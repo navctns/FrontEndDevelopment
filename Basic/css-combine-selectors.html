@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>CSS Basic Selectors</title>
+        <link rel="stylesheet" href="style.css"/>
+        <style>
+          /* For Paragraphs(p) with class "big" */
+          p.big{
+            font-size:20px;
+          }
+          /*child Selector */
+          article > p {
+            color:blue;
+          }
+
+          article p {
+            color:blue;
+          }
+          .colored p {
+            color:green;
+          }
+
+          /*items with more than one classes */
+          .text-red.align-center {
+            color:red;
+            text-align:center;
+          }
+        </style>
+    </head>
+    <body>
+      <h1>Main Heading (h1) </h1>
+      <p class="big">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+        laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
+        voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
+        non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+      </p>
+      <article>
+        <h2> Heading (h2) </h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores, amet.</p>
+        <div><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Temporibus, eum.</p><div>
+      </article>
+      <div class="colored">
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum quaerat molestiae provident deserunt consectetur velit veniam, maxime voluptates placeat blanditiis.</p>
+        <p class="text-red align-center">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus, distinctio.</p>
+      </div>
+    </body>
+</html>

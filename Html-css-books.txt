@@ -1,0 +1,20 @@
+Recommended Books
+
+Disclosure: Please note that most of the links below are affiliate links, and at no additional cost to you, I will earn a commission if you decide to make a purchase. Please understand that I recommend these books because I think they are good books and not because of the small commissions I make if you decide to buy something. Please do not spend any money on these books unless you feel that they will help you achieve your learning goals.
+
+-Yaakov Chaikin
+
+By the way, most of the links I provide below are to Amazon.com. Amazon has this really cool service called AmazonPrime. You can sign up for a trial of it here. Using that service, you will get free 2-day shipping on most items on Amazon.com. I use that service all the time and it's really nice! Also, recently, Amazon came out with another service called PrimeNOW. It's only available to AmazonPrime members and they will deliver A LOT of items to your doorsteps within 2 hours for FREE. Yes, seriously. I've used it. Of course, AmazonPrime has a lot of other perks like free movies/shows/music streaming, Kindle book library, etc.
+
+With AmazonPrime, a lot of the books below will be at your doorsteps THE SAME DAY you order them, for FREE. Click here to check it out!
+		
+Web Design with HTML, CSS, JavaScript and jQuery Set by Jon Duckett	Buy on Amazon	MY ABSOLUTE TOP PICK. This is a set that combines 2 books for a cheaper price. Both books are excellent: very visual, easy to look up things in, and get straight to the point without a lot of blah blah.
+HTML and CSS: Design and Build Websites by Jon Duckett	Buy on Amazon	MY TOP PICK FOR HTML/CSS. Great book that is very visually oriented. It’s very easy to look through, especially if you are in a hurry. It’s also very concise and to the point.
+Learning Web Design: A Beginner's Guide to HTML, CSS, JavaScript, and Web Graphics by Jennifer Niederst Robbins	Buy on Amazon	A fairly comprehensive book that talks about the code AND the design aspect of web page development.
+Learning Web App Development by Semmy Purewal	Buy on Amazon	A student found this book and states that "its close to what is taught in this course". Looks like a great book from first glance and does sound close to what we cover in the course.
+Mastering Sublime Text by Dan Peleg	Buy on Amazon	Clear, step by step instructions. Covers Sublime Text 3!
+Pragmatic Guide to Git by Travis Swicegood	Buy on Amazon	MY TOP PICK FOR GIT. I am a BIG fan of pretty much any Pragmatic programming series book. This one is great as well! Explains the concepts well, so you are not just memorizing commands.
+Pro Git by Scott Chacon and Ben Straub	Buy on Amazon	Explains things pretty well. You can read it for free online here.
+JavaScript: The Definitive Guide: Activate Your Web Pages by David Flanagan	Buy on Amazon	A VERY comprehensive book on Javascript. This Definitive Guide book is a classic.
+JavaScript: The Good Parts by Douglas Crockford	Buy on Amazon	Another classic! Written by the inventor of JSON. Empowers you to harness the true power of Javascript as a language.
+JavaScript and JQuery: Interactive Front-End Web Development by Jon Duckett	Buy on Amazon	MY TOP PICK FOR JAVASCRIPT. Just like his HTML/CSS book, this one is very visual and gets to the point quickly.

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>CSS Basic Selectors</title>
+        <link rel="stylesheet" href="style.css"/>
+        <style>
+
+          @import url('https://fonts.googleapis.com/css2?family=Langar&display=swap');
+
+          body{
+            font-family: 'Langar','Sans-serif';
+          }
+
+          header li {
+            list-style:none;
+          }
+          a:link,a:visited {
+            text-decoration:none;
+            background-color:lightgreen;
+            border:1px solid green;
+            color:black;
+            display:block;
+            width:200px;
+            text-align:center;
+            margin-bottom:0.5em;
+          }
+          /* active is when clicked that link */
+          a:hover, a:active {
+            background-color: darkgreen;
+            color:#fff;
+          }
+          section div:nth-child(odd){
+            background-color:#8BE8A2;
+          }
+          section div {
+            background-color: #35B054;
+            text-align: center;
+          }
+          section div:hover{
+            background-color:#3C6346;
+            color:#fff;
+            cursor:pointer;
+            scale:1.1;
+          }
+        </style>
+    </head>
+    <body>
+      <header>
+        <h1>Online Resources</h1>
+        <ul>
+          <li><a href="coursera.org/">coursera</a><li>
+          <li><a href="https://www.udemy.com/">Udemy</a></li>
+          <li><a href="https://www.youtube.com/">youtube</a></li>
+        </ul>
+      </header>
+      <section>
+        <div>div1</div>
+        <div>div2</div>
+        <div>div3</div>
+        <div>div4</div>
+        <div>div5</div>
+        <div>div6</div>
+        <div>div7</div>
+        <div>div8</div>
+        <div>div9</div>
+        <div>div10</div>
+        <div>div11</div>
+    </section>
+</html>
