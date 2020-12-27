@@ -1,0 +1,149 @@
+*{
+	margin:0;
+	padding:0;
+}
+
+body {
+	background-color: #000;
+}
+.showcase {
+	display:grid;
+	grid-template-columns:1.5fr 0.5fr;
+	/*width:100%;*/
+/*	background-color: #17211A;
+*/
+	background-color: #000;
+	
+}
+
+.showcase-two-img {
+	display:grid;
+	grid-template-columns:1fr;
+	width:100%;
+	height:auto;	
+	padding:10px
+	justify-content:center;
+	align-items: center;
+}
+
+img {
+	width:100%;
+	height:auto;
+}
+
+.showcase-sec-1{
+	width:100%;
+	height:auto;
+}
+
+
+.showcase-main-content{
+	text-align: left;
+	justify-content: center;
+	color:#fff;
+	padding:2% 20%;
+}
+
+.side-content-heading {
+	text-align:center;
+	color:#fff;
+}
+
+.showcase-sec-1 {
+	align-items:center;
+	justify-content:center;
+	width:100%;
+	background-size:auto 100%;
+	background-position: center;
+  	background-repeat:no-repeat;
+  	height:100vh;
+}
+
+.vid-embedd{
+	display: relative;
+	align-items: center;
+	justify-content: center;
+	align-self: center;
+}
+.showcase-sec-2 {
+
+	align-items:center;
+	justify-content:center;
+	width:100%;
+	background-size:auto 100%;
+	background-position: cover;
+  	background-repeat:no-repeat;
+  	/*align-self: center;*/
+}
+
+.showcase-sec-2 > div {
+	align-items: center;
+	justify-content: center;
+}
+
+/*.showcase-sec-2 {
+	align-items:center;
+	justify-content:center;
+	width:100%;
+	background-size:auto 100%;
+	background-position: center;
+  	background-repeat:no-repeat;
+  	/*height:80vh;*/
+/*}*/
+
+iframe {
+	width:100%;
+	align-items: center;
+	justify-content: center;
+}
+
+.content-slider {
+	/*margin-top:10px;*/
+	padding:10px;
+	display:flex;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-gap: 1em;
+	align-items: center;
+	justify-content: center;
+	/*background-color: #ddd;*/
+
+}
+
+.content-slider > div {
+	background-color: #eee;
+	align-items: center;
+	justify-content: center;
+	/*float:center;*/
+}
+
+section {
+	margin-top:1em; 
+}
+
+.image-gallery {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-gap:1em;
+	align-items: center;
+	justify-content: center;
+	margin: 1em;
+}
+
+.gallery-small-img {
+	display:grid;
+	grid-template-columns: repeat(2, 1fr);
+    /*grid-template-rows: repeat(1, 5vw);*/
+    grid-gap: 15px;
+    /*align-items: center;*/
+    /*justify-content: center;*/
+}
+
+/*.gallery-small-img > img {
+	width:30%;
+}*/
+
+.image-gallery > div {
+	width:100%;
+	/*align-items: center;*/
+	/*justify-content: center;*/
+}
