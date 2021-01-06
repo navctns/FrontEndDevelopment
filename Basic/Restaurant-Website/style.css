@@ -34,3 +34,27 @@ img {
   border:2px solid red;
   background-color:gray;
 }
+
+.nav-link {
+  font-size:22px;
+  font-weight:900;
+}
+
+@@media (min-width:768px) {
+
+
+.navbar-nav {
+  float:right;
+  /* align-items: right; */
+  /* text-align: right; */
+}
+
+/* #navbarSupportedContent > ul > li > a {
+  text-align: right;
+}
+.nav-item {
+  text-align:right;
+} */
+
+
+}
