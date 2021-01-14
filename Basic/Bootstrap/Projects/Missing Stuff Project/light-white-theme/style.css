@@ -1,0 +1,120 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
+.main-wrapper {
+  height: 100vh;
+}
+
+body {
+  overflow-x:hidden;
+  background-attachment: fixed;
+  font-family: 'Open-Sans',sans-serif;
+}
+
+#nav-button > span {
+  color:#fff;
+}
+
+.main-cards {
+  margin-top:0px;
+}
+
+.jumbotron {
+  background:url('img/jumbotron-img.jpg');
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.jumbotron .dark-overlay {
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  min-height: 100vh;
+  /* background: rgba(0,51,25,0.7); */
+  background: rgba(255,255,255,0.7);
+
+}
+a {
+  text-decoration: none;
+}
+#card-1 {
+  /* background:#1b5e20; */
+  /* background: #004d40; */
+  /* background:#b2ebf2; */
+  /* background: #e0f7fa; */
+  background:#e0e0e0;
+
+  /* border:1px #006064 solid;  */
+  border:1px #424242 solid;
+}
+
+#card-2 {
+  /* background:#00897b; */
+  /* background: #1b5e20; */
+  /* background: #004d40; */
+  /* background:#b2ebf2; */
+  /* background: #e0f7fa; */
+  background:#e0e0e0;
+
+  /* border:1px #006064 solid; */
+  border:1px #424242 solid;
+
+
+}
+
+#card-3 {
+  /* background:#00796b; */
+  /* background:#1b5e20; */
+  /* background: #004d40; */
+  /* background:#b2ebf2; */
+  /* background: #e0f7fa; */
+  background:#e0e0e0;
+  /* border:1px #006064 solid; */
+  border:1px #424242 solid;
+
+
+}
+.btn-box {
+  /* background:#009688; */
+  /* background:#4dd0e1; */
+  /* background: #006064; */
+  background: #424242;
+  color:#fff;
+}
+/* .jumbotron {
+  background:#26a69a;
+} */
+
+#main-nav {
+  /* background:#004d40; */
+  background:#fff;
+  color:#fff;
+}
+
+#main-nav a {
+  color:#000;
+}
+/* .fab {
+  color:orange;
+} */
+.fa-facebook {
+  color:#4267B2;
+}
+.fa-instagram {
+  color:#F56040;
+}
+
+.fa-twitter{
+  color:#1DA1F2;
+}
+
+@media (max-width:768px) {
+  .main-wrapper {
+    height: 300vh;
+  }
+
+  .jumbotron .dark-overlay {
+    min-height: 300vh;
+  }
+}
