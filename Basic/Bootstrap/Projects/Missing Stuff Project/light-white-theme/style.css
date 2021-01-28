@@ -15,6 +15,14 @@ body {
   color:#fff;
 }
 
+.navbar-nav {
+  text-transform: uppercase;
+}
+
+.navbar-nav .nav-item {
+  margin-right: 2rem;
+}
+
 .main-cards {
   margin-top:0px;
 }
@@ -57,7 +65,7 @@ a {
   /* background:#b2ebf2; */
   /* background: #e0f7fa; */
   /* background:#e0e0e0; */
-  background: rgba(224,224,224,0.7);
+  background: rgba(224,224,224,0.9);
 
   /* border:1px #006064 solid; */
   border:1px #424242 solid;
@@ -82,7 +90,8 @@ a {
   /* background:#009688; */
   /* background:#4dd0e1; */
   /* background: #006064; */
-  background: #424242;
+  /* background: #424242; */
+  background:#009688;
   color:#fff;
 }
 /* .jumbotron {
@@ -91,12 +100,18 @@ a {
 
 #main-nav {
   /* background:#004d40; */
-  background:#fff;
+  background:#009688;
   color:#fff;
 }
 
+#main-footer {
+  background:#009688;
+  color:#fff;
+
+}
+
 #main-nav a {
-  color:#000;
+  color:#fff;
 }
 /* .fab {
   color:orange;
@@ -114,10 +129,10 @@ a {
 
 @media (max-width:768px) {
   .main-wrapper {
-    height: 300vh;
+    height: 320vh;
   }
 
   .jumbotron .dark-overlay {
-    min-height: 300vh;
+    min-height: 320vh;
   }
 }
