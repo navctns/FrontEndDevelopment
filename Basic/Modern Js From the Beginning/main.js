@@ -348,3 +348,155 @@ changeDate.setSeconds(51);
 changeDate.setMilliseconds(945);
 console.log(changeDate);
 // console.log(val);
+
+const id = 100;
+
+//EQUAL TO
+
+if(id == 100){
+  console.log('CORRECT');
+}
+else {
+  console.log('INCORRECT');
+}
+
+//NOT EQUAL TO
+
+if(id != 101){
+  console.log('NOT 101')
+}
+else {
+  console.log('CORRECT - 101')
+}
+
+//EQUAL TO VALUE AND Type
+const ids = 200;
+if (ids === 100){
+  console.log('CORRECT');
+} else {
+  console.log('INCORRECT');
+}
+
+//NOT EQUAL to Value and type
+
+if (ids !== 200){
+  console.log('INCORRECT(200)');
+} else {
+  console.log('CORRECT(200)')
+}
+
+//Testing variables
+let test1 = 'Test';
+if(typeof test1 !== 'undefined' ){
+  console.log(`The test1 is ${test1}`)
+} else {
+  console.log('NO ID');
+}
+
+
+//GREATER OR LESS THAN
+// ids = 300;
+let id1 = 100;
+if(id1 > 200){
+  console.log('CORRECT');
+}
+else {
+  console.log('INCORRECT')
+}
+
+// if else
+
+const color = 'red';
+
+if(color === 'red'){
+  console.log(`Color is ${color}`)
+}
+else if(color ==='blue'){
+  console.log('Color is Blue');
+}
+else {
+  console.log('Color is not red or blue');
+}
+
+//Logical Operators
+
+//AND &&
+
+const nameNew = 'Joshy';
+const ageNew = 10;
+
+if(ageNew>0 && ageNew<12){
+  console.log(`${nameNew} is a child`);
+}
+else if (ageNew >= 13 && ageNew<=19){
+  console.log(`${nameNew} is a teenager`);
+
+}
+else {
+  console.log(`${nameNew} is an adult`);
+}
+
+//OR ||
+
+if (ageNew <16 || ageNew > 65){
+  console.log(`${nameNew} can not run in race`);
+}else {
+  console.log(`${nameNew} is registered for the race`);
+}
+
+
+//TERNARY Operator
+let price = 400;
+console.log( price === 500 ? 'Can be included in Budget': 'Can not include in the Budget' );
+
+//Without braces
+
+if(id === 100)
+  console.log('CORRECT');
+else
+  console.log('INCORRECT');
+
+
+//SWITCHES
+
+// color = 'red';
+
+switch(color){
+
+  case 'red' :
+    console.log("Color is red");
+    break;
+
+  case 'blue' :
+    console.log('Color is blue');
+  default:
+    console.log("Color is not red or blue");
+}
+
+let day1;
+
+switch(new Date().getDay()){
+
+  case 0:
+    day1 = 'Sunday';
+    break;
+  case 1:
+    day1 = "Monday";
+    break;
+  case 2:
+    day1 = 'Tuesday';
+    break;
+  case 3:
+    day1 = "Wednesday";
+    break;
+  case 4:
+    day1 = 'Thursday';
+    break;
+  case 5:
+    day1 = "Friday";
+    break;
+  case 6:
+    day1 = 'Saturday';
+    break;
+};
+console.log(`Today is ${day1}`);
