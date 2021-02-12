@@ -172,7 +172,7 @@ html = `<ul>
         <li>${age > 25 ? 'Over 25':'Under 25'}</li>
         <li>${hello()}</li>
       </ul>`
-document.body.innerHTML = html;
+// document.body.innerHTML = html;
 
 // ARRAYS and ARRAY METHODS
 
