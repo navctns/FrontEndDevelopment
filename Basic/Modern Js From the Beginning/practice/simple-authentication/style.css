@@ -1,0 +1,34 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap');
+
+/* for everything use - * */
+* {
+    box-sizing:border-box;
+
+}
+
+body {
+    font-family: 'Source Sans Pro', 'Sans-serif';
+    display:flex;
+    margin:0;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    height:100vh;
+    overflow:hidden;
+}
+
+.form-error {
+  color:red;
+}
+
+.input-error{
+  border:1px #solid #ccc;
+  background-color: white; /*The color of your choice here*/
+  color:red;
+}
+.input-success{
+  border:1px #solid #ccc;
+  background-color: white; /*The color of your choice here*/
+  color:green;
+}
