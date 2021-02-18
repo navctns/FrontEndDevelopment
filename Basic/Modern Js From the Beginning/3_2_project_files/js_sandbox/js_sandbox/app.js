@@ -291,3 +291,171 @@ val = link.hasAttribute('title');
 link.removeAttribute('title');
 val = link;
 console.log(val);
+
+// document.querySelector('.clear-tasks').addEventListener('click', function(e){
+//   console.log("Hello World");
+//   e.preventDefault();
+// })
+
+
+//EVENT LISTENERS & EVENT OBJECT
+
+// document.querySelector('.clear-tasks').addEventListener('click', onClick);
+//
+// function onClick(e){
+//   //console.log('Clicked');
+//
+//   val = e;
+//   val = e.target;
+//   val = e.target.id;
+//   val = e.target.className;
+//   val = e.target.classList;
+//   e.target.innerText = 'MODIFY TASKS';
+//   val = e.type;
+//   val = e.timeStamp;
+//
+//   //coods event related to window
+//   val = e.clientX;//
+//   val = e.clientY;
+//
+//   //coods event related to element
+//   //related to the button pixels
+//   val = e.offsetX;
+//   val = e.offsetY;
+//   console.log(val);
+//   e.preventDefault();
+// }
+
+//MOUSE EVENTS
+
+const clearBtn = document.querySelector('.clear-tasks');
+const card = document.querySelector('.card');
+const heading = document.querySelector('h5');
+
+//Event handler
+
+function runEvent(e){
+  console.log(`Event Type : ${e.type}`);
+  e.preventDefault();
+}
+
+//click
+// clearBtn.addEventListener('click',runEvent);
+
+//Double click - error!!
+// clearBtn.addEventListener('dblclick',runEvent);
+
+//Mousedown //mouseclick and hold
+
+// clearBtn.addEventListener('mousedown', runEvent);
+
+//Mouseup - error !! reloading may be
+
+// clearBtn.addEventListener('mouseup', runEvent);
+
+//mouseenter
+
+// card.addEventListener('mouseenter', runEvent);
+
+//mouseleave
+
+// card.addEventListener('mouseleave', runEvent);
+
+//mouseover
+
+// card.addEventListener('mouseover', runEvent);
+
+//mouseout
+
+// card.addEventListener('mouseout', runEvent);
+
+//mousemove
+
+// card.addEventListener('mousemove', runEventMove);
+//
+// function runEventMove(e){
+//   console.log(`MouseX : ${e.offsetX} mouseY:${e.offsetY}`);
+//   heading.textContent = `MouseX : ${e.offsetX} mouseY:${e.offsetY}`
+//   document.body.style.backgroundColor = `rgb(${e.offsetX},${e.offsetY},40)`;
+//   e.preventDefault();
+// }
+
+const form = document.querySelector('form');
+const taskInput = document.getElementById('task');
+
+//clear Existing input
+taskInput.value = '';
+
+function runEventForm(e){
+  console.log(`EVENT TYPE:${e.type}`);
+  console.log(taskInput.value);
+  // heading.innerText = e.target.value;
+  console.log(e.target.value);
+}
+
+//submit
+// form.addEventListener('submit', runEventForm);
+
+//keydown
+// taskInput.addEventListener('keydown',runEventForm);
+
+//keyup //when the key is pressed and released
+
+// taskInput.addEventListener('keyup',runEventForm);
+//
+// //keypress
+//
+// taskInput.addEventListener('keypress', runEventForm);
+//
+// //events on select
+//
+// const select = document.querySelector('select');
+// select.addEventListener('change', runEventForm);
+
+
+//EVENT BUBBLING
+//CHILD TO PARENT EVENT FIRING
+
+document.querySelector('.card-title').addEventListener('click', function(){
+
+  console.log('card title');
+});
+
+//on its parent
+
+// document.querySelector('.card-content').addEventListener('click', function(){
+//   console.log('card content');
+// });
+//
+// //card
+//
+// document.querySelector('.card').addEventListener('click', function(){
+//   console.log('card');
+// });
+//
+// //on col
+//
+// document.querySelector('.col').addEventListener('click', function(){
+//   console.log('col');
+// });
+
+//EVENT DELEGATION
+//child event to parent
+
+const delItem = document.querySelector('.delete-item');
+delItem.addEventListener('click', deleteItem);
+
+function deleteItem(e){
+  // if(e.target.parentElement.className === 'delete-item secondary-content'){
+  //   console.log('delete item');
+  // }
+
+  // contins in classList
+  if(e.target.parentElement.classList.contains('delete-item')){
+    console.log('delete item');
+    e.target.parentElement.parentElement.remove();
+  }
+  e.preventDefault();
+}
+
+document.body.addEventListener('click', deleteItem);
