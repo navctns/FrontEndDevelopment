@@ -1,36 +1,23 @@
 <template>
-  <div class="navbar navbar-expand-sm navbar-light bg-light mb-3">
-    <div class="container">
-      <ul class="navbar-nav">
-        <li class="navbar-item">
-          <a href="#" class="nav-link">Write Review</a>
-        </li>
-        <li class="navbar-item">
-          <a href="#" class="nav-link">Review List</a>
-        </li>
-      </ul>
+  <div id="nav">
+    <router-link to="/">Home</router-link> |
+    <router-link to="/about">About</router-link>
+    <router-link to="/writeReview">Write Review</router-link>
   </div>
-</div>
-  <div class="container">
-  <h2>Movie Ratings and Reviews</h2>
+  <router-view/>
+  <home/>
 
-    <div class="position-absolute top-50 start-50 translate-middle">
-      <!-- <div class="form-group">
-        <input className="form-control" type="text" placeholder="Type movie name here">
-      </div> -->
-      <div class="input-group mb-3">
-        <input type="text" class="form-control" placeholder="Type movie name here" aria-label="Recipient's username" aria-describedby="basic-addon2">
-        <button class='btn btn-primary' id="basic-addon2">Search</button>
-      </div>
-    </div>
-    </div>
 </template>
 
 <script>
 // import HelloWorld from './components/HelloWorld.vue'
+import Home from './views/Home.vue';
 
 export default {
-  // name: 'App',
+  name: 'App',
+  components: {
+    Home
+  }
 }
 </script>
 
@@ -41,6 +28,18 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  /* margin-top: 60px; */
+}
+
+#nav {
+  padding: 30px;
+}
+
+#nav a {
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+#nav a.router-link-exact-active {
+  color: #42b983;
 }
 </style>

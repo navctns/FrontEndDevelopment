@@ -160,6 +160,10 @@ form.addEventListener('submit', function(e){
 
     //load array to localStorage
     localStorage.setItem('reviews', JSON.stringify(reviews));
+     movieEl.value = '';
+     directorEl.value = '';
+     ratingEl.value = '';
+     reviewEl.value = '';
     alert('Review Added');
 
   }

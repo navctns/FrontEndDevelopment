@@ -47,3 +47,15 @@ body #main {
   opacity:0.7;
   color:black;
 }
+
+.clear-reviews {
+  border-radius: 0.5em;
+  display:block;
+  background: #5b5b5b;
+  text-decoration: none;
+  color:#f6f6f6;
+}
+.clear-reviews:hover{
+  color:#f6f6f6;
+  opacity:0.9;
+}
