@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css" integrity="sha512-EZLkOqwILORob+p0BXZc+Vm3RgJBOe1Iq/0fiI7r/wJgzOFZMlsqTa29UEl6v6U6gsV4uIpsNZoV32YZqrCRCQ==" crossorigin="anonymous" />
+  <title>magic Square</title>
+</head>
+<body>
+  <div class="container">
+    <h2 class="text-center">-----3X3 Magic Square-----</h2>
+    <div class="row offset-by-two" id="row1">
+      <div class="one-third column"><input type="number" id="item11" class="col-1 input-item"></div>
+      <div class="one-third column"><input type="number" id="item12" class="col-2 input-item"></div>
+      <div class="one-third column"><input type="number" id="item13" class="col-3 input-item"></div>
+    </div>
+    <div class="row" id="row2">
+      <div class="one-third column"><input type="number" id="item21" class="col-1 input-item"></div>
+      <div class="one-third column"><input type="number" id="item22" class="col-2 input-item"></div>
+      <div class="one-third column"><input type="number" id="item23" class="col-3 input-item"></div>
+    </div>
+    <div class="row" id="row3">
+      <div class="one-third column"><input type="number" id="item31" class="col-1 input-item"></div>
+      <div class="one-third column"><input type="number" id="item32" class="col-2 input-item"></div>
+      <div class="one-third column"><input type="number" id="item33" class="col-3 input-item"></div>
+    </div>
+    <div class="row">
+      <input type="submit" value="submit" id="input-numbers">
+    </div>
+    <div class="row">
+      <h4 class="game-result"></h4>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
