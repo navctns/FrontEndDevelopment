@@ -21,4 +21,17 @@ class Github {
       repos
     }
   }
+
+//Get languages from repo
+
+async getLanguage(repo,login){
+  console.log('abc',repo,login);
+  const repoLanguageResponse = await fetch(`https://api.github.com/repos/${login}/${repo.name}/languages?&client_id=${this.client_id}&client_secret=${this.client_secret}`);
+  // const repoLanguageResponse = await fetch(`https://api.github.com/repos/NV/astexplorer/languages?&client_id=${this.client_id}&client_secret=${this.client_secret}`);
+  const languages = await repoLanguageResponse.json();
+  return {
+    languages
+  }
+}
+
 }

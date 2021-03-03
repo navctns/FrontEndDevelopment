@@ -3,6 +3,7 @@ class UI {
 
   constructor(){
     this.profile = document.getElementById('profile');
+    this.github = new Github;
   }
 
   //SHOW PROFILE
@@ -39,9 +40,15 @@ class UI {
 
   // SHOW REPOS
 
-  showRepos(repos){
+  showRepos(repos,login){
     let output = '';
     repos.forEach(repo => {
+      let languages;
+      this.github.getLanguage(repo,login)
+          .then(languages => {
+              console.log(languages);
+            });
+
       output += `
               <div class="card card-body mb-2">
                 <div class="row">
@@ -52,6 +59,7 @@ class UI {
                     <span class="badge badge-primary p-3 mb-3">Stars: ${repo.stargazers_count}</span>
                     <span class="badge badge-secondary p-3 mb-3">Watchers: ${repo.watchers_count}</span>
                     <span class="badge badge-success p-3 mb-3">Forks: ${repo.forks_count}</span>
+                    <span class="badge badge-success p-3 mb-3"><a href="${repo.languages_url}" target="_blank">Languages</a></span>
                   </div>
                 </div>
               </div>
