@@ -6,15 +6,29 @@
 }
 
 .bg-dark-1 {
-  background: #6e7c7c;
+  /* background: #6e7c7c; */
+  /* background: #5b5b5b; */
+  /* background: #5b6d5b; */
+  background: #435560;
 }
 
 .weather-items .list-group-item {
   background: #435560;
-  color:#f7f6e7;
+  /* background: #6e7c7c; */
+  /* color:#f7f6e7; */
+  /* background: #1e212d; */
+  background: #314e52;
 }
 
 body {
   background: #aaaaaa;
   font-family: 'Roboto', sans-serif;
+}
+
+nav,footer {
+  background:#435560;
+}
+
+#w-location {
+  color:#ef8d32;
 }

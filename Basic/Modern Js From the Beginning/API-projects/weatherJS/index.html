@@ -10,33 +10,32 @@
   <title>WeatherJS</title>
 
 </head>
-<body>
-  <nav class="bg-dark text-light text-center p-3">
-    <h2>Weather Updates</h2>
+<body class="bg-primary">
+  <nav class="text-light text-center p-1">
+    <h3>Weather Updates</h3>
   </nav>
 
   <div class="container mb-5">
 
-    <div class="row">
+    <div class="row text-light">
       <div class="col-md-6 mx-auto text-center bg-dark-1 mt-5 p-5 rounded">
         <h1 id="w-location"></h1>
-        <h3 class="text-light" id="w-desc"></h3>
+        <h4 class="text-light" id="w-desc"></h4>
         <h3 id="w-string"></h3>
         <img id="w-icon">
         <div class="row weather-items">
           <div class="col-md-6 p-3">
             <ul class="list-group">
-              <li class="list-group-item" id="w-lattitude">Lattitude : </li>
-              <li class="list-group-item" id="w-longitude">longitude : </li>
-              <li class="list-group-item" id="w-city">City : </li>
-              <li class="list-group-item" id="w-feels-like">Feels Like : </li>
+              <li class="list-group-item mb-3" id="w-lattitude">Lattitude : </li>
+              <li class="list-group-item mb-3" id="w-longitude">longitude : </li>
+              <li class="list-group-item mb-3" id="w-feels-like">Feels Like : </li>
             </ul>
           </div>
           <div class="col-md-6 p-3">
             <ul class="list-group">
-              <li class="list-group-item" id="w-temp-min">Minimum Temp : </li>
-              <li class="list-group-item" id="w-temp-max">Maximum Temp : </li>
-              <li class="list-group-item" id="w-humidity">Humidity : </li>
+              <li class="list-group-item mb-3" id="w-temp-min">Minimum Temp : </li>
+              <li class="list-group-item mb-3" id="w-temp-max">Maximum Temp : </li>
+              <li class="list-group-item mb-3" id="w-humidity">Humidity : </li>
               <li class="list-group-item" id="w-wind-speed">Wind Speed : </li>
             </ul>
           </div>
@@ -44,13 +43,13 @@
 
         <hr>
         <!-- Button trigger modal -->
-        <button type="button" id='change-loc-modal' class="btn btn-primary" data-toggle="modal" data-target="#locModal">
+        <button type="button" id='change-loc-modal' class="btn btn-primary btn-lg" data-toggle="modal" data-target="#locModal">
           Change Location
         </button>
       </div>
     </div>
   </div>
-  <footer class="mt5 p-3 text-center bg-dark text-light">
+  <footer class="mt5 p-3 text-center text-light">
     WeatherJS &copy;
   </footer>
 

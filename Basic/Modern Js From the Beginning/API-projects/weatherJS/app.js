@@ -1,6 +1,11 @@
 
+//Init
+const storage = new Storage;
+//Get Stored Location data
+const weatherLocation = storage.getLocationData();
+
 //Init Weather Object
-const weather = new Weather('Miami', 'FL');
+const weather = new Weather(weatherLocation.city, weatherLocation.state);
 const ui = new UI;
 
 function getWeather(){
@@ -13,14 +18,33 @@ function getWeather(){
       .catch(err => console.log(err));
 }
 
-document.getElementById('change-loc-modal').addEventListener('click', (e) => {
+// document.getElementById('change-loc-modal').addEventListener('click', (e) => {
+//   if(ui.locationChangeCity === '' || ui.locationChangeState === ''){
+//     console.log('Enter City and State');
+//   }
+//   else {
+//     weather.changeLocation(ui.locationChangeCity.value, ui.locationChangeState.value);
+//   }
+//   e.preventDefault();
+// })
+
+document.getElementById('w-change-btn').addEventListener('click', (e) => {
+  const city = document.getElementById('city').value;
+  const state = document.getElementById('state').value;
+
   if(ui.locationChangeCity === '' || ui.locationChangeState === ''){
     console.log('Enter City and State');
   }
   else {
-    weather.changeLocation(ui.locationChangeCity.value, ui.locationChangeState.value);
+    weather.changeLocation(city, state);
+    //Set location to LS
+    storage.setLocationData(city, state);
   }
-  e.preventDefault();
+  //get and displaly weather
+  getWeather();
+  //Close modal
+  $('#locModal').modal('hide');
+  // e.preventDefault();
 })
 
 //Get weather on DOM Load

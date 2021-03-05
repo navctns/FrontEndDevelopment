@@ -5,14 +5,14 @@ class UI {
     this.desc = document.getElementById('w-desc');
     this.lattitude = document.getElementById('w-lattitude');
     this.longitude = document.getElementById('w-longitude');
-    this.city = document.getElementById('w-city');
+    this.city = document.getElementById('w-location');
     this.temp_min = document.getElementById('w-temp-min');
     this.temp_max = document.getElementById('w-temp-max');
     this.humidity = document.getElementById('w-humidity');
     this.feels_like = document.getElementById('w-feels-like');
     this.wind_speed = document.getElementById('w-wind-speed');
-    this.locationChangeCity = document.getElementById('w-form').getElementById('city');
-    this.locationChangeState = document.getElementById('w-form').getElementById('state');
+    // this.locationChangeCity = document.getElementById('w-form').getElementById('city');
+    // this.locationChangeState = document.getElementById('w-form').getElementById('state');
 
   }
 
@@ -27,7 +27,7 @@ class UI {
     this.desc.textContent = weather.weather[0].description;
     this.lattitude.textContent = 'Lattitude : ' + weather.coord.lat;
     this.longitude.textContent = 'Longitude : ' + weather.coord.lon;
-    this.city.textContent = 'City : ' + weather.name;
+    this.city.textContent = weather.name;
     this.temp_min.textContent = 'Max Temp : ' + weather.main.temp_min;
     this.temp_max.textContent = 'Min Temp : ' + weather.main.temp_max;
     this.humidity.textContent = 'Humidity : ' + weather.main.humidity;
