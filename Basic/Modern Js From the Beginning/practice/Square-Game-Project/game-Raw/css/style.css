@@ -1,0 +1,41 @@
+.example-parent {
+  border: 2px solid #DFA612;
+  color: black;
+  display: flex;
+  font-family: sans-serif;
+  font-weight: bold;
+  min-height: 125px;
+}
+
+.example-origin {
+  flex-basis: 100%;
+  flex-grow: 1;
+  padding: 10px;
+}
+
+.example-draggable {
+  background-color: #4AAE9B;
+  font-weight: normal;
+  /* margin-bottom: 10px; */
+  /* margin-top: 10px; */
+  margin: 25px 100px 25px 100px;
+  padding: 10px;
+  min-height: 50px;
+}
+
+.example-draggable-alter {
+  background-color: #f25287;
+  font-weight: normal;
+  /* margin-bottom: 10px; */
+  /* margin-top: 10px; */
+  margin: 25px 100px 25px 100px;
+  padding: 10px;
+  min-height: 50px;
+}
+
+.example-dropzone {
+  background-color: #6DB65B;
+  flex-basis: 100%;
+  flex-grow: 1;
+  padding: 10px;
+}

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <title>Square Game</title>
+</head>
+<body class="valign-wrapper">
+  <div class="container">
+    <h3 class="center-align">Square Game</h3>
+    <div class="row">
+      <!-- box 1 -->
+      <div class="col s4">
+        <div class="example-parent">
+          <div class="example-origin game-field-1"
+          ondragover="onDragOver(event);"
+          ondrop="onDrop(event);"
+
+          >
+            <div
+              id="draggable-1"
+              class="example-draggable"
+              draggable="true"
+              ondragstart="onDragStart(event);"
+              style="background-color: #4AAE9B;">
+            </div>
+
+          </div>
+      </div>
+      </div>
+
+      <!-- box 2 -->
+      <div class="col s4">
+        <div class="example-parent">
+          <div class="example-origin"
+          ondragover="onDragOver(event);"
+          ondrop="onDrop(event);"
+
+          >
+            <div
+              id="draggable-2"
+              class="example-draggable"
+              draggable="true"
+              ondragstart="onDragStart(event);">
+            </div>
+
+          </div>
+      </div>
+      </div>
+      <!-- box -3 -->
+      <div class="col s4">
+        <div class="example-parent">
+          <div class="example-origin game-field-2"
+          ondragover="onDragOver(event);"
+          ondrop="onDrop(event);"
+
+          >
+            <div
+              id="draggable-3"
+              class="example-draggable"
+              draggable="true"
+              ondragstart="onDragStart(event);">
+            </div>
+
+          </div>
+      </div>
+    </div>
+
+    </div>
+    <!-- Row II-->
+    <div class="row">
+      <!-- box 4 -->
+
+      <div class="col s4">
+        <div class="example-parent">
+          <div class="example-origin"
+          ondragover="onDragOver(event);"
+          ondrop="onDrop(event);"
+
+          >
+
+
+          </div>
+      </div>
+      </div>
+
+    <!-- Box 5 -->
+      <div class="col s4">
+        <div class="example-parent">
+          <div class="example-origin game-field-1 game-field-2"
+          ondragover="onDragOver(event);"
+          ondrop="onDrop(event);"
+
+          >
+
+
+          </div>
+      </div>
+      </div>
+      <!--box 6 -->
+      <div class="col s4">
+        <div class="example-parent">
+          <div class="example-origin"
+          ondragover="onDragOver(event);"
+          ondrop="onDrop(event);"
+
+          >
+
+
+          </div>
+      </div>
+    </div>
+
+    </div>
+    <!-- ROW III -->
+    <div class="row">
+      <!-- box 7 -->
+      <div class="col s4">
+        <div class="example-parent">
+          <div class="example-origin game-field-2"
+          ondragover="onDragOver(event);"
+          ondrop="onDrop(event);"
+
+          >
+            <div
+              id="draggable-4"
+              class="example-draggable-alter"
+              draggable="true"
+              ondragstart="onDragStart(event);">
+            </div>
+
+          </div>
+      </div>
+      </div>
+
+      <!-- box 8 -->
+      <div class="col s4">
+        <div class="example-parent">
+          <div class="example-origin"
+          ondragover="onDragOver(event);"
+          ondrop="onDrop(event);"
+
+          >
+            <div
+              id="draggable-5"
+              class="example-draggable-alter"
+              draggable="true"
+              ondragstart="onDragStart(event);">
+            </div>
+
+          </div>
+      </div>
+      </div>
+      <!-- box 9 -->
+      <div class="col s4">
+        <div class="example-parent">
+          <div class="example-origin game-field-1"
+          ondragover="onDragOver(event);"
+          ondrop="onDrop(event);"
+
+          >
+            <div
+              id="draggable-6"
+              class="example-draggable-alter"
+              draggable="true"
+              ondragstart="onDragStart(event);">
+            </div>
+
+          </div>
+      </div>
+    </div>
+
+    </div>
+    <h3 id="game-winner"></h3>
+    <div id="restart"></div>
+    </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
