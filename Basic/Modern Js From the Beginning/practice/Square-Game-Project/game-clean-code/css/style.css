@@ -1,5 +1,10 @@
+body{
+  /* background: #f4f5db; */
+  background: #c7cfb7;
+}
 .example-parent {
-  border: 2px solid #DFA612;
+  /* border: 2px solid #DFA612; */
+  border: 2px solid #557174;
   color: black;
   display: flex;
   font-family: sans-serif;
@@ -14,7 +19,8 @@
 }
 
 .example-draggable {
-  background-color: #4AAE9B;
+  /* background-color: #4AAE9B; */
+  background-color:#709fb0;
   font-weight: normal;
   /* margin-bottom: 10px; */
   /* margin-top: 10px; */
@@ -24,7 +30,9 @@
 }
 
 .example-draggable-alter {
-  background-color: #f25287;
+  /* background-color: #f25287; */
+  background-color: #e97878;
+
   font-weight: normal;
   /* margin-bottom: 10px; */
   /* margin-top: 10px; */
@@ -38,4 +46,8 @@
   flex-basis: 100%;
   flex-grow: 1;
   padding: 10px;
+}
+#game-winner{
+  margin-top: 0;
+  text-align: center;
 }

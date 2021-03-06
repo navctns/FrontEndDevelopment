@@ -63,13 +63,13 @@ function checkWinning(){
     console.log('Player 1 WON');
     document.body.style.backgroundColor = '#a6f0c6';
     document.getElementById('game-winner').textContent = 'Player I WON';
-    endGame();
+    endGame(gameField1);
   }
   if(player2WinTrack1 || player2winTrack2){
     console.log('Player II WON')
     document.getElementById('game-winner').textContent = 'Player II WON';
     document.body.style.backgroundColor = '#d6b0b1';
-    endGame();
+    endGame(gameField2);
   }
 
 }
@@ -94,7 +94,7 @@ function restartGame(){
   window.location.reload();
 }
 
-function endGame(){
+function endGame(gameField){
   //Disable Drat items and Show Restart button
   allDropFields = document.querySelectorAll('.example-origin');
   allDropFields.forEach(item =>{
@@ -104,4 +104,10 @@ function endGame(){
   // ondrop
   //Show Restart Button
   document.getElementById('restart').innerHTML = '<a class="waves-effect waves-light btn-large" id="restart-btn" onclick="restartGame()">Restart Game</a>'
+
+  //change game field color
+  gameField[0].style.backgroundColor = '#ffd880';
+  gameField[1].style.backgroundColor = '#ffd880';
+  gameField[2].style.backgroundColor = '#ffd880';
+
 }
