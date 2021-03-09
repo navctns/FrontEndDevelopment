@@ -171,5 +171,72 @@ str = '4x4x5x4x';//matches with last 3 items
 
 re = /^([0,9]x){3}/;
 str = '3x6x8x1x';//does not match should start with exact m instances
+// reTest(re,str);
+// console.log(re.exec(str));
+
+//Shorthand character classes
+re = /\w/; //character alphanumeric or _
+str = '3x3x3x';
+// reTest(re,str);
+// console.log(re.exec(str));
+
+re = /\w+/;//one or more characters(alpahnumeric, _)
+str = '2x2x2x';
+// reTest(re,str);
+// console.log(re.exec(str));
+
+//Non-word character
+re = /\W/;//non-word character(!)
+str = 'x85';//Not matches
+str = '!#';//Matched
+// reTest(re,str);
+// console.log(re.exec(str));
+
+//DIGIT CHARACTER
+re = /\d/;//match any digit
+str = '234';
+// reTest(re,str);
+// console.log(re.exec(str));
+
+re = /\d+/;//Match multiple digits word
+str = '368';
+// reTest(re,str);
+// console.log(re.exec(str));
+
+re = /\D/;//Non digit
+str = '233';//not matches
+str = 'yu';
+// reTest(re,str);
+// console.log(re.exec(str));
+
+//SPACE CHARACTER
+re = /\s/; // Match white space character
+str = 'asd bca';
+// reTest(re,str);
+// console.log(re.exec(str));
+
+//Non white space char
+re = /\S/; //Match non-white space character
+// str = '  ';//not match
+str = 'srt';//match
+// reTest(re,str);
+// console.log(re.exec(str));
+
+//WORD BOUNDARY
+re = /Hell\b/;// Word and the index
+str = 'Hello welcome to Hell';
+// reTest(re,str);
+// console.log(re.exec(str));
+
+//ASSERTIONS
+re = /x(?=y)/;//Match x only if followed by y
+str = 'abcx';//doesnt match
+str = 'abcxy';//Match
+// reTest(re,str);
+// console.log(re.exec(str));
+
+re = /x(?!y)/; //Match x only if not followed by y
+str = 'abcxy';//does not match
+str = 'xac';//match
 reTest(re,str);
 console.log(re.exec(str));
