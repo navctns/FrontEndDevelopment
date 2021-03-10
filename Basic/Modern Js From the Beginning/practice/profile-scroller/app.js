@@ -4,7 +4,7 @@ const data = [
     name:'Joseph Alexy',
     age:32,
     gender:'male',
-    loolingfor:'female',
+    lookingfor:'female',
     location:'Boston MA',
     image:'https://randomuser.me/portraits/men/82.jpg'
   },
@@ -12,7 +12,7 @@ const data = [
     name:'Ann',
     age:26,
     gender:'female',
-    loolingfor:'male',
+    lookingfor:'male',
     location:'Mumbai MH',
     image:'https://randomuser.me/portraits/women/82.jpg'
   },
@@ -20,7 +20,7 @@ const data = [
     name:'Julia',
     age:24,
     gender:'female',
-    loolingfor:'female',
+    lookingfor:'female',
     location:'Kolkata WB',
     image:'https://randomuser.me/portraits/women/81.jpg'
   }
@@ -46,15 +46,31 @@ function profileIterator(profiles){
       prevIndex;
   return {
     next:function(){
+      console.log('prev',prevIndex)
+
+      if(nextIndex > 0){
+        prevIndex = nextIndex -1;
+        console.log('prev',prevIndex);
+      }else if (nextIndex === 0) {
+        prevIndex = profiles.length-1;
+        console.log('prev else',prevIndex);
+      }
       return nextIndex<profiles.length?
         {value:profiles[nextIndex++],done:false}
         :{done:true}
 
     },
     prev:function(){
-      return nextIndex >= 0?
-        {value:profiles[nextIndex],done:false}
+
+      return prevIndex !== 'undefined' ?
+        {value:profiles[prevIndex], done:false}
         :{done:true}
+      // return prevIndex > 0 ?
+      //   {value:profiles[nextIndex-1], done:false}
+      //   :{done:true}
+      // return nextIndex >= 0?
+      //   {value:profiles[nextIndex],done:false}
+      //   :{done:true}
     }
   };
 }
@@ -63,6 +79,10 @@ function profileIterator(profiles){
 function nextProfie(){
 
   const currentProfile = profiles.next().value;
+  console.log('current',currentProfile);
+  // console.log('prev',prevIndex)
+
+  // console.log('next',profiles.next());
   if(currentProfile != undefined){
         document.getElementById('profileDisplay').innerHTML = `
                   <ul class="list-group">
@@ -82,6 +102,7 @@ function nextProfie(){
 function prevProfie(){
 
   const currentProfile = profiles.prev().value;
+  console.log(currentProfile);
   if(currentProfile != undefined){
         document.getElementById('profileDisplay').innerHTML = `
                   <ul class="list-group">
@@ -97,5 +118,5 @@ function prevProfie(){
     }
 }
 
-console.log('prev', profiles.prev().value);
-console.log('prev', profiles.prev().value);
+// console.log('prev', profiles.prev().value);
+// console.log('prev', profiles.prev().value);
