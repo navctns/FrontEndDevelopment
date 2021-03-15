@@ -91,7 +91,21 @@ function changeTab(){
             </div>
           </div>
           </div>
-
+          <div class="columns is-size-3 has-text-centered">
+            <div class="column">
+              <h3 class="result-one"></h3>
+            </div>
+            <div class="column ">
+              <h4 class="result-two"></h4>
+            </div>
+            <div class="column ">
+              <h4 class="result-three"></h4>
+            </div>
+            <div class="column ">
+              <h4 class="result-four"></h4>
+            </div>
+          </div>
+          <div id="polling-end-warn"></div>
       </div>`;
 }
 
@@ -100,15 +114,28 @@ function addVote(){
     console.log(event.target);
     if(event.target.parentElement.classList.contains('vote')){
       //votes done so far
-      if(electOne.totalVoters <= electOne.votesDone){
+      let votesDone = electOne.votesDone + 1;//to remove extra vote
+      if(votesDone === electOne.totalVoters){
         document.querySelectorAll('.vote').forEach(item => {
           item.disabled = true;
           // item.setAttribute('disabled','disabled');
-
+          item.firstChild.setAttribute('onclick','event.stopPropagation();');
         })
         // event.stopPropagation();
-        alert('Polling Completed')
-      }else{
+        //show notification
+        document.getElementById('polling-end-warn').innerHTML = `
+          <div class="notification is-danger">
+            <button class="delete"></button>
+            Polling Completed
+          </div>
+          `
+        setTimeout(() =>{
+          document.getElementById('polling-end-warn').innerHTML = '';
+        },2000);
+
+
+        // alert('Polling Completed')
+      }else if (electOne.votesDone < electOne.totalVoters){
         electOne.votesDone += 1;
         electOneVoteDone += 1;
         console.log(electOneVoteDone,electOne.votesDone);
@@ -149,4 +176,14 @@ function setRepoll(electOne){
   console.log('set repoll');
   electOne.setRepoll();
   setElectOne();
+  location.reload();
+}
+
+//GET RESULT
+function getResult(electOne){
+  document.querySelector('.result-one').innerHTML = String(electOne.p1);
+  document.querySelector('.result-two').innerHTML = electOne.p2;
+  document.querySelector('.result-three').innerHTML = electOne.p3;
+  document.querySelector('.result-four').innerHTML = electOne.p4;
+
 }
