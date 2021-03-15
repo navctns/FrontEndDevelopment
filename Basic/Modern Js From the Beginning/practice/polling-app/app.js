@@ -105,6 +105,7 @@ function changeTab(){
               <h4 class="result-four"></h4>
             </div>
           </div>
+          <div class="is-size-3 has-text-centered has-text-success" id="winner"></div>
           <div id="polling-end-warn"></div>
       </div>`;
 }
@@ -181,9 +182,10 @@ function setRepoll(electOne){
 
 //GET RESULT
 function getResult(electOne){
-  document.querySelector('.result-one').innerHTML = String(electOne.p1);
+  document.querySelector('.result-one').innerHTML = electOne.p1;
   document.querySelector('.result-two').innerHTML = electOne.p2;
   document.querySelector('.result-three').innerHTML = electOne.p3;
   document.querySelector('.result-four').innerHTML = electOne.p4;
-
+  const winner = electOne.getResult();
+  document.querySelector('#winner').innerHTML = `${winner.id} is Selected for the Position`;
 }
