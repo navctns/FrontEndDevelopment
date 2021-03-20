@@ -1,0 +1,9 @@
+
+#showcase {
+  min-height: 40vh;
+  background: url('https://source.unsplash.com/random');
+}
+
+#content-heading {
+  padding-left: 6em;
+}
