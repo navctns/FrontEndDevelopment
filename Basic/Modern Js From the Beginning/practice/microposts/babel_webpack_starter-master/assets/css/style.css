@@ -1,0 +1,22 @@
+
+.delete{
+  /* color:red; */
+  color:#ff4b5c;
+}
+.delete:hover {
+  /* color:red; */
+  color:#ff4b5c;
+  opacity:0.8;
+}
+
+.edit{
+  /* color:red; */
+  /* color:#66bfbf; */
+  color:#51adcf;
+}
+.edit:hover {
+  /* color:red; */
+  /* color:#66bfbf; */
+  color:#51adcf;
+  opacity:0.8;
+}
