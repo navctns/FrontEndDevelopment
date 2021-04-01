@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma-rtl.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
+  <script src="https://unpkg.com/vue@next" defer></script>
+  <script src="app.js" defer></script>
+
+  <title>Polling App</title>
+</head>
+<body id="election">
+  <div class="tabs is-boxed">
+  <ul>
+    <li class="is-active">
+      <a onclick="changeTab()">
+        <!-- <span class="icon is-small"><i class="fas fa-image" aria-hidden="true"></i></span> -->
+        <!-- <span>Pictures</span> -->
+        Pictures
+      </a>
+    </li>
+    <li>
+      <a onclick="changeTab()">
+        <!-- <span class="icon is-small"><i class="fas fa-music" aria-hidden="true"></i></span> -->
+        <!-- <span>Music</span> -->
+        Music
+      </a>
+    </li>
+    <li>
+      <a onclick="changeTab()">
+        Sports
+      </a>
+    </li>
+    <li>
+      <a onclick="changeTab()">
+        Arts
+      </a>
+    </li>
+    <li class="m-2">
+        <button class="button is-link repoll" v-on:click="setRepoll">Repoll</button>
+    </li>
+    <li class="m-2">
+        <button class="button is-success get-result" v-on:click="getResults">Show Result</button>
+    </li>
+  </ul>
+</div>
+<div id="election-data">
+         <div class="container">
+        <div class="columns">
+           <div class="column">
+              <div class="card">
+                <div class="card-image">
+                  <figure class="image is-4by3">
+                    <img src="img/symbols/wings.svg" alt="Placeholder image">
+                 </figure>
+                </div>
+                <div class="card-content">
+                  <div class="media">
+                    <div class="media-center">
+                      <a href="#" class="vote vote-item-1"><i v-on:click="candidateOne += 1" class="fas fa-hand-pointer fa-2x"></i></a>
+                    </div>
+                  </div>
+               </div>
+              </div>
+            </div>
+           <div class="column">
+              <div class="card">
+                 <div class="card-image">
+                   <figure class="image is-4by3">
+                     <img src="img/symbols/fire.svg" alt="Placeholder image">
+                 </figure>
+                </div>
+                <div class="card-content">
+                  <div class="media">
+                     <div class="media-center">
+                     <a href="#" class="vote vote-item-2"><i v-on:click="candidateTwo += 1" class="fas fa-hand-pointer fa-2x"></i></a>
+                     </div>
+                   </div>
+               </div>
+               </div>
+             </div>
+             <div class="column">
+               <div class="card">
+                 <div class="card-image">
+                   <figure class="image is-4by3">
+                     <img src="img/symbols/favorite.svg" alt="Placeholder image">
+                   </figure>
+                 </div>
+                 <div class="card-content">
+                   <div class="media">
+                     <div class="media-center">
+                       <a href="#" class="vote vote-item-3"><i v-on:click="candidateThree += 1" class="fas fa-hand-pointer fa-2x"></i></a>
+                     </div>
+                   </div>
+                 </div>
+               </div>
+             </div>
+             <div class="column">
+               <div class="card">
+                 <div class="card-image">
+                   <figure class="image is-4by3">
+                     <img src="img/symbols/brightness.svg" alt="Placeholder image">
+                   </figure>
+                 </div>
+                 <div class="card-content">
+                   <div class="media">
+                     <div class="media-center">
+                       <a href="#" class="vote vote-item-4"><i v-on:click="candidateFour += 1" class="fas fa-hand-pointer fa-2x"></i></a>
+                     </div>
+                   </div>
+                 </div>
+               </div>
+             </div>
+             </div>
+             <div class="columns is-size-3 has-text-centered">
+               <div class="column">
+                 <h3 class="result-one">{{candidateOne}}</h3>
+               </div>
+               <div class="column ">
+                 <h4 class="result-two">{{candidateTwo}}</h4>
+               </div>
+               <div class="column ">
+                 <h4 class="result-three">{{candidateThree}}</h4>
+               </div>
+               <div class="column ">
+                 <h4 class="result-four">{{candidateFour}}</h4>
+               </div>
+             </div>
+             <div class="is-size-3 has-text-centered has-text-success" id="winner">{{winner}}</div>
+             <div id="polling-end-warn"></div>
+         </div>
+</div>
+<!-- <script src="election.js"></script> -->
+<!-- <script src="app.js"></script> -->
+</body>
+</html>
