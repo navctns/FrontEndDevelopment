@@ -67,12 +67,15 @@ app = Vue.createApp({
       this.opponentHealth -= attackValue;
       this.attackPlayer();
       // this.gameOverCase();
-      this.addToBattleLog(`player attacks ${attackValue}`);
+      // this.addToBattleLog(`player attacks ${attackValue}`);
+      this.addLogMessage('player','attack', attackValue);
+
     },
     attackPlayer(){
       const attackValue = getRandomValue(8,15);
       this.playerHealth -= attackValue;
-      this.addToBattleLog(`opponent attacks ${attackValue}`);
+      // this.addToBattleLog(`opponent attacks ${attackValue}`);
+      this.addLogMessage('opponent','attack', attackValue);
 
     },
     specialAttackMonster(){
@@ -81,7 +84,9 @@ app = Vue.createApp({
       this.opponentHealth -= attackValue;
       this.attackPlayer();
       // this.gameOverCase();
-      this.addToBattleLog(`Player make Special attack ${attackValue}`);
+      // this.addToBattleLog(`Player make Special attack ${attackValue}`);
+      this.addLogMessage('player','attack', attackValue);
+
     },
     healPlayer(){
       this.currentRound++;
@@ -92,14 +97,28 @@ app = Vue.createApp({
         this.playerHealth += healValue;
       }
       this.attackPlayer();
-      this.addToBattleLog(`Player heals ${healValue}`);
+      // this.addToBattleLog(`Player heals ${healValue}`);
 
+      this.addLogMessage('player','heal', healValue);
       // this.gameOverCase();
 
     },
-    addToBattleLog(message){
-      this.battleLog.push(message);
+    // addToBattleLog(message){
+    //   this.battleLog.push(message);
+    // }
+    addLogMessage(who,what,value){
+      // this.battleLog.push(message);
+      this.battleLog.unshift({
+        actionBy:who,
+        actionType:what,
+        actionValue:value,
+      });
+      console.log(this.battleLog);
+    },
+    surrender(){
+      this.winner = 'opponent';
     }
+
     // gameOverCase(){
     //   if(this.opponentHealth <=0 && this.playerHealth >0){
     //     this.Result = 'You Won';

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://unpkg.com/vue@next" defer></script>
+  <script src='app.js' defer></script>
+
+  <title>Document</title>
+</head>
+<body>
+  <div id="game-body">
+    <div class="container">
+      <h2>Odd or Even</h2>
+    </div>
+    <!-- <div class="container">
+      <h2>Start Playing</h1>
+    </div> -->
+    <div class="game-container">
+      <button class="odd" @click="gameTurn('odd')">Odd</button>
+      <button class="even" @click="gameTurn('even')">Even</button>
+    </div>
+    <div class="game-container loading-anim" v-if="animationVisibility">
+      <div class="left-item">
+        <img src="img/giphy.gif" alt="">
+      </div>
+      <div class="right-item">
+        <img src="img/giphy.gif" alt="">
+      </div>
+    </div>
+    <!-- SHOW CALCULATED RESULTS -->
+    <div id="result-block" v-show="resultVisibility">
+      <div class="game-container player-score">
+        <!-- <input type="text" id="player-1"> -->
+        <!-- <input type="text" id="player-2"> -->
+        <p id="player-1">{{playerNum}}</p>
+        <p id="player-2">{{opponentNum}}</p>
+      </div>
+      <div class="game-container result-block">
+        <h2 id="result">{{playerNum + opponentNum}}</h2>
+      </div>
+      <div class="container winner">
+        <h1 id="winner">{{winOrLose}}</h1>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>

@@ -42,12 +42,19 @@
         <button :disabled="gameOver" @click="attackOpponent">ATTACK</button>
         <button :disabled="mayUseSpecialAttack || gameOver" @click="specialAttackMonster">SPECIAL ATTACK</button>
         <button :disabled="gameOver" @click="healPlayer">HEAL</button>
-        <button :disabled="gameOver">SURRENDER</button>
+        <button :disabled="gameOver" @click="surrender">SURRENDER</button>
       </section>
       <section id="log" class="container">
         <h2>Battle Log</h2>
         <ul>
-          <li v-for="step in battleLog">{{step}}</li>
+          <!-- <li v-for="step in battleLog">{{step}}</li> -->
+          <li v-for="logMessage in battleLog">
+            <span
+              :class="{'log--player':logMessage.actionBy === 'player','log--monster': logMessage.actionBy === 'opponent'}"
+            >{{logMessage.actionBy === 'player'? 'Player':'Opponent'}} </span>
+            <span v-if="logMessage.actionType === 'heal'"> heals himself for <span class="log--heal">{{logMessage.actionValue}}</span></span>
+            <span v-else> attacks and deals <span class='log--damage'>{{logMessage.actionValue}}</span></span>
+          </li>
         </ul>
       </section>
     </div>
