@@ -19,7 +19,8 @@ export default {
     matchStarted:{
       type:Boolean,
       required:true,
-    }
+    },
+    loadingStyles:String,
   },
   data(){
     return{

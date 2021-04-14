@@ -48,22 +48,75 @@ export default {
     matchStarted(value){
       if(value){
         console.log('match start');
-        setTimeout(()=>{
-          console.log('time out 300');
-          this.loadingWidth = '60';
-          this.loadingStylesValue = {width:this.loadingWidth+'%'};
+          for(let i=100;i>=0;i--){
+            setTimeout(()=>{
+              this.loadingWidth = i;
+              this.loadingStylesValue = {width:this.loadingWidth+'%'};
+            },600)
+          }
 
-        },300);
-        setTimeout(()=>{
-          this.loadingWidth = '30';
-          this.loadingStylesValue = {width:this.loadingWidth+'%'};
 
-        },300);
-        setTimeout(()=>{
-          this.loadingWidth = '0';
-          this.loadingStylesValue = {width:this.loadingWidth+'%'};
+        // setTimeout(()=>{
+        //   console.log('time out 300');
+        //   for(let i=90;i>=80;i--){
+        //     this.loadingWidth = 90;
+        //     this.loadingStylesValue = {width:this.loadingWidth+'%'};
+        //   }
+        //   // this.loadingWidth = 90;
+        //
+        //   setTimeout(()=>{
+        //     console.log('time out 300');
+        //     this.loadingWidth = 80;
+        //     this.loadingStylesValue = {width:this.loadingWidth+'%'};
+        //
+        //   },3000);
+        // },4000);
+        //
+        // setTimeout(()=>{
+        //   console.log('time out 300');
+        //   this.loadingWidth = 60;
+        //   this.loadingStylesValue = {width:this.loadingWidth+'%'};
+        //   setTimeout(()=>{
+        //     this.loadingWidth = 50;
+        //     this.loadingStylesValue = {width:this.loadingWidth+'%'};
+        //
+        //   },3000);
+        //   setTimeout(()=>{
+        //     this.loadingWidth = 40;
+        //     this.loadingStylesValue = {width:this.loadingWidth+'%'};
+        //
+        //   },3000);
+        // },4000);
+        //
+        //   setTimeout(()=>{
+        //     console.log('time out 300');
+        //     this.loadingWidth = 30;
+        //     this.loadingStylesValue = {width:this.loadingWidth+'%'};
+        //     setTimeout(()=>{
+        //       console.log('time out 300');
+        //       this.loadingWidth = 20;
+        //       this.loadingStylesValue = {width:this.loadingWidth+'%'};
+        //
+        //     },3000);
+        //
+        //
+        //     setTimeout(()=>{
+        //       console.log('time out 300');
+        //       this.loadingWidth = 10;
+        //       this.loadingStylesValue = {width:this.loadingWidth+'%'};
+        //     },3000);
+        //   },4000);
+        //
+        //
+        //     setTimeout(()=>{
+        //       console.log('time out 300');
+        //       this.loadingWidth = 0;
+        //       this.loadingStylesValue = {width:this.loadingWidth+'%'};
+        //
+        //     },4000);
 
-        },300);
+
+
       }
     }
   },
