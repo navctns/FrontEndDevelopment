@@ -10,7 +10,11 @@
   </div>
   <!-- Score Card -->
   <div class="row">
-    <score-card></score-card>
+    <score-card
+      :runs-count="runsCount"
+      :overs-count="oversCount"
+      :balls-count="ballsCount"
+    ></score-card>
     <instant-visuals></instant-visuals>
   </div>
   <div class="row valign-wrapper center-align">
@@ -18,6 +22,8 @@
       :match-started="matchStarted"
       @start-match="triggerMatchStart"
       @current-ball="addCurrentBallScore"
+      @update-scores="updateScores"
+      @innings-change="onInningsChange"
     ></game-buttons>
     <!-- Removed Props -->
     <!-- :loading-styles="loadingStylesValue" -->
@@ -41,6 +47,7 @@ export default {
       totalOvers:2,
       oversCount:0,
       ballsCount:0,
+      runsCount:0,
       wickestCount:0,
       scoreIndex:[0,1,2,3,4,5,6,'wd','nb','wk'],//Inactive
       loadingWidth:'100',
@@ -187,6 +194,18 @@ export default {
     addCurrentBallScore(ballValue){
       console.log(ballValue);
     },
+    updateScores(overs,balls,ballOutput){
+      //Update values from data passed from game buttons component
+      this.oversCount = overs;
+      this.ballsCount = balls;
+      this.runsCount += ballOutput;
+    },
+    onInningsChange(){
+      this.oversCount = 0;
+      this.ballsCount = 0;
+      this.runsCount = 0;
+      this.wickestCount = 0;
+    }
   }
 }
 </script>
