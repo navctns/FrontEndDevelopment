@@ -16,9 +16,12 @@
   <div class="row valign-wrapper center-align">
     <game-buttons
       :match-started="matchStarted"
-      :loading-styles="loadingStylesValue"
       @start-match="triggerMatchStart"
+      @current-ball="addCurrentBallScore"
     ></game-buttons>
+    <!-- Removed Props -->
+    <!-- :loading-styles="loadingStylesValue" -->
+    <!-- :bowler-styles="bowlerStylesValue" -->
   </div>
   <!-- <a href="#"><img src="./assets/cricket.svg" alt=""></a> -->
 </nav>
@@ -39,21 +42,38 @@ export default {
       oversCount:0,
       ballsCount:0,
       wickestCount:0,
-      scoreIndex:[0,1,2,3,4,5,6,'wd','nb','wk'],
+      scoreIndex:[0,1,2,3,4,5,6,'wd','nb','wk'],//Inactive
       loadingWidth:'100',
       loadingStylesValue:{width:'100%'},
+      bowlerStylesValue:{width:'20%'},
     }
   },
   watch:{
     matchStarted(value){
       if(value){
         console.log('match start');
-          for(let i=100;i>=0;i--){
+        //Change Bowlers Styles
+        for(let i=20;i<22;i+=0.1){
+          setTimeout(()=>{
+            this.bowlerStylesValue = {width:i+'%'};
+          },300);
+        }
+        //Loading Animation
+          for(let i=100;i>=0;i-=0.1){
             setTimeout(()=>{
               this.loadingWidth = i;
+              //Change loader width decreasing
               this.loadingStylesValue = {width:this.loadingWidth+'%'};
-            },600)
+            },300)
           }
+          //Reset Loader to Full Width
+          setTimeout(()=>{
+            this.loadingWidth = 100;
+            //Set to Full Width
+            this.loadingStylesValue = {width:this.loadingWidth+'%'};
+          },2000);
+          // this.bowlerStyles = {width:'20%'};
+
 
 
         // setTimeout(()=>{
@@ -163,7 +183,10 @@ export default {
         //   },2000);
         // }
       }
-    }
+    },
+    addCurrentBallScore(ballValue){
+      console.log(ballValue);
+    },
   }
 }
 </script>

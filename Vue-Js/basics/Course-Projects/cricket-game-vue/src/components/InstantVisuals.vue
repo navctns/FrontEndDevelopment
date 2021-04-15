@@ -2,9 +2,9 @@
   <div class="col s8 m8 center-align">
     <div class="card blue-grey darken-1">
       <div class="card-content white-text">
-        <span class="card-title"><h4>Score Visualization</h4></span>
+        <span class="card-title"><h5>Score Visualization</h5></span>
       </div>
-      <div>
+      <!-- <div>
         <div class="row">
           <div class="col s6">
             <p class="center-align">Score</p>
@@ -13,7 +13,7 @@
             <p class="center-align">Overs</p>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
 
   </div>
