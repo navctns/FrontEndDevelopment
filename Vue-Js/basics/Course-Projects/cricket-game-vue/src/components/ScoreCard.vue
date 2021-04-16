@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="offset-s6 col s4 m4 center-align">
-    <div class="card blue-grey darken-1">
+    <div class="card scores-card darken-1">
       <!-- <div class="card-content white-text"> -->
         <div class="row">
           <!-- <div class="col m4">

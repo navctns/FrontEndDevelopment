@@ -1,49 +1,60 @@
 <template lang="html">
     <div class="col s4 m4 center-align">
-      <a href="#"><img src="./assets/cricket.svg" alt="" @click.stop="playerBatting" v-show="!inningsOver" v-if="inningsNumber === 0"></a>
-      <a href="#"><img src="./assets/cricket.svg" alt="" v-show="!inningsOver" v-if="inningsNumber === 1"></a>
+      <!-- <a href="#"><img src="./assets/cricket.svg" alt="" @click.stop="playerBatting" v-show="!inningsOver" v-if="inningsNumber === 0"></a> -->
+      <!-- <a href="#"><img src="./assets/cricket.svg" alt="" v-show="!inningsOver" v-if="inningsNumber === 1"></a> -->
+      <a href="#"><img src="./assets/batsman4.jpg" alt="" @click.stop="playerBatting" v-show="!inningsOver" v-if="inningsNumber === 0"></a>
+      <a href="#"><img src="./assets/batsman4.jpg" alt="" v-show="!inningsOver" v-if="inningsNumber === 1"></a>
 
     </div>
 
     <div class="col s4 m4">
-      <a class="waves-effect waves-light btn-large" @click="startMatch" v-if="!matchStarted">Start Match</a>
-      <!-- <p style="color:black;">{{currentBallScore}}</p>
-      <p style="color:black;" v-show="startBowling">Bowling Starts...</p>
-      <p style="color:black;">{{ballsCount}}</p>
-      <p style="color:black;">{{oversCount}}</p> -->
-      <p style="color:black;" v-if="inningsOver">Inning Over</p>
-      <a class="waves-effect waves-light btn-large" v-if="inningsOver" @click="newInnings">Start Second Innings</a> -->
-      <div class="card blue-grey darken-1 center-align" v-if="matchStarted">
-        <div v-if="currentBallScore === 0">
-          <h3>Dot Ball</h3>
+      <div class="ball-banner center-align" >
+        <div v-if="!matchStarted">
+          <a class="waves-effect waves-light btn-large" @click="startMatch" >Start Match</a>
         </div>
-        <div v-else-if="currentBallScore === 1">
-          <h3>Its Just a Single</h3>
+        <div v-else-if="inningsOver">
+          <p style="color:black;" v-if="inningsOver">Inning Over</p>
+          <a class="waves-effect waves-light btn-large" @click="newInnings">Start Second Innings</a>
         </div>
-        <div v-else-if="currentBallScore === 2">
-          <h3>Scores a Double</h3>
-        </div>
-        <div v-else-if="currentBallScore === 3">
-          <h3>Runs a Triple</h3>
-        </div>
-        <div v-else-if="currentBallScore === 4">
-          <h3>Its a Four</h3>
-        </div>
-        <div v-else-if="currentBallScore === 6">
-          <h3>Oh..Its a Six</h3>
-        </div>
-        <div v-else-if="currentBallScore === 'nb'">
-          <h3>Its a Noball</h3>
-        </div>
-        <div v-else-if="currentBallScore === 'wd'">
-          <h2>Wide Ball</h2>
-        </div>
-        <div v-else-if="currentBallScore === 'wk'">
-          <h2>Its a Wicket</h2>
-        </div>
+        <div v-else-if="playerHits">
+          <div v-if="currentBallScore === 0">
+            <h4>Dot Ball</h4>
+          </div>
+          <div v-else-if="currentBallScore === 1">
+            <h4>Its Just a Single</h4>
+          </div>
+          <div v-else-if="currentBallScore === 2">
+            <h4>Scores a Double</h4>
+          </div>
+          <div v-else-if="currentBallScore === 3">
+            <h4>Runs a Triple</h4>
+          </div>
+          <div v-else-if="currentBallScore === 4">
+            <!-- <h4>Its a Four</h4> -->
+            <img src="./assets/four.jpg" alt="">
+          </div>
+          <div v-else-if="currentBallScore === 6">
+            <!-- <h4>Oh..Its a Six</h4> -->
+            <img src="./assets/six3.jpg" alt="">
+          </div>
+          <div v-else-if="currentBallScore === 'nb'">
+            <h4>Its a Noball</h4>
+          </div>
+          <div v-else-if="currentBallScore === 'wd'">
+            <h4>Wide Ball</h4>
+          </div>
+          <div v-else-if="currentBallScore === 'wk'">
+            <!-- <h4>Its a Wicket</h4> -->
+            <img src="./assets/wicket2.webp" alt="">
+            <h4>Wicket!!</h4>
+          </div>
 
-      </div>
+        </div>
+        <div v-else>
+          <h5>Bowling Starts...</h5>
+        </div>
     </div>
+  </div>
     <div class="col s4 m4 center-align">
       <a href="#"><img class="bowler" :style="bowlerStyles" src="./assets/bowling.gif" alt="" v-show="!inningsOver" v-if="inningsNumber === 0"></a>
       <a href="#"><img class="bowler" :style="bowlerStyles" src="./assets/bowling.gif" alt="" v-show="!inningsOver" @click="playerBatting" v-if="inningsNumber === 1"></a>
@@ -90,7 +101,8 @@ export default {
       playerTwo:{
         score:0,
         wickets:0,
-      }
+      },
+      playerHits:false,
     }
   },
   mounted(){
@@ -133,6 +145,7 @@ export default {
   methods:{
     showBowlingAnimations(){
       //Start Bowling
+      this.playerHits = false;
       this.startBowling = true;
       //Change Bowlers Styles
       for(let i=20;i<23;i+=0.1){
@@ -153,6 +166,7 @@ export default {
           this.loadingWidth = 100;
           //Set to Full Width
           this.loadingStyles = {width:this.loadingWidth+'%'};
+          this.bowlerStyles.width = '20%';
         },2000);
     },
     startMatch(){
@@ -177,6 +191,7 @@ export default {
 
   },
   playerBatting(){
+    this.playerHits = true;
     if(this.startBowling){
       const currentBallScore = randomNumberFromArray(this.scoreIndex);
       this.$emit('current-ball',currentBallScore);
@@ -237,15 +252,28 @@ export default {
     border: 1px solid #575757;
     /* margin: 1rem 0; */
     background: #fde5e5;
+    /* background:#52734d; */
   }
 
   .bowling-bar__value {
-    background-color: #00a876;
+    /* background-color: #00a876; */
+    /* background-color:#52734d; */
+    background-color: #91c788;
     width: 100%;
     height: 100%;
   }
   .card {
     width:100%;
     height:auto;
+  }
+  .ball-banner{
+    display: flex;
+    align-items: center;
+    justify-content:center;
+    background-color: #ddffbc;
+    width:100%;
+    height: 100%;
+    color:#52734d;
+    height: 30vh;
   }
 </style>

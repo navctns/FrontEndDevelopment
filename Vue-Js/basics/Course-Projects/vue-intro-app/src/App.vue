@@ -2,6 +2,9 @@
   <header>
     <h1>My Friends</h1>
   </header>
+  <new-friend
+    @new-friend = "createNewFriend"
+  ></new-friend>
   <ul>
     <friend-contact
       v-for="friend in friends"
@@ -58,8 +61,13 @@ export default {
         //Use data passed from component
         const identifiedFriend = this.friends.find(friend => friend.id === friendId);
         identifiedFriend.isFavourite = !identifiedFriend.isFavourite;
+      },
+      createNewFriend(friendObj){
+        console.log('friend created')
+        this.friends.push(friendObj);
       }
-    }
+    },
+
   }
 </script>
 
@@ -103,7 +111,7 @@ header {
   list-style: none;
 }
 
-#app li {
+#app li,#app form {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
   margin: 1rem auto;
   border-radius: 10px;
@@ -111,6 +119,28 @@ header {
   text-align: center;
   width: 90%;
   max-width: 40rem;
+}
+form{
+  padding: 1em;
+  margin: 1em;
+}
+
+form  input {
+  display:block;
+  margin:1em;
+  width:80%;
+  height: auto;
+  /* justify-content: center; */
+
+}
+
+.btn{
+  display: block;
+  border: 2px #58004d;
+  text-align: center;
+  text-decoration: none;
+  background-color: #eca3f5;
+  padding:1em;
 }
 
 #app h2 {

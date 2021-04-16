@@ -211,6 +211,12 @@ export default {
 </script>
 
 <style>
+  .nav-wrapper{
+    background-color: #52734d;
+  }
+.scores-card{
+  background-color:#91c788;
+}
 /* #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
