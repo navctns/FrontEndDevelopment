@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="offset-s6 col s4 m4 center-align">
+  <div class="col s4 m4 center-align">
     <div class="card scores-card darken-1">
       <!-- <div class="card-content white-text"> -->
         <div class="row">
@@ -7,7 +7,7 @@
             <span class="card-title"><h5>Score Card</h5></span>
           </div> -->
           <div class="col m6">
-            <span><h4>{{runsCount}}</h4></span>
+            <span><h4>{{runsCount}}/{{wicketsCount}}</h4></span>
           </div>
           <div class="col m6">
             <span><h5>Overs:{{oversCount}}.{{ballsCount}}</h5></span>
@@ -41,6 +41,10 @@ export default {
       default:0,
     },
     ballsCount:{
+      type:Number,
+      default:0,
+    },
+    wicketsCount:{
       type:Number,
       default:0,
     },

@@ -10,6 +10,7 @@
     </div>
     <button type="button" @click="toggleFavourite">Toggle Favourite</button>
     <button type="button" @click="toggleDetails">{{detailsAreVisible ? 'Hide':'Show'}}</button>
+    <button type="button" name="button" @click="$emit('delete',id)">Delete</button>
     <ul v-if="detailsAreVisible">
       <li><strong>Phone: </strong>{{phoneNumber}}</li>
       <li><strong>Email: </strong>{{emailAddress}}</li>
@@ -37,6 +38,7 @@ export default {
   // },
 
   //Props with TYPE,REQUIRED,...
+  emits:['delete'],
   props:{
     id:{
       type:String,

@@ -15,6 +15,7 @@
       :email-address="friend.mail"
       :is-favourite="friend.isFavourite"
       @toggle-favourite="toggleFavouriteStatus"
+      @delete="deleteContact"
     ></friend-contact>
     <!-- <friend-contact
       name="Julie Jones"
@@ -63,8 +64,12 @@ export default {
         identifiedFriend.isFavourite = !identifiedFriend.isFavourite;
       },
       createNewFriend(friendObj){
-        console.log('friend created')
+        console.log('friend created');
         this.friends.push(friendObj);
+      },
+      deleteContact(friendId){
+        console.log(friendId);
+        this.friends = this.friends.filter(friend => friend.id !== friendId)
       }
     },
 
@@ -134,7 +139,9 @@ form  input {
 
 }
 
-.btn{
+
+
+form .btn{
   display: block;
   border: 2px #58004d;
   text-align: center;
