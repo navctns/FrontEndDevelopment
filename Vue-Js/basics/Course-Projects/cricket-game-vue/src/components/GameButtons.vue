@@ -3,9 +3,15 @@
 
   <!--MENUS -->
   <div class="col s4 m4">
-      <!-- <div class="row"> -->
 
-        <div class="ball-banner center-align">
+      <div class="row ball-banner-container center-align">
+        <div class="col s12 m12 ball-banner-first">
+
+        </div>
+        <div class="col s12 m12 ball-banner-first">
+
+        </div>
+        <div class="col s12 m12 ball-banner center-align">
 
             <div v-if="!matchStarted">
               <a class="waves-effect waves-light btn-large" @click="startMatch" >Start Match</a>
@@ -53,11 +59,9 @@
             <div v-else-if="startBowling">
               <h4>Start Bowling...</h4>
             </div>
-            <div>
-
-            </div>
 
       </div>
+    </div>
     </div>
     <!-- <div class="col s4 m4 center-align"> -->
     <div class="col s4 m4 center-align game-container">
@@ -72,8 +76,14 @@
 
         <div v-show="ballRelease === 'relasing'" class="ball-container">
             <!-- <p style="color:black;">Relasing</p> -->
-            <a href="#"><img class="bowler" :style="ballStyles"  src="./assets/cricketball.svg" alt="" v-show="!inningsOver" v-if="inningsNumber === 0"></a>
-            <a href="#"><img class="bowler" :style="ballStyles"  src="./assets/cricketball.svg" alt="" v-show="!inningsOver" @click="playerBatting" v-if="inningsNumber === 1"></a>
+            <div v-if="!playerHits">
+              <a href="#"><img class="bowler" :style="ballStyles"  src="./assets/cricketball.svg" alt="" v-show="!inningsOver" v-if="inningsNumber === 0"></a>
+              <a href="#"><img class="bowler" :style="ballStyles"  src="./assets/cricketball.svg" alt="" v-show="!inningsOver" @click="playerBatting" v-if="inningsNumber === 1"></a>
+            </div>
+            <div v-else-if="playerHits">
+              <h3>Ball Score</h3>
+            </div>
+
 
         </div>
         <div v-show="ballRelease === 'running'" class="ball-container">
@@ -90,19 +100,26 @@
       </div>
       <!-- BATSMAN -->
       <!-- <div class="col s4 m4 center-align" :class="{battingLg:playerHits}"> -->
-      <div class="batsman-side center-align" :class="{battingLg:playerHits}">
+      <div class="batsman-side left-align" :class="{battingLg:playerHits}">
 
         <!-- <a href="#"><img src="./assets/cricket.svg" alt="" @click.stop="playerBatting" v-show="!inningsOver" v-if="inningsNumber === 0"></a> -->
         <!-- <a href="#"><img src="./assets/cricket.svg" alt="" v-show="!inningsOver" v-if="inningsNumber === 1"></a> -->
-        <a href="#"><img class="bat-img" src="./assets/cricket-bat-01.svg"  alt="" @click.stop="playerBatting" v-show="!inningsOver" v-if="inningsNumber === 0"></a>
-        <a href="#"><img class="bat-img" src="./assets/cricket-bat-01.svg"  alt="" v-show="!inningsOver" v-if="inningsNumber === 1"></a>
+        <div class="bat-click-zone">
+          <a href="#"><img class="bat-img" src="./assets/cricketbat.svg"  alt="" @click.stop="playerBatting" v-show="!inningsOver" v-if="inningsNumber === 0"></a>
+          <a href="#"><img class="bat-img" src="./assets/cricketbat.svg"  alt="" v-show="!inningsOver" v-if="inningsNumber === 1"></a>
+
+        </div>
       </div>
-      <div class="stump-container">
+      <!-- <div class="stump-container">
         <img src="./assets/wickets.svg" alt="" class="stump-img">
 
-      </div>
+      </div> -->
 
     </div>
+
+    <canvas class="col s4 m4 center-align game-ball-action" id="ballCanvas">
+      <ball-action></ball-action>
+    </canvas>
 
 
 
@@ -117,6 +134,8 @@ function randomNumberFromArray(arr){
   return arr[Math.floor(Math.random()*arr.length)];
 }
 
+import BallAction from './BallAction.vue';
+
 export default {
   props:{
     matchStarted:{
@@ -125,9 +144,28 @@ export default {
     },
 
   },
+  components:{
+    BallAction,
+  },
   data(){
     return{
-      //Bowler
+      //Ball Animations
+      // ballCanvas:this.$el.querySelector("#ballCanvas"),
+      // ballCanvas:this.$refs.ballCanvas,
+      ballCanvas:'',
+      ctx : '',
+      x:0,
+      y:0,
+      dx:0,
+      dy:0,
+      ballInitialY:0,
+      shotPatterns : [
+        {dx:6,dy:-2},
+        {dx:6,dy:-3},
+        {dx:6,dy:-6},
+        {dx:6,dy:-1},
+      ],
+      //BOWLER
       bowlerImg:"./assets/batsman-2.jpg",
       ballRelease:'running',
       ballStyles:{width:'10%',margin:0},
@@ -137,7 +175,7 @@ export default {
       loadingStyles:{width:'100%'},
       bowlerStyles:{width:'10%'},
       loadingWidth:100,
-      currentBallScore:'',
+      currentBallScore:0,
       maxOvers:2,
       ballsCount:0,
       oversCount:0,
@@ -168,6 +206,53 @@ export default {
   },
   mounted(){
     console.log('mounted');
+    var canvas = document.getElementById("ballCanvas");
+    console.log(canvas);
+    var ctx = canvas.getContext("2d");
+
+    this.ballCanvas = canvas;
+    this.ctx = ctx;
+    this.x = canvas.width/2;
+    this.y = canvas.height-30;
+    // this.x = 20;
+    // this.y = canvas.height;
+    this.ballInitialY = canvas.height-5;
+
+    // const shotPatterns = [
+    //   {dx:6,dy:-2},
+    //   {dx:6,dy:-3},
+    //   {dx:6,dy:-6},
+    //   {dx:6,dy:-1},
+    // ]
+
+    // this.dx = 6;
+    // this.dy = -2;
+    // this.dx = 6;
+    // this.dy = -3;
+
+    // this.dx = 6;
+    // this.dy = -6;
+    //
+    // this.dx = 6;
+    // this.dy = -1;
+
+    ctx.beginPath();
+    ctx.rect(20, 40, 50, 50);
+    ctx.fillStyle = "#FF0000";
+    ctx.fill();
+    ctx.closePath();
+    //
+    ctx.beginPath();
+    ctx.arc(240, 160, 20, 0, Math.PI*2, false);
+    ctx.fillStyle = "green";
+    ctx.fill();
+    ctx.closePath();
+    //
+    ctx.beginPath();
+    ctx.rect(160, 10, 100, 40);
+    ctx.strokeStyle = "rgba(0, 0, 255, 0.5)";
+    ctx.stroke();
+    ctx.closePath();
   },
   emit:['start-match','update-scores','innings-change'],
   watch:{
@@ -186,9 +271,14 @@ export default {
             six:0
           }
         }
+        this.x = 20;
+        this.y = this.ballInitialY;
+        this.drawBall('#4cb050');
+
         setTimeout(()=>{
           this.showBowlingAnimations();
         },2000);
+
       }
     },
     oversCount(){
@@ -283,6 +373,8 @@ export default {
   },
   playerBatting(){
     this.playerHits = true;
+    //Generate Random type of shots
+    this.randomShotsGen();
     if(this.startBowling){
       const currentBallScore = randomNumberFromArray(this.scoreIndex);
       this.$emit('current-ball',currentBallScore);
@@ -315,6 +407,20 @@ export default {
 
     this.startBowling = false;
 
+    //SHOW BALL MOVEMENT
+    setInterval(this.drawBallPath, 30);
+
+    // for(let i=0;i<10;i++){
+    //   setTimeout(()=>{
+    //     setInterval(this.drawBallPath(), 10);
+    //   },10);
+    // }
+
+
+
+
+
+
    if(this.currentBallScore === 'nb' || this.currentBallScore === 'wd'){
      //Start Bowling in case no ball or wide (since ballcount is not incrementing)
      this.startBowling = true;
@@ -346,6 +452,26 @@ export default {
     }else if(ball === 5){
       this.thisOver.six = value;
     }
+  },
+  //BALL MOVEMENT
+  drawBall(color = "#810000") {
+    this.ctx.beginPath();
+    this.ctx.arc(this.x, this.y, 10, 0, Math.PI*2);
+    this.ctx.fillStyle = color ;
+    this.ctx.fill();
+    this.ctx.closePath();
+  },
+  drawBallPath() {
+    this.ctx.clearRect(0, 0, this.ballCanvas.width, this.ballCanvas.height);
+    this.drawBall();
+    this.x += this.dx;
+    this.y += this.dy;
+  },
+ randomShotsGen(){
+   //Generate Random Ball Movement on shots
+    const shotObj = randomNumberFromArray(this.shotPatterns);
+    this.dx = shotObj.dx;
+    this.dy = shotObj.dy;
   },
 }
 }
@@ -381,6 +507,14 @@ export default {
     width:100%;
     height:auto;
   }
+
+  .ball-banner-container{
+    flex-direction: column;
+    display: flex;
+    align-items:center;
+    justify-content:end;
+
+  }
   .ball-banner{
     display: flex;
     align-items: center;
@@ -390,13 +524,25 @@ export default {
     height: 100%;
     color:#52734d;
     height: 30vh;
+    flex-direction: column;
   }
-  .batting-lg{
-    transform: scale(1.1);
+  .ball-banner-first{
+    height: 20vh;
+    background-color: #4cb050;
+
+  }
+  .battingLg img{
+    /* transform: scale(1.1); */
+    margin-bottom: 1em;
+    transform: rotate(-30deg);
   }
   .bat-img{
-    width:30%;
+    width:10%;
     height: auto;
+    margin-left:8em;
+    background:#2193b0;
+    /* border-radius: 50%; */
+    position: absolute;
   }
   .stump-img{
     width:30%;
@@ -421,8 +567,23 @@ export default {
   align-items: bottom;
   background-color:#e2b07e;
 
-
 }
+.bat-click-zone{
+  background:#2193b0;
+  border-radius: 50%;
+  width: 20%;
+  position: absolute;
+  /* content:''; */
+  /* position:absolute; */
+  /* padding:65% 65% 0 0; */
+  /* top:10%; */
+  /* left:10%; */
+  /* border-radius:50%; */
+  /* background:#2193b0; */
+  /* z-index:-1; */
+ }
+
+
 .ball-container{
   height: 30vh;
   background-color:#e2b07e;
@@ -441,4 +602,10 @@ export default {
   background-color: #52734d;
 
 }
+.game-ball-action{
+  height: 55vh;
+  color:#fff;
+}
+
+
 </style>

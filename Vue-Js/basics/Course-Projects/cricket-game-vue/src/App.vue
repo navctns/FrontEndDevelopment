@@ -179,7 +179,8 @@ export default {
 }
 .game-container{
   background-color: #4cb050;
-  height: 80vh;
+  height: 83vh;
   margin:0;
 }
+
 </style>
