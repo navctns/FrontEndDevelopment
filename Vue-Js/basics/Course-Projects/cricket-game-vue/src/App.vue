@@ -1,32 +1,22 @@
-<template>
+<template >
 
 
+  <div :class="{gameCelebration:boundaryCelebration,celebrationBox:!boundaryCelebration}">
+    <!-- GAME CONTAINER -->
+    <div class="row game-container" >
 
-  <!-- Score Card -->
-  <div class="row game-container">
-    <!-- SCORE CARD -->
-    <!-- <score-card
-      :runs-count="runsCount"
-      :overs-count="oversCount"
-      :balls-count="ballsCount"
-      :wickets-count="wicketsCount"
-    ></score-card> -->
+        <game-buttons
+          :match-started="matchStarted"
+          :second-innings="secondInnings"
+          @update-scores="updateScores"
+          @innings-change="onInningsChange"
+          @ball-celebration="showCelebrations"
+        ></game-buttons>
 
-    <!-- PLAYERS AND PITCH -->
-    <!-- <div class="row valign-wrapper center-align"> -->
-      <game-buttons
-        :match-started="matchStarted"
-        :second-innings="secondInnings"
-        @update-scores="updateScores"
-        @innings-change="onInningsChange"
-      ></game-buttons>
 
-      <!-- THIS OVER AND OTHER -->
-      <!-- <instant-visuals
-        :this-over = "thisOverItems"
-      ></instant-visuals>-->
-
+    </div>
   </div>
+
 
   <div class="nav-wrapper">
 
@@ -43,8 +33,12 @@
             <div v-if="!matchStarted">
               <a class="waves-effect waves-light btn-large" @click="startMatch">Start Match</a>
             </div>
-            <div v-if="inningsNumber === 1 && !secondInnings">
+            <div v-else-if="inningsNumber === 1 && !secondInnings">
               <a class="waves-effect waves-light btn-large" @click="startSecondInnings">Start Second Innings</a>
+            </div>
+            <div class="stump-container" v-else>
+              <img src="./assets/wickets.svg" alt="" class="stump-img">
+
             </div>
         </div>
 
@@ -77,6 +71,7 @@ export default {
       ballsCount:0,
       runsCount:0,
       wicketsCount:0,
+      boundaryCelebration:false,
       inningsNumber:0,
       scoreIndex:[0,1,2,3,4,5,6,'wd','nb','wk'],//Inactive
       loadingWidth:'100',
@@ -167,6 +162,10 @@ export default {
   startSecondInnings(){
     this.secondInnings = true;
   },
+  showCelebrations(){
+    this.boundaryCelebration = true;
+    setTimeout(()=> this.boundaryCelebration = false,2000);
+  },
 
   }
 }
@@ -203,6 +202,8 @@ export default {
 .nav-wrapper{
   background-color: #4cb050;
   margin:0;
+  border:2px solid #fdca40;
+
 }
 .game-container{
   background-color: #4cb050;
@@ -210,6 +211,29 @@ export default {
   margin:0;
   border-radius: 30%;
   border:2px solid #fdca40;
+}
+.gameCelebration{
+  background: url('./assets/Crowd-Of-Kids.svg');
+  z-index: -1;
+  border-radius: 0;
+}
+.celebrationBox{
+  width:100%;
+  background: #0a8043;
+}
+#app{
+  background: #0a8043;
+}
+.stump-img{
+  width:30%;
+  height: auto;
+}
+.stump-container{
+  /* position: absolute; */
+  background-color:#e2b07e;
+  height: 100%;
+  padding:0;
+
 }
 
 </style>
