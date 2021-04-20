@@ -209,7 +209,9 @@ export default {
     }
   },
   mounted(){
-    console.log('mounted');
+    //Mounts The Canvases for showing Ball Movement on Left SIDE
+    // and right side
+    // console.log('mounted');
     var canvas = document.getElementById("ballCanvas");
     console.log(canvas);
     var ctx = canvas.getContext("2d");
@@ -232,6 +234,7 @@ export default {
 
     //KEYBOARD EVENT HANDLER
     window.addEventListener('keyup',(e)=>{
+      //GAME PLAY ARROW KEY Event Listener
       console.log('Key pressed');
       if(this.startBowling){
         if(e.keyCode === 37){
@@ -252,11 +255,14 @@ export default {
   emits:['start-match','update-scores','innings-change','ball-celebration'],
   watch:{
     matchStarted(){
+      //Start The match - Button Event, show initial bowling animations
       if(this.matchStarted){
         this.showBowlingAnimations();
       }
     },
     ballsCount(value){
+      //ON Change Balls Count Check for overchange,
+      //If over change set this over object
       if(value){
         if(value % 6 === 0){
           this.oversCount++;
@@ -287,6 +293,9 @@ export default {
       }
     },
     oversCount(){
+      //Check for over count, Check for innings end
+      //If innings ended emit an event to app
+      // also store current players score
       if(this.oversCount === this.maxOvers){
         this.startBowling = false;
         this.inningsOver = true;
@@ -311,6 +320,8 @@ export default {
       }
     },
     secondInnings(value){
+      //On Second innings true start new innings
+      //Second innings is a prop from app
       // console.log('second innings',this.secondInnings);
       if(value){
         this.newInnings();
@@ -323,6 +334,7 @@ export default {
       return this.bowlerImg.toString();
     },
   winningCase(){
+      //Check the scores of two players on second innings change and show result
       if(this.inningsNumber === 2){
         console.log('match result');
         if(this.playerOne.score > this.playerTwo.score){
@@ -339,6 +351,7 @@ export default {
   methods:{
     showBowlingAnimations(){
       //Show ball movement animations
+      //Make ball size increase  on time creates a small effect
       //Start Bowling
       this.playerHits = false;
       this.startBowling = true;
@@ -383,6 +396,7 @@ export default {
         },2000);
     },
     startMatch(){
+      //Start match button
       //Change Balls Count
       // this.ballsCount += 1;
       // this.$emit('start-match','start');
@@ -391,6 +405,9 @@ export default {
 
   },
   playerBatting(direct){
+    //On when player hits on the bat, set a random score value for the ball
+    //If it is a boundary show celebrations ,
+    //Trigger ball movement on the canvas
   // playerBatting(){
     // console.log('direction',direct)
     this.playerHits = true;
@@ -468,6 +485,7 @@ export default {
    }
   },
   newInnings(){
+    //Start a new innings reset certain values
     this.runsCount = 0;
     this.oversCount = 0;
     this.ballsCount = 0;
@@ -477,6 +495,7 @@ export default {
     // this.$emit('innings-change',this.inningsNumber);
   },
   setThisOver(ball,value){
+    //Create This over Object
     if(ball === 0){
       this.thisOver.one = value;
     }else if(ball === 1){
@@ -494,6 +513,7 @@ export default {
   //BALL MOVEMENT
   //SHOT TOWARDS RIGHT
   drawBallRight(color = "#810000") {
+    //Draw the Ball for the movement in right side
     // if(direct === 'right'){
       //Shot to right
       // console.log('right shot')
@@ -512,6 +532,7 @@ export default {
 
   },
   drawBallPathRight() {
+    //Draw Ball path Through the right with x,y change by dx and dy
     // if(direct === 'right'){
       //Shot to Right
       console.log('right shot');
@@ -519,16 +540,12 @@ export default {
       this.drawBallRight();
       this.x += this.dx;
       this.y += this.dy;
-    // }else if(direct === 'left'){
-    //   this.lCtx.clearRect(0, 0, this.leftCanvas.width, this.leftCanvas.height);
-    //   this.drawBall('left');
-    //   this.lx += this.ldx;//For left side shot interval
-    //   this.ly += this.ldy;//For left side shot interval
-    // }
 
   },
   //SHOT TOWARDS LEFT
   drawBallLeft(color = "#810000") {
+    //Draw the Ball for the movement in Left side
+
       this.lCtx.beginPath();
       this.lCtx.arc(this.lx, this.ly, 10, 0, Math.PI*2);
       this.lCtx.fillStyle = color ;
@@ -536,6 +553,8 @@ export default {
       this.lCtx.closePath();
   },
   drawBallPathLeft() {
+    //Draw Ball path Through the right with lx,ly change by ldx and ldy
+
       this.lCtx.clearRect(0, 0, this.leftCanvas.width, this.leftCanvas.height);
       this.drawBallLeft();
       this.lx += this.ldx;//For left side shot interval
@@ -543,7 +562,8 @@ export default {
   },
 
  randomShotsGen(direct){
-   //Generate Random Ball Movement on shots
+   //Generate Random Ball Movement on shots by setting dx,dy patterns
+   //control the direction the ball travel
    if(direct === 'right'){
      const shotObj = randomNumberFromArray(this.shotPatternsRight);
      this.dx = shotObj.dx;
