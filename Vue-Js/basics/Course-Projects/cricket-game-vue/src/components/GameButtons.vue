@@ -4,14 +4,14 @@
   <!--MENUS -->
   <div class="col s4 m4">
 
-      <div class="row ball-banner-container center-align">
-        <div class="col s12 m12 ball-banner-first">
+      <div class=" row ball-banner-container  center-align">
+        <!-- <div class="col s12 m12 ball-banner-first">
 
         </div>
         <div class="col s12 m12 ball-banner-first">
 
-        </div>
-        <div class="col s12 m12 ball-banner center-align">
+        </div> -->
+        <div class="col offset-m4 s12 m12 ball-banner center-align">
 
             <div v-if="!matchStarted">
               <a class="waves-effect waves-light btn-large" @click="startMatch" >Start Match</a>
@@ -141,7 +141,9 @@ export default {
     matchStarted:{
       type:Boolean,
       required:true,
+      default:false,
     },
+    secondInnings:Boolean,
 
   },
   components:{
@@ -170,7 +172,7 @@ export default {
       ballRelease:'running',
       ballStyles:{width:'10%',margin:0},
       //Match General
-      matchStartedStatus:this.matchStarted,
+      // matchStartedStatus:this.matchStarted,
       scoreIndex:[0,1,2,3,4,6,'wd','nb','wk'],
       loadingStyles:{width:'100%'},
       bowlerStyles:{width:'10%'},
@@ -182,6 +184,7 @@ export default {
       wicketsCount:0,
       startBowling:false,
       ballTimer:0,
+      startSecondInnings:this.secondInnings,
       //Results
       inningsOver:false,
       inningsNumber:0,
@@ -254,13 +257,18 @@ export default {
     ctx.stroke();
     ctx.closePath();
   },
-  emit:['start-match','update-scores','innings-change'],
+  emits:['start-match','update-scores','innings-change'],
   watch:{
+    matchStarted(){
+      if(this.matchStarted){
+        this.showBowlingAnimations();
+      }
+    },
     ballsCount(value){
       if(value){
         if(value % 6 === 0){
           this.oversCount++;
-
+          console.log('over change');
           //This over value set to zero(remove prev values)
           this.thisOver = {
             one:0,
@@ -285,7 +293,14 @@ export default {
       if(this.oversCount === this.maxOvers){
         this.startBowling = false;
         this.inningsOver = true;
+        console.log('overs ended');
+        ////////
+        console.log('second innings',this.startSecondInnings);
+        console.log('second innings', this.secondInnings);
+        ///////
         this.inningsNumber++;
+        this.$emit('innings-change',this.inningsNumber);
+
         //Store innings Score
         if(this.inningsNumber === 1){
           this.playerOne.score = this.runsCount;
@@ -296,6 +311,12 @@ export default {
         }
       }else{
         this.ballsCount = 0;
+      }
+    },
+    startSecondInnings(value){
+      console.log('second innings');
+      if(value){
+        this.newInnings();
       }
     }
   },
@@ -366,7 +387,7 @@ export default {
     startMatch(){
       //Change Balls Count
       // this.ballsCount += 1;
-      this.$emit('start-match','start');
+      // this.$emit('start-match','start');
         console.log('match start')
       this.showBowlingAnimations();
 
@@ -377,7 +398,7 @@ export default {
     this.randomShotsGen();
     if(this.startBowling){
       const currentBallScore = randomNumberFromArray(this.scoreIndex);
-      this.$emit('current-ball',currentBallScore);
+      // this.$emit('current-ball',currentBallScore);
       this.currentBallScore = currentBallScore;
       console.log(currentBallScore);
     }
@@ -435,8 +456,9 @@ export default {
     this.oversCount = 0;
     this.ballsCount = 0;
     this.inningsOver = false;
+
     // this.$emit('update-scores',this.oversCount,this.ballsCount,0);
-    this.$emit('innings-change');
+    // this.$emit('innings-change',this.inningsNumber);
   },
   setThisOver(ball,value){
     if(ball === 0){
@@ -513,6 +535,8 @@ export default {
     display: flex;
     align-items:center;
     justify-content:end;
+    border-radius: 30%;
+    align-items: end;
 
   }
   .ball-banner{
@@ -525,11 +549,13 @@ export default {
     color:#52734d;
     height: 30vh;
     flex-direction: column;
+    border-radius: 40%;
+
   }
   .ball-banner-first{
     height: 20vh;
     background-color: #4cb050;
-
+    border-radius: 30%;
   }
   .battingLg img{
     /* transform: scale(1.1); */
@@ -570,7 +596,7 @@ export default {
 }
 .bat-click-zone{
   background:#2193b0;
-  border-radius: 50%;
+  /* border-radius: 50%; */
   width: 20%;
   position: absolute;
   /* content:''; */
@@ -597,6 +623,7 @@ export default {
   -moz-box-shadow:    inset 0 0 10px #000000;
   -webkit-box-shadow: inset 0 0 10px #000000;
   box-shadow:         inset 0 0 10px #000000;
+  border-radius: 10%;
 }
 .btn-large{
   background-color: #52734d;

@@ -1,6 +1,7 @@
 <template lang="html">
-  <div class="col offset-m4 s4 m4  center-align">
-    <div class="card scores-card darken-1">
+  <!-- <div class="col s4 m4  center-align"> -->
+  <div class="center-align">
+        <div class="card scores-card darken-1">
       <div class="card-content white-text">
         <!-- <span class="card-title"><h5>Score Visualization</h5></span> -->
         <div class="this-over">

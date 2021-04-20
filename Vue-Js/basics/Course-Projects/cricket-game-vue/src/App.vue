@@ -16,7 +16,7 @@
     <!-- <div class="row valign-wrapper center-align"> -->
       <game-buttons
         :match-started="matchStarted"
-        @start-match="triggerMatchStart"
+        :second-innings="secondInnings"
         @update-scores="updateScores"
         @innings-change="onInningsChange"
       ></game-buttons>
@@ -28,7 +28,7 @@
 
   </div>
 
-  <div class="nav-wrapper row">
+  <div class="nav-wrapper">
 
       <score-card
         :runs-count="runsCount"
@@ -37,6 +37,16 @@
         :wickets-count="wicketsCount"
       ></score-card>
 
+        <!-- GAME CORE CONTROLS -->
+        <div class="col offset-m4 s12 m12 ball-banner center-align">
+        <!-- <div> -->
+            <div v-if="!matchStarted">
+              <a class="waves-effect waves-light btn-large" @click="startMatch">Start Match</a>
+            </div>
+            <div v-if="inningsNumber === 1 && !secondInnings">
+              <a class="waves-effect waves-light btn-large" @click="startSecondInnings">Start Second Innings</a>
+            </div>
+        </div>
 
         <!-- THIS OVER AND OTHER -->
         <instant-visuals
@@ -61,11 +71,13 @@ export default {
   data(){
     return{
       matchStarted:false,
+      secondInnings:false,
       totalOvers:2,
       oversCount:0,
       ballsCount:0,
       runsCount:0,
       wicketsCount:0,
+      inningsNumber:0,
       scoreIndex:[0,1,2,3,4,5,6,'wd','nb','wk'],//Inactive
       loadingWidth:'100',
       loadingStylesValue:{width:'100%'},
@@ -76,7 +88,8 @@ export default {
         three:0,
         four:0,
         five:0,
-        six:0
+        six:0,
+        matchStarted:false,
       },
     }
   },
@@ -141,12 +154,20 @@ export default {
       this.wicketsCount = wickets;
       this.runsCount += ballOutput;
     },
-    onInningsChange(){
+    onInningsChange(inningsNumber){
       this.oversCount = 0;
       this.ballsCount = 0;
       this.runsCount = 0;
-      this.wickestCount = 0;
-    }
+      this.wicketsCount = 0;
+      this.inningsNumber = inningsNumber;
+    },
+    startMatch(){
+      this.matchStarted = true;
+    },
+  startSecondInnings(){
+    this.secondInnings = true;
+  },
+
   }
 }
 </script>
@@ -158,8 +179,14 @@ export default {
 
     /* height:20vh; */
     color:#f8f5f1;
+    border-radius: 30%;
+    display: flex;
+    width: 100%;
+    gap:1em;
+    margin: 1em;
+    padding:1em;
   }
-  .nav-wrapper > *{
+  .nav-wrapper > * {
     width:100%;
   }
 .scores-card{
@@ -181,6 +208,8 @@ export default {
   background-color: #4cb050;
   height: 83vh;
   margin:0;
+  border-radius: 30%;
+  border:2px solid #fdca40;
 }
 
 </style>
