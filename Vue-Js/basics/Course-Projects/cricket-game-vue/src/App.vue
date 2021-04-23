@@ -214,6 +214,8 @@ export default {
 }
 .gameCelebration{
   background: url('./assets/Crowd-Of-Kids.svg');
+  /* background: url('./assets/crowd.jpg'); */
+
   z-index: -1;
   border-radius: 0;
 }
@@ -233,7 +235,6 @@ export default {
   background-color:#e2b07e;
   height: 100%;
   padding:0;
-
 }
 
 </style>

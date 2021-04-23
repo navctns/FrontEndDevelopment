@@ -1,7 +1,9 @@
 <template lang="html">
   <div class="user-details">
     <active-user :user-data="activeUser"></active-user>
-    <user-data :user-data="activeUser"></user-data>
+    <user-data :user-data="activeUser"
+      @new-user-data="changeUser"
+    ></user-data>
   </div>
 </template>
 
@@ -9,43 +11,26 @@
 export default {
   data(){
     return{
-      users:[
-        {
-          name:'Matt New',
-          age:32,
-          username:'matnew',
-          active:false,
-        },
-        {
-          name:'Ravan',
-          age:28,
-          username:'ravan19',
-          active:true,
-        },
-        {
-          name:'Seetha',
-          age:25,
-          username:'seetha20',
-          active:false,
-        }
-      ],
+
       activeUser:{
                 name:'Ravan',
                 age:28,
-                username:'ravan19',
-                active:true,
               },
     }
   },
   methods:{
-    getActiveUser(){
-      let activeUser = '';
-      this.users.forEach(user =>{
-        if(user.active){
-          activeUser = user;
-        }
-      });
-      return activeUser;
+    // getActiveUser(){
+    //   let activeUser = '';
+    //   this.users.forEach(user =>{
+    //     if(user.active){
+    //       activeUser = user;
+    //     }
+    //   });
+    //   return activeUser;
+    // },
+    changeUser(name,age){
+      this.activeUser.name = name;
+      this.activeUser.age = age;
     }
   },
 }

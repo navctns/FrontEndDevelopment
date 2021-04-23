@@ -1,6 +1,6 @@
 <template lang="html">
   <div>
-    <h2>Username:{{userData.username}}</h2>
+    <h2>Username:{{userData.name}}</h2>
     <h3>Age:{{userData.age}}</h3>
   </div>
 
