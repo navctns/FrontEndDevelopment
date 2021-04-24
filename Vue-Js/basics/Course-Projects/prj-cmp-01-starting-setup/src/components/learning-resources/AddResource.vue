@@ -1,13 +1,18 @@
 <template>
   <!-- <teleport to="body"> -->
-    <base-error v-if="invalidInput">
-      <template v-slot:header>
-        <h5>Invalid Input</h5>
+    <base-dialog v-if="inputIsInvalid"
+            title="Invalid input"
+            @close="confirmError">
+      <template v-slot:default>
+        <p>
+          Unfortunatly atleast one input value is invalid,please
+          check all inputs, make sure you entered at least a few characters
+        </p>
       </template>
-      <template #body>
-        <p>Please fill all fields</p>
+      <template #actions>
+        <base-button @click="confirmError">Okay</base-button>
       </template>
-    </base-error>
+    </base-dialog>
 
   <!-- </teleport> -->
 
@@ -39,7 +44,7 @@
     inject:['addResource'],
     data(){
       return{
-        invalidInput:false,
+        inputIsInvalid:false,
       }
     },
     methods:{
@@ -50,10 +55,13 @@
         if(titleInput.trim() === '' || descriptionInput.trim() === '' || linkInput.trim() === ''){
           // this.$emit('add-resource',titleInput,descriptionInput,linkInput);
           console.log('input invalid');
-          this.invalidInput = true;
+          this.inputIsInvalid = true;
         }else{
           this.addResource(titleInput,descriptionInput,linkInput);
         }
+      },
+      confirmError(){
+        this.inputIsInvalid = false;
       }
     }
   }
@@ -77,7 +85,8 @@ textarea {
 input:focus,
 textarea:focus {
   outline: none;
-  border-color: #3a0061;
+  /* border-color: #3a0061; */
+  border-color:#8ab6d6;
   background-color: #f7ebff;
 }
 
