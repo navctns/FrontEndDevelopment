@@ -51,9 +51,18 @@ export default {
   created(){
     //When component is created before it shown on screen
     this.loadTeamMembers(this.teamId)
-    // console.log(this.asc);//Undefined 
+    // console.log(this.asc);//Undefined
     //Cant be accessed as a prop
     console.log(this.$route.query)
+  },
+  beforeRouteUpdate(to, from, next){
+    //when the component is reused with new data
+    console.log('TeamMembers cmp beforeRouteUpdate');
+    console.log(to,from);
+    //This can be an alternative to watch for
+    // updating data inside dynamically
+    this.loadTeamMembers(to.params.teamId);
+    next();
   },
   watch:{
     teamId(newId){

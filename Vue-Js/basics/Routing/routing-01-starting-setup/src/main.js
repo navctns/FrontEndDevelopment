@@ -27,6 +27,9 @@ const router = createRouter({
     },
     {
       path:'/teams',
+      meta:{
+        needsAuth:true,
+      },
       components:{
         default:TeamsList,
         footer:TeamsFooter
@@ -48,7 +51,13 @@ const router = createRouter({
       components:{
         default:UsersList,
         footer:UsersFooter
+      },
+      beforeEnter(to,from,next){
+        console.log('Router-config:Users beforeEnter');
+        console.log(to, from);
+        next();
       }
+
     },
 
     {
@@ -69,14 +78,31 @@ const router = createRouter({
 
 });
 router.beforeEach((to,from,next)=>{
-  console.log(to,from,next);
+  console.log('Global beforeEach');
+  // console.log(to,from,next);
   // next(false);
   // if(to.name === 'team-members'){
   //   next();
   // }else{
   //   next({name:'team-members', params:{teamId:'t2'}})
   // }
-  next();
-})
+  if(to.meta.needsAuth){
+    console.log('Needs Auth!');
+    next();
+  }else{
+    next();
+  }
+});
+
+//After Each
+router.afterEach((to,from) =>{
+  //This method Cant deny a navigation
+  //can send/store analytic data like
+  //Log every navigation, Log when navigation changes
+  //Can't set or change what user see
+  //It is executed Last on the navigation action
+  console.log('Global afterEach');
+  console.log(to, from);
+});
 app.use(router);
 app.mount('#app');
