@@ -1,10 +1,28 @@
 <template>
-  <div class="container">
+  <router-view v-slot="slotProps">
+    <transition name='fade-button' mode="out-in">
+      <component :is='slotProps.Component'></component>
+    </transition>
+  </router-view>
+  <!-- <div class="container">
     <div class="block" :class="{animate:animatedBlock}"></div>
     <button @click="animateBlock">Animate</button>
   </div>
   <div class="container">
-    <transition name="para">
+    <users-list></users-list>
+  </div>
+  <div class="container">
+    <transition name="para"
+    :css="false"
+    @before-enter="beforeEnter"
+    @before-leave="beforeLeave"
+    @enter="enter"
+    @after-enter="afterEnter"
+    @leave="leave"
+    @after-leave="afterLeave"
+    @enter-cancelled="enterCancelled"
+    @leave-cancelled="leaveCancelled"
+    >
       <p v-if="paraIsVisible">This is Only Something visible</p>
     </transition>
     <button @click="toggleParagraph">Toggle Paragraph</button>
@@ -15,24 +33,36 @@
     </transition>
     <button @click="toggleParagraphTwo">Toggle Paragraph</button>
   </div>
+  <div class="container">
+    <transition name="fade-button" mode="out-in">
+      <button @click="showUsers" v-if="!usersAreVisible">Show Users</button>
+      <button @click="hideUsers" v-else>Hide Users</button>
+    </transition>
+  </div>
   <base-modal @close="hideDialog" :open="dialogIsVisible">
     <p>This is a test dialog!</p>
     <button @click="hideDialog">Close it!</button>
   </base-modal>
   <div class="container">
     <button @click="showDialog">Show Dialog</button>
-  </div>
+  </div>-->
 </template>
 
 <script>
+// import UsersList from './components/UsersList.vue';
 export default {
+  components:{
+    // UsersList
+  },
   data() {
     return {
       dialogIsVisible: false,
       animatedBlock:false,
       paraIsVisible:false,
       paraTwoIsVisible:false,
-
+      usersAreVisible:false,
+      enterInterval:null,
+      leaveInterval:null,
      };
   },
   methods: {
@@ -51,6 +81,73 @@ export default {
     toggleParagraphTwo(){
       this.paraTwoIsVisible = !this.paraTwoIsVisible;
     },
+    showUsers(){
+      this.usersAreVisible = true;
+    },
+    hideUsers(){
+      this.usersAreVisible = false;
+    },
+    beforeEnter(el){
+      //Before entering
+      console.log('beforeEnter');
+      console.log(el);
+      el.style.opacity = 0;
+    },
+    beforeLeave(el){
+      // before Leaving
+      console.log('beforeLeave');
+      console.log(el);
+      el.style.opacity = 1;
+    },
+    enter(el, done){
+      //when entering
+      console.log('enter');
+      console.log(el);
+      let round = 1;
+      this.enterInterval = setInterval(() => {
+        el.style.opacity = round * 0.01;
+        round++;
+        if(round >100){
+          clearInterval(this.enterInterval);
+          done();
+        }
+      }, 20);
+    },
+    afterEnter(el){
+      //after enter, wait for animation to finish
+      console.log('afterEnter');
+      console.log(el);
+    },
+    leave(el, done){
+      //when leave start
+      console.log('leave');
+      console.log(el);
+      let round = 1;
+      this.leaveInterval = setInterval(()=>{
+        el.style.opacity = 1 - round * 0.01;
+        round++;
+        if(round > 100){
+          // el.style.opacity = 0;
+          // el.remove();
+          clearInterval(this.leaveInterval);
+          done();
+        }
+      })
+    },
+    afterLeave(el){
+      //after leave wait for animation to finish
+      console.log('afterLeave');
+      console.log(el);
+    },
+    enterCancelled(el){
+      console.log(el);
+      clearInterval(this.enterInterval);
+    },
+    leaveCancelled(el){
+      console.log(el);
+      clearInterval(this.leaveInterval);
+    }
+
   },
 };
 </script>
@@ -147,16 +244,16 @@ button:active {
 
 /* custom class names */
 
-.para-enter-active{
+/* .para-enter-active{ */
   /* before mounted and after mounted */
   /* transition:all 0.5s ease-out; */
-  animation: slide-scale 0.3s ease-out;
-}
+  /* animation: slide-scale 0.3s ease-out; */
+/* } */
 
-.para-leave-active{
+/* .para-leave-active{ */
   /* transition:all 0.5s ease-in; */
-  animation:slide-scale 0.3s ease-out;
-}
+  /* animation:slide-scale 0.3s ease-out; */
+/* } */
 
 @keyframes slide-right {
   0%{
@@ -172,5 +269,27 @@ button:active {
 }
 .para2-active{
   animation: slide-right 0.3s ease-out forwards;
+}
+.fade-button-enter-from,
+.fade-button-leave-to
+{
+  opacity: 0;
+}
+.fade-button-enter-active{
+  transition:opacity 0.3s ease-out;
+}
+.fade-button-leave-active{
+  transition: opacity 0.3s ease-in;
+}
+.fade-button-enter-to,
+.fade-button-leave-from{
+  opacity:1;
+}
+/* ROUTE ANIMATION */
+.route-enter-active{
+  animation: slide-scale 0.4s ease-out;
+}
+.route-leave-active{
+  animation:slide-scale 0.4s ease-in;
 }
 </style>
