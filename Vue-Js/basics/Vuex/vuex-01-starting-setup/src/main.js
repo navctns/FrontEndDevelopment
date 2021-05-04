@@ -1,25 +1,14 @@
 import { createApp } from 'vue';
-import { createStore } from 'vuex';
 
 import App from './App.vue';
+import store from './store/index.js';
 const app = createApp(App);
 
 //Vuex
-const store = createStore({
-  state(){
-    return{
-      counter:0,
-    };
-  },
-  mutations:{
-    increment(state){
-      state.counter++;
-    },
-    increase(state, payload){
-      state.counter = state.counter + payload.value;
-    }
-  }
-});
+//modules
+
+
+
 
 app.use(store);
 
