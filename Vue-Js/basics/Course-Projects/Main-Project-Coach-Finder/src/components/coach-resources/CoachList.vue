@@ -1,8 +1,9 @@
 <template lang="html">
   <ul>
     <coach-card
-      v-for="coach in coaches"
+      v-for="coach in coachesList"
         :key="coach.id"
+        :id="coach.id"
         :name="coach.name"
         :topic="coach.topic"
         :rating="coach.rating"
@@ -16,34 +17,17 @@ export default {
   components:{
     CoachCard,
   },
+  computed:{
+    coachesList(){
+      console.log('coatchesList from cmp');
+      const coaches = this.$store.getters['coaches/getAllCoaches'];
+      console.log(coaches);
+      return this.$store.getters['coaches/getAllCoaches'];
+    }
+  },
   data(){
     return{
-      coaches:[
-        {
-          id:1,
-          name:'Hari',
-          topic:'Maths',
-          rating:'5',
-        },
-        {
-          id:2,
-          name:'Ben',
-          topic:'Architecture',
-          rating:'4',
-        },
-        {
-          id:3,
-          name:'Naveen',
-          topic:'Python',
-          rating:'4',
-        },
-        {
-          id:3,
-          name:'Naveen',
-          topic:'Python',
-          rating:'4',
-        },
-      ]
+
     }
 
   }

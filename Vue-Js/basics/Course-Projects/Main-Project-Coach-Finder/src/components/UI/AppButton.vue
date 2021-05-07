@@ -1,6 +1,6 @@
 <template>
   <button class="std"
-  :class="{flat:color==='flat',btnBlue:color==='blue',btnRed:color==='red',smallBtn:size==='sm',lgBtn:size==='lg',xlBtn:size==='xl'}"
+  :class="{flat:color==='flat',btnBlue:color==='blue',btnRed:color==='red',btnGreen:color==='green',smallBtn:size==='sm',lgBtn:size==='lg',xlBtn:size==='xl',xxlBtn:size==='xxl'}"
   >{{value}}</button>
 </template>
 <script>
@@ -9,13 +9,22 @@
   }
 </script>
 <style scoped>
+
   .std{
     padding:0.5em;
     border-radius: 0.5em;
+    position:inherit;
+    width:100%;
+    margin:0;
+
   }
   .btnRed{
     background: #ff8474;
     color:#eee;
+  }
+  .btnGreen{
+    background-color: #91c788;
+    color:#323232;
   }
   .btnBlue{
     background: #3d84b8;
@@ -33,6 +42,8 @@
     background-color: #1e6f5c;
     color:#fafafa;
   }
+  .btnGreen:hover,
+  .btnGreen:focus,
   .btnBlue:hover,
   .btnBlue:focus,
   .btnRed:hover,
@@ -47,6 +58,9 @@
   }
   .xlBtn{
     width:80%;
+  }
+  .xxlBtn{
+    width:100%;
   }
 
 </style>

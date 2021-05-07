@@ -1,14 +1,8 @@
 <template>
   <!-- header  -->
   <div class="container">
-    <app-card bgColor="green">
-      <the-header></the-header>
-    </app-card>
     <app-card>
       <coach-list></coach-list>
-    </app-card>
-    <app-card>
-      <the-footer></the-footer>
     </app-card>
   </div>
 
@@ -16,14 +10,12 @@
 </template>
 <script>
   import CoachList from '../components/coach-resources/CoachList.vue';
-  import TheHeader from '../components/UI/TheHeader.vue';
-  import TheFooter from '../components/UI/TheFooter.vue';
+  // import TheHeader from '../components/UI/TheHeader.vue';
 
   export default{
     components:{
       CoachList,
-      TheHeader,
-      TheFooter,
+
     }
   }
 </script>

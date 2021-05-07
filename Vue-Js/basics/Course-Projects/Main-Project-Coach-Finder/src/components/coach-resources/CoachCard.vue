@@ -1,21 +1,23 @@
 <template>
   <li>
     <app-small-card>
-      <template #default>
+      <template #content>
         <h2>{{name}}</h2>
         <h3>{{topic}}</h3>
         <h3>{{rating}}</h3>
       </template>
       <template #footer>
-        <app-button value="Set as Coach" color="red" size="lg"></app-button>
-        <app-button value="View Details" color="blue" size="lg"></app-button>
+        <app-button value="Contact" color="green" size="lg"></app-button>
+        <router-link :to="{ name: 'coach-info', params: {coachId:id} }">
+          <app-button value="View Details" color="blue" size="lg"></app-button>
+        </router-link>
       </template>
     </app-small-card>
   </li>
 </template>
 <script>
   export default{
-    props:['name','topic','rating']
+    props:['id','name','topic','rating']
   }
 </script>
 <style scoped="">
