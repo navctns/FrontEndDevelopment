@@ -8,24 +8,28 @@ export default{
           name:'Hari',
           topic:'Maths',
           rating:'5',
+          reqIds:[],
         },
         {
           id:2,
           name:'Ben',
           topic:'Architecture',
           rating:'4',
+          reqIds:[],
         },
         {
           id:3,
           name:'Naveen',
           topic:'Python',
           rating:'4',
+          reqIds:[],
         },
         {
           id:3,
           name:'Naveen',
           topic:'Python',
           rating:'4',
+          reqIds:[],
         },
       ]
     }

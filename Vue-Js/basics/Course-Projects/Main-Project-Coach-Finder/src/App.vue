@@ -16,7 +16,6 @@
 <script>
 import TheHeader from './components/UI/TheHeader.vue';
 import TheFooter from './components/UI/TheFooter.vue';
-
   export default{
     components:{
       TheHeader,
@@ -25,8 +24,11 @@ import TheFooter from './components/UI/TheFooter.vue';
   }
 </script>
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap');
+
 body{
   color:#323232;
+  font-family: 'noto-sans-jp',sans-serif;
 }
 .container{
   display: flex;

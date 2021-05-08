@@ -3,7 +3,9 @@
     <request-item
       v-for="request in requestsList"
         :key="request.id"
+        :id="request.id"
         :coachId="request.coachId"
+        :name="request.name"
         :message="request.message"
         :email="request.email"
 

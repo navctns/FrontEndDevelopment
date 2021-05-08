@@ -49,9 +49,23 @@
   /* section{
     margin: auto;
   } */
-  header,footer{
+  section{
+    margin:1em 0;
+  }
+  footer{
     display: flex;
     justify-content: space-between;
+    text-align:center;
     align-items: center;
   }
+  header{
+    display: flex;
+    /* justify-content: center; */
+    justify-content: space-between;
+    max-height: 40vh;
+    /* text-align:center; */
+    /* align-items: center; */
+    gap:2em;
+  }
+
 </style>

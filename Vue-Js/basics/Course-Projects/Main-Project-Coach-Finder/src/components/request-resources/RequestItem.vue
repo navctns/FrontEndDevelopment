@@ -2,10 +2,11 @@
   <li>
     <app-small-card width="sm">
       <template #rightTag>
-        <icon-button mode="delete"></icon-button>
+        <icon-button @click.prevent="deleteRequest" mode="delete"></icon-button>
       </template>
       <template #default>
         <h4>{{message}}</h4>
+        <h5>{{name}}</h5>
         <h5>{{email}}</h5>
       </template>
       <template #footer>
@@ -17,6 +18,12 @@
 </template>
 <script>
   export default{
-    props:['coachId','message','email'],
+    props:['coachId','message','email','id','name'],
+    methods:{
+      deleteRequest(){
+        console.log('abd');
+        this.$store.dispatch('requests/deleteRequest',this.id);
+      }
+    }
   }
 </script>

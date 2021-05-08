@@ -7,9 +7,11 @@
         <h3>{{rating}}</h3>
       </template>
       <template #footer>
-        <app-button value="Contact" color="green" size="lg"></app-button>
-        <router-link :to="{ name: 'coach-info', params: {coachId:id} }">
-          <app-button value="View Details" color="blue" size="lg"></app-button>
+        <router-link to="/coaches" class="link">
+          <app-button value="Contact" color="green" size="xxl"></app-button>
+        </router-link>
+        <router-link class="link" :to="{ name: 'coach-info', params: {coachId:id} }">
+          <app-button value="View Details" color="blue" size="xxl"></app-button>
         </router-link>
       </template>
     </app-small-card>
@@ -21,6 +23,14 @@
   }
 </script>
 <style scoped="">
+.link{
+  margin: 0;
+  width: 100%;
+  display: block;
+  background-color: inherit;
+  padding: 0;
+
+}
   li{
     padding:1em;
     width:90%;

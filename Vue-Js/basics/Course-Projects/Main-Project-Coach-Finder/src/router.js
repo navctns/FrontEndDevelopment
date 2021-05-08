@@ -3,6 +3,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import CoachesHome from './pages/TheCoachesHome.vue';
 import TheRequests from './pages/TheRequests.vue';
 import CoachInfo from './pages/CoachInfo.vue';
+// import CoachContactForm from './pages/CoachContactForm.vue';
 
 const router = createRouter({
   history:createWebHistory(),
@@ -21,13 +22,19 @@ const router = createRouter({
       props:true,
       name:'coach-info',
       component:CoachInfo,
-      children:[
-        {
-          path:'/contact',
-          component:null,
-        },
-      ]
+      // children:[
+      //   {
+      //     path:'/coaches/:coachId/contact',
+      //     name:'contact',
+      //     component:CoachContactForm,
+      //   },
+      // ]
     },
+    // {
+    //   path:'/contact',
+    //   name:'contact',
+    //   component:CoachContactForm,
+    // },
     {
       path:'/register',
       component:null,
