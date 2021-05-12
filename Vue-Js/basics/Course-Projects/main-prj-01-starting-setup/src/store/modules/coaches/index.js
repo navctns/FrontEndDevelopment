@@ -6,6 +6,7 @@ export default{
   namespaced:true,
   state(){
     return{
+      userIsCoach:false,//different methodf
       coaches:[
             {
               id: 'c1',
