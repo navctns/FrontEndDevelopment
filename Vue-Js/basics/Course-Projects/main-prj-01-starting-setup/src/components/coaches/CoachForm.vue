@@ -1,36 +1,37 @@
 <template>
   <form @submit.prevent="submitForm">
-    <div class="form-control">
+    <div class="form-control" :class="{invalid:!firstName.isValid}">
       <label for="firstname">Firstname</label>
-      <input type="text" id="firstname" v-model="firstName">
+      <input type="text" id="firstname" v-model="firstName.val" @blur="clearValidity('firstName')">
     </div>
-    <div class="form-control">
+    <div class="form-control" :class="{invalid:!lastName.isValid}">
       <label for="lastname">Lastname</label>
-      <input type="text" id="lastname" v-model="lastName">
+      <input type="text" id="lastname" v-model="lastName.val" @blur="clearValidity('lastName')">
     </div>
-    <div class="form-control">
+    <div class="form-control" :class="{invalid:!description.isValid}">
       <label for="description">Description</label>
-      <input type="text" id="description" v-model="description">
+      <input type="text" id="description" v-model="description.val" @blur="clearValidity('description')">
     </div>
-    <div class="form-control">
+    <div class="form-control" :class="{invalid:!rate.isValid}">
       <label for="rate">Hourly rate</label>
-      <input type="number" id="rate" v-model.number="rate">
+      <input type="number" id="rate" v-model.number="rate.val" @blur="clearValidity('rate')">
     </div>
-    <div class="form-control">
+    <div class="form-control" :class="{invalid:!areas.isValid}">
       <h3>Areas of Expertise</h3>
       <div>
-        <input type="checkbox" id="frontend" value="frontend" @change="setExpArea">
+        <input type="checkbox" id="frontend" value="frontend" @change="setExpArea" @blur="clearValidity('areas')">
         <label for="frontend">Frontend Development</label>
       </div>
       <div>
-        <input type="checkbox" id="backend" value="backend" @change="setExpArea">
+        <input type="checkbox" id="backend" value="backend" @change="setExpArea" @blur="clearValidity('areas')">
         <label for="backend">Backend Development</label>
       </div>
       <div>
-        <input type="checkbox" id="career" value="career" @change="setExpArea">
+        <input type="checkbox" id="career" value="career" @change="setExpArea" @blur="clearValidity('areas')">
         <label for="career">Career Development</label>
       </div>
     </div>
+    <p v-if="!formIsValid">Please fix the above errors and submit again</p>
     <base-button>Register</base-button>
   </form>
 </template>
@@ -39,21 +40,64 @@
     emits:['save-data'],
     data(){
       return{
-        firstName:'',
-        lastName:'',
-        description:'',
-        rate:null,
-        areas:[],
+        firstName:{
+          val:'',
+          isValid:true,
+        },
+        lastName:{
+          val:'',
+          isValid:true,
+        },
+        description:{
+          val:'',
+          isValid:true,
+        },
+        rate:{
+          val:'',
+          isValid:true,
+        },
+        areas:{
+          val:[],
+          isValid:true,
+        },
+        formIsValid:true,
       }
     },
     methods:{
+      validateForm(){
+        this.fortIsValid = true;
+        if(this.firstName.val === ''){
+          this.firstName.isValid = false;
+          this.formIsValid = false;
+        }
+        if(this.lastName.val === ''){
+          this.lastName.isValid = false;
+          this.formIsValid = false;
+        }
+        if(this.description.val === ''){
+          this.description.isValid = false;
+          this.formIsValid = false;
+        }
+        if(!this.rate.val || this.rate.val <0){
+          this.rate.isValid = false;
+          this.formIsValid = false;
+        }
+        if(this.areas.val.length === 0){
+          this.areas.isValid = false;
+          this.formIsValid = false;
+        }
+      },
       submitForm(){
+        this.validateForm();
+        if(!this.formIsValid){
+          return;
+        }
         const formData = {
-          first:this.firstName,
-          last:this.lastName,
-          desc:this.description,
-          rate:this.rate,
-          areas:this.areas,
+          first:this.firstName.val,
+          last:this.lastName.val,
+          desc:this.description.val,
+          rate:this.rate.val,
+          areas:this.areas.val,
         }
         console.log(formData);
         this.$emit('save-data', formData);
@@ -61,16 +105,20 @@
       setExpArea(event){
         if(event.target.id === 'frontend'){
             const exp = 'frontend';
-            this.areas.push(exp);
+            this.areas.val.push(exp);
         }
         if(event.target.id === 'backend'){
           const exp = 'backend';
-          this.areas.push(exp);
+          this.areas.val.push(exp);
         }
         if(event.target.id === 'career'){
             const exp = 'career';
-            this.areas.push(exp);
+            this.areas.val.push(exp);
         }
+      },
+      clearValidity(input){
+        //Clearing the error invalid classes
+        this[input].isValid = true;
       }
     }
   }
