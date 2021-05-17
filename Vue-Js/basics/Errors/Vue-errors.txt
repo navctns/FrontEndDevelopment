@@ -1,0 +1,8 @@
+SINGLE ROOT ELEMENT ERROR 
+
+[Vue warn]: Component inside <Transition> renders non-element root node that cannot be animated. 
+  at <CoachesList onVnodeUnmounted=fn<onVnodeUnmounted> ref=Ref< undefined > > 
+  at <BaseTransition mode="out-in" appear=false persisted=false  ... > 
+  at <Transition name="route" mode="out-in" > 
+  at <RouterView> 
+  at <App>

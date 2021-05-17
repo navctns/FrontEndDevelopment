@@ -7,6 +7,7 @@ export default{
   state(){
     return{
       userIsCoach:false,//different methodf
+      lastFetch:null,
       coaches:[
             {
               id: 'c1',
