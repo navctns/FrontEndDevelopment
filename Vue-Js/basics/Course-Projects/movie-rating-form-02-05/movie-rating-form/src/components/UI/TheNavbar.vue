@@ -1,23 +1,6 @@
 <template>
   <div class="container">
-    <div class="row">
-      <ul class="navbar">
-        <li>
-          <app-small-button value="Sort by Genres" mode="oth" @click="sortMovies('genre')"></app-small-button>
-        </li>
-      </ul>
-      <ul class="navbar" v-if="sortByGenre">
-        <li>
-          <app-small-button value="Genres" mode="oth"></app-small-button>
-        </li>
-        <li>
-          <app-small-button value="Genres" mode="oth"></app-small-button>
-        </li>
-        <li>
-          <app-small-button value="Genres" mode="oth"></app-small-button>
-        </li>
-      </ul>
-    </div>
+
 
     <ul class="navbar">
 
@@ -43,15 +26,10 @@
   export default{
     data(){
       return{
-        sortByGenre:false,
       }
     },
     methods:{
-      sortMovies(sortBy){
-        if(sortBy === 'genre'){
-          this.sortByGenre = !this.sortByGenre;
-        }
-      }
+
     }
   }
 </script>
