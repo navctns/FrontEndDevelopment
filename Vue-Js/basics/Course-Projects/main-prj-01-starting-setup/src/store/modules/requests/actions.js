@@ -6,7 +6,8 @@ export default{
       message:payload.message,
       // coachId:payload.coachId,
     };
-    const response = await fetch(`https://coaches-app-2e5a0-default-rtdb.firebaseio.com/requests/${payload.coachId}.json`,{
+    const userId = context.rootGetters.userId;
+    const response = await fetch(`https://coaches-app-2e5a0-default-rtdb.firebaseio.com/requests/${userId}.json`,{
       method:'POST',
       body:JSON.stringify(newRequest),
     });
