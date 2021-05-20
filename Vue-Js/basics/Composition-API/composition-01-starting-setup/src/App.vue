@@ -1,18 +1,42 @@
 <template>
   <section class="container">
-    <h2>{{ user.name }}</h2>
-    <h3>{{ user.age }}</h3>
+    <!-- <h2>{{ userName }}</h2>
+    <h3>{{ user.age }}</h3> -->
+    <user-data :first-name="firstName" :last-name="lastName" :age="user.age"></user-data>
     <button @click="setAge">Change Age</button>
+    <div>
+      <input type="text" placeholder="Firstname" v-model="firstName">
+      <input type="text" placeholder="Lastname" ref="lastNameInput">
+      <button @click="setLastName">Set Lastname</button>
+    </div>
   </section>
 </template>
 
 <script>
-// import {ref} from 'vue';
+import UserData from './components/UserData.vue';
+import {ref, computed } from 'vue';
 import { reactive } from 'vue';
 // import { ref, reactive, isReactive, isRef, toRefs } from 'vue';
 
 export default {
+  components:{
+    UserData
+  },
   setup(){
+    //COMPUTED
+    const firstName = ref('');
+    const lastName = ref('');
+    const lastNameInput = ref(null);
+
+    function setFirstName(event){
+      firstName.value = event.target.value;
+    }
+    function setLastName(){
+      lastName.value = lastNameInput.value.value;
+    }
+    const uName = computed(function(){
+      return firstName.value + ' ' + lastName.value;
+    });
     //ref creates value can be used in template
     //ref function creates a reactive object
     //WITHOUT OBJECT
@@ -57,6 +81,13 @@ export default {
       // age:userRefs.age,
       user:user,
       setAge:setNewAge,
+      userName:uName,
+      setFirstName,
+      setLastName,
+      firstName,
+      lastName,
+      lastNameInput
+
     }
   }
 };

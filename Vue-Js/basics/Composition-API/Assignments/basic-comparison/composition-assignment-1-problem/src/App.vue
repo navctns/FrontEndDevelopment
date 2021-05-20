@@ -9,7 +9,11 @@
   <!--     //USING REF OBJECT -->
   <h3 v-if="courseGoal.visibility">{{courseGoal.goal}}</h3>
   <button @click="toggleGoal">Toggle Goal</button>
-
+  <input type="text" placeholder="change goal" v-model="courseGoal.newGoalVal" @blur="changeGoal">
+  <button @click="prevGoal">Prev Goal</button>
+  <!--USING OPTIONS API -->
+  <!-- <h3 v-if="goalVisibility">{{courseGoal}}</h3> -->
+  <!-- <button @click="toggleGoal">Toggle Goal</button> -->
   <!-- Task 3: Manage data in three ways -->
   <!-- => Separate refs -->
   <!-- => Ref Object -->
@@ -22,6 +26,20 @@
 import { reactive } from 'vue';
 
 export default {
+  //USING OPTIONS API
+  // data(){
+  //   return{
+  //     courseGoal:'Learn Vue to Create Useful & Crazy Apps',
+  //     goalVisibility:true,
+  //   }
+  // },
+  // methods:{
+  //   toggleGoal(){
+  //     this.goalVisibility = !this.goalVisibility;
+  //   }
+  // }
+
+  //USING COMPOSITION API
   setup(){
     //USING SEPARATE REF
     // const courseGoal = ref('Learn Vue to Create Useful & Crazy Apps');
@@ -41,9 +59,18 @@ export default {
     const courseGoal = reactive({
       goal:'Learn Vue to Create Useful & Crazy Apps',
       visibility:true,
+      oldGoal:'',
+      newGoalVal:'',
     });
     function toggleGoal(){
       courseGoal.visibility = ! courseGoal.visibility;
+    }
+    function changeGoal(){
+      courseGoal.oldGoal = courseGoal.goal;
+      courseGoal.goal = courseGoal.newGoalVal;
+    }
+    function undoGoalChange(){
+      courseGoal.goal = courseGoal.oldGoal;
     }
     return{
       //USING SEPARATE REF
@@ -53,6 +80,8 @@ export default {
       //USING REF OBJECT
       courseGoal:courseGoal,
       toggleGoal:toggleGoal,
+      changeGoal,
+      prevGoal:undoGoalChange,
 
     }
   }
