@@ -62,6 +62,8 @@
           if(this.filterParams.filter === 'genre'){
             console.log('filter by genre', this.filterParams);
             //add filter logic here
+            const filterKey = this.filterParams.keyword;
+            return movies.filter(movie => movie.genre_ids.includes(filterKey));
           }
         }
         return movies;

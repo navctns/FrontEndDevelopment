@@ -58,7 +58,7 @@
         //emitted function
         console.log('on-movie-filter',sortBy);
         // this.$store.commit('sortMoviesByGenre', parseInt(sortBy));
-        this.$emit('filter-movies',this.sortTerm,sortBy);
+        this.$emit('filter-movies',this.sortTerm,parseInt(sortBy));
       }
     },
     created(){
