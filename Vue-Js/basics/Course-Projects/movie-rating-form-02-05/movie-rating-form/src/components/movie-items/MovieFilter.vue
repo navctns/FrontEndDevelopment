@@ -6,57 +6,81 @@
       </li>
       <li class="flex-item">
         <h5>Sort by</h5>
-        <select name="" id="">
-          <option>Language</option>
-          <option value="">by Genre</option>
+        <select name="" id="" v-model="sortTerm">
+          <option value="lang" selected>Language</option>
+          <option value="genre">by Genre</option>
         </select>
       </li>
     </ul>
-    <ul class="navbar">
-      <!-- <li>
-        <app-small-button value="Sort by Genres" mode="oth" @click="sortMovies('genre')"></app-small-button>
-      </li> -->
-      <li>
-        <app-button value="Comedy" mode="flat" @click="sortMovies('genre')"></app-button>
-      </li>
-      <li>
-        <app-button value="Action/Horror" mode="flat" @click="sortMovies('genre')"></app-button>
-      </li>
-      <li>
-        <app-button value="Fantacy/Sci-fi" mode="flat" @click="sortMovies('genre')"></app-button>
-      </li>
-      <li>
-        <app-button value="Drama/History" mode="flat" @click="sortMovies('genre')"></app-button>
-      </li>
-      <li>
-        <app-button value="Slow Cineme" mode="flat" @click="sortMovies('genre')"></app-button>
-      </li>
-    </ul>
-    <ul class="navbar" v-if="sortByGenre">
-      <li>
-        <app-small-button value="Genres" mode="oth"></app-small-button>
-      </li>
-      <li>
-        <app-small-button value="Genres" mode="oth"></app-small-button>
-      </li>
-      <li>
-        <app-small-button value="Genres" mode="oth"></app-small-button>
-      </li>
-    </ul>
+    <filter-items :filter-by="sortTerm" :keywords="keywordsList" @sort-by="sortBySpecificTerm"></filter-items>
   </div>
 </template>
 <script>
+  import FilterItems from '../UI/AppFilterItems.vue';
   export default{
+    components:{
+      FilterItems,
+    },
+    emits:['filter-movies'],
     data(){
       return{
-        sortByGenre:false,
+        // sortMode:'',
+        sortTerm:'',
+        genres:null,
+        keywordsList:[],
       }
     },
     methods:{
-      sortMovies(sortBy){
+      async sortMovies(sortBy){
         if(sortBy === 'genre'){
-          this.sortByGenre = !this.sortByGenre;
-          const response = fetch('https://api.nytimes.com/svc/movies/v2/reviews/search.json?query=godfather&api-key=yourkey')
+          // this.sortByGenre = !this.sortByGenre;
+          this.sortTerm = 'genre';
+          //Genres keywords on API
+          this.keywordsList = this.$store.getters.genres;
+          console.log(this.keywordsList,'abc');
+          // const response = fetch('https://api.nytimes.com/svc/movies/v2/reviews/search.json?query=godfather&api-key=yourkey')
+          // const getMoviewByGenres = fetch('https://api.themoviedb.org/3/genre/movie/list?api_key=<<api_key>>&language=en-US',)
+          const getMoviewByGenres = await fetch('https://api.themoviedb.org/3/genre/movie/list?api_key=c9a2fdad68cf48b2893d6e9ab30ad18a',);
+          const responseData = getMoviewByGenres.json();
+          console.log(responseData);
+
+        }else if(sortBy==='lang'){
+          this.sortTerm = 'lang';
+        }
+      },
+      getGenresItems(){
+        this.genres = this.$store.getters.genres;
+        console.log('on filter',this.genres);
+        return this.genres;
+      },
+      sortBySpecificTerm(sortBy){
+        //Sort by specific genre or Language
+        //emitted function
+        console.log('on-movie-filter',sortBy);
+        // this.$store.commit('sortMoviesByGenre', parseInt(sortBy));
+        this.$emit('filter-movies',this.sortTerm,sortBy);
+      }
+    },
+    created(){
+      this.$store.dispatch('fetchGenres');
+      this.getGenresItems();
+    },
+    // computed:{
+    //   filterKeywords(){
+    //     if(this.sortTerm === 'genre'){
+    //       return this.$store.getters.genres;
+    //     }
+    //   }
+    // },
+    watch:{
+      async sortTerm(value){
+        console.log(value);
+        if(value === 'genre'){
+          console.log('sort by genre');
+          const genresList = this.$store.getters.genres;
+          console.log('genres list', genresList);
+          this.keywordsList = this.$store.getters.genres;
+          console.log(this.keywordsList);
         }
       }
     }

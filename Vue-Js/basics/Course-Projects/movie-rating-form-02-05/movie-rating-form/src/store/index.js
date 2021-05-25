@@ -4,26 +4,8 @@ import { createStore } from 'vuex';
 const store = createStore({
   state(){
     return{
-        movies:[{
-          id:'snow-piercer',
-          title:'Snowpiercer',
-          genre:'Action/Sci-fi',
-          director:'Bong Joon-ho',
-          writer:'Bong Joon-ho, Kelly Masterson',
-          imgUrl:'https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQPOHIxYdTXDpbFEWC-cv-tAQ98ELcVPMGVFy0pgFoI5s7UiDNU',
-          synopsis:''
-        },
-        {
-          id:'host',
-          title:'The Host',
-          genre:'Horror/Action',
-          director:'Bong Joon-ho',
-          writer:'Bong Joon-ho',
-          imgUrl:'https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQI9-kW4DCOtKg9c5UlYw1RgDPv5v508ysKahIbG6u_hvTa2TQH',
-          synopsis:'An unidentified monster appears from the Han River in Seoul, kills hundreds and also carries off Hyun-seo. When her family learns that she is being held captive, they resolve to save her.',
-        },
-
-      ],
+        movies:[],
+      genres:null,
     }
 
   },
@@ -38,6 +20,15 @@ const store = createStore({
       const idx = state.movies.findIndex(movie => movie.id === id);
       state.movies.splice(idx,1);
       console.log(state.movies);
+    },
+    sortMoviesByGenre(state, payload){
+      // console.log(state.movies,state.movies[0].genre_ids,'movie-genre-eg');
+      console.log(payload);
+      state.movies = state.movies.filter(movie => movie.genre_ids.includes(payload));
+      const sortedIndexes = state.movies.findIndex(movie => movie.genre_ids.includes(payload));
+      console.log('sorted movies', sortedIndexes);
+
+      console.log(state.movies);
     }
   },
   actions:{
@@ -47,11 +38,35 @@ const store = createStore({
     deleteMovie(context, payload){
       console.log('delete movie');
       context.commit('deleteMovieFromList', payload);
+    },
+    async setMovies(context){
+      const moviesResponse = await fetch('https://api.themoviedb.org/3/movie/top_rated?api_key=c9a2fdad68cf48b2893d6e9ab30ad18a&language=en-US');
+      const responseData = await moviesResponse.json();
+      console.log(responseData.results);
+      // return state.movies;
+      if(!moviesResponse.ok){
+        console.log('Error while lading movies');
+      }
+      context.state.movies = responseData.results;
+      // return responseData.results;
+    },
+    async fetchGenres(context){
+      const genresRes = await fetch('https://api.themoviedb.org/3/genre/movie/list?api_key=c9a2fdad68cf48b2893d6e9ab30ad18a&language=en-US');
+      const genresData = await genresRes.json();
+      console.log('genres data',genresData);
+      console.log('genres data',genresData.genres);
+      if(!genresRes.ok){
+        console.log('Error while fetching genres');
+      }
+      context.state.genres = genresData.genres;
     }
   },
   getters:{
     movies(state){
       return state.movies;
+    },
+    genres(state){
+      return state.genres;
     }
   }
 });

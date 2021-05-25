@@ -1,28 +1,22 @@
 <template>
-  <movie-filter></movie-filter>
+  <!-- <movie-filter></movie-filter> -->
   <movies-list></movies-list>
 </template>
 <script>
   // import MovieForm from '../components/movie-items/MovieForm.vue';
   import MoviesList from '../components/movie-items/MoviesList.vue';
-  import MovieFilter from '../components/movie-items/MovieFilter.vue';
+  // import MovieFilter from '../components/movie-items/MovieFilter.vue';
 
   export default{
     components:{
       MoviesList,
-      MovieFilter,
     },
     data(){
       return{
         selectedTab:'movies-list',
       }
     },
-    // provide(){
-    //   return{
-    //     movies:this.movies,
-    //     addMovie:this.addMovie,
-    //   };
-    // },
+
     methods:{
       setTab(tab){
         this.selectedTab = tab;
