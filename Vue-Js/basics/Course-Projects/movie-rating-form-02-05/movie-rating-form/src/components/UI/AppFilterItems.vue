@@ -3,7 +3,8 @@
     <li
       v-for="filter in filters"
         :key="filter.name">
-        <app-button :value="filter.name" :name="filter.name" :id="filter.id" mode="flat" @click="sortBy($event)"></app-button>
+        <app-button v-if="filterBy ==='genre'" :value="filter.name" :name="filter.name" :id="filter.id" mode="flat" @click="sortBy($event)"></app-button>
+        <app-button v-else :value="filter.label" :name="filter.name" mode="flat" @click="sortBy($event)"></app-button>
     </li>
   </ul>
 </template>
@@ -11,11 +12,7 @@
   export default{
     props:['filterBy','keywords'],
     emits:['sort-by'],
-    data(){
-      return{
-        // filters:null,
-      }
-    },
+
     computed:{
       filters(){
         //Filter names are set according //
@@ -34,13 +31,17 @@
                 label:'French'
               },
               {
-                name:'English',
+                name:'en',
                 label:'English'
               },
               {
-                name:'korean',
+                name:'ko',
                 label:'Korean'
               },
+              {
+                name:'ja',
+                label:'Japanese'
+              }
           ]
         }else{
           return [];
@@ -51,7 +52,11 @@
       sortBy(event){
         //Sort parameters from specific buttons(specific genres)
         console.log(event.target.name,event.target.id);
-        this.$emit('sort-by',event.target.id);
+        if(this.filterBy === 'genre'){
+          this.$emit('sort-by',event.target.id);
+        }else{
+          this.$emit('sort-by',event.target.name);
+        }
       }
     }
   }

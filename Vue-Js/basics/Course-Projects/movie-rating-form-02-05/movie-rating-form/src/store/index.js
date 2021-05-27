@@ -6,6 +6,7 @@ const store = createStore({
     return{
         movies:[],
       genres:null,
+      selectedMovie:null,
     }
 
   },
@@ -29,6 +30,10 @@ const store = createStore({
       console.log('sorted movies', sortedIndexes);
 
       console.log(state.movies);
+    },
+    setSelectedMovie(state, payload){
+      //Set movie selected by the user to show details
+      state.selectedMovie = payload;
     }
   },
   actions:{
@@ -59,6 +64,13 @@ const store = createStore({
         console.log('Error while fetching genres');
       }
       context.state.genres = genresData.genres;
+    },
+    async getMovieById(context, payload){
+      console.log('payload', payload, typeof payload);
+      const movieResponse = await fetch(payload);
+      const responseData = await movieResponse.json();
+      console.log('movie details', responseData);
+      context.commit('setSelectedMovie', responseData);
     }
   },
   getters:{
@@ -67,6 +79,9 @@ const store = createStore({
     },
     genres(state){
       return state.genres;
+    },
+    getSelectedMovie(state){
+      return state.selectedMovie;
     }
   }
 });

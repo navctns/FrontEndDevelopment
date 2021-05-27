@@ -58,8 +58,9 @@ ul.navbar{
   text-decoration: none; */
 }
 a.router-link-active{
-  background-color: #21bf73;
-  padding:1em;
+  /* background-color: #21bf73; */
+  background-color: #b0eacd;
+  padding:0.5em;
   text-decoration: none;
 }
 a.router-link-active:hover{
@@ -67,9 +68,9 @@ a.router-link-active:hover{
 }
 a{
   text-decoration: none;
-  padding:1em;
+  padding:0.5em;
   border-radius: 0.5em;
-  border: 1px solid #21bf73;
+  /* border: 1px solid #21bf73; */
   width:10rem;
   cursor: pointer;
   text-decoration: none;

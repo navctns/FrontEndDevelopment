@@ -1,12 +1,13 @@
 <template>
-  <movie-filter @filter-movies="setFilterParams"></movie-filter>
+  <movie-filter @filter-movies="setFilterParams" @search-movie="setFilterParams"></movie-filter>
 
   <ul>
     <movie-card
       v-for="movie in getUpdatedMovies"
       :key="movie.id"
+      :id="movie.id"
       :title="movie.title"
-      :language="movie.original_language"
+      :language="languageStr(movie.original_language)"
       :overview="movie.overview"
       :poster-path="movie.poster_path"
     ></movie-card>
@@ -45,14 +46,25 @@
         }
       },
       setFilterParams(filterTerm, keyRef){
+        console.log('setFilterParams');
         //filterTerm (type of filtering(language,genre...))
         //keyRef - specific key(specific lang, of specific genre)
         this.filterParams ={
           filter:filterTerm,
           keyword:keyRef,
         };
+      },
+      languageStr(lang){
+        if(lang === 'en'){
+          return 'English';
+        }else if(lang === 'ko'){
+          return 'Korean';
+        }else if(lang === 'ja'){
+          return 'Japanese';
+        }else if(lang === 'hi'){
+          return 'Hindi';
+        }
       }
-
     },
     computed:{
       getUpdatedMovies(){
@@ -62,8 +74,18 @@
           if(this.filterParams.filter === 'genre'){
             console.log('filter by genre', this.filterParams);
             //add filter logic here
-            const filterKey = this.filterParams.keyword;
-            return movies.filter(movie => movie.genre_ids.includes(filterKey));
+            // const filterKey = this.filterParams.keyword;
+            // return movies.filter(movie => movie.genre_ids.includes(filterKey));
+            return this.filterParams.keyword;
+          }else if(this.filterParams.filter === 'lang'){
+            // const filterKey = this.filterParams.keyword;
+            // return movies.filter(movie => movie.original_language === filterKey);
+            return this.filterParams.keyword;
+          }else if(this.filterParams.filter === 'search'){
+            console.log('search by key');
+            // const filterKey = this.filterParams.keyword;
+            // return movies.filter(movie => movie.title.toLowerCase().includes(filterKey.toLowerCase()));
+            return this.filterParams.keyword;
           }
         }
         return movies;

@@ -2,14 +2,21 @@
   <div class="row">
     <ul class="filter-bar">
       <li>
-        <input type="text" placeholder="search movie">
+        <input type="text" placeholder="search movie" @input="searchMovie" v-model.trim="searchTermInp">
       </li>
       <li class="flex-item">
-        <h5>Sort by</h5>
-        <select name="" id="" v-model="sortTerm">
+        <!-- <select name="" id="" v-model="sortTerm">
           <option value="lang" selected>Language</option>
           <option value="genre">by Genre</option>
-        </select>
+        </select> -->
+         <ul class="breadcrumb">
+           <li>
+             <app-button value="Movies by Genre" mode="flat" @click="setFilterType('genre')"></app-button>
+           </li>
+           <li>
+             <app-button value="Movies By Language" mode="flat" @click="setFilterType('lang')"></app-button>
+           </li>
+        </ul>
       </li>
     </ul>
     <filter-items :filter-by="sortTerm" :keywords="keywordsList" @sort-by="sortBySpecificTerm"></filter-items>
@@ -21,13 +28,14 @@
     components:{
       FilterItems,
     },
-    emits:['filter-movies'],
+    emits:['filter-movies', 'search-movie'],
     data(){
       return{
         // sortMode:'',
         sortTerm:'',
         genres:null,
         keywordsList:[],
+        searchTermInp:'',
       }
     },
     methods:{
@@ -37,9 +45,6 @@
           this.sortTerm = 'genre';
           //Genres keywords on API
           this.keywordsList = this.$store.getters.genres;
-          console.log(this.keywordsList,'abc');
-          // const response = fetch('https://api.nytimes.com/svc/movies/v2/reviews/search.json?query=godfather&api-key=yourkey')
-          // const getMoviewByGenres = fetch('https://api.themoviedb.org/3/genre/movie/list?api_key=<<api_key>>&language=en-US',)
           const getMoviewByGenres = await fetch('https://api.themoviedb.org/3/genre/movie/list?api_key=c9a2fdad68cf48b2893d6e9ab30ad18a',);
           const responseData = getMoviewByGenres.json();
           console.log(responseData);
@@ -53,25 +58,52 @@
         console.log('on filter',this.genres);
         return this.genres;
       },
-      sortBySpecificTerm(sortBy){
+      async sortBySpecificTerm(sortBy){
         //Sort by specific genre or Language
         //emitted function
         console.log('on-movie-filter',sortBy);
-        // this.$store.commit('sortMoviesByGenre', parseInt(sortBy));
-        this.$emit('filter-movies',this.sortTerm,parseInt(sortBy));
+        if(this.sortTerm === 'genre'){
+          // this.$emit('filter-movies',this.sortTerm,parseInt(sortBy));
+          const moviesResponse = await fetch('https://api.themoviedb.org/3/discover/movie?api_key=c9a2fdad68cf48b2893d6e9ab30ad18a&language=en-US&with_genres=' + sortBy);
+          const responseData = await moviesResponse.json();
+          console.log('movies by genres',responseData.results)
+          this.$emit('filter-movies',this.sortTerm,responseData.results);
+        }else{
+          const moviesResponse = await fetch('https://api.themoviedb.org/3/discover/movie?api_key=c9a2fdad68cf48b2893d6e9ab30ad18a&language=en-US&with_original_language=' + sortBy);
+          const responseData = await moviesResponse.json();
+          this.$emit('filter-movies',this.sortTerm, responseData.results);
+        }
+      },
+      async searchMovie(){
+        //Search movies by input keyword
+        console.log('searchMovie');
+        // this.$emit('search-movie', 'search',this.searchTermInp);
+        const searchResponse = await fetch('https://api.themoviedb.org/3/search/movie?api_key=c9a2fdad68cf48b2893d6e9ab30ad18a&language=en-US&query=' + this.searchTermInp);
+        const responseData = await searchResponse.json();
+        console.log('search-response',responseData.results);
+        //SEARCH BY PEOPLE
+        //Get Person Id
+        const byPeopleResponse = await fetch(' https://api.themoviedb.org/3/search/person?api_key=c9a2fdad68cf48b2893d6e9ab30ad18a&language=en-US&page=1&query=' + this.searchTermInp);
+        const byPeopleData = await byPeopleResponse.json();
+        console.log('by people', byPeopleData.results);
+        const personId = byPeopleData.results[0].id;
+        const moviesByPeopleRes = await fetch('https://api.themoviedb.org/3/discover/movie?api_key=c9a2fdad68cf48b2893d6e9ab30ad18a&language=en-US&with_people=' + parseInt(personId));
+        const moviesByPeopleData = await moviesByPeopleRes.json();
+        console.log('movies by person', moviesByPeopleData.results);
+        moviesByPeopleData.results.forEach(item => {
+          responseData.results.unshift(item);
+        });
+        this.$emit('search-movie', 'search',responseData.results);
+        // return responseData;
+      },
+      setFilterType(type){
+        this.sortTerm = type;
       }
     },
     created(){
       this.$store.dispatch('fetchGenres');
       this.getGenresItems();
     },
-    // computed:{
-    //   filterKeywords(){
-    //     if(this.sortTerm === 'genre'){
-    //       return this.$store.getters.genres;
-    //     }
-    //   }
-    // },
     watch:{
       async sortTerm(value){
         console.log(value);
@@ -118,4 +150,41 @@ select{
 /* .flex-item >*{
   width: 100%;
 } */
+/* breadcrumb */
+/* Style the list */
+ul.breadcrumb {
+ padding: 10px 16px;
+ list-style: none;
+ /* background-color: #eee; */
+}
+
+/* Display list items side by side */
+ul.breadcrumb li {
+ display: inline;
+ font-size: 18px;
+ text-decoration: none;
+
+}
+
+/* Add a slash symbol (/) before/behind each list item */
+ul.breadcrumb li+li:before {
+ padding: 8px;
+ color: black;
+ content: "/\00a0";
+}
+
+/* Add a color to all links inside the list */
+ul.breadcrumb li a {
+ /* color: #0275d8; */
+ /* color:#4aa96c; */
+ text-decoration: none;
+}
+
+/* Add a color on mouse-over */
+ul.breadcrumb li a:hover {
+ /* color: #01447e; */
+ /* color:#4aa96c; */
+ opacity:0.9;
+ /* text-decoration: underline; */
+}
 </style>

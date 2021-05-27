@@ -2,10 +2,14 @@
   <li>
     <app-card>
       <template #header>
-        <img :src="imageUrl" alt="">
+        <router-link :to="{ name: 'movie-details', params: {movieId:id} }">
+          <img :src="imageUrl" alt="">
+        </router-link>
       </template>
       <template #default>
-        <h3>{{title}}</h3>
+        <router-link :to="{ name: 'movie-details', params: {movieId:id} }">
+          <h3>{{title}}</h3>
+        </router-link>
         <h4>Language:{{language}}</h4>
         <!-- <h4>Writer:{{writer}}</h4> -->
       </template>
@@ -36,5 +40,9 @@
   h4{
     font-weight: 200;
     /* text-align: center; */
+  }
+  a{
+    text-decoration: none;
+    color:#323232;
   }
 </style>
