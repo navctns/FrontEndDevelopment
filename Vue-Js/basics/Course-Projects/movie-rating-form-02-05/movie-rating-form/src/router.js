@@ -9,7 +9,7 @@ const router = createRouter({
   history:createWebHistory(),
   routes:[
     { path:'/', component:TheMovies},
-    { path:'/movie/:movieId', component:MovieDetails, props:true, name:"movie-details"},
+    { path:'/:movieId', component:MovieDetails, props:true, name:"movie-details"},
     { path:'/panel', component: AdminPanel, name:'main-panel', redirect:'/panel/addMovie',
       children:[
         // {path:'/panel/:section', name:"add-movie", component:MovieForm}

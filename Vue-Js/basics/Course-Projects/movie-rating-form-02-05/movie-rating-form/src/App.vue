@@ -1,6 +1,12 @@
 <template>
   <the-navbar></the-navbar>
-  <router-view></router-view>
+  <router-view v-slot="slotProps">
+    <transition name="route" mode="out-in">
+      <keep-alive>
+        <component :is="slotProps.Component"></component>
+      </keep-alive>
+    </transition>
+  </router-view>
 </template>
 
 <script>
@@ -61,14 +67,7 @@ export default {
 </script>
 
 <style>
-/* #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-} */
+
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 * {
   box-sizing: border-box;
@@ -78,7 +77,41 @@ html {
 }
 body {
   margin: 0;
-  color:#393e46;
+  /* color:#393e46; */
+  color:#323232;
 }
-
+.fade-enter-from,
+.fade-leave-to
+{
+  opacity: 0;
+}
+.fade-enter-active{
+  transition:opacity 0.3s ease-out;
+}
+.fade-leave-active{
+  transition: opacity 0.3s ease-in;
+}
+.fade-enter-to,
+.fade-leave-from{
+  opacity:1;
+}
+.route-enter-from{
+  opacity: 0;
+  transform:translateY(-30px);
+}
+.route-leave-to{
+  opacity:0;
+  transform:translateY(30px);
+}
+.route-enter-active{
+  transition:all 0.3s ease-out;
+}
+.route-leave-active{
+  transition:all 0.3s ease-in;
+}
+.route-enter-to,
+.route-leave-from{
+  opacity:1;
+  transform:translateY(0);
+}
 </style>

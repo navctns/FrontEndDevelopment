@@ -1,5 +1,4 @@
 <template>
-  <!-- <movie-filter></movie-filter> -->
   <movies-list></movies-list>
 </template>
 <script>

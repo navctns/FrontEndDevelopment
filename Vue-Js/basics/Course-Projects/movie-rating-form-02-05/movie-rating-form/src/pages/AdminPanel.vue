@@ -1,38 +1,41 @@
 <template lang="html">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
+  <div>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
 
-    <the-navbar></the-navbar>
-    <div class="container">
-      <div class="panel-nav">
-        <app-card>
-          <ul>
-            <li>
-              <!-- <navigation-button> -->
-                <!-- <router-link :to="{name:'main-panel', params:{section:'addMovie'}}">Add Movie</router-link> -->
+      <the-navbar></the-navbar>
+      <div class="container">
+        <div class="panel-nav">
+          <app-card>
+            <ul>
+              <li>
+                <!-- <navigation-button> -->
+                  <!-- <router-link :to="{name:'main-panel', params:{section:'addMovie'}}">Add Movie</router-link> -->
+                  <div class="link-container">
+                    <router-link to="/panel/addMovie">Add Movie</router-link>
+                    <i class="fas fa-chevron-right"></i>
+
+                  </div>
+
+                <!-- </navigation-button> -->
+              </li>
+              <li>
+                <!-- <button>Stored Movies</button> -->
                 <div class="link-container">
-                  <router-link to="/panel/addMovie">Add Movie</router-link>
+                  <router-link :to="{name:'stored-movies'}">Movies List</router-link>
                   <i class="fas fa-chevron-right"></i>
-
                 </div>
+              </li>
+            </ul>
+          </app-card>
+        </div>
 
-              <!-- </navigation-button> -->
-            </li>
-            <li>
-              <!-- <button>Stored Movies</button> -->
-              <div class="link-container">
-                <router-link :to="{name:'stored-movies'}">Movies List</router-link>
-                <i class="fas fa-chevron-right"></i>
-              </div>
-            </li>
-          </ul>
-        </app-card>
+        <div class="content-wrapper">
+          <!-- <movie-form></movie-form> -->
+          <router-view></router-view>
+        </div>
       </div>
+  </div>
 
-      <div class="content-wrapper">
-        <!-- <movie-form></movie-form> -->
-        <router-view></router-view>
-      </div>
-    </div>
 
 </template>
 
@@ -94,7 +97,7 @@ export default {
   .fa-chevron-right:hover{
     transform: scale(1.1);
   }
-  .link-container a{   
+  .link-container a{
     text-decoration: none;
   }
   a{

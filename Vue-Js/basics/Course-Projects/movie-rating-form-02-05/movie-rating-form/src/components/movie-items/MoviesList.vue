@@ -1,18 +1,20 @@
 <template>
-  <movie-filter @filter-movies="setFilterParams" @search-movie="setFilterParams"></movie-filter>
+  <div>
+    <movie-filter @filter-movies="setFilterParams" @search-movie="setFilterParams"></movie-filter>
 
-  <ul>
-    <movie-card
-      v-for="movie in getUpdatedMovies"
-      :key="movie.id"
-      :id="movie.id"
-      :title="movie.title"
-      :language="languageStr(movie.original_language)"
-      :overview="movie.overview"
-      :poster-path="movie.poster_path"
-    ></movie-card>
+    <ul>
+      <movie-card
+        v-for="movie in getUpdatedMovies"
+        :key="movie.id"
+        :id="movie.id"
+        :title="movie.title"
+        :language="languageStr(movie.original_language)"
+        :overview="movie.overview"
+        :poster-path="movie.poster_path"
+      ></movie-card>
 
-  </ul>
+    </ul>
+</div>
 
 </template>
 <script>
