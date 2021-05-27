@@ -1,10 +1,12 @@
 <template>
   <the-navbar></the-navbar>
   <router-view v-slot="slotProps">
+    <!-- recheck keep alive -->
     <transition name="route" mode="out-in">
-      <keep-alive>
+      <keep-alive v-if="slotProps.Component.name ==='movies-list'">
         <component :is="slotProps.Component"></component>
       </keep-alive>
+      <component v-else :is="slotProps.Component"></component>
     </transition>
   </router-view>
 </template>
