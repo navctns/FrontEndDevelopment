@@ -3,10 +3,10 @@
   <router-view v-slot="slotProps">
     <!-- recheck keep alive -->
     <transition name="route" mode="out-in">
-      <keep-alive v-if="slotProps.Component.name ==='movies-list'">
+      <keep-alive>
         <component :is="slotProps.Component"></component>
       </keep-alive>
-      <component v-else :is="slotProps.Component"></component>
+      <!-- <component v-else :is="slotProps.Component"></component> -->
     </transition>
   </router-view>
 </template>
@@ -80,7 +80,11 @@ html {
 body {
   margin: 0;
   /* color:#393e46; */
-  color:#323232;
+  /* color:#323232; */
+  color:#fafafa;
+}
+h2,h3,h4,h5,h6{
+  color:#fafafa;
 }
 .fade-enter-from,
 .fade-leave-to

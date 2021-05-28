@@ -1,6 +1,6 @@
 <template>
   <li>
-    <app-card>
+    <app-card size="sm-card">
       <template #header>
         <router-link :to="{ name: 'movie-details', params: {movieId:id} }">
           <img :src="imageUrl" alt="">
@@ -34,8 +34,14 @@
   }
   li{
     width:100%;
-    height: 60%;
+    /* height: 100%; */
+    /* min-height: 15rem; */
+    margin:0.5rem auto;
     display: grid;
+  }
+  li:hover{
+    transform: scale(1.1);
+    transition: 0.3s ease-out;
   }
   h4{
     font-weight: 200;

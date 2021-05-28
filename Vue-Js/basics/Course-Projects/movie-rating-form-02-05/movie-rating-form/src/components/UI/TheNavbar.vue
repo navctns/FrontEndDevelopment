@@ -1,9 +1,6 @@
 <template>
   <div class="container">
-
-
     <ul class="navbar">
-
       <li>
         <!-- <a href="#">Movies</a> -->
         <router-link to="/">
@@ -37,6 +34,8 @@
 .container{
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
+  padding:0;
+  background: #323232;
 }
 .row{
   display: flex;
@@ -44,9 +43,12 @@
 }
 ul.navbar{
   display: flex;
-  justify-content: center;
+  justify-content:center;
+  align-items: center;
   list-style: none;
   gap:1em;
+  padding:0;
+  height: 0.8em;
 }
 .router-link-active{
   /* width:100%; */
@@ -77,11 +79,13 @@ a{
   background-color: transparent;
   display: block;
   text-align: center;
-  color:#393e46;
+  /* color:#393e46; */
+  color:#fafafa;
 }
 
 a:hover{
   background-color: #b0eacd;
+  color:#323232;
 }
 
 </style>

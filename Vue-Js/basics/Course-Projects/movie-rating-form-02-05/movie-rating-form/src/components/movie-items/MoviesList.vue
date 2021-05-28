@@ -1,24 +1,20 @@
 <template>
-  <keep-alive>
-    <div>
-      <movie-filter @filter-movies="setFilterParams" @search-movie="setFilterParams"></movie-filter>
-
-      <ul>
-        <movie-card
-          v-for="movie in getUpdatedMovies"
-          :key="movie.id"
-          :id="movie.id"
-          :title="movie.title"
-          :language="languageStr(movie.original_language)"
-          :overview="movie.overview"
-          :poster-path="movie.poster_path"
-        ></movie-card>
-
+    <div class="bgWall">
+      <div>
+        <movie-filter @filter-movies="setFilterParams" @search-movie="setFilterParams"></movie-filter>
+        <ul>
+          <movie-card
+            v-for="movie in getUpdatedMovies"
+            :key="movie.id"
+            :id="movie.id"
+            :title="movie.title"
+            :language="languageStr(movie.original_language)"
+            :overview="movie.overview"
+            :poster-path="movie.poster_path"
+          ></movie-card>
       </ul>
+    </div>
   </div>
-  </keep-alive>
-
-
 </template>
 <script>
   import MovieCard from './MovieCard.vue';
@@ -112,7 +108,7 @@ ul {
 
   display: grid;
 
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows: auto;
   grid-gap: 20px;
 }
@@ -125,4 +121,29 @@ ul {
     flex-basis: 30%;
     width:30%;
   } */
+  .bgWall{
+    /* background:url('https://source.unsplash.com/featured/?movies'); */
+    /* background:rgba(0,0,0,0.26),url('https://source.unsplash.com/random')); */
+    background: -webkit-linear-gradient(rgba(0, 0, 0, 0.8), rgba(195, 55, 100, 0.8)), url('https://source.unsplash.com/featured/?movies');
+
+    /* background: -webkit-linear-gradient(rgba(29, 38, 113, 0.8), rgba(195, 55, 100, 0.8)), url('https://source.unsplash.com/featured/?movies'); */
+    background-size: cover;
+     /* https://source.unsplash.com/featured/?{KEYWORD},{KEYWORD}   */
+     /* z-index: -1; */
+     /* background: rgba(0,0,0,0.25); */
+     /* overflow: hidden; */
+  }
+  .bgWall .blackOverlay{
+    position:absolute;
+    /* top:0;
+    left:0; */
+    width:100%;
+    min-height:100vh;
+    background: rgba(0,0,0,0.7);
+  }
+@media(max-width:768px) {
+  ul{
+    grid-template-columns: 1fr;
+  }
+}
 </style>

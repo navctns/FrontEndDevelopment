@@ -1,5 +1,5 @@
 <template id="">
-  <a class="btn" :class="{flat:mode === 'flat',std:mode === 'std',navButton:nav, otherBtn:mode === 'oth'}">{{value}}</a>
+  <a class="btn" :class="{flat:mode === 'flat',std:mode === 'std',navButton:nav, otherBtn:mode === 'oth',textWhite:textColor==='white',textBlack:textColor==='black'}">{{value}}</a>
   <!-- <a class="btn">{{value}}</a> -->
 
 </template>
@@ -18,6 +18,10 @@
       nav:{
         type:Boolean,
         default:false,
+      },
+      textColor:{
+        type:String,
+        required:false,
       }
     },
     mounted(){
@@ -61,5 +65,10 @@
     background-color: #21bf73;
     padding:1em;
   }
-
+  .textBlack:hover{
+    color:#323232;
+  }
+  .textWhite:hover{
+    color:#fafafa;
+  }
 </style>

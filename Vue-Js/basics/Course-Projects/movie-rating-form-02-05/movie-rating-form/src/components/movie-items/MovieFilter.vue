@@ -11,15 +11,22 @@
         </select> -->
          <ul class="breadcrumb">
            <li>
-             <app-button value="Movies by Genre" mode="flat" @click="setFilterType('genre')"></app-button>
+             <app-button text-color="black" value="Movies by Genre" mode="flat" @click="setFilterType('genre')"></app-button>
            </li>
            <li>
-             <app-button value="Movies By Language" mode="flat" @click="setFilterType('lang')"></app-button>
+             <app-button  text-color="black" value="Movies By Language" mode="flat" @click="setFilterType('lang')"></app-button>
            </li>
         </ul>
       </li>
     </ul>
-    <filter-items :filter-by="sortTerm" :keywords="keywordsList" @sort-by="sortBySpecificTerm"></filter-items>
+    <!-- Movies Category Collections - popular,now showing -->
+      <app-card v-if="genCollections">
+        <ul class="filter-collections">
+          <li>Top Rated</li>
+          <li>Running Now</li>
+        </ul>
+      </app-card>
+    <filter-items v-else :filter-by="sortTerm" :keywords="keywordsList" @sort-by="sortBySpecificTerm"></filter-items>
   </div>
 </template>
 <script>
@@ -36,6 +43,7 @@
         genres:null,
         keywordsList:[],
         searchTermInp:'',
+        genCollections:true,
       }
     },
     methods:{
@@ -66,7 +74,6 @@
           // this.$emit('filter-movies',this.sortTerm,parseInt(sortBy));
           const moviesResponse = await fetch('https://api.themoviedb.org/3/discover/movie?api_key=c9a2fdad68cf48b2893d6e9ab30ad18a&language=en-US&with_genres=' + sortBy);
           const responseData = await moviesResponse.json();
-          console.log('movies by genres',responseData.results)
           this.$emit('filter-movies',this.sortTerm,responseData.results);
         }else{
           const moviesResponse = await fetch('https://api.themoviedb.org/3/discover/movie?api_key=c9a2fdad68cf48b2893d6e9ab30ad18a&language=en-US&with_original_language=' + sortBy);
@@ -76,20 +83,17 @@
       },
       async searchMovie(){
         //Search movies by input keyword
-        console.log('searchMovie');
+        // console.log('searchMovie');
         // this.$emit('search-movie', 'search',this.searchTermInp);
         const searchResponse = await fetch('https://api.themoviedb.org/3/search/movie?api_key=c9a2fdad68cf48b2893d6e9ab30ad18a&language=en-US&query=' + this.searchTermInp);
         const responseData = await searchResponse.json();
-        console.log('search-response',responseData.results);
         //SEARCH BY PEOPLE
         //Get Person Id
         const byPeopleResponse = await fetch(' https://api.themoviedb.org/3/search/person?api_key=c9a2fdad68cf48b2893d6e9ab30ad18a&language=en-US&page=1&query=' + this.searchTermInp);
         const byPeopleData = await byPeopleResponse.json();
-        console.log('by people', byPeopleData.results);
         const personId = byPeopleData.results[0].id;
         const moviesByPeopleRes = await fetch('https://api.themoviedb.org/3/discover/movie?api_key=c9a2fdad68cf48b2893d6e9ab30ad18a&language=en-US&with_people=' + parseInt(personId));
         const moviesByPeopleData = await moviesByPeopleRes.json();
-        console.log('movies by person', moviesByPeopleData.results);
         moviesByPeopleData.results.forEach(item => {
           responseData.results.unshift(item);
         });
@@ -98,6 +102,7 @@
       },
       setFilterType(type){
         this.sortTerm = type;
+        this.genCollections = false;
       }
     },
     created(){
@@ -108,11 +113,8 @@
       async sortTerm(value){
         console.log(value);
         if(value === 'genre'){
-          console.log('sort by genre');
-          const genresList = this.$store.getters.genres;
-          console.log('genres list', genresList);
+          // const genresList = this.$store.getters.genres;
           this.keywordsList = this.$store.getters.genres;
-          console.log(this.keywordsList);
         }
       }
     }
@@ -132,6 +134,15 @@ ul.filter-bar{
   align-items: center;
   list-style: none;
   gap:1em;
+  padding: 0;
+}
+ul.filter-collections{
+  display: flex;
+  justify-content:center;
+  align-items: center;
+  list-style: none;
+  gap:1em;
+  padding:0;
 }
 select{
   width:10em;
@@ -186,5 +197,11 @@ ul.breadcrumb li a:hover {
  /* color:#4aa96c; */
  opacity:0.9;
  /* text-decoration: underline; */
+}
+.row{
+  padding:0.5em 0;
+}
+.filter-container{
+  padding: 0;
 }
 </style>

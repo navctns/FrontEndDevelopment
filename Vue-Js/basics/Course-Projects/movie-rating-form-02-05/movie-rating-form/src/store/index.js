@@ -45,7 +45,14 @@ const store = createStore({
       context.commit('deleteMovieFromList', payload);
     },
     async setMovies(context){
-      const moviesResponse = await fetch('https://api.themoviedb.org/3/movie/top_rated?api_key=c9a2fdad68cf48b2893d6e9ab30ad18a&language=en-US');
+      //TOP Rated MOVIES
+      // const moviesResponse = await fetch('https://api.themoviedb.org/3/movie/top_rated?api_key=c9a2fdad68cf48b2893d6e9ab30ad18a&language=en-US');
+      //NOW PLAYING
+      // const moviesResponse = await fetch('https://api.themoviedb.org/3/movie/now_playing?api_key=c9a2fdad68cf48b2893d6e9ab30ad18a&language=en-US&page=2');
+      //POPULAR
+      // const moviesResponse = await fetch('https://api.themoviedb.org/3/movie/popular?api_key=c9a2fdad68cf48b2893d6e9ab30ad18a&language=en-US&page=2');
+      //UPCOMING MOVIES
+      const moviesResponse = await fetch('https://api.themoviedb.org/3/movie/upcoming?api_key=c9a2fdad68cf48b2893d6e9ab30ad18a&language=en-US&page=2');
       const responseData = await moviesResponse.json();
       console.log(responseData.results);
       // return state.movies;

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div :class="{smCard:size==='sm-card'}">
     <header>
       <slot name="header"></slot>
     </header>
@@ -11,7 +11,17 @@
     </footer>
   </div>
 </template>
-<style scoped="">
+<script>
+  export default{
+    props:{
+      size:{
+        type:String,
+        required:false,
+      }
+    }
+  }
+</script>
+<style scoped>
   div{
     padding:1em;
     /* margin: 1em 0; */
@@ -25,7 +35,10 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width:100%;
+    max-width:100%;
+  }
+  .smCard{
+    height:25rem;
   }
   header,footer{
     display: flex;

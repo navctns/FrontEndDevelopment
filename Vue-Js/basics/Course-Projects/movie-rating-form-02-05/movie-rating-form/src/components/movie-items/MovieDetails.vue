@@ -1,5 +1,4 @@
 <template>
-
   <div class='movie-details'>
     <div>
       <img :src="posterUrl" alt=""/>
@@ -14,7 +13,7 @@
   </div>
 </template>
 <script>
-  import { computed} from 'vue';
+  import { computed, toRefs, watch} from 'vue';
   import { useStore } from 'vuex';
   export default{
 
@@ -25,6 +24,11 @@
 
     },
     setup(props){
+      const {movieId} = toRefs(props);
+      const movieIdUpdate = watch(movieId, (newVal, oldVal)=>{
+        console.log('movie ids', newVal, oldVal);
+        loadMovie();
+      });
       // const movieData = computed(() => {
       //   const movieResponse = fetch()
       // });
@@ -36,7 +40,7 @@
           this.error = error.message || 'Something went wrong';
         }
       }
-      loadMovie();
+
       const movieData = computed(()=>{
         return store.getters.getSelectedMovie || [];
       });
@@ -75,6 +79,7 @@
         releaseYear,
         movie:generalInfo,
         spokenLanguages,
+        movieIdUpdate
       }
     }
   }
@@ -85,5 +90,15 @@
     grid-template-columns: 1fr 3fr;
     margin:1em;
     color:#323232;
+    justify-content: center;
+    place-items:center;
   }
+  h3{
+    color:#323232;
+  }
+@media(max-width:768px) {
+  .movie-details{
+    grid-template-columns: 1fr;
+  }
+}
 </style>
