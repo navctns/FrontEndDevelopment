@@ -7,6 +7,7 @@ const store = createStore({
         movies:[],
       genres:null,
       selectedMovie:null,
+      currentMovieReviews:[],
     }
 
   },
@@ -34,6 +35,10 @@ const store = createStore({
     setSelectedMovie(state, payload){
       //Set movie selected by the user to show details
       state.selectedMovie = payload;
+    },
+    setReviews(state, payload){
+      //Set Reviews for current movie
+      state.currentMovieReviews = payload;
     }
   },
   actions:{
@@ -78,6 +83,19 @@ const store = createStore({
       const responseData = await movieResponse.json();
       console.log('movie details', responseData);
       context.commit('setSelectedMovie', responseData);
+    },
+    async getFromAPI(context, payload){
+      const movieResponse = await fetch(payload.link);
+      const responseData = await movieResponse.json();
+      console.log('Data Retrieved:', responseData.results);
+      if(!movieResponse.ok){
+        console.log('Something went wrong, on getting data');
+      }
+      console.log('res',payload.toDo);
+      if(payload.toDo === 'reviews'){
+        console.log('setReviews');
+        context.commit('setReviews',responseData.results);
+      }
     }
   },
   getters:{
@@ -89,6 +107,9 @@ const store = createStore({
     },
     getSelectedMovie(state){
       return state.selectedMovie;
+    },
+    getMovieReviews(state){
+      return state.currentMovieReviews;
     }
   }
 });
