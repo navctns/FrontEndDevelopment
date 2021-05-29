@@ -35,7 +35,7 @@
       const store = useStore();
       async function loadMovie(){
         try{
-          await store.dispatch('getMovieById',`https://api.themoviedb.org/3/movie/${props.movieId}?api_key=c9a2fdad68cf48b2893d6e9ab30ad18a&language=en-US`);
+          await store.dispatch('getMovieData',`https://api.themoviedb.org/3/movie/${props.movieId}?api_key=c9a2fdad68cf48b2893d6e9ab30ad18a&language=en-US`);
         }catch(error){
           this.error = error.message || 'Something went wrong';
         }
@@ -88,13 +88,19 @@
   .movie-details{
     display: grid;
     grid-template-columns: 1fr 3fr;
-    margin:1em;
-    color:#323232;
+    /* margin:1em; */
+    /* color:#323232; */
+    color:#fafafa;
     justify-content: center;
     place-items:center;
+    background: -webkit-linear-gradient(rgba(0, 0, 0, 0.8), rgba(195, 55, 100, 0.8)), url('https://source.unsplash.com/featured/?movies');
+    min-height: 100vh;
+    padding:1em;
+    text-align:left;
   }
   h3{
-    color:#323232;
+    /* color:#323232; */
+    color:#fafafa;
   }
 @media(max-width:768px) {
   .movie-details{

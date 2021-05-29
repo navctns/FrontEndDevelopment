@@ -1,11 +1,15 @@
 <template id="">
-  <a class="btn" :class="{flat:mode === 'flat',std:mode === 'std',navButton:nav, otherBtn:mode === 'oth',textWhite:textColor==='white',textBlack:textColor==='black'}">{{value}}</a>
+  <a class="btn" :class="{flat:mode === 'flat' && !active,std:mode === 'std',navButton:nav, otherBtn:mode === 'oth',textWhite:textColor==='white',textBlack:textColor==='black',active:active}">{{value}}</a>
   <!-- <a class="btn">{{value}}</a> -->
 
 </template>
 <script type="text/javascript">
   export default{
     props:{
+      active:{
+        type:Boolean,
+        default:false,
+      },
       mode:{
         type:String,
         default:'std',
@@ -31,12 +35,16 @@
 </script>
 <style media="screen" scoped>
   .btn{
-    padding:1em;
+    padding:0.5em;
     border-radius: 0.5em;
     width:10rem;
     cursor: pointer;
     text-decoration: none;
     text-align: center;
+  }
+  .active{
+    background-color: #b0eacd;
+    color:#323232;
   }
   .navButton{
     background-color: #21bf73;

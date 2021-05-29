@@ -72,7 +72,7 @@ const store = createStore({
       }
       context.state.genres = genresData.genres;
     },
-    async getMovieById(context, payload){
+    async getMovieData(context, payload){
       console.log('payload', payload, typeof payload);
       const movieResponse = await fetch(payload);
       const responseData = await movieResponse.json();

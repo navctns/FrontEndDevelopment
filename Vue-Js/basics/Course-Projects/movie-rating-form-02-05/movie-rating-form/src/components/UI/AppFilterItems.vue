@@ -7,8 +7,8 @@
         <li
          v-for="filter in filters.fst"
             :key="filter.name">
-            <app-button text-color="black"  v-if="filterBy ==='genre'" :value="filter.name" :name="filter.name" :id="filter.id" mode="flat" @click="sortBy($event)"></app-button>
-            <app-button text-color="black" v-else :value="filter.label" :name="filter.name" mode="flat" @click="sortBy($event)"></app-button>
+            <app-button :active="activeFilter===filter.name" text-color="black"  v-if="filterBy ==='genre'" :value="filter.name" :name="filter.name" :id="filter.id" mode="flat" @click="sortBy($event)"></app-button>
+            <app-button :active="activeFilter===filter.name" text-color="black" v-else :value="filter.label" :name="filter.name" mode="flat" @click="sortBy($event)"></app-button>
         </li>
         <li>
           <app-button text-color="black" value=">>>" mode="flat" @click="slideList('sec')"></app-button>
@@ -23,8 +23,8 @@
         <li
          v-for="filter in filters.sec"
             :key="filter.name">
-            <app-button text-color="black" v-if="filterBy ==='genre'" :value="filter.name" :name="filter.name" :id="filter.id" mode="flat" @click="sortBy($event)"></app-button>
-            <app-button text-color="black" v-else :value="filter.label" :name="filter.name" mode="flat" @click="sortBy($event)"></app-button>
+            <app-button :active="activeFilter===filter.name" text-color="black" v-if="filterBy ==='genre'" :value="filter.name" :name="filter.name" :id="filter.id" mode="flat" @click="sortBy($event)"></app-button>
+            <app-button :active="activeFilter===filter.name" text-color="black" v-else :value="filter.label" :name="filter.name" mode="flat" @click="sortBy($event)"></app-button>
           </li>
           <li>
             <app-button text-color="black" value=">>>" mode="flat" @click="slideList('thd')"></app-button>
@@ -38,8 +38,8 @@
         <li
          v-for="filter in filters.thd"
             :key="filter.name">
-            <app-button text-color="black" v-if="filterBy ==='genre'" :value="filter.name" :name="filter.name" :id="filter.id" mode="flat" @click="sortBy($event)"></app-button>
-            <app-button text-color="black" v-else :value="filter.label" :name="filter.name" mode="flat" @click="sortBy($event)"></app-button>
+            <app-button :active="activeFilter===filter.name" text-color="black" v-if="filterBy ==='genre'" :value="filter.name" :name="filter.name" :id="filter.id" mode="flat" @click="sortBy($event)"></app-button>
+            <app-button :active="activeFilter===filter.name" text-color="black" v-else :value="filter.label" :name="filter.name" mode="flat" @click="sortBy($event)"></app-button>
           </li>
       </ul>
       <!-- FILTERS WITHOUT SLIDER -->
@@ -47,8 +47,8 @@
         <li
          v-for="filter in filters"
             :key="filter.name">
-            <app-button text-color="black" v-if="filterBy ==='genre'" :value="filter.name" :name="filter.name" :id="filter.id" mode="flat" @click="sortBy($event)"></app-button>
-            <app-button text-color="black" v-else :value="filter.label" :name="filter.name" mode="flat" @click="sortBy($event)"></app-button>
+            <app-button :active="activeFilter===filter.name" text-color="black" v-if="filterBy ==='genre'" :value="filter.name" :name="filter.name" :id="filter.id" mode="flat" @click="sortBy($event)"></app-button>
+            <app-button :active="activeFilter===filter.name" text-color="black" v-else :value="filter.label" :name="filter.name" mode="flat" @click="sortBy($event)"></app-button>
           </li>
       </ul>
     </app-card>
@@ -56,7 +56,15 @@
 </template>
 <script>
   export default{
-    props:['filterBy','keywords'],
+    // props:['filterBy','keywords'],
+    props:{
+      filterBy:{
+        type:String,
+      },
+      keywords:{
+        type:Array,
+      },
+    },
     emits:['sort-by'],
     data(){
       return{
@@ -64,6 +72,7 @@
         listSecondSection:false,
         listFirstSection:false,
         listThirdSection:false,
+        activeFilter:null,
       }
     },
     computed:{
@@ -104,27 +113,15 @@
           return this.keywords;
         }else if(this.filterBy === 'lang'){
           return[
-              {
-                name:'ml',
-                label:'Malayalam'
-              },
-              {
-                name:'fr',
-                label:'French'
-              },
-              {
-                name:'en',
-                label:'English'
-              },
-              {
-                name:'ko',
-                label:'Korean'
-              },
-              {
-                name:'ja',
-                label:'Japanese'
-              }
+              {name:'ml',label:'Malayalam'},
+              {name:'fr',label:'French'},
+              {name:'en',label:'English'},
+              {name:'ko',label:'Korean'},
+              {name:'ja',label:'Japanese'}
           ]
+        }else if(this.filterBy === 'resent'){
+            console.log('keywords-filter',this.keywords);
+            return this.keywords;
         }else{
           return [];
         }
@@ -148,6 +145,11 @@
           this.listSecondSection = false;
           this.listFirstSection = true;
           this.listThirdSection = false;
+        }else if(newVal === 'resent'){
+          this.sliderOn = false;
+          this.listSecondSection = false;
+          this.listFirstSection = false;
+          this.listThirdSection = false
         }
       }
     },
@@ -190,8 +192,10 @@
         //Sort parameters from specific buttons(specific genres)
         console.log(event.target.name,event.target.id);
         if(this.filterBy === 'genre'){
+          this.activeFilter = event.target.name;
           this.$emit('sort-by',event.target.id);
         }else{
+          this.activeFilter = event.target.name;
           this.$emit('sort-by',event.target.name);
         }
       }

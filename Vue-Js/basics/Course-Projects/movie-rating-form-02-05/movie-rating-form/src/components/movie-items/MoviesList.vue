@@ -49,7 +49,7 @@
       setFilterParams(filterTerm, keyRef){
         console.log('setFilterParams');
         //filterTerm (type of filtering(language,genre...))
-        //keyRef - specific key(specific lang, of specific genre)
+        //keyRef - specific key(specific lang, of specific genre)/Data Objects
         this.filterParams ={
           filter:filterTerm,
           keyword:keyRef,
@@ -70,6 +70,7 @@
     computed:{
       getUpdatedMovies(){
         //Get from vuex and filter according to filters
+        //filterParams contains the filtered movies data
         const movies = this.$store.getters.movies;
         if(this.filterParams){
           if(this.filterParams.filter === 'genre'){
@@ -77,6 +78,7 @@
             //add filter logic here
             // const filterKey = this.filterParams.keyword;
             // return movies.filter(movie => movie.genre_ids.includes(filterKey));
+
             return this.filterParams.keyword;
           }else if(this.filterParams.filter === 'lang'){
             // const filterKey = this.filterParams.keyword;
@@ -86,6 +88,8 @@
             console.log('search by key');
             // const filterKey = this.filterParams.keyword;
             // return movies.filter(movie => movie.title.toLowerCase().includes(filterKey.toLowerCase()));
+            return this.filterParams.keyword;
+          }else if(this.filterParams.filter === 'resent'){
             return this.filterParams.keyword;
           }
         }

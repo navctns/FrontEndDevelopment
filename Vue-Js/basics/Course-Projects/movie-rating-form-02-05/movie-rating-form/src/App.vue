@@ -71,17 +71,19 @@ export default {
 <style>
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+ /* @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap'); */
 * {
   box-sizing: border-box;
 }
 html {
-  font-family: 'Roboto', sans-serif;
+  font-family:'Roboto', sans-serif;
 }
 body {
   margin: 0;
   /* color:#393e46; */
   /* color:#323232; */
   color:#fafafa;
+  letter-spacing: 1px;
 }
 h2,h3,h4,h5,h6{
   color:#fafafa;

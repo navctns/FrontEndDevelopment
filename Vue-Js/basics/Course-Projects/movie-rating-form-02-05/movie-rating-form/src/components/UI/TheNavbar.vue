@@ -64,6 +64,7 @@ a.router-link-active{
   background-color: #b0eacd;
   padding:0.5em;
   text-decoration: none;
+  color:#323232;
 }
 a.router-link-active:hover{
   background-color: #21bf73;
