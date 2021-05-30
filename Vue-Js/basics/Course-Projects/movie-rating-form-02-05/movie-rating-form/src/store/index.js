@@ -8,6 +8,7 @@ const store = createStore({
       genres:null,
       selectedMovie:null,
       currentMovieReviews:[],
+      languages:null,
     }
 
   },
@@ -39,6 +40,9 @@ const store = createStore({
     setReviews(state, payload){
       //Set Reviews for current movie
       state.currentMovieReviews = payload;
+    },
+    setLanguages(state, payload){
+      state.languages = payload;
     }
   },
   actions:{
@@ -95,8 +99,11 @@ const store = createStore({
       if(payload.toDo === 'reviews'){
         console.log('setReviews');
         context.commit('setReviews',responseData.results);
+      }else if(payload.toDo === 'langs'){
+        context.commit('setLanguages', responseData);
+        console.log('langs fetched', responseData);
       }
-    }
+    },
   },
   getters:{
     movies(state){
@@ -110,6 +117,9 @@ const store = createStore({
     },
     getMovieReviews(state){
       return state.currentMovieReviews;
+    },
+    getLanguages(state){
+      return state.languages;
     }
   }
 });

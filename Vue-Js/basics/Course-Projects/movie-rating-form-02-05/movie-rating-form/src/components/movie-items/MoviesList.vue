@@ -8,7 +8,7 @@
             :key="movie.id"
             :id="movie.id"
             :title="movie.title"
-            :language="languageStr(movie.original_language)"
+            :language="setLanguageStr(movie.original_language)"
             :overview="movie.overview"
             :poster-path="movie.poster_path"
           ></movie-card>
@@ -30,6 +30,7 @@
         movies:[],
         genres:[],
         filterParams:null,
+        langsLib:null,
       }
     },
     // inject:['movies']
@@ -55,16 +56,38 @@
           keyword:keyRef,
         };
       },
-      languageStr(lang){
-        if(lang === 'en'){
-          return 'English';
-        }else if(lang === 'ko'){
-          return 'Korean';
-        }else if(lang === 'ja'){
-          return 'Japanese';
-        }else if(lang === 'hi'){
-          return 'Hindi';
+      setLanguageStr(langCode){
+        let langObj = null;
+        let langStr = '';
+        const langsLib = this.getLanguagesList();
+       console.log('langs lib', langsLib);
+       // langsLib.forEach(langItem =>{
+       //   console.log('libItem', langItem);
+       // });
+        if(langsLib){
+          langObj = langsLib.filter(lang => lang.iso_639_1 === langCode);
+          if(langObj){
+            console.log('language found',langObj);
+            langObj.forEach(lang=>{
+              console.log('lang item', lang.english_name);
+              // return lang.english_name;
+              langStr = lang.english_name;
+            });
+            return langStr;
+          }
+          // await this.langsLib.forEach(langArr =>{
+          //   console.log('lang arr', langArr);
+          //   langObj = langArr.filter(lang => lang.iso_639_1 === langCode);
+          //   if(langObj){
+          //     console.log('language found',langObj);
+          //     return langObj.english_name;
+          //   }
+          // });
         }
+        return '';
+      },
+      getLanguagesList(){
+        return this.$store.getters.getLanguages;
       }
     },
     computed:{
@@ -94,11 +117,14 @@
           }
         }
         return movies;
-      }
+      },
+
     },
     created(){
       //Load movies from API
       this.loadMovies();
+      this.langsLib = this.getLanguagesList();
+      console.log('langs list',this.langsLib);
 
     }
   }

@@ -15,11 +15,16 @@ const router = createRouter({
         // {path:'/panel/:section', name:"add-movie", component:MovieForm}
         {path:'/panel/addMovie', name:"add-movie", component:MovieForm},
         {path:'/panel/storedMovies', name:"stored-movies", component:StoredMovies},
-
-
       ]
     }
-  ]
+  ],
+  scrollBehavior(to,from,savedPosition){
+    console.log('scroll-beh',to, from, savedPosition);
+    if(savedPosition){
+      return savedPosition;
+    }
+    return { left:0, top:0 };
+  }
 });
 
 export default router

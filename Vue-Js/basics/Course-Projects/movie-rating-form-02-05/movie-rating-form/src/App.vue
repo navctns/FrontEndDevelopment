@@ -63,6 +63,13 @@ export default {
       this.movies.splice(idx,1);
       console.log(this.movies);
     }
+  },
+  created(){
+    const actionObj = {
+      link:'https://api.themoviedb.org/3/configuration/languages?api_key=c9a2fdad68cf48b2893d6e9ab30ad18a',
+      toDo:'langs',
+    }
+    this.$store.dispatch('getFromAPI', actionObj);
   }
 
 }
@@ -84,6 +91,7 @@ body {
   /* color:#323232; */
   color:#fafafa;
   letter-spacing: 1px;
+  line-height: 1.6;
 }
 h2,h3,h4,h5,h6{
   color:#fafafa;
