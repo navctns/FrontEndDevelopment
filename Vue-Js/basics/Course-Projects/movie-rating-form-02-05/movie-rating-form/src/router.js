@@ -9,7 +9,7 @@ const router = createRouter({
   history:createWebHistory(),
   routes:[
     { path:'/', component:TheMovies},
-    { path:'/:movieId', component:MovieDetails, props:true, name:"movie-details"},
+    { path:'/:movieId/:title', component:MovieDetails, props:true, name:"movie-details"},
     { path:'/panel', component: AdminPanel, name:'main-panel', redirect:'/panel/addMovie',
       children:[
         // {path:'/panel/:section', name:"add-movie", component:MovieForm}
@@ -19,7 +19,7 @@ const router = createRouter({
     }
   ],
   scrollBehavior(to,from,savedPosition){
-    console.log('scroll-beh',to, from, savedPosition);
+    // console.log('scroll-beh',to, from, savedPosition);
     if(savedPosition){
       return savedPosition;
     }

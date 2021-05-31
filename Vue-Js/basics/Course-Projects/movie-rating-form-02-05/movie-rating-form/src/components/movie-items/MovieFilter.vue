@@ -2,7 +2,7 @@
   <div class="row">
     <ul class="filter-bar">
       <li>
-        <input type="text" placeholder="search movie" @input="searchMovie" v-model.trim="searchTermInp">
+        <input type="text" placeholder="search movie" @input="searchMovie" v-model="searchTermInp">
       </li>
       <li class="flex-item">
          <ul class="breadcrumb">

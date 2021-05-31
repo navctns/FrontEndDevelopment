@@ -2,13 +2,13 @@
   <li>
     <app-card size="sm-card">
       <template #header>
-        <router-link :to="{ name: 'movie-details', params: {movieId:id} }">
+        <router-link :to="{ name: 'movie-details', params: {movieId:id,title:title} }">
           <img :src="imageUrl" alt="">
         </router-link>
       </template>
       <template #default>
-        <router-link :to="{ name: 'movie-details', params: {movieId:id} }">
-          <h3>{{title}}</h3>
+        <router-link :to="{ name: 'movie-details', params: {movieId:id,title:title} }">
+          <h3>{{title}} <span v-if="releaseYear !==''">({{releaseYear}})</span></h3>
         </router-link>
         <h4>Language:{{language}}</h4>
         <!-- <h4>Writer:{{writer}}</h4> -->
@@ -19,7 +19,7 @@
 </template>
 <script>
   export default{
-    props:['id','posterPath','language','overview','title'],
+    props:['id','posterPath','language','overview','title','releaseYear'],
     computed:{
       imageUrl(){
         return 'https://image.tmdb.org/t/p/w185' + this.posterPath;

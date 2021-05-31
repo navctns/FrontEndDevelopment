@@ -11,6 +11,7 @@
             :language="setLanguageStr(movie.original_language)"
             :overview="movie.overview"
             :poster-path="movie.poster_path"
+            :release-year="renderReleaseYear(movie)"
           ></movie-card>
       </ul>
     </div>
@@ -35,6 +36,13 @@
     },
     // inject:['movies']
     methods:{
+      renderReleaseYear(movie){
+        if(movie.release_date){
+          return movie.release_date.slice(0,4)
+        }else{
+          return '';
+        }
+      },
       getGenresItems(){
         this.genres = this.$store.getters.genres;
         console.log(this.genres);
@@ -60,29 +68,16 @@
         let langObj = null;
         let langStr = '';
         const langsLib = this.getLanguagesList();
-       console.log('langs lib', langsLib);
-       // langsLib.forEach(langItem =>{
-       //   console.log('libItem', langItem);
-       // });
+
         if(langsLib){
           langObj = langsLib.filter(lang => lang.iso_639_1 === langCode);
           if(langObj){
-            console.log('language found',langObj);
             langObj.forEach(lang=>{
-              console.log('lang item', lang.english_name);
               // return lang.english_name;
               langStr = lang.english_name;
             });
             return langStr;
           }
-          // await this.langsLib.forEach(langArr =>{
-          //   console.log('lang arr', langArr);
-          //   langObj = langArr.filter(lang => lang.iso_639_1 === langCode);
-          //   if(langObj){
-          //     console.log('language found',langObj);
-          //     return langObj.english_name;
-          //   }
-          // });
         }
         return '';
       },
