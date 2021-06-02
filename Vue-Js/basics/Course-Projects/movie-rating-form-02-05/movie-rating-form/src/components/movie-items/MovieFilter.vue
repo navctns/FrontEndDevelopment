@@ -13,7 +13,7 @@
              <app-button :active="sortTerm==='lang'" text-color="black" value="Movies By Language" mode="flat" @click="setFilterType('lang')"></app-button>
            </li>
            <li>
-             <app-button :active="sortTerm==='resent'" text-color="black" value="Now showing/Other" mode="flat" @click="setFilterType('resent')"></app-button>
+             <app-button :active="sortTerm==='resent'" text-color="black" value="Popular Now" mode="flat" @click="setFilterType('resent')"></app-button>
            </li>
         </ul>
       </li>
@@ -109,12 +109,15 @@
         //Get Person Id
         const byPeopleResponse = await fetch(' https://api.themoviedb.org/3/search/person?api_key=c9a2fdad68cf48b2893d6e9ab30ad18a&language=en-US&page=1&query=' + this.searchTermInp);
         const byPeopleData = await byPeopleResponse.json();
-        const personId = byPeopleData.results[0].id;
-        const moviesByPeopleRes = await fetch('https://api.themoviedb.org/3/discover/movie?api_key=c9a2fdad68cf48b2893d6e9ab30ad18a&language=en-US&with_people=' + parseInt(personId));
-        const moviesByPeopleData = await moviesByPeopleRes.json();
-        moviesByPeopleData.results.forEach(item => {
-          responseData.results.unshift(item);
-        });
+        if(byPeopleData.results && byPeopleData.results.length !==0){
+          const personId = byPeopleData.results[0].id;
+          const moviesByPeopleRes = await fetch('https://api.themoviedb.org/3/discover/movie?api_key=c9a2fdad68cf48b2893d6e9ab30ad18a&language=en-US&with_people=' + parseInt(personId));
+          const moviesByPeopleData = await moviesByPeopleRes.json();
+          moviesByPeopleData.results.forEach(item => {
+            responseData.results.unshift(item);
+          });
+        }
+
         this.$emit('search-movie', 'search',responseData.results);
         // return responseData;
       },

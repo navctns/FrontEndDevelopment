@@ -2,19 +2,28 @@
   <div class="container">
     <ul class="navbar">
       <li>
+        <router-link to='/'>
+          Home
+        </router-link>
+      </li>
+      <li>
         <!-- <a href="#">Movies</a> -->
-        <router-link to="/">
+        <router-link to="/movies">
           Movies
           <!-- <app-button type="button" name="button" value="Movies" mode="flat"></app-button> -->
         </router-link>
       </li>
       <li>
-        <!-- <a href="#">Add Movie</a> -->
-        <router-link to='/panel'>
-          Panel
-          <!-- <app-button type="button" name="button"  value="Add Movie" mode="flat" :nav="true"></app-button> -->
+        <router-link to='/about'>
+          About
         </router-link>
       </li>
+      <li>
+        <router-link to='/panel'>
+          Panel
+        </router-link>
+      </li>
+
     </ul>
   </div>
 

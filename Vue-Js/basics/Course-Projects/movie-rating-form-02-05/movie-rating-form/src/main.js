@@ -2,7 +2,7 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import AppButton from './components/UI/AppButton.vue';
 import AppCard from './components/UI/AppCard.vue';
-import TheNavbar from './components/UI/TheNavbar.vue';
+import TheNavbar from './components/layout/TheNavbar.vue';
 import AppModalDialog from './components/UI/AppModalDialog.vue';
 import AppSmallButton from './components/UI/AppSmallButton.vue';
 import router from './router.js';
@@ -17,6 +17,7 @@ app.component('app-small-button', AppSmallButton);
 
 app.use(router);
 app.use(store);
-router.isReady().then(()=>{
-  app.mount('#app');
-})
+// router.isReady().then(()=>{
+//   app.mount('#app');
+// })
+app.mount('#app');

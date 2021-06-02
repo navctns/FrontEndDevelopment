@@ -8,7 +8,7 @@
       </template>
       <template #default>
         <router-link :to="{ name: 'movie-details', params: {movieId:id,title:title} }">
-          <h3>{{title}} <span v-if="releaseYear !==''">({{releaseYear}})</span></h3>
+          <h4>{{title}} <span v-if="releaseYear !==''">({{releaseYear}})</span></h4>
         </router-link>
         <h4>Language:{{language}}</h4>
         <!-- <h4>Writer:{{writer}}</h4> -->

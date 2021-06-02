@@ -157,6 +157,9 @@ ul {
      /* z-index: -1; */
      /* background: rgba(0,0,0,0.25); */
      /* overflow: hidden; */
+     margin: 0;
+     min-height:100vh;
+     height: auto;
   }
   .bgWall .blackOverlay{
     position:absolute;

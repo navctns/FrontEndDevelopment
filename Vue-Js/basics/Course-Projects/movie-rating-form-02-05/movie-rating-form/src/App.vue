@@ -1,5 +1,12 @@
 <template>
-  <the-navbar></the-navbar>
+  <the-navbar v-if="!homepage"></the-navbar>
+  <!-- <home-page v-if="homepage"></home-page> -->
+  <!-- For the Starting SHOWCASE -->
+  <router-view name="showcase" v-if="homepage" v-slot="slotProps">
+    <transition name="showcase" mode="out-in">
+      <component :is="slotProps.Component"></component>
+    </transition>
+  </router-view>
   <router-view v-slot="slotProps">
     <!-- recheck keep alive -->
     <transition name="route" mode="out-in">
@@ -9,16 +16,19 @@
       <!-- <component v-else :is="slotProps.Component"></component> -->
     </transition>
   </router-view>
+  <!-- FOOTER -->
+  <the-footer v-if="!homepage"></the-footer>
 </template>
 
 <script>
-// import HelloWorld from './components/HelloWorld.vue';
-// import MovieForm from './components/MovieForm.vue';
-// import TheMovies from './pages/TheMovies.vue'
+import TheFooter from './components/layout/TheFooter.vue';
+import HomePage from './pages/HomePage.vue';
 export default {
   name: 'App',
   components:{
     // TheNavbar,
+    TheFooter,
+    HomePage,
   },
   data(){
     return{
@@ -64,6 +74,18 @@ export default {
       console.log(this.movies);
     }
   },
+  computed:{
+    homepage(){
+      return this.$route.path === '/';
+      // if(this.$route.path === '/'){
+      //   console.log('home page');
+      //   console.log('Route',this.$route)
+      //   return true;
+      // }
+      // console.log('Route',this.$route)
+      // return false;
+    }
+  },
   created(){
     const actionObj = {
       link:'https://api.themoviedb.org/3/configuration/languages?api_key=c9a2fdad68cf48b2893d6e9ab30ad18a',
@@ -92,6 +114,8 @@ body {
   color:#fafafa;
   letter-spacing: 1px;
   line-height: 1.6;
+  background: -webkit-linear-gradient(rgba(0, 0, 0, 0.8), rgba(195, 55, 100, 0.8)), url('https://source.unsplash.com/featured/?movies');
+
 }
 h2,h3,h4,h5,h6{
   color:#fafafa;
@@ -127,6 +151,26 @@ h2,h3,h4,h5,h6{
 }
 .route-enter-to,
 .route-leave-from{
+  opacity:1;
+  transform:translateY(0);
+}
+/* SHOWCASE ANIM */
+.showcase-enter-from{
+  opacity: 0;
+  transform:translateX(-1000px);
+}
+.showcase-leave-to{
+  opacity:0;
+  transform:translateX(-1000px);
+}
+.showcase-enter-active{
+  transition:all 1s ease-out;
+}
+.showcase-leave-active{
+  transition:all 1s ease-in;
+}
+.showcase-enter-to,
+.showcase-leave-from{
   opacity:1;
   transform:translateY(0);
 }

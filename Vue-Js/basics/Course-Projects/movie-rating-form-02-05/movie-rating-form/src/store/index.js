@@ -9,6 +9,7 @@ const store = createStore({
       selectedMovie:null,
       currentMovieReviews:[],
       currentMovieCriticReviews:[],
+      filmMovements:{gerExp:[], freImp:[],sovMon:[],itlNeo:[],jpNew:[],brNew:[],frNew:[],hongNew:[],dogme95:[]},
       languages:null,
     }
 
@@ -52,7 +53,12 @@ const store = createStore({
     },
     setLanguages(state, payload){
       state.languages = payload;
+    },
+    setFilmMovements(state, payload){
+      console.log('mutation', payload.key);
+      state.filmMovements[payload.key].push(payload.data);
     }
+
   },
   actions:{
     addMovie(context, payload){
@@ -114,6 +120,13 @@ const store = createStore({
       }else if(payload.toDo === 'critic-reviews'){
         console.log('critic reviews loaded', responseData);
         await context.commit('setCriticReviews', responseData.results);
+      }else if(payload.toDo === 'film-movements'){
+        console.log('film-movement-movie', responseData);
+        const mutationData = {
+          data:responseData,
+          key:payload.filmMov
+        }
+        await context.commit('setFilmMovements', mutationData);
       }
     },
   },
@@ -135,6 +148,14 @@ const store = createStore({
     },
     getLanguages(state){
       return state.languages;
+    },
+    getFilmMovements(state){
+      return state.filmMovements;
+    },
+    getSpecificFilmMovement(state){
+      return function(key){
+        return state.filmMovements[key];
+      }
     }
   }
 });
