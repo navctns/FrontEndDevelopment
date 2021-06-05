@@ -13,3 +13,188 @@ Strike,Mother,Lace,My Grandmother,Arsenal,Old and New,Earth,Alone,Deserter
 
 italian neo :[5155,307,156139,120488,43469,8429,8016,204722,185078,5156,43445,43444,31058,276155,102524,4173,56518,49781,43389,43372,43379,158693,41464,43361,90770,833,31293,12548,74585,93863,277524,56402,43195,2748,405,56122]
 The Bandit
+
+Japanese New Wave:[188683,188684,86664,125222,125217,188685,
+76754,336793,98639,88527,111718,109276,3764,95508,164695,
+31104,90191,111397,100461,54146,33342,162616,42984,3763,
+49571,88562,61475,86666,88435,16672,326705,117212,219245,
+148371,378371,464398,42718,42720,42721,45706,29452,85692,
+151019,77124,17905,104441,50696,289217,98193,108512,56599,
+268650,78117,1556,104744,45713,68429,110748,104343,213692,
+94466,36090,104549,104543,236867,163216,104282,86520,
+163214,104251,48419,5879]
+movies:
+Kisses (1957) n
+Ryakushô Renzoku Shasatsuma (1969) nnn
+Boy (1969)  nnn
+
+British New wave:
+[
+  43103,50011,18929,37230,210808,25062,33765,16103,76000,18774,
+  5769,26535,24134,42744,15598,42724,14794,13384
+
+]
+French New Wave
+[
+  5544,269,27419,1818,40641,63880,499,266,2860,27019,1628,
+  147,4024,8073,31417,1093,26030,1626,2363,43026
+]
+Hong kong new wave
+[
+  377793,212781,44914,283573,293251,73841,39865,141883,
+  212774,104287,104681,256071,454841,182227,313104,176213,
+  156045,186907,72445,112594,283574,157229,157236,
+  186940,152421,313047,171816,176217,44860,179995,66011,
+  283578,203152,313046,11471,69161,213171,180896,18305,
+  44861,490761,172969,195748,313042,172698,173137,78033,
+  261149,41244,
+]
+The Extras  n
+justice is served. nn
+The Secret (1979) nn
+Encore (1980) nn
+The Club (1981) nn
+Twinkle Twinkle Little Star (1983) nn
+The Musical Singer (1985) nn
+
+Dogme95
+[
+  309,452,139,10613,10621,42881,251504,251506,251515,112,12831,
+  377538,100607,504828,52656,56314,99216,157613,15842,504847,
+  191784,95052,504866,504867,102,504868,272367,426290,16012,
+  504870,33294,431489
+]
+
+ Interview (2000) nn
+  Babylon (2001) nn
+   Once Upon Another Time (2000)nn
+
+  documentary film movement
+  [
+    174892,54051,330630,77963,98478,84656
+  ]
+
+  Poetic Realism:
+  [
+    43904,26252,78537,777,46326,29415,27053
+  ]
+Polish school
+[
+  43322,29933,5055,105762,80324,11502,25939
+]
+free cinema
+[
+  49176,117475,117471,117477,117470,117484
+]
+Key filmmakers: Lindsay Anderson, Karel Reisz, Tony Richardson, Lorenza Mazzetti
+O Dreamland (1953), Together (1956),
+Every Day Except Christmas (1957), Nice Time (1957),
+Momma Don't Allow (1955), We Are The Lambeth Boys (1958) (pictured top)
+
+film novo
+[
+  836,67612,194853,119023,67062,74349,105347,
+]
+Key filmmakers: Glauber Rocha, Carlos Diegues, Ruy Guerra, Nelson Pereira dos Santos, Joaquim Pedro de Andrade
+Barren Lives (1963) (pictured top), Black God, White Devil (1964),
+ The Guns (1964), The Priest And The Girl (1966),
+  Land In Anguish (1967), Antonio Das Mortes (1969),
+   How Tasty Was My Little Frenchman (1971)
+
+Czech New Wave(1962-1968)
+[
+  25905,789,38442,39387
+]
+Key filmmakers: Jaromil Jires, Jan Nemec, Milos Forman, Vera Chytilova, Ivan Passer, Jiri Menzel, Jan Kadar
+The Loves Of A Blonde (1965) (pictured above),
+The Shop On Main Street (1965), Closely Watched Trains (1967) (pictured top),
+ The Fireman’s Ball (1967)
+
+The Movie Brats (Late 1960s – 1980s)
+[
+  238,838,203,592,578,103,11,840,12637,18387
+]
+ The Godfather (1972), American Graffiti (1973),
+  Mean Streets (1973), The Conversation (1974),
+   Jaws (1975), Taxi Driver (1976), Star Wars (1977),
+    Close Encounters Of The Third Kind (1977), New York, New York (1977), Big Wednesday (1978).
+Key filmmakers: Francis Ford Coppola, George Lucas, John Milius, Brian De Palma, Steven Spielberg, Paul Schrader
+L.A. Rebellion
+[
+  164835,27432,161585,137765,94725
+]
+Key filmmakers: Charles Burnett, Zeinabu irene Davis, Larry Clark, Ben Caldwell, Julie Dash, Billy Woodberry
+As Above, So Below (1973), Killer Of Sheep (1977) (pictured top),
+ Passing Through (1977), Bless Their Little Hearts (1984),
+  To Sleep With Anger (1990)
+
+New German Cinema(1968-1982)
+[
+  2000,10310,2204,216,4762,11710,661,6404,659,45560
+]
+Rainer Werner Fassbinder (pictured above),
+ Werner Herzog, Alexander Kluge,
+ Volker Schlöndorff, Helma Sanders-Brahms,
+  Hans-Jürgen Syberberg, Margarethe von Trotta, Wim Wenders
+
+  Aguirre, Wrath of God (1972), The Bitter Tears Of Petra Von Kant (1972),
+ Alice In The Cities (1974), Fear Eats The Soul (1974),
+  The Lost Honour Of Katharina Blum (1975),
+The Enigma Of Kaspar Hauser (1974), The Marriage Of Maria Braun (1979),
+Nosferatu The Vampyre (1979), The Tin Drum (1979), Berlin Alexanderplatz (1980)
+
+the Australian New Wave(1975-1985)
+[
+  26405,62761,11020,38919,69069,88285,9659,13783,14630,
+  11646,
+]
+Key filmmakers: Bruce Beresford, Phillip Noyce, Gillian Armstrong, George Miller, Fred Schepisi, Peter Weir
+
+Wake In Fright (1971), The Cars That Ate Paris (1974),
+Picnic At Hanging Rock (1975), Don’s Party (1976),
+The Chant Of Jimmie Blacksmith (1978), Newsfront (1978),
+Mad Max (1979), Breaker Morant (1980), Puberty Blues (1981),
+Gallipoli (1981)
+
+Cinéma du look(1980-1991)
+[
+  4485,19184,63418,10656,64131,9322,2767
+]
+Key filmmakers: Jean-Jacques Beineix, Luc Besson, Leos Carax
+Diva (1981), The Last Battle (1983), Boy Meets Girl (1984),
+ Subway (1985), Mauvais Sang (1986), Nikita (1990) (pictured top),
+  Les Amants Du Pont-Neuf (1991)
+
+New Queer Cinema(1990-1995)
+[
+  31225,31785,32881,33247,54934
+]
+Key filmmakers: Todd Haynes, Derek Jarman, Jennie Livingston, Tom Kalin
+
+Paris Is Burning (1990) (pictured top), Young Soul Rebels (1991),
+ The Hours And Times (1991), The Living End (1992),
+  Swoon (1992)
+
+Mumblecore (2002-)
+[
+  33693,5761,13120,23720,47607,84355,121986,172533
+
+]
+Key filmmakers: Andrew Bujalski, Lynn Shelton, Mark Duplass, Jay Duplass, Lena Dunham, Joe Swanberg
+
+Funny Ha Ha (2002) (pictured top), Hannah Takes The Stairs (2007),
+ In Search Of A Midnight Kiss (2008), Humpday (2009),
+Tiny Furniture (2009), Your Sister’s Sister (2011),
+ Frances Ha (2012), Drinking Buddies (2013)
+
+ Indian Parallel Cinema (1952–1992)
+ [
+  45129,242826,5801,896,54352,410246,55658,41053,235186,166798,305897,112053,
+  171492,257138,169364,88093,255607,176513,198434,207649,
+  232791,103073,259042,307365,128082,78819,
+ ]
+
+ Rajnigandha
+ Ashadh Ka Ek Din nn
+ Duvidha
+ Party

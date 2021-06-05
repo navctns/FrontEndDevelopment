@@ -84,7 +84,22 @@ export default {
       // }
       // console.log('Route',this.$route)
       // return false;
-    }
+    },
+
+  },
+  watch:{
+    // const watchRoute = watch('$route', (from)=>{
+    //   if(from.path.contains('/filmAppreciation')){
+    //     console.log('from.path', from.path);
+    //     this.transitionName = 'info';
+    //   }
+    // });
+    // '$route'(from){
+    //     if(from.path === '/filmAppreciation'){
+    //       console.log('from.path', from.path);
+    //       this.transitionName = 'info';
+    //     }
+    // }
   },
   created(){
     const actionObj = {

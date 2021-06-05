@@ -7,6 +7,7 @@ import MovieDetails from './components/movie-items/MovieDetails.vue';
 import AboutPage from './pages/AboutPage.vue';
 import HomePage from './pages/HomePage.vue';
 import FilmAppreciation from './pages/FilmAppreciation.vue';
+import MovementMovies from './pages/FilmMovementMovies.vue';
 import FilmMovement from './pages/FilmMovement.vue';
 
 const router = createRouter({
@@ -19,8 +20,12 @@ const router = createRouter({
     },
     { path:'/movies', component:TheMovies},
     { path:'/:movieId/:title', component:MovieDetails, props:true, name:"movie-details"},
-    { path:'/filmAppreciation', component:FilmAppreciation,},
-    { path:'/filmAppreciation/film_movement/:movement', name:"film_movement",props:true, component:FilmMovement},
+    { path:'/filmAppreciation', component:FilmAppreciation,
+      children:[
+        {path:'/filmAppreciation/:moviesDataKey', name:'film_movement', props:true, component:FilmMovement},
+      ]
+    },
+    { path:'/filmAppreciation/film_movement/:movement', name:"film_movement_movies",props:true, component:MovementMovies},
     // { path:'/filmAppreciation/film_movement/:movement', name:"french_impressionist",props:true, component:FilmMovement},
 
     { path:'/panel', component: AdminPanel, name:'main-panel', redirect:'/panel/addMovie',

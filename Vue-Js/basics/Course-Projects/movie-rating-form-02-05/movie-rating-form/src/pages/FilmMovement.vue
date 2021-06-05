@@ -1,94 +1,100 @@
 <template>
-  <div>
-    <h3>{{header}}</h3>
-    <!-- <p v-for="movie in movies" :key="movie.id">{{movie.title}}</p> -->
-    <!-- <p>{{moviesList}}</p> -->
-    <ul>
-      <!-- <li v-for="movie in moviesList" :key="movie.id">{{movie.title}}</li> -->
-      <movie-card
-        v-for="movie in moviesList"
-        :key="movie.id"
-        :id="movie.id"
-        :title="movie.title"
-        :language="setLanguageStr(movie.original_language)"
-        :overview="movie.overview"
-        :poster-path="movie.poster_path"
-        :release-year="renderReleaseYear(movie)"
-      ></movie-card>
-    </ul>
-  </div>
+  <transition name="info" mode="out-in">
+    <div>
+      <h2>{{movementContent.header}}</h2>
+      <p>
+        Parallel cinema, or New Indian Cinema, was a film movement in Indian cinema that originated in the state of West Bengal in the 1950s as an alternative to the mainstream commercial Indian cinema.
+
+    Inspired by Italian Neorealism, Parallel Cinema began just before the French New Wave and Japanese New Wave, and was a precursor to the Indian New Wave of the 1960s. The movement was initially led by Bengali cinema and produced internationally acclaimed filmmakers such as Satyajit Ray, Mrinal Sen, Ritwik Ghatak, Tapan Sinha and others. It later gained prominence in other film industries of India.
+
+    It is known for its serious content, realism and naturalism, symbolic elements with a keen eye on the sociopolitical climate of the times, and for the rejection of inserted dance-and-song routines that are typical of mainstream Indian films.
+      </p>
+      <router-link :to="{ name:'film_movement_movies', params:{movement:moviesDataKey,header:moviesNav}}">{{movementContent.moviesNav}}</router-link>
+    </div>
+  </transition>
+
 </template>
 <script>
-  import MovieCard from '../components/movie-items/MovieCard.vue';
-
   export default{
-    components:{
-      MovieCard,
-    },
-    props:['movement', 'header'],
+    props:['moviesDataKey','header','moviesNav'],
     data(){
       return{
-        movies:[],
+        headerStr:'',
+        content:'',
+        moviesNavLabel:'',
+      }
+
+    },
+    watch:{
+      moviesNav(){
+        console.log('movies nav', this.moviesNav);
+        //Dynamic Updation of content on changeing s film movement
+        this.headerStr = this.$route.params.header;
+        this.moviesNavLabel = this.$route.params.moviesNav;
       }
     },
     computed:{
-      moviesList(){
-        return this.$store.getters['getSpecificFilmMovement'](this.movement);
-      }
-    },
-
-    methods:{
-      renderReleaseYear(movie){
-        if(movie.release_date){
-          return movie.release_date.slice(0,4)
-        }else{
-          return '';
-        }
-      },
-      setLanguageStr(langCode){
-        let langObj = null;
-        let langStr = '';
-        const langsLib = this.getLanguagesList();
-
-        if(langsLib){
-          langObj = langsLib.filter(lang => lang.iso_639_1 === langCode);
-          if(langObj){
-            langObj.forEach(lang=>{
-              // return lang.english_name;
-              langStr = lang.english_name;
-            });
-            return langStr;
+      headerAndNav(){
+        console.log('path movement', this.$route.params.moviesDataKey);
+        if(this.moviesDataKey === 'gerExp'){
+          // this.headerStr = 'German Expressionism';
+          // this.moviesNavLabel = 'German Expressionist Films (1919 - 1931)';
+          return {
+            header:'German Expressionism',
+            moviesNav:'German Expressionist Films (1919 - 1931)',
+          }
+        }else {
+          return{
+            header:'',
+            moviesNav:'',
           }
         }
-        return '';
       },
-      getLanguagesList(){
-        return this.$store.getters.getLanguages;
+      movementContent(){
+        return this.$store.getters.getMovementContents(this.moviesDataKey);
       }
     },
-    beforeMounted(){
-      console.log('film mov', this.movies);
-      // this.movies = return this.$store.getters['getSpecificFilmMovement'](this.movement);
+    mounted(){
+      console.log('beforeMount',this.moviesDataKey);
+      this.headerStr = this.$route.params.header;
+      this.moviesNavLabel = this.$route.params.moviesNav;
+      console.log('updations',this.header, this.moviesDataKey,this.headerStr, this.moviesNavLabel);
     }
   }
 </script>
 <style scoped>
-  ul{
-    width: 90%;
-    /* height:80%; */
-    max-width: 1240px;
-    margin: 1rem auto;
-
-    display: grid;
-
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: auto;
-    grid-gap: 20px;;
-  }
-  div{
-    display:flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-  }
+a{
+  text-decoration: none;
+  color:#fafafa;
+  padding:1em;
+  width:15rem;
+  background: #323232;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  border-radius: 0.5em;
+  margin: 1em 0;
+}
+a:hover{
+  opacity: 0.9;
+}
+.info-enter-from{
+  opacity: 0;
+  /* transform:translateX(-1000px); */
+}
+.info-leave-to{
+  opacity:0;
+  /* transform:translateX(-1000px); */
+}
+.info-enter-active{
+  transition:all 1s ease-out;
+}
+.info-leave-active{
+  transition:all 1s ease-in;
+}
+.info-enter-to,
+.info-leave-from{
+  opacity:1;
+  /* transform:translateY(0); */
+}
 </style>
