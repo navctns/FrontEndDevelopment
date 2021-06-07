@@ -43,8 +43,10 @@
     text-align: center;
   }
   .active{
-    background-color: #b0eacd;
-    color:#323232;
+    /* background-color: #b0eacd;
+    color:#323232; */
+    background: #03256c;
+    color:#fafafa;
   }
   .navButton{
     background-color: #21bf73;
@@ -58,7 +60,9 @@
   }
   .flat:focus,
   .flat:hover{
-      background-color: #b0eacd;
+      /* background-color: #b0eacd; */
+    background: #03256c;
+    color:#fafafa;
   }
   .otherBtn{
     background-color: #1e6f5c;

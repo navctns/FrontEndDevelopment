@@ -33,16 +33,19 @@ a{
   cursor: pointer;
   text-decoration: none;
   /* background-color: transparent; */
-  background-color: #21bf73;
+  background: #03256c;
   display: block;
   text-align: center;
   /* color:#393e46; */
   color:#fafafa;
 }
 
-a:hover{
+/* a:hover{
   background-color: #b0eacd;
   color:#323232;
+} */
+a:hover{
+  opacity: 0.8;
 }
 
 /* ANIMATIONS */

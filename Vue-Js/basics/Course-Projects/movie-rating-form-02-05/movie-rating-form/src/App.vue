@@ -172,14 +172,15 @@ h2,h3,h4,h5,h6{
 /* SHOWCASE ANIM */
 .showcase-enter-from{
   opacity: 0;
-  transform:translateX(-1000px);
+  position: absolute;
+  /* transform:translateX(-1000px); */
 }
 .showcase-leave-to{
   opacity:0;
-  transform:translateX(-1000px);
+  /* transform:translateX(-1000px); */
 }
 .showcase-enter-active{
-  transition:all 1s ease-out;
+  transition:all 3s ease-out;
 }
 .showcase-leave-active{
   transition:all 1s ease-in;
@@ -187,6 +188,6 @@ h2,h3,h4,h5,h6{
 .showcase-enter-to,
 .showcase-leave-from{
   opacity:1;
-  transform:translateY(0);
+  /* transform:translateY(0); */
 }
 </style>

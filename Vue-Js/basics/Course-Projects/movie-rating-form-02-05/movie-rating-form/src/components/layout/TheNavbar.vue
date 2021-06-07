@@ -23,6 +23,11 @@
           Panel
         </router-link>
       </li>
+      <li>
+        <router-link to='/filmAppreciation'>
+          Film Appreciation
+        </router-link>
+      </li>
 
     </ul>
   </div>
@@ -70,13 +75,15 @@ ul.navbar{
 }
 a.router-link-active{
   /* background-color: #21bf73; */
-  background-color: #b0eacd;
+  /* background-color: #b0eacd; */
+  background: #03256c;
   padding:0.5em;
   text-decoration: none;
-  color:#323232;
+  color:#fafafa;
 }
 a.router-link-active:hover{
-  background-color: #21bf73;
+  /* background-color: #21bf73; */
+  background: #03256c;
 }
 a{
   text-decoration: none;
@@ -94,8 +101,10 @@ a{
 }
 
 a:hover{
-  background-color: #b0eacd;
-  color:#323232;
+  /* background-color: #b0eacd; */
+  background: #03256c;
+  /* color:#323232; */
+  color:#fafafa;
 }
 
 </style>

@@ -7,13 +7,13 @@
       <li class="flex-item">
          <ul class="breadcrumb">
            <li>
-             <app-button :active="sortTerm==='genre'" text-color="black" value="Movies by Genre" mode="flat" @click="setFilterType('genre')"></app-button>
+             <app-button :active="sortTerm==='genre'" text-color="white" value="Movies by Genre" mode="flat" @click="setFilterType('genre')"></app-button>
            </li>
            <li>
-             <app-button :active="sortTerm==='lang'" text-color="black" value="Movies By Language" mode="flat" @click="setFilterType('lang')"></app-button>
+             <app-button :active="sortTerm==='lang'" text-color="white" value="Movies By Language" mode="flat" @click="setFilterType('lang')"></app-button>
            </li>
            <li>
-             <app-button :active="sortTerm==='resent'" text-color="black" value="Popular Now" mode="flat" @click="setFilterType('resent')"></app-button>
+             <app-button :active="sortTerm==='resent'" text-color="white" value="Popular Now" mode="flat" @click="setFilterType('resent')"></app-button>
            </li>
         </ul>
       </li>

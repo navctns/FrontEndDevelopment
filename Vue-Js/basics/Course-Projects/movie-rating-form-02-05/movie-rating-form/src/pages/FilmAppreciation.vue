@@ -40,16 +40,6 @@
       <router-link :to="{ name:'film_movement_movies', params:{movement:'indParallel',header:'Movies in Indian Parallel Cinema (1952–1992)'}}">Movies in Indian Parallel Cinema (1952–1992)</router-link> -->
     </div>
 
-
-    <!-- <ul>
-      <li v-for="movie in movements.gerExp"
-        :key="movie.id"
-      >
-        {{movie.title}}
-      </li>
-    </ul> -->
-    <!-- <app-button mode="flat" value="Traditions in World Cinema" text-color='black'>
-    </app-button> -->
   </div>
 </template>
 <script>

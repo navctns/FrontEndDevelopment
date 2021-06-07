@@ -8,8 +8,25 @@
         <h3>{{movie.title}}({{releaseYear}})</h3>
         <p>{{spokenLanguages}}</p>
         <p>Duration:{{movie.runtime}}</p>
+        <h5>Director:{{credits.director}}</h5>
+        <h5>Writer:{{credits.writer}}</h5>
+        <h5>Overview</h5>
         <p>{{movie.overview}}</p>
-          <h4>Rating:{{movie.popularity}}</h4>
+        <h4>Rating:{{movie.rating}}</h4>
+      </div>
+    </div>
+    <div v-if="recommendedMovies.length > 0">
+      <h3 style="text-align:center">Movies you may Like</h3>
+      <div class="similar-movies">
+        <movie-card v-for="movie in recommendedMovies"
+          :key="movie.id"
+          :id="movie.id"
+          :title="movie.title"
+          :language="setLanguageStr(movie.original_language)"
+          :overview="movie.overview"
+          :poster-path="movie.poster_path"
+          :release-year="renderReleaseYear(movie)"
+          ></movie-card>
       </div>
     </div>
     <!-- CRITIC REVIEWS -->
@@ -37,11 +54,13 @@
   import MovieReview from './MovieReview.vue';
   import { computed, watch, toRefs, onBeforeMount } from 'vue';
   import { useStore } from 'vuex';
+  import MovieCard from './MovieCard.vue';
   // import { useRoute } from 'vue-router';
 
   export default{
     components:{
       MovieReview,
+      MovieCard,
     },
     props:{
       movieId:{
@@ -56,22 +75,18 @@
     setup(props){
       const { movieId } = toRefs(props);//HERE
       const { title } = toRefs(props);
-      // const route = useRoute();
-
-      // const movieId = computed(()=>{
-      //   console.log('route movie id', route.params.movieId, typeof route.params.movieId);
-      //   return parseInt(route.params.movieId);
-      // });
 
       const movieIdUpdate = watch(movieId, (newVal, oldVal)=>{
         console.log('movie ids', newVal, oldVal);
         loadMovie();
         loadMovieReviews();
         loadMovieCriticReviews();
+        loadSimilarMovies();
+        loadRecommendedMovies();
+        loadMovieCredits();
+        // setCreditsData();
       });
-      // const movieData = computed(() => {
-      //   const movieResponse = fetch()
-      // });
+
       const store = useStore();
       async function loadMovie(){
         //LOAD Movie Data From API
@@ -112,10 +127,114 @@
           this.error = error.message || 'Something went wrong';
         }
       }
+
+      async function loadSimilarMovies(){
+        //Load similar movies
+         const getLink = `https://api.themoviedb.org/3/movie/${movieId.value}/similar?api_key=c9a2fdad68cf48b2893d6e9ab30ad18a&language=en-US&page=1`;
+         const payload = {
+           link:getLink,
+           toDo:'similar-movies',
+         };
+         try{
+           await store.dispatch('getFromAPI', payload);
+         }catch(error){
+           this.error = error.message || 'Something went wrong';
+         }
+      }
+
+      async function loadRecommendedMovies(){
+        //Load similar movies
+
+         const getLink = `https://api.themoviedb.org/3/movie/${movieId.value}/recommendations?api_key=c9a2fdad68cf48b2893d6e9ab30ad18a&language=en-US&page=1`;
+         const payload = {
+           link:getLink,
+           toDo:'recomm-movies',
+         };
+         try{
+           await store.dispatch('getFromAPI', payload);
+         }catch(error){
+           this.error = error.message || 'Something went wrong';
+         }
+      }
+
+      async function loadMovieCredits(){
+        //Load Movie credits from API
+         const getLink = `https://api.themoviedb.org/3/movie/${movieId.value}/credits?api_key=c9a2fdad68cf48b2893d6e9ab30ad18a&language=en-US`;
+         const payload = {
+           link:getLink,
+           toDo:'movie-credits',
+         };
+         try{
+           await store.dispatch('getFromAPI', payload);
+         }catch(error){
+           this.error = error.message || 'Something went wrong';
+         }
+      }
+
+      function setLanguageStr(langCode){
+        //Set language on movie card
+        let langObj = null;
+        let langStr = '';
+        const langsLib = getLanguagesList();
+
+        if(langsLib){
+          langObj = langsLib.filter(lang => lang.iso_639_1 === langCode);
+          if(langObj){
+            langObj.forEach(lang=>{
+              // return lang.english_name;
+              langStr = lang.english_name;
+            });
+            return langStr;
+          }
+        }
+        return '';
+      }
+      function getLanguagesList(){
+        return store.getters.getLanguages;
+      }
+      function renderReleaseYear(movie){
+        //Set Release date on movie card
+        if(movie.release_date){
+          return movie.release_date.slice(0,4)
+        }else{
+          return '';
+        }
+      }
       const movieData = computed(()=>{
         // console.log('movie data',store.getters.getSelectedMovie);
         return store.getters.getSelectedMovie || [];
       });
+      function getCredits(){
+        return store.getters.getMovieCredits;
+      }
+      const similarMovies = computed(()=>{
+        return store.getters.getSimilarMovies || [];
+      });
+      const recommendedMovies = computed(()=>{
+        return store.getters.getRecommendedMovies || [];
+      });
+      //set Movie Credits
+      // async function setCreditsData(){
+      //   const allCredits = getCredits();
+      //   console.log('crews:',allCredits.crew);
+      // }
+      const movieCredits = computed(()=>{
+        const credits = {
+          director:'',
+          writer:'',
+        };
+        const allCredits = getCredits();
+        if(allCredits){
+          console.log('crews:',allCredits.crew);
+          const director = allCredits.crew.find(crew=>crew.job === 'Director');
+          const writer = allCredits.crew.find(crew=>crew.job === 'Screenplay' || crew.job === 'Writer');
+          credits.director = director.name || '';
+          credits.writer = writer.name || '';
+          console.log('director', director);
+        }
+        return credits;
+      });
+
       const posterUrl = computed(()=>{
         // console.log('poster path',movieData.value.poster_path)
         return 'https://image.tmdb.org/t/p/w185' + movieData.value.poster_path;
@@ -142,6 +261,8 @@
           runtime : movieData.value.runtime || '',
           overview : movieData.value.overview || '',
           popularity : movieData.value.popularity || '',
+          rating:movieData.value.vote_average,
+          vote_count:movieData.value.vote_count,
         }
       });
       //GET MOVIE REVIEWS
@@ -180,6 +301,10 @@
         loadMovie();
         loadMovieReviews();
         loadMovieCriticReviews();
+        loadSimilarMovies();
+        loadRecommendedMovies();
+        loadMovieCredits();
+        // setCreditsData();
       });
 
       return{
@@ -193,6 +318,11 @@
         reviewVisibility,
         criticReviewVisibility,
         criticReviews,
+        similarMovies,
+        setLanguageStr,
+        renderReleaseYear,
+        recommendedMovies,
+        credits:movieCredits,
         // routeWatch
       }
     }
@@ -224,6 +354,11 @@
     /* place-items:center; */
     padding:1em;
 
+  }
+  .similar-movies{
+    display: flex;
+    gap:1em;
+    margin:1.5em 1em;
   }
   h3,a{
     /* color:#323232; */

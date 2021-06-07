@@ -7,39 +7,39 @@
         <li
          v-for="filter in filters.fst"
             :key="filter.name">
-            <app-button :active="activeFilter===filter.name" text-color="black"  v-if="filterBy ==='genre'" :value="filter.name" :name="filter.name" :id="filter.id" mode="flat" @click="sortBy($event)"></app-button>
-            <app-button :active="activeFilter===filter.name" text-color="black" v-else :value="filter.label" :name="filter.name" mode="flat" @click="sortBy($event)"></app-button>
+            <app-button :active="activeFilter===filter.name" text-color="white"  v-if="filterBy ==='genre'" :value="filter.name" :name="filter.name" :id="filter.id" mode="flat" @click="sortBy($event)"></app-button>
+            <app-button :active="activeFilter===filter.name" text-color="white" v-else :value="filter.label" :name="filter.name" mode="flat" @click="sortBy($event)"></app-button>
         </li>
         <li>
-          <app-button text-color="black" value=">>>" mode="flat" @click="slideList('sec')"></app-button>
+          <app-button text-color="white" value=">>>" mode="flat" @click="slideList('sec')"></app-button>
         </li>
       </ul>
       <!-- Slide II -->
 
       <ul class="navbar" v-if="listSecondSection">
         <li>
-          <app-button text-color="black" value="<<<" mode="flat" @click="slideList('fst')"></app-button>
+          <app-button text-color="white" value="<<<" mode="flat" @click="slideList('fst')"></app-button>
         </li>
         <li
          v-for="filter in filters.sec"
             :key="filter.name">
-            <app-button :active="activeFilter===filter.name" text-color="black" v-if="filterBy ==='genre'" :value="filter.name" :name="filter.name" :id="filter.id" mode="flat" @click="sortBy($event)"></app-button>
-            <app-button :active="activeFilter===filter.name" text-color="black" v-else :value="filter.label" :name="filter.name" mode="flat" @click="sortBy($event)"></app-button>
+            <app-button :active="activeFilter===filter.name" text-color="white" v-if="filterBy ==='genre'" :value="filter.name" :name="filter.name" :id="filter.id" mode="flat" @click="sortBy($event)"></app-button>
+            <app-button :active="activeFilter===filter.name" text-color="white" v-else :value="filter.label" :name="filter.name" mode="flat" @click="sortBy($event)"></app-button>
           </li>
           <li>
-            <app-button text-color="black" value=">>>" mode="flat" @click="slideList('thd')"></app-button>
+            <app-button text-color="white" value=">>>" mode="flat" @click="slideList('thd')"></app-button>
           </li>
       </ul>
       <!-- Slide III -->
       <ul class="navbar" v-if="thirdSection">
         <li>
-          <app-button text-color="black" value="<<<" mode="flat" @click="slideList('sec')"></app-button>
+          <app-button text-color="white" value="<<<" mode="flat" @click="slideList('sec')"></app-button>
         </li>
         <li
          v-for="filter in filters.thd"
             :key="filter.name">
-            <app-button :active="activeFilter===filter.name" text-color="black" v-if="filterBy ==='genre'" :value="filter.name" :name="filter.name" :id="filter.id" mode="flat" @click="sortBy($event)"></app-button>
-            <app-button :active="activeFilter===filter.name" text-color="black" v-else :value="filter.label" :name="filter.name" mode="flat" @click="sortBy($event)"></app-button>
+            <app-button :active="activeFilter===filter.name" text-color="white" v-if="filterBy ==='genre'" :value="filter.name" :name="filter.name" :id="filter.id" mode="flat" @click="sortBy($event)"></app-button>
+            <app-button :active="activeFilter===filter.name" text-color="white" v-else :value="filter.label" :name="filter.name" mode="flat" @click="sortBy($event)"></app-button>
           </li>
       </ul>
       <!-- FILTERS WITHOUT SLIDER -->
@@ -47,8 +47,8 @@
         <li
          v-for="filter in filters"
             :key="filter.name">
-            <app-button :active="activeFilter===filter.name" text-color="black" v-if="filterBy ==='genre'" :value="filter.name" :name="filter.name" :id="filter.id" mode="flat" @click="sortBy($event)"></app-button>
-            <app-button :active="activeFilter===filter.name" text-color="black" v-else :value="filter.label" :name="filter.name" mode="flat" @click="sortBy($event)"></app-button>
+            <app-button :active="activeFilter===filter.name" text-color="white" v-if="filterBy ==='genre'" :value="filter.name" :name="filter.name" :id="filter.id" mode="flat" @click="sortBy($event)"></app-button>
+            <app-button :active="activeFilter===filter.name" text-color="white" v-else :value="filter.label" :name="filter.name" mode="flat" @click="sortBy($event)"></app-button>
           </li>
       </ul>
     </app-card>
