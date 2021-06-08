@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <h3>{{movementContent.moviesNav}}</h3>
     <!-- <p v-for="movie in movies" :key="movie.id">{{movie.title}}</p> -->
     <!-- <p>{{moviesList}}</p> -->
@@ -16,7 +16,11 @@
         :release-year="renderReleaseYear(movie)"
       ></movie-card>
     </ul>
+    <div class="scroll-block">
+      <app-button value="^" @click="scrollToTop"></app-button>
+    </div>
   </div>
+
 </template>
 <script>
   import MovieCard from '../components/movie-items/MovieCard.vue';
@@ -88,6 +92,9 @@
           // console.log('movieid',movieId);
           this.loadMovie(movieId, this.movement);
         });
+      },
+      scrollToTop(){
+        window.scrollTo(0,0);
       }
     },
     watch:{
@@ -118,11 +125,17 @@
     grid-template-rows: auto;
     grid-gap: 20px;;
   }
-  div{
+  .container{
     display:flex;
     flex-direction: column;
     justify-content: center;
     text-align: center;
     min-height: 100vh;
+  }
+  .scroll-block{
+    display: flex;
+    align-items:flex-end;
+    justify-content: flex-end;
+    padding:1em;
   }
 </style>

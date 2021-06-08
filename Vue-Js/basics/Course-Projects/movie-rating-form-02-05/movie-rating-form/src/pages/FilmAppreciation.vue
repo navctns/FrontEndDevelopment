@@ -13,7 +13,9 @@
           </keep-alive>
         </transition>
       </router-view>
-
+      <div class="scroll-block">
+        <app-button value="^" @click="scrollToTop"></app-button>
+      </div>
     </div>
 
   </div>
@@ -32,9 +34,14 @@
       const filmMovements = computed(()=>{
         return store.getters.getFilmMovements;
       });
+
+      function scrollToTop(){
+        window.scrollTo(0,0);
+      }
       return{
         movements:filmMovements,
         movementsData:filmMovementsData,
+        scrollToTop,
       }
     }
   }
@@ -83,5 +90,11 @@
     text-decoration: none;
     color:#fafafa;
   }
-
+  .scroll-block{
+    display: flex;
+    align-items:flex-end;
+    justify-content: flex-end;
+    padding:1em;
+    width:100%;
+  }
 </style>

@@ -54,6 +54,9 @@
       >
     </movie-review>
     </div>
+    <div class="scroll-block">
+      <app-button value="^" @click="scrollToTop"></app-button>
+    </div>
 </div>
 </template>
 <script>
@@ -347,6 +350,9 @@
         // setCreditsData();
       });
 
+      function scrollToTop(){
+        window.scrollTo(0,0);
+      }
       return{
         // movie:movieData,
         posterUrl,
@@ -363,6 +369,7 @@
         renderReleaseYear,
         recommendedMovies,
         credits:movieCredits,
+        scrollToTop,
         // routeWatch
       }
     }
@@ -409,7 +416,12 @@
     /* color:#323232; */
     color:#fafafa;
   }
-
+  .scroll-block{
+    display: flex;
+    align-items:flex-end;
+    justify-content: flex-end;
+    padding:1em;
+  }
 @media(max-width:768px) {
   .movie-details{
     grid-template-columns: 1fr;

@@ -15,6 +15,9 @@
           ></movie-card>
       </ul>
     </div>
+    <div class="scroll-block">
+      <app-button value="^" @click="scrollToTop"></app-button>
+    </div>
   </div>
 </template>
 <script>
@@ -83,6 +86,9 @@
       },
       getLanguagesList(){
         return this.$store.getters.getLanguages;
+      },
+      scrollToTop(){
+        window.scrollTo(0,0);
       }
     },
     computed:{
@@ -168,6 +174,12 @@ ul {
     width:100%;
     min-height:100vh;
     background: rgba(0,0,0,0.7);
+  }
+  .scroll-block{
+    display: flex;
+    align-items:flex-end;
+    justify-content: flex-end;
+    padding:1em;
   }
 @media(max-width:768px) {
   ul{

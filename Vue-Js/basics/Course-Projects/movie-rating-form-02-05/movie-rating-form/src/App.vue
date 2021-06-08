@@ -72,6 +72,7 @@ export default {
 }
 html {
   font-family:'Roboto', sans-serif;
+  scroll-behavior: smooth;
 }
 body {
   margin: 0;
