@@ -8,11 +8,17 @@
         <h3>{{movie.title}}({{releaseYear}})</h3>
         <p>{{spokenLanguages}}</p>
         <p>Duration:{{movie.runtime}}</p>
-        <h5>Director:{{credits.director}}</h5>
-        <h5>Writer:{{credits.writer}}</h5>
+        <h5>Director:{{credits.directors}}</h5>
+        <h5>Writer:{{credits.writers}}</h5>
+        <!-- <span class="writer">
+          <h6>Writer</h6>
+          <h5 v-for="wr in credits.writer" :key="wr.name">{{wr.name}}</h5>
+        </span> -->
+        <h4>Rating:{{movie.rating}}</h4>
+      </div>
+      <div>
         <h5>Overview</h5>
         <p>{{movie.overview}}</p>
-        <h4>Rating:{{movie.rating}}</h4>
       </div>
     </div>
     <div v-if="recommendedMovies.length > 0">
@@ -213,24 +219,58 @@
       const recommendedMovies = computed(()=>{
         return store.getters.getRecommendedMovies || [];
       });
-      //set Movie Credits
-      // async function setCreditsData(){
-      //   const allCredits = getCredits();
-      //   console.log('crews:',allCredits.crew);
-      // }
+
       const movieCredits = computed(()=>{
         const credits = {
-          director:'',
-          writer:'',
+          directors:'',
+          writers:'',
         };
         const allCredits = getCredits();
+        let directors = null;
+        let writers = null;
         if(allCredits){
+          //if Credits get not null
           console.log('crews:',allCredits.crew);
-          const director = allCredits.crew.find(crew=>crew.job === 'Director');
-          const writer = allCredits.crew.find(crew=>crew.job === 'Screenplay' || crew.job === 'Writer');
-          credits.director = director.name || '';
-          credits.writer = writer.name || '';
-          console.log('director', director);
+          directors = allCredits.crew.filter(crew=>{
+            return crew.job === 'Director'
+          });
+          writers = allCredits.crew.filter(crew=>{
+            return crew.job === 'Screenplay' || crew.job === 'Writer';
+          });
+          console.log('writer',writers);
+          let directorNames = '';
+          let writerNames = '';
+          if(directors){
+            //For Constructing Single and Multiple Directors
+            directorNames += directors[0].name;
+            let directorsLen = directors.length;
+            if(directorsLen > 1){
+              directors.slice(1,directors.length-1).forEach(director =>{
+                directorNames += ', ' + director.name;
+              });
+            }
+            console.log('directors', directors);
+            // credits.director = director.name || '';
+          }
+          credits.directors = directorNames;
+
+          if(writers){
+            //For Constructing singe or multiple writer names
+            writerNames += writers[0].name;
+            let writersLen = writers.length;
+            console.log('writers len',writers.length,writersLen > 1);
+            if(writersLen > 1){
+              console.log('writers length > 1');writers.lengh > 1
+              console.log('sliced writers', writers.slice(1,writers.length-1));
+              writers.slice(1,writers.length-1).forEach(writer =>{
+                writerNames += ', ' + writer.name;
+              });
+            }
+            // credits.writer = writer || '';
+          }
+          credits.writers = writerNames;
+
+          console.log('writers', writers);
         }
         return credits;
       });
@@ -331,7 +371,8 @@
 <style scoped>
   .movie-details{
     display: grid;
-    grid-template-columns: 1fr 3fr;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 0;
     /* margin:1em; */
     /* color:#323232; */
     color:#fafafa;
@@ -340,6 +381,10 @@
     text-align:left;
     padding:1em;
 
+  }
+  .movie-details img{
+    width:70%;
+    height:auto;
   }
   div.container{
     display:flex;

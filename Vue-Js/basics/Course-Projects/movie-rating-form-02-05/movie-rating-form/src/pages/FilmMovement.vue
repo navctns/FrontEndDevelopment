@@ -34,22 +34,6 @@
       }
     },
     computed:{
-      headerAndNav(){
-        console.log('path movement', this.$route.params.moviesDataKey);
-        if(this.moviesDataKey === 'gerExp'){
-          // this.headerStr = 'German Expressionism';
-          // this.moviesNavLabel = 'German Expressionist Films (1919 - 1931)';
-          return {
-            header:'German Expressionism',
-            moviesNav:'German Expressionist Films (1919 - 1931)',
-          }
-        }else {
-          return{
-            header:'',
-            moviesNav:'',
-          }
-        }
-      },
       movementContent(){
         return this.$store.getters.getMovementContents(this.moviesDataKey);
       }
@@ -63,12 +47,20 @@
   }
 </script>
 <style scoped>
+div{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 a{
   text-decoration: none;
   color:#fafafa;
   padding:1em;
   width:15rem;
-  background: #323232;
+  /* background: #323232; */
+  background: #03256c;
+  color:#fafafa;
   display: flex;
   justify-content: center;
   text-align: center;

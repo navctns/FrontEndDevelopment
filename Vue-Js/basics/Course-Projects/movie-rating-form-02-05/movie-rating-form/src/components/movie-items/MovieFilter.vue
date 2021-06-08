@@ -2,7 +2,7 @@
   <div class="row">
     <ul class="filter-bar">
       <li>
-        <input type="text" placeholder="search movie" @input="searchMovie" v-model="searchTermInp">
+        <input type="text" placeholder="search movie or Artist" @input="searchMovie" v-model="searchTermInp">
       </li>
       <li class="flex-item">
          <ul class="breadcrumb">
@@ -153,7 +153,6 @@
         }else if(value === ''){
           this.sortTerm = 'resent';
         }
-
       }
     }
   }
@@ -242,5 +241,9 @@ ul.breadcrumb li a:hover {
 }
 .filter-container{
   padding: 0;
+}
+input{
+  /* height: 1.5em; */
+  font-size: 1.2em;
 }
 </style>

@@ -30,37 +30,7 @@ export default {
     TheFooter,
     HomePage,
   },
-  data(){
-    return{
-      movies:[{
-        id:'snow-piercer',
-        title:'Snowpiercer',
-        genre:'Action/Sci-fi',
-        director:'Bong Joon-ho',
-        writer:'Bong Joon-ho, Kelly Masterson',
-        imgUrl:'https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQPOHIxYdTXDpbFEWC-cv-tAQ98ELcVPMGVFy0pgFoI5s7UiDNU',
-        synopsis:''
-      },
-      {
-        id:'host',
-        title:'The Host',
-        genre:'Horror/Action',
-        director:'Bong Joon-ho',
-        writer:'Bong Joon-ho',
-        imgUrl:'https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQI9-kW4DCOtKg9c5UlYw1RgDPv5v508ysKahIbG6u_hvTa2TQH',
-        synopsis:'An unidentified monster appears from the Han River in Seoul, kills hundreds and also carries off Hyun-seo. When her family learns that she is being held captive, they resolve to save her.',
-      },
 
-    ],
-    }
-  },
-  provide(){
-    return{
-      movies:this.movies,
-      addMovie:this.addMovie,
-      deleteMovie:this.deleteMovie,
-    };
-  },
   methods:{
     addMovie(movieObj){
       console.log('add new movie');
@@ -77,30 +47,11 @@ export default {
   computed:{
     homepage(){
       return this.$route.path === '/';
-      // if(this.$route.path === '/'){
-      //   console.log('home page');
-      //   console.log('Route',this.$route)
-      //   return true;
-      // }
-      // console.log('Route',this.$route)
-      // return false;
+
     },
 
   },
-  watch:{
-    // const watchRoute = watch('$route', (from)=>{
-    //   if(from.path.contains('/filmAppreciation')){
-    //     console.log('from.path', from.path);
-    //     this.transitionName = 'info';
-    //   }
-    // });
-    // '$route'(from){
-    //     if(from.path === '/filmAppreciation'){
-    //       console.log('from.path', from.path);
-    //       this.transitionName = 'info';
-    //     }
-    // }
-  },
+
   created(){
     const actionObj = {
       link:'https://api.themoviedb.org/3/configuration/languages?api_key=c9a2fdad68cf48b2893d6e9ab30ad18a',
@@ -129,6 +80,7 @@ body {
   color:#fafafa;
   letter-spacing: 1px;
   line-height: 1.6;
+  font-size: 1.2em;
   background: -webkit-linear-gradient(rgba(0, 0, 0, 0.8), rgba(195, 55, 100, 0.8)), url('https://source.unsplash.com/featured/?movies');
 
 }

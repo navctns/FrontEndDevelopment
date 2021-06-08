@@ -1,11 +1,6 @@
 <template>
   <app-card>
-    <!-- <ul>
-      <li>The Host</li>
-      <li>Snowpiercer</li>
-      <li>Tokyo</li>
-      <li>Mother</li>
-    </ul> -->
+
     <template #header>
       <h2>Movies List</h2>
     </template>
@@ -17,7 +12,6 @@
           <th>Name</th>
           <th>Director</th>
           <th>Writer</th>
-          <!-- <th>synopsis</th> -->
           <th>==</th>
         </tr>
        </thead>
@@ -26,13 +20,6 @@
             :key="movie.id"
             :movie="movie"
          >
-           <!-- <td>1</td>
-           <td>4522</td>
-           <td>{{movie.title}}</td>
-           <td>{{movie.director}}</td>
-           <td>{{movie.writer}}</td>
-           <td>{{movie.synopsis}}</td>
-           <td><app-button value="Delete" mode="flat" @click="deleteItem(movie.id)"></app-button></td> -->
          </movie-table-row>
       </tbody>
     </table>
@@ -43,12 +30,6 @@
   export default{
     components:{
       MovieTableRow
-    },
-    // inject:['movies','deleteMovie'],
-    data(){
-      return{
-
-      }
     },
     computed:{
       moviesList(){

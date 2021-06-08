@@ -198,3 +198,16 @@ Tiny Furniture (2009), Your Sister’s Sister (2011),
  Ashadh Ka Ek Din nn
  Duvidha
  Party
+
+Direct Cinema(1958-1962)
+dirCinema:
+[
+  133,162494,135,132,
+]
+Key filmmakers: Robert Drew, Richard Leacock, D.A. Pennebaker, Albert Maysles, David Maysles
+
+Key dates: 1958-1962
+
+Primary (1960), Crisis: Behind A Presidential Commitment (1963),
+The Chair (1963), Don’t Look Back (1967) (pictured top),
+ Gimme Shelter (1970)

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3>{{header}}</h3>
+    <h3>{{movementContent.moviesNav}}</h3>
     <!-- <p v-for="movie in movies" :key="movie.id">{{movie.title}}</p> -->
     <!-- <p>{{moviesList}}</p> -->
     <ul>
@@ -35,6 +35,9 @@
     computed:{
       moviesList(){
         return this.$store.getters['getSpecificFilmMovement'](this.movement);
+      },
+      movementContent(){
+        return this.$store.getters.getMovementContents(this.movement);
       }
     },
 

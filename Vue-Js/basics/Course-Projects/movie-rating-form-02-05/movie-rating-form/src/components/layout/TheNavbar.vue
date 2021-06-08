@@ -90,7 +90,7 @@ a{
   padding:0.5em;
   border-radius: 0.5em;
   /* border: 1px solid #21bf73; */
-  width:10rem;
+  min-width:12rem;
   cursor: pointer;
   text-decoration: none;
   background-color: transparent;
@@ -98,6 +98,8 @@ a{
   text-align: center;
   /* color:#393e46; */
   color:#fafafa;
+  font-weight: 600;
+
 }
 
 a:hover{

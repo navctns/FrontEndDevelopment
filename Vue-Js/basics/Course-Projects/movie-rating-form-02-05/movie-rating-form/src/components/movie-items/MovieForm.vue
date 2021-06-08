@@ -1,15 +1,4 @@
 <template>
-      <!-- <app-modal-dialog v-if="showSuccessDialog"
-        @close="closeModal"
-        :autoClose ="true"
-        >
-        <template #header>
-          Item Added
-        </template>
-        <template #default>
-          item has been added successfully
-        </template>
-      </app-modal-dialog> -->
       <form>
         <h2>Add Movie</h2>
         <div class="form-control">

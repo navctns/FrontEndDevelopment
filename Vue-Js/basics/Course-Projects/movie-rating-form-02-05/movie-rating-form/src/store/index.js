@@ -21,10 +21,13 @@ const store = createStore({
         movieBrats:[],laRebel:[],
         newGer:[],ausNew:[],
         duLook:[],newQueer:[],
-        mumble:[],indParallel:[],
+        mumble:[],indParallel:[],dirCinema:[],
       },
       languages:null,
       movementsData:movementsData,
+      popularMovies:null,
+      nowshowingMovies:null,
+      upcomingMovies:null,
     }
 
   },
@@ -83,6 +86,15 @@ const store = createStore({
     },
     setMovieCredits(state, payload){
       state.currentMovieCredits = payload;
+    },
+    setPopularMovies(state, payload){
+      state.popularMovies = payload;
+    },
+    setNowshowingMovies(state, payload){
+      state.nowshowingMovies = payload;
+    },
+    setUpcomingMovies(state, payload){
+      state.upcomingMovies = payload;
     }
 
   },
@@ -161,6 +173,17 @@ const store = createStore({
       }else if(payload.toDo === 'movie-credits'){
         console.log('movie-credits', responseData);
         await context.commit('setMovieCredits', responseData);
+      }else if(payload.toDo === 'popular-movies'){
+        console.log('popular-movies', responseData.results);
+        // await context.commit('setPopularMovies', responseData.results.slice(payload.lIdx,payload.uIdx));
+        await context.commit('setPopularMovies', responseData.results);
+
+      }else if(payload.toDo === 'now-showing'){
+        let response = await fetch(payload.link);
+        let dataFetched = await response.json();
+        await context.commit('setNowshowingMovies', dataFetched.results);
+      }else if(payload.toDo === 'upcoming'){
+        await context.commit('setUpcomingMovies', responseData.results);
       }
     },
   },
@@ -204,6 +227,15 @@ const store = createStore({
     },
     getMovieCredits(state){
       return state.currentMovieCredits;
+    },
+    getPopularMovies(state){
+      return state.popularMovies;
+    },
+    getNowshowingMovies(state){
+      return state.nowshowingMovies;
+    },
+    getUpcomingMovies(state){
+      return state.upcomingMovies;
     }
   }
 });

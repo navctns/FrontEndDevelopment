@@ -29,6 +29,9 @@ export default{
   docFilmMov:{
     path:'Documentary_Film_Movement', moviesDataKey:'docFilmMov', header:'Documentary Film Movement', moviesNav:'Documentary Film Movement Films(1929-1950)'
   },
+  poeticReal:{
+    path:'Poetic_Realism', moviesDataKey:'poeticReal', header:'Poetic Realism(1930-1939)', moviesNav:'Movies in Poetic Realism(1930-1939)',
+  },
   polSch:{
     path:'The_Polish_School', moviesDataKey:'polSch', header:'The Polish School', moviesNav:'The Polish School Movies(1955-1963)'
   },
@@ -64,6 +67,9 @@ export default{
   },
   indParallel:{
     path:'Indian_Parallel_Cinema', moviesDataKey:'indParallel', header:'Indian Parallel Cinema', moviesNav:'Movies in Indian Parallel Cinema (1952–1992)'
+  },
+  dirCinema:{
+    path:'Direct_Cinema', moviesDataKey:'dirCinema', header:'Direct Cinema(1958-1962)', moviesNav:'Movies in Direct Cinema(1958-1962)'
   },
 
 }
