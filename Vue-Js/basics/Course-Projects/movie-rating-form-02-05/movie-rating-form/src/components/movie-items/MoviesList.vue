@@ -184,6 +184,12 @@ ul {
 @media(max-width:768px) {
   ul{
     grid-template-columns: 1fr;
+    place-items:center;
+    margin: auto;
+  }
+  li{
+    display: flex;
+    justify-content: center;
   }
 
 }

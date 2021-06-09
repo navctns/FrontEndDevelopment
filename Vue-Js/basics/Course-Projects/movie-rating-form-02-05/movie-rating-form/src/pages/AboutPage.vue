@@ -39,4 +39,23 @@
     display: flex;
     justify-content: center;
  }
+ img{
+  width:100%;
+  height: auto;
+ }
+ @media(max-width:768px) {
+   h2,h3{
+     font-weight: 500;
+   }
+   p{
+     font-size:0.9em;
+   }
+   div img{
+     width:auto;
+     height:auto;
+   }
+   div{
+     padding: 0.5em;
+   }
+ }
 </style>

@@ -1,8 +1,10 @@
 <template>
-  <div>
+  <div :class="{backdrop:backdrop}" @click="showHideNavigations(false)">
 
-    <div class="show-hide-navigations">
-      <app-button value="traditions" @mouseover="showHideNavigations(true)" ></app-button>
+    <div class="show-hide-navigations" @mouseover="showHideNavigations(true)">
+      <!-- <app-button value="traditions" @mouseover="showHideNavigations(true)"  ></app-button> -->
+      <i class="fas fa-bars"></i>
+      <span>Traditions</span>
     </div>
     <div class="container">
       <div class="navigations" v-if="navigationsVisiblility">
@@ -33,7 +35,7 @@
   export default{
     setup(){
 
-      const navigationsVisiblility = ref(true);
+      const navigationsVisiblility = ref(window.innerWidth>768?true:false);
       const filmMovementsData = filmMovementPaths;
       //Load vuex
       const store = useStore();
@@ -57,11 +59,14 @@
           navigationsVisiblility.value = inp;
         }
       }
-      // const screenWidth = ref(window.innerWidth);
-      const responsiveWidth = watch(window.innerWidth,()=>{
+      const screenWidth = ref(window.innerWidth);
+      const responsiveWidth = watch(screenWidth,()=>{
         if(window.innerWidth >768){
           navigationsVisiblility.value = true;
         }
+      });
+      const backdrop = computed(()=>{
+        return window.innerWidth < 768 && navigationsVisiblility.value;
       });
       return{
         movements:filmMovements,
@@ -70,6 +75,7 @@
         navigationsVisiblility,
         showHideNavigations,
         responsiveWidth,
+        backdrop,
       }
     }
   }
@@ -134,15 +140,29 @@
   .show-hide-navigations{
     display: none;
   }
+  .backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 10;
+    background-color: rgba(0, 0, 0, 0.75);
+  }
   @media(max-width:768px) {
     /* .navigations{
       transform:translateX(-100vh);
     } */
     .container{
       grid-template-columns: 1fr;
+      transition: 0.3s ease-in;
     }
     .show-hide-navigations{
-      display: block;
+      /* display: block; */
+      margin: 2em 0;
+      display: flex;
+      gap:0.5em;
+      padding:0.5em;
     }
     .show-hide-navigations:hover{
       .navigations{

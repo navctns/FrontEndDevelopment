@@ -243,7 +243,9 @@
           console.log('writer',writers);
           let directorNames = '';
           let writerNames = '';
-          if(directors){
+          const directorsLen = directors.length;
+          const writersLen = writers.lengh;
+          if(directorsLen > 0){
             //For Constructing Single and Multiple Directors
             directorNames += directors[0].name;
             let directorsLen = directors.length;
@@ -257,7 +259,7 @@
           }
           credits.directors = directorNames;
 
-          if(writers){
+          if(writersLen > 0){
             //For Constructing singe or multiple writer names
             writerNames += writers[0].name;
             let writersLen = writers.length;
@@ -379,7 +381,7 @@
   .movie-details{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-gap: 0;
+    grid-gap: 0.5em;
     /* margin:1em; */
     /* color:#323232; */
     color:#fafafa;
@@ -390,7 +392,7 @@
 
   }
   .movie-details img{
-    width:70%;
+    width:60%;
     height:auto;
   }
   div.container{
@@ -422,9 +424,43 @@
     justify-content: flex-end;
     padding:1em;
   }
+  img{
+    width:auto;
+    height: auto;
+  }
+
 @media(max-width:768px) {
   .movie-details{
     grid-template-columns: 1fr;
+    place-items:center;
+  }
+  .container{
+    font-size: 0.9em;
+    padding:0.5em;
+  }
+  .movie-details img{
+    width: auto;
+  }
+  .movie-details div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap:0;
+    margin:0;
+  }
+  .similar-movies{
+    display: grid;
+    grid-template-columns: 1fr;
+    place-items:center;
+  }
+  .similar-movies li {
+    display: flex;
+    justify-content: center;
+    width: 60%;
+    height: auto;
+  }
+  .similar-movies li:last-child{
+    display: none;
   }
 }
 </style>

@@ -143,4 +143,9 @@ h2,h3,h4,h5,h6{
   opacity:1;
   /* transform:translateY(0); */
 }
+@media(max-width:768px) {
+  body{
+    line-height: 1.4em;
+  }
+}
 </style>
