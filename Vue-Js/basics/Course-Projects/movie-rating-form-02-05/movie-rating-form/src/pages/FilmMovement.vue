@@ -57,7 +57,7 @@ a{
   text-decoration: none;
   color:#fafafa;
   padding:1em;
-  width:15rem;
+  width:20rem;
   /* background: #323232; */
   background: #03256c;
   color:#fafafa;

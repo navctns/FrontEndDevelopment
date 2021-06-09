@@ -123,7 +123,9 @@
 
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: auto;
-    grid-gap: 20px;;
+    grid-gap: 20px;
+    place-items:center;
+    justify-items:center;
   }
   .container{
     display:flex;
@@ -137,5 +139,10 @@
     align-items:flex-end;
     justify-content: flex-end;
     padding:1em;
+  }
+  @media(max-width:768px) {
+    ul{
+      grid-template-columns: 1fr;
+    }
   }
 </style>

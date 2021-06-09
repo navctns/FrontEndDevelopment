@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-      <div>
+      <div class="trending-container">
         <h3>Popular Now</h3>
         <div class="popular-movies">
           <router-link v-for="movie in popularMovies" :key="movie.id" :to="{ name: 'movie-details', params: {movieId:movie.id,title:movie.title} }">
@@ -123,14 +123,16 @@
 
 }
 .popular-movies{
-  display: flex;
+  /* display: flex; */
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   gap:1em;
   justify-content: center;
   align-items: center;
   /* flex-direction: column; */
 }
 .popular-movies >*{
-  width: 100%;
+  width: auto;
 }
 .navigation{
   display: flex;
@@ -175,6 +177,38 @@ a:hover{
   opacity: 0.8;
 }
 
+@media(max-width:768px) {
+  /* ul{
+    grid-template-columns: 1fr;
+  } */
+  /* .trending-container{
+    display: none;
+  } */
+  .navigation{
+    flex-direction: column;
+    align-items: center;
+  }
+  .popular-movies{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    width:100%;
+  }
+  .popular-movies >*{
+    width:100%;
+  }
+  .popular-movies a:last-child{
+    display: none;
+  }
+  img{
+    width: 100%;
+  }
+  .container{
+    padding:1em;
+  }
+  /* a{
+    width: 100%;
+  } */
+}
 /* ANIMATIONS */
 /* @keyframes home {
   from{

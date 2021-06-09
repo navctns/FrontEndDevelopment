@@ -3,3 +3,11 @@ Iterating Objects
 Object.entries(obj).forEach(
     ([key, value]) => console.log(key, value)
 );
+
+//Getting the resolution and Responsive Screen width/height
+
+//For getting Resolution of the screen
+const screenWidth = window.screen.width;
+
+//For getting responsive screen width
+const responsiveScreenWidth = window.innerWidth;

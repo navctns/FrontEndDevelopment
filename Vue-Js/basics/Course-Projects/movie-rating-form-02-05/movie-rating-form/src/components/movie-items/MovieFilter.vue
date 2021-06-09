@@ -4,7 +4,7 @@
       <li>
         <input type="text" placeholder="search movie or Artist" @input="searchMovie" v-model="searchTermInp">
       </li>
-      <li class="flex-item">
+      <li class="filter-items">
          <ul class="breadcrumb">
            <li>
              <app-button :active="sortTerm==='genre'" text-color="white" value="Movies by Genre" mode="flat" @click="setFilterType('genre')"></app-button>
@@ -191,7 +191,7 @@ select{
   width:100%;
   align-items: center;
 } */
-.flex-item{
+.filter-items{
   display:flex;
   gap:0.5em;
   justify-content: center;
@@ -245,5 +245,34 @@ ul.breadcrumb li a:hover {
 input{
   /* height: 1.5em; */
   font-size: 1.2em;
+}
+@media(max-width:768px) {
+  ul.filter-bar{
+    flex-direction: column;
+  }
+  input{
+    width:80%;
+    font-size: 0.8em;
+  }
+  ul.breadcrumb{
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    /* gap:0.8em; */
+  }
+  ul.breadcrumb li{
+    font-size:0.8em;
+    width:auto;
+    margin: 0.5em 0;
+  }
+  ul.breadcrumb {
+   padding: 0;
+   list-style: none;
+   /* background-color: #eee; */
+  }
+  ul.breadcrumb li+li:before {
+    padding:0;
+    content:'';
+  }
 }
 </style>

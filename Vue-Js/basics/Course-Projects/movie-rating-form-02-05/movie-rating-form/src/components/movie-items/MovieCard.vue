@@ -29,14 +29,16 @@
 </script>
 <style scoped>
   img{
-    width:80%;
-    height: auto;
+    /* width:80%; */
+    width:auto;
+    max-width: 90%;
+    height:auto;
   }
   li{
     width:100%;
     /* height: 100%; */
     /* min-height: 15rem; */
-    margin:0.5rem auto;
+    margin:1rem auto;
     display: grid;
   }
   li:hover{
@@ -50,5 +52,10 @@
   a{
     text-decoration: none;
     color:#323232;
+  }
+  @media(max-width:768px) {
+    a,h4{
+      font-size:0.9em;
+    }
   }
 </style>

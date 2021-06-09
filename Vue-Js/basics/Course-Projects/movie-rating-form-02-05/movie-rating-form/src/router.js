@@ -20,7 +20,7 @@ const router = createRouter({
     },
     { path:'/movies', component:TheMovies},
     { path:'/:movieId/:title', component:MovieDetails, props:true, name:"movie-details"},
-    { path:'/filmAppreciation', component:FilmAppreciation,
+    { path:'/filmAppreciation', component:FilmAppreciation,redirect:'/filmAppreciation/gerExp',
       children:[
         {path:'/filmAppreciation/:moviesDataKey', name:'film_movement', props:true, component:FilmMovement},
       ]

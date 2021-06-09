@@ -185,5 +185,6 @@ ul {
   ul{
     grid-template-columns: 1fr;
   }
+
 }
 </style>

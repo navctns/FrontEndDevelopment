@@ -1,33 +1,39 @@
 <template>
-  <div class="container">
+  <div>
 
-    <div class="navigations">
-      <router-link v-for="movement in movementsData" :key="movement.moviesDataKey" :to="{ name: 'film_movement', params: {path:movement.path,header:movement.header,moviesDataKey:movement.moviesDataKey, moviesNav:movement.moviesNav} }">{{movement.header}}</router-link>
+    <div class="show-hide-navigations">
+      <app-button value="traditions" @mouseover="showHideNavigations(true)" ></app-button>
     </div>
-    <div class="traditions">
-
-      <router-view v-slot="slotProps">
-        <transition name="info" mode="out-in">
-          <keep-alive>
-            <component :is="slotProps.Component"></component>
-          </keep-alive>
-        </transition>
-      </router-view>
-      <div class="scroll-block">
-        <app-button value="^" @click="scrollToTop"></app-button>
+    <div class="container">
+      <div class="navigations" v-if="navigationsVisiblility">
+        <router-link v-for="movement in movementsData" :key="movement.moviesDataKey" :to="{ name: 'film_movement', params: {path:movement.path,header:movement.header,moviesDataKey:movement.moviesDataKey, moviesNav:movement.moviesNav} }" @click="showHideNavigations(false)">{{movement.header}}</router-link>
       </div>
-    </div>
+      <div class="traditions">
 
+        <router-view v-slot="slotProps">
+          <transition name="info" mode="out-in">
+            <keep-alive>
+              <component :is="slotProps.Component"></component>
+            </keep-alive>
+          </transition>
+        </router-view>
+        <div class="scroll-block">
+          <app-button value="^" @click="scrollToTop"></app-button>
+        </div>
+      </div>
+
+    </div>
   </div>
 </template>
 <script>
   // import movieTraditions from './movieTraditions.js';
   import filmMovementPaths from './data/filmMovementPathsData.js';
-  import { computed } from 'vue';
+  import { computed, ref, watch } from 'vue';
   import { useStore } from 'vuex';
   export default{
     setup(){
 
+      const navigationsVisiblility = ref(true);
       const filmMovementsData = filmMovementPaths;
       //Load vuex
       const store = useStore();
@@ -38,10 +44,32 @@
       function scrollToTop(){
         window.scrollTo(0,0);
       }
+      function showHideNavigations(inp){
+        if(!inp){
+          // const screenWidth = window.screen.width;
+          const screenWidth = window.innerWidth;
+
+          console.log('screen width', screenWidth);
+          if(screenWidth<768){
+            navigationsVisiblility.value = inp;
+          }
+        }else{
+          navigationsVisiblility.value = inp;
+        }
+      }
+      // const screenWidth = ref(window.innerWidth);
+      const responsiveWidth = watch(window.innerWidth,()=>{
+        if(window.innerWidth >768){
+          navigationsVisiblility.value = true;
+        }
+      });
       return{
         movements:filmMovements,
         movementsData:filmMovementsData,
         scrollToTop,
+        navigationsVisiblility,
+        showHideNavigations,
+        responsiveWidth,
       }
     }
   }
@@ -61,20 +89,26 @@
   a{
     text-decoration: none;
     color:#fafafa;
-    padding:1em;
-    width:15rem;
+    padding:0.2em;
+    width:20rem;
     background: #323232;
     display: flex;
     justify-content: center;
     text-align: center;
     border-radius: 0.5em;
-    margin: 1em 0;
-    font-weight: 600;
+    margin: 0.2em 0;
+    font-weight: 300;
 
   }
   a:hover{
     opacity: 0.9;
     background: #03256c;
+  }
+  .navigations{
+    display: flex;
+    flex-direction: column;
+    gap:0.2em;
+
   }
   .traditions{
     width:100%;
@@ -96,5 +130,24 @@
     justify-content: flex-end;
     padding:1em;
     width:100%;
+  }
+  .show-hide-navigations{
+    display: none;
+  }
+  @media(max-width:768px) {
+    /* .navigations{
+      transform:translateX(-100vh);
+    } */
+    .container{
+      grid-template-columns: 1fr;
+    }
+    .show-hide-navigations{
+      display: block;
+    }
+    .show-hide-navigations:hover{
+      .navigations{
+
+      }
+    }
   }
 </style>

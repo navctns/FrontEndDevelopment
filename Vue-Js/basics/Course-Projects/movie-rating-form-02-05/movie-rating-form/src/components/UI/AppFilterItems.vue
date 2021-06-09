@@ -220,4 +220,13 @@ li{
 div{
   padding: 0;
 }
+@media(max-width:768px) {
+  ul.navbar{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    font-size: 0.8em;
+    grid-gap: 0.5em;
+    place-items:center;
+  }
+}
 </style>
