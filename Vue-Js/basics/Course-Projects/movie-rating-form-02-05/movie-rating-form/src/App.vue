@@ -1,5 +1,6 @@
 <template>
-  <the-navbar v-if="!homepage"></the-navbar>
+  <!-- <the-navbar v-if="!homepage"></the-navbar> -->
+  <the-navbar></the-navbar>
   <!-- <home-page v-if="homepage"></home-page> -->
   <!-- For the Starting SHOWCASE -->
   <router-view name="showcase" v-if="homepage" v-slot="slotProps">

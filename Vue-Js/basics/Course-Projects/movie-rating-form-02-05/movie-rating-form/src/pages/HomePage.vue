@@ -17,11 +17,7 @@
             Film Appreciation
           </router-link>
       </div>
-      <!-- <div>
-        <router-link v-for="movie in upcomingMovies" :key="movie.id" :to="{ name: 'movie-details', params: {movieId:movie.id,title:movie.title} }">
-          <img :src="setImageUrl(movie.poster_path)" alt="">
-        </router-link>
-      </div> -->
+
     </div>
 
 </template>
@@ -47,7 +43,6 @@
 
       async function getNowshowingMovies(){
         const payload = {
-          // link:'https://api.themoviedb.org/3/movie/now_playing?api_key=c9a2fdad68cf48b2893d6e9ab30ad18a&language=en-US&page=1',
           link:'https://api.themoviedb.org/3/movie/upcoming?api_key=c9a2fdad68cf48b2893d6e9ab30ad18a&language=en-US&page=2',
           toDo:'upcoming'
         };
@@ -67,8 +62,6 @@
         }
         return [];
       });
-
-
 
       const nowshowingMovies = computed(()=>{
         // getLink = 'https://api.themoviedb.org/3/movie/popular?api_key=c9a2fdad68cf48b2893d6e9ab30ad18a&language=en-US&page=1';
@@ -115,21 +108,17 @@
     align-items: center;
     min-height: 100vh;
     padding:5em;
-    /* background: url('../assets/susan-gold-sQGCHET1wvc-unsplash.jpg'); */
-    /* background: url('../assets/samuel-regan-asante-wMkaMXTJjlQ-unsplash.jpg'); */
     background: url('../assets/erik-witsoe-GF8VvBgcJ4o-unsplash.jpg');
     background-size: cover;
     width:100%;
 
 }
 .popular-movies{
-  /* display: flex; */
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   gap:1em;
   justify-content: center;
   align-items: center;
-  /* flex-direction: column; */
 }
 .popular-movies >*{
   width: auto;
@@ -148,16 +137,12 @@
 }
 .navigation a:focus,
 .navigation a:hover{
-  /* padding:1em; */
   transform: scale(1.2);
   transition: 0.3s ease-out;
 }
 a{
   text-decoration: none;
-  /* padding:0.5em; */
-  /* padding: 1em; */
   border-radius: 0.5em;
-  /* border: 1px solid #21bf73; */
   width:auto;
   cursor: pointer;
   text-decoration: none;
@@ -169,21 +154,12 @@ a{
   color:#fafafa;
 }
 
-/* a:hover{
-  background-color: #b0eacd;
-  color:#323232;
-} */
 a:hover{
   opacity: 0.8;
 }
 
 @media(max-width:768px) {
-  /* ul{
-    grid-template-columns: 1fr;
-  } */
-  /* .trending-container{
-    display: none;
-  } */
+
   .navigation{
     flex-direction: column;
     align-items: center;
@@ -205,43 +181,7 @@ a:hover{
   .container{
     padding:1em;
   }
-  /* a{
-    width: 100%;
-  } */
-}
-/* ANIMATIONS */
-/* @keyframes home {
-  from{
-    opacity:0;
-    transform:translateX(-50px) scale(0.7);
-  }
-  to{
-    opacity:1;
-    transform: translateX(0) scale(1);
-  }
-} */
-
-/* .showcase-enter-active{
-  transition:all 0.3s ease-out;
-  position:absolute;
 
 }
-.showcase-leave-active{
-  transition: all 0.3s ease-in reverse;
-  position:absolute;
 
-}
-.showcase-enter-from{
-  opacity:0;
-  transform:translateY(-900px);
-}
-.showcase-enter-to,
-.showcase-leave-from{
-  opacity:1;
-  transform:translateY(0);
-}
-.showcase-leave-to{
-  opacity:0;
-  transform:translateY(0px);
-} */
 </style>

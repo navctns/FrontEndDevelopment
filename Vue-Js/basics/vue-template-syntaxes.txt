@@ -4,7 +4,7 @@ Dropdown
     <option value="genre">by Genre</option>
  </select> -->
 
- Backdorp For Close By Clicking Backdorp
+ Backdorp For Closing a Popup/Navigation By Clicking Backdorp
 
  .backdrop {
    position: fixed;
@@ -15,3 +15,16 @@ Dropdown
    z-index: 10;
    background-color: rgba(0, 0, 0, 0.75);
  }
+
+// Preserving White space on large paragraph contents
+//Preserves paragraph Sturcture
+
+<p style="white-space: pre-line;">
+  {{content}}
+</p>
+content = `long text with paragraph structure`;
+
+//Withour Linebreak
+<p style="white-space: pre-line;">
+  {{content}}
+</p>

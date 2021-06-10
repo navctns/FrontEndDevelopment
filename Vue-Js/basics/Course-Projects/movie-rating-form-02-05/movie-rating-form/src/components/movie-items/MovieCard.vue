@@ -2,13 +2,14 @@
   <li>
     <app-card size="sm-card">
       <template #header>
-        <router-link :to="{ name: 'movie-details', params: {movieId:id,title:title} }">
+        <router-link :to="{ name: 'movie-details', params: {movieId:id,title:title} }" class="poster-img-contain">
           <img :src="imageUrl" alt="">
         </router-link>
       </template>
       <template #default>
         <router-link :to="{ name: 'movie-details', params: {movieId:id,title:title} }">
-          <h4>{{title}} <span v-if="releaseYear !==''">({{releaseYear}})</span></h4>
+          <!-- <h4>{{title}} <span v-if="releaseYear !==''">({{releaseYear}})</span></h4> -->
+          <h4>{{titleWithYr}}</h4>
         </router-link>
         <h4>Language:{{language}}</h4>
         <!-- <h4>Writer:{{writer}}</h4> -->
@@ -23,6 +24,12 @@
     computed:{
       imageUrl(){
         return 'https://image.tmdb.org/t/p/w185' + this.posterPath;
+      },
+      titleWithYr(){
+        if(this.releaseYear !== ''){
+          return this.title + '(' + this.releaseYear + ')';
+        }
+        return this.title;
       }
     }
   }
@@ -33,6 +40,7 @@
     width:auto;
     max-width: 90%;
     height:auto;
+    /* margin:1em 0; */
   }
   li{
     width:100%;
@@ -40,6 +48,7 @@
     /* min-height: 15rem; */
     margin:1rem auto;
     display: grid;
+    /* padding:1em 0; */
   }
   li:hover{
     transform: scale(1.1);
@@ -47,11 +56,20 @@
   }
   h4{
     font-weight: 200;
+    font-size:0.9em;
     /* text-align: center; */
+    display: flex;
+    justify-content:flex-start;
+    margin-left: 1em;
   }
   a{
     text-decoration: none;
     color:#323232;
+  }
+  .poster-img-contain{
+    display: flex;
+    justify-content: center;
+    align-items:flex-start;
   }
   @media(max-width:768px) {
     a,h4{

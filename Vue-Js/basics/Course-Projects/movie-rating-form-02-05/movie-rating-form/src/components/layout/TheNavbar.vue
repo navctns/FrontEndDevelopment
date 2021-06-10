@@ -1,7 +1,6 @@
 <template>
-  <div :class="{backdrop:backdrop}" @click="hideNavbar">
+  <div :class="{backdrop:backdrop}" @click="hideNavbar" class="main">
     <div class="navbar-toggler">
-      <!-- <app-button value="Navbar" @mouseover="showNavbar"></app-button> -->
       <i class="fas fa-bars" @mouseover="showNavbar"></i>
     </div>
     <div class="container" v-if="navbarVisibility">
@@ -13,10 +12,8 @@
           </router-link>
         </li>
         <li>
-          <!-- <a href="#">Movies</a> -->
           <router-link to="/movies" @click="hideNavbar">
             Movies
-            <!-- <app-button type="button" name="button" value="Movies" mode="flat"></app-button> -->
           </router-link>
         </li>
         <li>
@@ -25,16 +22,10 @@
           </router-link>
         </li>
         <li>
-          <router-link to='/panel' @click="hideNavbar">
-            Panel
-          </router-link>
-        </li>
-        <li>
           <router-link to='/filmAppreciation' @click="hideNavbar">
             Film Appreciation
           </router-link>
         </li>
-
       </ul>
     </div>
   </div>
@@ -43,7 +34,6 @@
 </template>
 <script>
   export default{
-    // emits:['hide-nav'],
     data(){
       return{
         navbarVisibility:window.innerWidth > 768?true:false,
@@ -72,6 +62,7 @@
   grid-template-columns: 1fr 1fr 1fr;
   padding:0;
   background: #323232;
+  place-items:center;
 }
 .backdrop {
   position: fixed;
@@ -88,7 +79,7 @@
 }
 ul.navbar{
   display: flex;
-  /* justify-content:center; */
+  justify-content:center;
   align-items: center;
   list-style: none;
   gap:1em;
@@ -96,52 +87,39 @@ ul.navbar{
   height: 0.8em;
 }
 .router-link-active{
-  /* width:100%; */
   background-color: #21bf73;
-  /* text-decoration: none;
-  padding:1em;
-  border-radius: 0.5em;
-  cursor: pointer;
-  text-decoration: none; */
 }
 a.router-link-active{
-  /* background-color: #21bf73; */
-  /* background-color: #b0eacd; */
   background: #03256c;
-  padding:0.5em;
   text-decoration: none;
   color:#fafafa;
 }
 a.router-link-active:hover{
-  /* background-color: #21bf73; */
   background: #03256c;
 }
 a{
   text-decoration: none;
-  padding:0.5em;
+  padding:0.2em;
   border-radius: 0.5em;
-  /* border: 1px solid #21bf73; */
   min-width:12rem;
   cursor: pointer;
   text-decoration: none;
   background-color: transparent;
   display: block;
   text-align: center;
-  /* color:#393e46; */
   color:#fafafa;
-  font-weight: 600;
+  font-weight: 500;
 
 }
 
 a:hover{
-  /* background-color: #b0eacd; */
   background: #03256c;
-  /* color:#323232; */
   color:#fafafa;
 }
 .navbar-toggler{
   display:none;
 }
+
 @media(max-width:768px) {
   .navbar-toggler{
     display: flex;

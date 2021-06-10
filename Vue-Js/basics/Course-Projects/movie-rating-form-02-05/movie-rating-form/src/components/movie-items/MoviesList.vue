@@ -16,7 +16,8 @@
       </ul>
     </div>
     <div class="scroll-block">
-      <app-button value="^" @click="scrollToTop"></app-button>
+      <!-- <app-button value="^" @click="scrollToTop"></app-button> -->
+      <i class="fas fa-arrow-circle-up fa-3x" @click="scrollToTop"></i>
     </div>
   </div>
 </template>
@@ -180,6 +181,10 @@ ul {
     align-items:flex-end;
     justify-content: flex-end;
     padding:1em;
+  }
+  .fa-arrow-circle-up:hover,
+  .fa-arrow-circle-up:focus{
+    cursor: pointer;
   }
 @media(max-width:768px) {
   ul{

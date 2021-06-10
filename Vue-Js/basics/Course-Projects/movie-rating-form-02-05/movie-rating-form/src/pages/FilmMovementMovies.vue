@@ -1,10 +1,7 @@
 <template>
   <div class="container">
     <h3>{{movementContent.moviesNav}}</h3>
-    <!-- <p v-for="movie in movies" :key="movie.id">{{movie.title}}</p> -->
-    <!-- <p>{{moviesList}}</p> -->
     <ul>
-      <!-- <li v-for="movie in moviesList" :key="movie.id">{{movie.title}}</li> -->
       <movie-card
         v-for="movie in moviesList"
         :key="movie.id"
@@ -17,7 +14,8 @@
       ></movie-card>
     </ul>
     <div class="scroll-block">
-      <app-button value="^" @click="scrollToTop"></app-button>
+      <i class="fas fa-arrow-circle-up fa-3x" @click="scrollToTop"></i>
+
     </div>
   </div>
 
@@ -89,7 +87,6 @@
       },
       loadMoviesInTradition(){
         movieTraditions[this.movement].forEach(movieId => {
-          // console.log('movieid',movieId);
           this.loadMovie(movieId, this.movement);
         });
       },
@@ -103,19 +100,13 @@
       }
     },
     mounted(){
-      console.log('film mov', this.movies, this.movement);
-      // this.movies = return this.$store.getters['getSpecificFilmMovement'](this.movement);
-      console.log('movies-specific movement',this.$store.getters['getSpecificFilmMovement'](this.movement));
-      // console.log(key, movementMovieIds);
       this.loadMoviesInTradition();
-
     }
   }
 </script>
 <style scoped>
   ul{
     width: 90%;
-    /* height:80%; */
     max-width: 1240px;
     margin: 1rem auto;
 
@@ -139,6 +130,10 @@
     align-items:flex-end;
     justify-content: flex-end;
     padding:1em;
+  }
+  .fa-arrow-circle-up:hover,
+  .fa-arrow-circle-up:focus{
+    cursor: pointer;
   }
   @media(max-width:768px) {
     ul{

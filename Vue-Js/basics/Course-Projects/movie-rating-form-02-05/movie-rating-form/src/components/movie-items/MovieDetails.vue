@@ -21,7 +21,7 @@
         <p>{{movie.overview}}</p>
       </div>
     </div>
-    <div v-if="recommendedMovies.length > 0">
+    <div v-if="recommendedMovies.length > 0" class="suggestions-container">
       <h3 style="text-align:center">Movies you may Like</h3>
       <div class="similar-movies">
         <movie-card v-for="movie in recommendedMovies"
@@ -411,8 +411,20 @@
   }
   .similar-movies{
     display: flex;
+    justify-content: center;
     gap:1em;
     margin:1.5em 1em;
+    width:30%;
+  }
+  .similar-movies li{
+    width:50%;
+  }
+  .suggestions-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* place-items:center; */
   }
   h3,a{
     /* color:#323232; */

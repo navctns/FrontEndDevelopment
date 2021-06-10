@@ -2,9 +2,7 @@
   <movies-list></movies-list>
 </template>
 <script>
-  // import MovieForm from '../components/movie-items/MovieForm.vue';
   import MoviesList from '../components/movie-items/MoviesList.vue';
-  // import MovieFilter from '../components/movie-items/MovieFilter.vue';
 
   export default{
     components:{
