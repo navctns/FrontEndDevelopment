@@ -28,29 +28,17 @@ const store = createStore({
       popularMovies:null,
       nowshowingMovies:null,
       upcomingMovies:null,
+      errorLoading:{
+        movies:false,
+        movieDetails:false,
+      },
     }
 
   },
   mutations:{
-    addNewMovie(state,movieObj){
-      console.log('add new movie');
-      state.movies.unshift(movieObj);
-    },
-    deleteMovieFromList(state,id){
-      console.log('delete from app');
-      // this.movies = this.movies.filter(movie => movie.id !== id);
-      const idx = state.movies.findIndex(movie => movie.id === id);
-      state.movies.splice(idx,1);
-      // console.log(state.movies);
-    },
-    sortMoviesByGenre(state, payload){
-      // console.log(state.movies,state.movies[0].genre_ids,'movie-genre-eg');
-      // console.log(payload);
-      state.movies = state.movies.filter(movie => movie.genre_ids.includes(payload));
-      // const sortedIndexes = state.movies.findIndex(movie => movie.genre_ids.includes(payload));
-      // console.log('sorted movies', sortedIndexes);
 
-      console.log(state.movies);
+    sortMoviesByGenre(state, payload){
+      state.movies = state.movies.filter(movie => movie.genre_ids.includes(payload));
     },
     setSelectedMovie(state, payload){
       //Set movie selected by the user to show details
@@ -58,36 +46,38 @@ const store = createStore({
     },
     setReviews(state, payload){
       //Set Reviews for current movie
-      console.log('audience-reviews',payload);
       state.currentMovieReviews = payload;
     },
     setCriticReviews(state, payload){
-      //Set Reviews for current movie
-      // state.currentMovieCriticReviews = payload;
-      console.log('critic-reviews',payload);
+      //Set Critics Reviews for current movie
       state.currentMovieCriticReviews = payload;
-
     },
     setLanguages(state, payload){
+      //Set languages
       state.languages = payload;
     },
     setFilmMovements(state, payload){
-      // console.log('mutation', payload.key);
+      //Set Film movements
       state.filmMovements[payload.key].push(payload.data);
     },
     setSimilarMovies(state, payload){
-      // const similarMovies = [];
-      // console.log(payload);
+      //Set Similar movies of a movie and slice to 5Nos
       state.similarMovies = payload.slice(0,5);
-      console.log('similar movies sliced', state.similarMovies);
     },
     setRecommendedMovies(state, payload){
-      state.recommendedMovies = payload.slice(0,5);
+      //Set Recommended movies after slicing
+      if(window.innerWidth >768){
+        state.recommendedMovies = payload.slice(0,5);
+      }else{
+        state.recommendedMovies = payload.slice(0,4);
+      }
     },
     setMovieCredits(state, payload){
+      //Set Movie credits data
       state.currentMovieCredits = payload;
     },
     setPopularMovies(state, payload){
+      //Set Popular movies
       state.popularMovies = payload;
     },
     setNowshowingMovies(state, payload){
@@ -95,18 +85,16 @@ const store = createStore({
     },
     setUpcomingMovies(state, payload){
       state.upcomingMovies = payload;
+    },
+    changeLoadingStatus(state,type){
+      state.errorLoading[type] = false;
     }
 
   },
   actions:{
-    addMovie(context, payload){
-      context.commit('addNewMovie', payload);
-    },
-    deleteMovie(context, payload){
-      console.log('delete movie');
-      context.commit('deleteMovieFromList', payload);
-    },
+
     async setMovies(context){
+      context.state.errorLoading.movies = false;
       //TOP Rated MOVIES
       // const moviesResponse = await fetch('https://api.themoviedb.org/3/movie/top_rated?api_key=c9a2fdad68cf48b2893d6e9ab30ad18a&language=en-US');
       //NOW PLAYING
@@ -116,10 +104,10 @@ const store = createStore({
       //UPCOMING MOVIES
       const moviesResponse = await fetch('https://api.themoviedb.org/3/movie/upcoming?api_key=c9a2fdad68cf48b2893d6e9ab30ad18a&language=en-US&page=2');
       const responseData = await moviesResponse.json();
-      // console.log(responseData.results);
-      // return state.movies;
+
       if(!moviesResponse.ok){
         console.log('Error while lading movies');
+        context.state.errorLoading.movies = true;
       }
       context.state.movies = responseData.results;
       // return responseData.results;
@@ -127,36 +115,41 @@ const store = createStore({
     async fetchGenres(context){
       const genresRes = await fetch('https://api.themoviedb.org/3/genre/movie/list?api_key=c9a2fdad68cf48b2893d6e9ab30ad18a&language=en-US');
       const genresData = await genresRes.json();
-      // console.log('genres data',genresData);
-      // console.log('genres data',genresData.genres);
-      if(!genresRes.ok){
-        console.log('Error while fetching genres');
-      }
+
       context.state.genres = genresData.genres;
     },
     async getMovieData(context, payload){
+      context.state.errorLoading.movieDetails = false;
       // console.log('payload', payload, typeof payload);
       const movieResponse = await fetch(payload);
+      if(!movieResponse.ok){
+        console.log('Something went wrong, on getting data');
+        context.state.errorLoading.movieDetails = true;
+      }
       const responseData = await movieResponse.json();
-      console.log('movie details', responseData);
       context.commit('setSelectedMovie', responseData);
     },
     async getFromAPI(context, payload){
+      context.state.errorLoading.movies = false;
+      context.state.errorLoading.movieDetails = false;
       const movieResponse = await fetch(payload.link);
       const responseData = await movieResponse.json();
       // console.log('Data Retrieved:', responseData);
       if(!movieResponse.ok){
         console.log('Something went wrong, on getting data');
+        if(payload.toDo === 'reviews' || payload.toDo === 'critic-reviews' ||
+            payload.toDo === 'recomm-movies' || payload.toDo === 'movie-credits' ){
+          context.state.errorLoading.movieDetails = true;
+        }else if(payload.toDo === 'popular-movies' || payload.toDo === 'now-showing' ||
+          payload.toDo === 'upcoming'){
+            context.state.errorLoading.movies = true;
+          }
       }
-      console.log('res',payload.toDo);
       if(payload.toDo === 'reviews'){
-        console.log('setReviews');
         await context.commit('setReviews',responseData.results);
       }else if(payload.toDo === 'langs'){
         await context.commit('setLanguages', responseData);
-        console.log('langs fetched', responseData);
       }else if(payload.toDo === 'critic-reviews'){
-        console.log('critic reviews loaded', responseData);
         await context.commit('setCriticReviews', responseData.results);
       }else if(payload.toDo === 'film-movements'){
         // console.log('film-movement-movie', responseData);
@@ -166,16 +159,12 @@ const store = createStore({
         }
         await context.commit('setFilmMovements', mutationData);
       }else if(payload.toDo === 'similar-movies'){
-        console.log('similar movies', responseData);
         await context.commit('setSimilarMovies', responseData.results);
       }else if(payload.toDo === 'recomm-movies'){
         await context.commit('setRecommendedMovies', responseData.results);
       }else if(payload.toDo === 'movie-credits'){
-        console.log('movie-credits', responseData);
         await context.commit('setMovieCredits', responseData);
       }else if(payload.toDo === 'popular-movies'){
-        console.log('popular-movies', responseData.results);
-        // await context.commit('setPopularMovies', responseData.results.slice(payload.lIdx,payload.uIdx));
         await context.commit('setPopularMovies', responseData.results);
 
       }else if(payload.toDo === 'now-showing'){
@@ -236,6 +225,12 @@ const store = createStore({
     },
     getUpcomingMovies(state){
       return state.upcomingMovies;
+    },
+    getLoadingStatus(state){
+      return state.errorLoading;
+    },
+    loadingMovieDetailsStatus(state){
+      return state.errorLoading.movieDetails;
     }
   }
 });

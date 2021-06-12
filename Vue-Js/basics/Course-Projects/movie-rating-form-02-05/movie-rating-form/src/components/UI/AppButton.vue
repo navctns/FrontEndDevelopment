@@ -1,7 +1,15 @@
 <template id="">
-  <a class="btn" :class="{flat:mode === 'flat' && !active,std:mode === 'std',navButton:nav, otherBtn:mode === 'oth',textWhite:textColor==='white',textBlack:textColor==='black',active:active}">{{value}}</a>
-  <!-- <a class="btn">{{value}}</a> -->
-
+  <a class="btn"
+  :class="{
+    flat:mode === 'flat' && !active,std:mode === 'std',
+    navButton:nav, otherBtn:mode === 'oth',
+    textWhite:textColor==='white',
+    textBlack:textColor==='black',
+    bgBlack:mode ==='bg-black',
+    bgBlue:mode ==='bg-blue',
+    active:active}">
+    {{value}}
+  </a>
 </template>
 <script type="text/javascript">
   export default{
@@ -28,9 +36,6 @@
         required:false,
       }
     },
-    mounted(){
-      console.log('nav button',this.nav);
-    }
   }
 </script>
 <style media="screen" scoped>
@@ -41,6 +46,24 @@
     cursor: pointer;
     text-decoration: none;
     text-align: center;
+  }
+  .bgBlack{
+    background: #161616;
+    color:#fafafa;
+  }
+  .bgBlack:hover{
+    background: #161616;
+    color:#fafafa;
+    opacity: 0.9;
+  }
+  .bgBlue{
+    background: #293b5f;
+    color:#fafafa;
+  }
+  .bgBlue:hover{
+    background: #293b5f;
+    color:#fafafa;
+    opacity: 0.9;
   }
   .active{
     /* background-color: #b0eacd;
@@ -60,7 +83,6 @@
   }
   .flat:focus,
   .flat:hover{
-      /* background-color: #b0eacd; */
     background: #03256c;
     color:#fafafa;
   }

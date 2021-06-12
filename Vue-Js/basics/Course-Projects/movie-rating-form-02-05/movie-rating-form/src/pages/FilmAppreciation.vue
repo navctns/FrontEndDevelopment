@@ -1,8 +1,8 @@
 <template>
   <div :class="{backdrop:backdrop}" @click="showHideNavigations(false)">
 
-    <div class="show-hide-navigations" @mouseover="showHideNavigations(true)">
-      <i class="fas fa-bars"></i>
+    <div class="show-hide-navigations">
+      <i class="fas fa-bars"  @mouseover.prevent="showHideNavigations(true)"></i>
       <span>Traditions</span>
     </div>
     <div class="container">
@@ -46,11 +46,10 @@
         window.scrollTo(0,0);
       }
       function showHideNavigations(inp){
+        console.log('show/hide',inp);
         if(!inp){
-          // const screenWidth = window.screen.width;
+          // const screenWidth = window.s@mouseover="showHideNavigations(true)"creen.width;
           const screenWidth = window.innerWidth;
-
-          console.log('screen width', screenWidth);
           if(screenWidth<768){
             navigationsVisiblility.value = inp;
           }
@@ -109,6 +108,7 @@
   }
   .navigations{
     display: flex;
+    /* display:grid; */
     flex-direction: column;
     gap:0.2em;
 
@@ -157,6 +157,7 @@
     .show-hide-navigations{
       margin: 2em 0;
       display: flex;
+      justify-content: flex-end;
       gap:0.5em;
       padding:0.5em;
     }

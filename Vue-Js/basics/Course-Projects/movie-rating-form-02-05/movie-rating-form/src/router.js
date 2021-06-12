@@ -1,16 +1,13 @@
 import {createRouter, createWebHistory} from 'vue-router';
-// import TheMovies from './pages/TheMovies.vue';
-// import AdminPanel from './pages/AdminPanel.vue';
-// import MovieForm from './components/movie-items/MovieForm.vue';
-// import StoredMovies from './components/movie-items/StoredMovies.vue';
-import MovieDetails from './components/movie-items/MovieDetails.vue';
-import AboutPage from './pages/AboutPage.vue';
-import HomePage from './pages/HomePage.vue';
-import FilmAppreciation from './pages/FilmAppreciation.vue';
-import MovementMovies from './pages/FilmMovementMovies.vue';
-import FilmMovement from './pages/FilmMovement.vue';
 
 const TheMovies = () => import('./pages/TheMovies.vue');
+const MovieDetails = () => import('./components/movie-items/MovieDetails.vue');
+const AboutPage = () => import('./pages/AboutPage.vue');
+const HomePage = () => import ('./pages/HomePage.vue');
+const FilmAppreciation = () => import('./pages/FilmAppreciation.vue');
+const MovementMovies = () => import('./pages/FilmMovementMovies.vue');
+const FilmMovement = () => import('./pages/FilmMovement.vue');
+
 const router = createRouter({
   history:createWebHistory(),
   routes:[
@@ -27,20 +24,10 @@ const router = createRouter({
       ]
     },
     { path:'/filmAppreciation/film_movement/:movement', name:"film_movement_movies",props:true, component:MovementMovies},
-    // { path:'/filmAppreciation/film_movement/:movement', name:"french_impressionist",props:true, component:FilmMovement},
-
-    // { path:'/panel', component: AdminPanel, name:'main-panel', redirect:'/panel/addMovie',
-    //   children:[
-    //     // {path:'/panel/:section', name:"add-movie", component:MovieForm}
-    //     {path:'/panel/addMovie', name:"add-movie", component:MovieForm},
-    //     {path:'/panel/storedMovies', name:"stored-movies", component:StoredMovies},
-    //   ]
-    // },
     { path:'/about', component:AboutPage, name:"about"},
 
   ],
   scrollBehavior(to,from,savedPosition){
-    // console.log('scroll-beh',to, from, savedPosition);
     if(savedPosition){
       return savedPosition;
     }

@@ -10,7 +10,7 @@
       </section>
       <menu>
         <slot name="actions">
-          <app-button @click="$emit('close')" value="Close"></app-button>
+          <app-button @click="$emit('close')" mode="bg-blue" value="Close"></app-button>
         </slot>
       </menu>
     </dialog>
@@ -46,11 +46,21 @@
   }
 header{
   font-weight: 600;
-  font-size: 12px;
-  padding:2em;
-  margin:auto;
+  font-size: 18px;
+  padding:0.2em;
+  margin:0;
+  color:#323232;
+  text-align: center;
+  background: #293b5f;
 }
-
+section{
+  display: flex;
+  justify-content: center;
+}
+menu{
+  display: flex;
+  justify-content: center;
+}
 dialog {
   position: fixed;
   top: 10vh;
@@ -63,5 +73,10 @@ dialog {
   padding: 0;
   margin: 0;
   overflow: hidden;
+  /* color:#323232; */
+  color:#fafafa;
+  /* background: #323232; */
+  background: #47597e;
+
   }
 </style>

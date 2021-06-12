@@ -1,5 +1,14 @@
 <template>
+
   <div class="container">
+    <app-modal-dialog v-if="loadingStatus.movieDetails" @close="closeModal">
+      <template #header>
+        <h3 class="modal-header">Error Loading data</h3>
+      </template>
+      <template #default>
+        <p>Something went wrong..Reload the page or try again later</p>
+      </template>
+    </app-modal-dialog>
     <div class='movie-details'>
       <div>
         <img :src="posterUrl" alt=""/>
@@ -10,10 +19,6 @@
         <p>Duration:{{movie.runtime}}</p>
         <h5>Director:{{credits.directors}}</h5>
         <h5>Writer:{{credits.writers}}</h5>
-        <!-- <span class="writer">
-          <h6>Writer</h6>
-          <h5 v-for="wr in credits.writer" :key="wr.name">{{wr.name}}</h5>
-        </span> -->
         <h4>Rating:{{movie.rating}}</h4>
       </div>
       <div>
@@ -21,8 +26,9 @@
         <p>{{movie.overview}}</p>
       </div>
     </div>
+    <!-- RECOMMENDED MOVIES -->
     <div v-if="recommendedMovies.length > 0" class="suggestions-container">
-      <h3 style="text-align:center">Movies you may Like</h3>
+      <h4 style="text-align:center">Movies you may Like</h4>
       <div class="similar-movies">
         <movie-card v-for="movie in recommendedMovies"
           :key="movie.id"
@@ -54,8 +60,9 @@
       >
     </movie-review>
     </div>
+    <!-- SCROLL TO TOP NAVIGATION -->
     <div class="scroll-block">
-      <app-button value="^" @click="scrollToTop"></app-button>
+      <i class="fas fa-arrow-circle-up fa-3x" @click="scrollToTop"></i>
     </div>
 </div>
 </template>
@@ -63,6 +70,7 @@
   import MovieReview from './MovieReview.vue';
   import { computed, watch, toRefs, onBeforeMount } from 'vue';
   import { useStore } from 'vuex';
+  import { useRouter } from 'vue-router';
   import MovieCard from './MovieCard.vue';
   // import { useRoute } from 'vue-router';
 
@@ -76,12 +84,13 @@
         type:String,
       },
       title:{
-        type:String
+        type:String,
       }
 
     },
 
     setup(props){
+      const router = useRouter();
       const { movieId } = toRefs(props);//HERE
       const { title } = toRefs(props);
 
@@ -90,7 +99,6 @@
         loadMovie();
         loadMovieReviews();
         loadMovieCriticReviews();
-        loadSimilarMovies();
         loadRecommendedMovies();
         loadMovieCredits();
         // setCreditsData();
@@ -99,9 +107,7 @@
       const store = useStore();
       async function loadMovie(){
         //LOAD Movie Data From API
-        // console.log('loadMovie movieId',movieId.value)
         const link = `https://api.themoviedb.org/3/movie/${movieId.value}?api_key=c9a2fdad68cf48b2893d6e9ab30ad18a&language=en-US`;
-        // console.log('movie -load link ', link);
         try{
           await store.dispatch('getMovieData', link);
         }catch(error){
@@ -123,8 +129,7 @@
         }
       }
       async function loadMovieCriticReviews(){
-        //LOAD Movie Reviews
-        // console.log('movie name on crtic reviews', title.value)
+        //LOAD Movie Critic Reviews
         const getLink = `https://api.nytimes.com/svc/movies/v2/reviews/search.json?query=${title.value}&api-key=YPu7L6T88FOlp3EHDmahbAmoB457H0hL`;
         const payload ={
           link:getLink,
@@ -137,22 +142,22 @@
         }
       }
 
-      async function loadSimilarMovies(){
-        //Load similar movies
-         const getLink = `https://api.themoviedb.org/3/movie/${movieId.value}/similar?api_key=c9a2fdad68cf48b2893d6e9ab30ad18a&language=en-US&page=1`;
-         const payload = {
-           link:getLink,
-           toDo:'similar-movies',
-         };
-         try{
-           await store.dispatch('getFromAPI', payload);
-         }catch(error){
-           this.error = error.message || 'Something went wrong';
-         }
-      }
+      // async function loadSimilarMovies(){
+      //   //Load similar movies
+      //    const getLink = `https://api.themoviedb.org/3/movie/${movieId.value}/similar?api_key=c9a2fdad68cf48b2893d6e9ab30ad18a&language=en-US&page=1`;
+      //    const payload = {
+      //      link:getLink,
+      //      toDo:'similar-movies',
+      //    };
+      //    try{
+      //      await store.dispatch('getFromAPI', payload);
+      //    }catch(error){
+      //      this.error = error.message || 'Something went wrong';
+      //    }
+      // }
 
       async function loadRecommendedMovies(){
-        //Load similar movies
+        //Load Recommended movies
 
          const getLink = `https://api.themoviedb.org/3/movie/${movieId.value}/recommendations?api_key=c9a2fdad68cf48b2893d6e9ab30ad18a&language=en-US&page=1`;
          const payload = {
@@ -210,7 +215,6 @@
         }
       }
       const movieData = computed(()=>{
-        // console.log('movie data',store.getters.getSelectedMovie);
         return store.getters.getSelectedMovie || [];
       });
       function getCredits(){
@@ -224,6 +228,7 @@
       });
 
       const movieCredits = computed(()=>{
+        //Retrieve movie credits (Director & writer)
         const credits = {
           directors:'',
           writers:'',
@@ -233,18 +238,16 @@
         let writers = null;
         if(allCredits){
           //if Credits get not null
-          console.log('crews:',allCredits.crew);
           directors = allCredits.crew.filter(crew=>{
             return crew.job === 'Director'
           });
           writers = allCredits.crew.filter(crew=>{
             return crew.job === 'Screenplay' || crew.job === 'Writer';
           });
-          console.log('writer',writers);
           let directorNames = '';
           let writerNames = '';
           const directorsLen = directors.length;
-          const writersLen = writers.lengh;
+          const writersLen = writers.length;
           if(directorsLen > 0){
             //For Constructing Single and Multiple Directors
             directorNames += directors[0].name;
@@ -254,7 +257,6 @@
                 directorNames += ', ' + director.name;
               });
             }
-            console.log('directors', directors);
             // credits.director = director.name || '';
           }
           credits.directors = directorNames;
@@ -263,7 +265,6 @@
             //For Constructing singe or multiple writer names
             writerNames += writers[0].name;
             let writersLen = writers.length;
-            console.log('writers len',writers.length,writersLen > 1);
             if(writersLen > 1){
               console.log('writers length > 1');writers.lengh > 1
               console.log('sliced writers', writers.slice(1,writers.length-1));
@@ -271,52 +272,55 @@
                 writerNames += ', ' + writer.name;
               });
             }
-            // credits.writer = writer || '';
           }
           credits.writers = writerNames;
-
-          console.log('writers', writers);
         }
         return credits;
       });
 
       const posterUrl = computed(()=>{
+        //Generate Movie poster url
         // console.log('poster path',movieData.value.poster_path)
         return 'https://image.tmdb.org/t/p/w185' + movieData.value.poster_path;
       });
       const releaseYear = computed(()=>{
+        //Retrieve release year from movie release date
         if (movieData.value.release_date){
           return movieData.value.release_date.slice(0,4);
         }
         return '';
       });
       const spokenLanguages = computed(()=>{
+        //Retrieve spoken languages from movie object
         let languages = '';
         if(movieData.value.spoken_languages){
           movieData.value.spoken_languages.forEach(lang =>{
             languages += lang.english_name + ',';
           });
         }
-        console.log('langs', languages);
         return languages;
       });
       const generalInfo = computed(()=>{
-        return{
-          title :movieData.value.title || '',
-          runtime : movieData.value.runtime || '',
-          overview : movieData.value.overview || '',
-          popularity : movieData.value.popularity || '',
-          rating:movieData.value.vote_average,
-          vote_count:movieData.value.vote_count,
+        //Create Object consisting general info about movie
+        const movieDataLen = movieData.value.lengh;
+        if(movieDataLen === 0){
+          return null;
+        }else{
+          return{
+            title :movieData.value.title || '',
+            runtime : movieData.value.runtime || '',
+            overview : movieData.value.overview || '',
+            popularity : movieData.value.popularity || '',
+            rating:movieData.value.vote_average,
+            vote_count:movieData.value.vote_count,
+          }
         }
+
       });
       //GET MOVIE REVIEWS
       const movieReviews = computed(()=>{
         //GET Reviews Data
-        // const review = store.getters.getMovieReviews;
-        // console.log('review getted',review);
         return store.getters.getMovieReviews || [];
-        // return store.getters.getMovieReviews.length >0?store.getters.getMovieReviews : false;
       });
       const reviewVisibility = computed(()=>{
         //Audience review visibility
@@ -334,29 +338,32 @@
         //Filter Review accorting to title
         if(criticReviews){
           const reviewItem = criticReviews.filter(review => review.headline.includes(title.value));
-          // console.log('filtered  review item',reviewItem);
-          return reviewItem
+          return reviewItem;
         }
         return [];
-        // return '';
       });
       onBeforeMount(()=>{
-        console.log('onBeforeMount',props.movieId);
-        // const route = useRoute();
         loadMovie();
         loadMovieReviews();
         loadMovieCriticReviews();
-        loadSimilarMovies();
         loadRecommendedMovies();
         loadMovieCredits();
-        // setCreditsData();
       });
 
+      const loadingStatus = computed(()=>{
+        //Check for errors occured on fetching from api
+        // console.log('loading-status',this.$store.getters.getLoadingStatus);
+        return store.getters.getLoadingStatus;
+      });
       function scrollToTop(){
         window.scrollTo(0,0);
       }
+      function closeModal(){
+        store.commit('changeLoadingStatus','movieDetails');
+        router.push('/movies');
+        // window.location.reload();
+      }
       return{
-        // movie:movieData,
         posterUrl,
         releaseYear,
         movie:generalInfo,
@@ -372,7 +379,8 @@
         recommendedMovies,
         credits:movieCredits,
         scrollToTop,
-        // routeWatch
+        loadingStatus,
+        closeModal,
       }
     }
   }
@@ -382,11 +390,8 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-gap: 0.5em;
-    /* margin:1em; */
-    /* color:#323232; */
     color:#fafafa;
     justify-content: center;
-    /* place-items:center; */
     text-align:left;
     padding:1em;
 
@@ -405,7 +410,6 @@
   }
   .reviews{
     display: grid;
-    /* place-items:center; */
     padding:1em;
 
   }
@@ -413,8 +417,8 @@
     display: flex;
     justify-content: center;
     gap:1em;
-    margin:1.5em 1em;
-    width:30%;
+    margin:0 1em;
+    width:40%;
   }
   .similar-movies li{
     width:50%;
@@ -427,7 +431,6 @@
     /* place-items:center; */
   }
   h3,a{
-    /* color:#323232; */
     color:#fafafa;
   }
   .scroll-block{
@@ -439,6 +442,10 @@
   img{
     width:auto;
     height: auto;
+  }
+  .fa-arrow-circle-up:hover,
+  .fa-arrow-circle-up:focus{
+    cursor: pointer;
   }
 
 @media(max-width:768px) {
@@ -464,6 +471,8 @@
     display: grid;
     grid-template-columns: 1fr;
     place-items:center;
+    width:90%;
+
   }
   .similar-movies li {
     display: flex;
@@ -471,8 +480,8 @@
     width: 60%;
     height: auto;
   }
-  .similar-movies li:last-child{
+  /* .similar-movies li:last-child{
     display: none;
-  }
+  } */
 }
 </style>

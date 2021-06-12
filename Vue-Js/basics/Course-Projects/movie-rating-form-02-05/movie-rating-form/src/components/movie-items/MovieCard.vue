@@ -8,11 +8,9 @@
       </template>
       <template #default>
         <router-link :to="{ name: 'movie-details', params: {movieId:id,title:title} }">
-          <!-- <h4>{{title}} <span v-if="releaseYear !==''">({{releaseYear}})</span></h4> -->
           <h4>{{titleWithYr}}</h4>
         </router-link>
         <h4>Language:{{language}}</h4>
-        <!-- <h4>Writer:{{writer}}</h4> -->
       </template>
     </app-card>
   </li>
@@ -49,6 +47,7 @@
     margin:1rem auto;
     display: grid;
     /* padding:1em 0; */
+    margin:1em 0;
   }
   li:hover{
     transform: scale(1.1);

@@ -34,7 +34,6 @@
       }
     },
     mounted(){
-      console.log('beforeMount',this.moviesDataKey);
       this.headerStr = this.$route.params.header;
       this.moviesNavLabel = this.$route.params.moviesNav;
     }

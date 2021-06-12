@@ -4,7 +4,7 @@ import AppButton from './components/UI/AppButton.vue';
 import AppCard from './components/UI/AppCard.vue';
 import TheNavbar from './components/layout/TheNavbar.vue';
 import AppModalDialog from './components/UI/AppModalDialog.vue';
-import AppSmallButton from './components/UI/AppSmallButton.vue';
+// import AppSmallButton from './components/UI/AppSmallButton.vue';
 import router from './router.js';
 import store from './store/index.js';
 
@@ -13,7 +13,7 @@ app.component('app-button', AppButton);
 app.component('app-card', AppCard);
 app.component('the-navbar', TheNavbar);
 app.component('app-modal-dialog', AppModalDialog);
-app.component('app-small-button', AppSmallButton);
+// app.component('app-small-button', AppSmallButton);
 
 app.use(router);
 app.use(store);

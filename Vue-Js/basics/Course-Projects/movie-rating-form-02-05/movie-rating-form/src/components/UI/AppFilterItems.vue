@@ -11,14 +11,17 @@
             <app-button :active="activeFilter===filter.name" text-color="white" v-else :value="filter.label" :name="filter.name" mode="flat" @click="sortBy($event)"></app-button>
         </li>
         <li>
-          <app-button text-color="white" value=">>>" mode="flat" @click="slideList('sec')"></app-button>
+          <!-- <app-button text-color="white" value=">>>" mode="flat" @click="slideList('sec')"></app-button> -->
+          <i class="fas fa-angle-double-right fa-2x" @click="slideList('sec')"></i>
         </li>
       </ul>
       <!-- Slide II -->
 
       <ul class="navbar" v-if="listSecondSection">
         <li>
-          <app-button text-color="white" value="<<<" mode="flat" @click="slideList('fst')"></app-button>
+          <!-- <app-button text-color="white" value="<<<" mode="flat" @click="slideList('fst')"></app-button> -->
+          <i class="fas fa-angle-double-left fa-2x" @click="slideList('fst')"></i>
+
         </li>
         <li
          v-for="filter in filters.sec"
@@ -27,13 +30,16 @@
             <app-button :active="activeFilter===filter.name" text-color="white" v-else :value="filter.label" :name="filter.name" mode="flat" @click="sortBy($event)"></app-button>
           </li>
           <li>
-            <app-button text-color="white" value=">>>" mode="flat" @click="slideList('thd')"></app-button>
+            <!-- <app-button text-color="white" value=">>>" mode="flat" @click="slideList('thd')"></app-button> -->
+            <i class="fas fa-angle-double-right fa-2x" @click="slideList('thd')"></i>
+
           </li>
       </ul>
       <!-- Slide III -->
       <ul class="navbar" v-if="thirdSection">
         <li>
-          <app-button text-color="white" value="<<<" mode="flat" @click="slideList('sec')"></app-button>
+          <!-- <app-button text-color="white" value="<<<" mode="flat" @click="slideList('sec')"></app-button> -->
+          <i class="fas fa-angle-double-left fa-2x" @click="slideList('sec')"></i>
         </li>
         <li
          v-for="filter in filters.thd"
@@ -95,7 +101,7 @@
         //category names set on movie obj
         //Setting filter buttons according to category names
         //languages, genres,...
-        if(this.filterBy === 'genre'){
+        if(this.filterBy === 'genre' || this.filterBy === 'lang'){
           console.log(this.keywords);
           if(this.keywords.length >6){
             const keywordsCpy = this.keywords.slice();
@@ -107,20 +113,11 @@
               sec:secSec,
               thd:thdSec,
             }
-            console.log('keyword arrays',keywordArrays, this.keywords);
             return keywordArrays;
           }
           return this.keywords;
-        }else if(this.filterBy === 'lang'){
-          return[
-              {name:'ml',label:'Malayalam'},
-              {name:'fr',label:'French'},
-              {name:'en',label:'English'},
-              {name:'ko',label:'Korean'},
-              {name:'ja',label:'Japanese'}
-          ]
         }else if(this.filterBy === 'resent'){
-            console.log('keywords-filter',this.keywords);
+          //Upcoming,Top Rated, Popular
             return this.keywords;
         }else{
           return [];
@@ -180,7 +177,6 @@
           this.sliderOn = true;
           this.listFirstSection = true;
         }else{
-          console.log('slider off');
           this.sliderOn = false;
           this.listSecondSection = false;
           this.listFirstSection = false;
@@ -215,10 +211,16 @@ ul.navbar{
   max-width:100%;
 }
 li{
-  display: block;
+  /* display: block; */
+  display: flex;
+  align-items: center;
 }
 div{
   padding: 0;
+}
+.fa-angle-double-left:hover,
+.fa-angle-double-right:hover{
+  transform:scale(1.1);
 }
 @media(max-width:768px) {
   ul.navbar{
@@ -227,6 +229,9 @@ div{
     font-size: 0.8em;
     grid-gap: 0.5em;
     place-items:center;
+  }
+  li{
+    display: block;
   }
 }
 </style>

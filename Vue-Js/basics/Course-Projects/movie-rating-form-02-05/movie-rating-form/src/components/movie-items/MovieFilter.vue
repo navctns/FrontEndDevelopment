@@ -50,35 +50,31 @@
       }
     },
     methods:{
-      async sortMovies(sortBy){
-        if(sortBy === 'genre'){
-          // this.sortByGenre = !this.sortByGenre;
-          this.sortTerm = 'genre';
-          //Genres keywords on API
-          this.keywordsList = this.$store.getters.genres;
-          const getMoviewByGenres = await fetch('https://api.themoviedb.org/3/genre/movie/list?api_key=c9a2fdad68cf48b2893d6e9ab30ad18a',);
-          const responseData = getMoviewByGenres.json();
-          console.log(responseData);
-
-        }else if(sortBy==='lang'){
-          this.sortTerm = 'lang';
-        }
-      },
+      // async sortMovies(sortBy){
+      //   if(sortBy === 'genre'){
+      //     this.sortTerm = 'genre';
+      //     //Genres keywords on API
+      //     this.keywordsList = this.$store.getters.genres;
+      //     const getMoviewByGenres = await fetch('https://api.themoviedb.org/3/genre/movie/list?api_key=c9a2fdad68cf48b2893d6e9ab30ad18a',);
+      //     const responseData = getMoviewByGenres.json();
+      //   }else if(sortBy==='lang'){
+      //     this.sortTerm = 'lang';
+      //   }
+      // },
       getGenresItems(){
         this.genres = this.$store.getters.genres;
-        console.log('on filter',this.genres);
         return this.genres;
       },
       async sortBySpecificTerm(sortBy){
         //Sort by specific genre or Language
         //emitted function
-        console.log('on-movie-filter',sortBy);
         if(this.sortTerm === 'genre'){
-          // this.$emit('filter-movies',this.sortTerm,parseInt(sortBy));
+          //Fetch movies by genre from api
           const moviesResponse = await fetch('https://api.themoviedb.org/3/discover/movie?api_key=c9a2fdad68cf48b2893d6e9ab30ad18a&language=en-US&with_genres=' + sortBy);
           const responseData = await moviesResponse.json();
           this.$emit('filter-movies',this.sortTerm,responseData.results);
         }else if(this.sortTerm === 'lang'){
+          //Fetch movies by Language from api
           const moviesResponse = await fetch('https://api.themoviedb.org/3/discover/movie?api_key=c9a2fdad68cf48b2893d6e9ab30ad18a&language=en-US&with_original_language=' + sortBy);
           const responseData = await moviesResponse.json();
           this.$emit('filter-movies',this.sortTerm, responseData.results);
@@ -101,11 +97,9 @@
       },
       async searchMovie(){
         //Search movies by input keyword
-        // console.log('searchMovie');
-        // this.$emit('search-movie', 'search',this.searchTermInp);
         const searchResponse = await fetch('https://api.themoviedb.org/3/search/movie?api_key=c9a2fdad68cf48b2893d6e9ab30ad18a&language=en-US&query=' + this.searchTermInp);
         const responseData = await searchResponse.json();
-        //SEARCH BY PEOPLE
+        //SEARCH BY PEOPLE(CREW/CAST)
         //Get Person Id
         const byPeopleResponse = await fetch(' https://api.themoviedb.org/3/search/person?api_key=c9a2fdad68cf48b2893d6e9ab30ad18a&language=en-US&page=1&query=' + this.searchTermInp);
         const byPeopleData = await byPeopleResponse.json();
@@ -139,18 +133,38 @@
     },
     watch:{
       async sortTerm(value){
-        console.log(value);
         if(value === 'genre'){
-          // const genresList = this.$store.getters.genres;
           this.keywordsList = this.$store.getters.genres;
         }else if(value === 'resent'){
-          console.log('resent lists');
           this.keywordsList = [
             {name:'top-rated',label:'Top Rated'},
             {name:'now-showing', label:'Now Showing'},
             {name:'popular', label:'Popular'},
             {name:'upcoming', label:'Upcoming'}];
-        }else if(value === ''){
+        }else if(value === 'lang'){
+          this.keywordsList = [
+              {name:'ml',label:'Malayalam'},
+              {name:'fr',label:'French'},
+              {name:'en',label:'English'},
+              {name:'ko',label:'Korean'},
+              {name:'ja',label:'Japanese'},
+              {name:'cs',label:'Czech'},
+              {name:'de', label:'German'},
+              {name:'it', label:'Italian'},
+              {name:'ku', label:'Kurdish'},
+              {name:'la', label:'Latin'},
+              {name:'pl', label:'Polish'},
+              {name:'da', label:'Danish'},
+              {name:'no', label:'Norwegian'},
+              {name:'hi', label:'Hindi'},
+              {name:'ru', label:'Russian'},
+              {name:'sr', label:'Serbian'},
+              {name:'sv', label:'Swedish'},
+              {name:'af', label:'Afrikaans'},
+
+          ]
+        }
+        else if(value === ''){
           this.sortTerm = 'resent';
         }
       }
@@ -187,24 +201,16 @@ select{
   padding:0.5em;
   height: auto;
 }
-/* li{
-  width:100%;
-  align-items: center;
-} */
+
 .filter-items{
   display:flex;
   gap:0.5em;
   justify-content: center;
 }
-/* .flex-item >*{
-  width: 100%;
-} */
-/* breadcrumb */
-/* Style the list */
+
 ul.breadcrumb {
  padding: 10px 16px;
  list-style: none;
- /* background-color: #eee; */
 }
 
 /* Display list items side by side */
@@ -232,9 +238,7 @@ ul.breadcrumb li a {
 /* Add a color on mouse-over */
 ul.breadcrumb li a:hover {
  /* color: #01447e; */
- /* color:#4aa96c; */
  opacity:0.9;
- /* text-decoration: underline; */
 }
 .row{
   padding:0.5em 0.5em;
@@ -244,7 +248,7 @@ ul.breadcrumb li a:hover {
 }
 input{
   /* height: 1.5em; */
-  font-size: 1.2em;
+  font-size: 1em;
 }
 @media(max-width:768px) {
   ul.filter-bar{

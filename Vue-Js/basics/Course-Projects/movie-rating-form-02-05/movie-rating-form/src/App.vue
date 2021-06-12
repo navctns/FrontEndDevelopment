@@ -1,7 +1,5 @@
 <template>
-  <!-- <the-navbar v-if="!homepage"></the-navbar> -->
   <the-navbar></the-navbar>
-  <!-- <home-page v-if="homepage"></home-page> -->
   <!-- For the Starting SHOWCASE -->
   <router-view name="showcase" v-if="homepage" v-slot="slotProps">
     <transition name="showcase" mode="out-in">
@@ -14,7 +12,6 @@
       <keep-alive>
         <component :is="slotProps.Component"></component>
       </keep-alive>
-      <!-- <component v-else :is="slotProps.Component"></component> -->
     </transition>
   </router-view>
   <!-- FOOTER -->
