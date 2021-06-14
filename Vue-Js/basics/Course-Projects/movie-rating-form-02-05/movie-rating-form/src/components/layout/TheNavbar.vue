@@ -23,7 +23,7 @@
         </li>
         <li>
           <router-link to='/filmAppreciation' @click="hideNavbar">
-            Film Appreciation
+            Film Movements
           </router-link>
         </li>
       </ul>
@@ -130,16 +130,18 @@ a:hover{
     margin: 1em 1em;
   }
   ul.navbar{
+    display: flex;
     flex-direction:column;
+    justify-content: center;
     align-items:center;
-    gap:0.5em;
+    /* gap:0.5em; */
 
   }
   .container{
     grid-template-columns: 1fr;
     position: absolute;
-    width:60%;
-    height:50vh;
+    width:100%;
+    height:100vh;
   }
   a{
     font-weight: 400;

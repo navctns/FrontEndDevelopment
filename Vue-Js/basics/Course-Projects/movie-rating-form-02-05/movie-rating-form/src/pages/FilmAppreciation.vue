@@ -87,6 +87,8 @@
     justify-content: center;
     min-height: 100vh;
     width: 100%;
+    background:#343a40;
+
   }
   a{
     text-decoration: none;
@@ -153,6 +155,7 @@
     .container{
       grid-template-columns: 1fr;
       transition: 0.3s ease-in;
+      padding: 0.5em;
     }
     .show-hide-navigations{
       margin: 2em 0;

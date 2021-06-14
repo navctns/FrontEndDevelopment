@@ -229,6 +229,7 @@ div{
     font-size: 0.8em;
     grid-gap: 0.5em;
     place-items:center;
+    padding:0;
   }
   li{
     display: block;

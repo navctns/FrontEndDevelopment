@@ -1,12 +1,12 @@
 <template>
   <the-navbar></the-navbar>
   <!-- For the Starting SHOWCASE -->
-  <router-view name="showcase" v-if="homepage" v-slot="slotProps">
+  <!-- <router-view name="showcase" v-if="homepage" v-slot="slotProps">
     <transition name="showcase" mode="out-in">
       <component :is="slotProps.Component"></component>
     </transition>
-  </router-view>
-  <router-view v-slot="slotProps">
+  </router-view> -->
+  <router-view name="main" v-slot="slotProps" :key="$route.fullPath">
     <!-- recheck keep alive -->
     <transition name="route" mode="out-in">
       <keep-alive>

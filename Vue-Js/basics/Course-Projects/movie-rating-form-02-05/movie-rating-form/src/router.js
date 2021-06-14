@@ -13,18 +13,39 @@ const router = createRouter({
   routes:[
     { path:'/',
       components:{
-          showcase:HomePage
+          main:HomePage
         }
     },
-    { path:'/movies', component:TheMovies},
-    { path:'/:movieId/:title', component:MovieDetails, props:true, name:"movie-details"},
-    { path:'/filmAppreciation', component:FilmAppreciation,redirect:'/filmAppreciation/gerExp',
+    { path:'/movies',
+      components:{
+        main:TheMovies
+      }
+    },
+    { path:'/:movieId/:title', props:true, name:"movie-details",
+      components:{
+        main:MovieDetails,
+      }
+    },
+    { path:'/filmAppreciation', redirect:"/filmAppreciation/gerExp",
+      components:{
+        main:FilmAppreciation,
+      },
       children:[
-        {path:'/filmAppreciation/:moviesDataKey', name:'film_movement', props:true, component:FilmMovement},
+        {path:'/filmAppreciation/:moviesDataKey', name:'film_movement', props:true,
+          component:FilmMovement
+        },
       ]
     },
-    { path:'/filmAppreciation/film_movement/:movement', name:"film_movement_movies",props:true, component:MovementMovies},
-    { path:'/about', component:AboutPage, name:"about"},
+    { path:'/filmAppreciation/film_movement/:movement', name:"film_movement_movies",props:true,
+      components:{
+        main:MovementMovies
+      }
+    },
+    { path:'/about',  name:"about",
+      components:{
+        main:AboutPage
+      },
+    },
 
   ],
   scrollBehavior(to,from,savedPosition){

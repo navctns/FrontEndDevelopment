@@ -14,7 +14,7 @@
             Explore Movies
           </router-link>
           <router-link to='/filmAppreciation'>
-            Film Appreciation
+            Film Movements
           </router-link>
       </div>
 

@@ -43,8 +43,10 @@
 div{
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
+  max-width: 100%;
+  background:#343a40; 
 }
 a{
   text-decoration: none;
@@ -80,5 +82,13 @@ a:hover{
 .info-leave-from{
   opacity:1;
   /* transform:translateY(0); */
+}
+@media(max-width:768px) {
+  /* div{
+    margin:0 0.5em;
+  } */
+  h2{
+    font-weight: 600;
+  }
 }
 </style>
