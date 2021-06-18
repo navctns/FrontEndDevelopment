@@ -138,6 +138,12 @@
   @media(max-width:768px) {
     ul{
       grid-template-columns: 1fr;
+      margin: 1rem 0;
+
+    }
+    li{
+      display: flex;
+      justify-content: center;
     }
   }
 </style>

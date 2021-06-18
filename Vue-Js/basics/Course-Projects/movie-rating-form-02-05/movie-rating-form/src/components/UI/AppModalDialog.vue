@@ -79,4 +79,17 @@ dialog {
   background: #47597e;
 
   }
+  @media(max-width:768px) {
+    section{
+      display: flex;
+      justify-content: center;
+      height: auto;
+      padding:1em;
+    }
+    menu{
+      margin: 1em 0;
+      padding:0;
+    }
+
+  }
 </style>

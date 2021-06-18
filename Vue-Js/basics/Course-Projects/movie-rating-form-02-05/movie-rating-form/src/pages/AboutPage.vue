@@ -149,9 +149,9 @@
  }
 
  @media(max-width:768px) {
-   h2,h3{
+   /* h2,h3{
      font-weight: 500;
-   }
+   } */
    /* p{
      font-size:0.8em;
    } */

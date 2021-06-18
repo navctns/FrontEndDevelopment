@@ -5,7 +5,7 @@
         <h3 class="modal-header">Error Loading data</h3>
       </template>
       <template #default>
-        <p>Something went wrong..Reload the page or try again later</p>
+        <p class="error-message">Something went wrong..Reload the page or try again later</p>
       </template>
     </app-modal-dialog>
       <div class="bgWall">
@@ -119,7 +119,7 @@
         if(this.filterParams){
           return this.filterParams.keyword;
         }
-        return movies;
+        return movies || [];
       },
       loadingStatus(){
         //Check for errors occured on fetching from api
@@ -192,6 +192,12 @@ ul {
     display: flex;
     justify-content: center;
   }
+  /* .error-message{
+    display: flex;
+    justify-content: center;
+    padding:1em;
+    height: auto;
+  } */
 
 }
 </style>
