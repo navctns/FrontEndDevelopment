@@ -1,0 +1,11 @@
+Create app
+vue create app_name
+
+INSTALL VUE-ROUTER
+
+sudo npm install vue-router@next --save
+
+
+INSTALL VUEX
+
+npm install vuex@next --save
