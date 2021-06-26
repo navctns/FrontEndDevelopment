@@ -14,9 +14,11 @@
             </div> -->
         </el-col>
         <el-col :xs="24" :sm="24" :md="12" :lg="12">
+          <div class="showcase-text">
             <h2>
               I am Naveen, I am a Front end developer, I create maintainable web applications and static websites
             </h2>
+          </div>
         </el-col>
       </el-row>
     </el-main>
@@ -71,5 +73,8 @@
   }
   .el-row{
     padding:2em;
+  }
+  h2{
+    
   }
 </style>
