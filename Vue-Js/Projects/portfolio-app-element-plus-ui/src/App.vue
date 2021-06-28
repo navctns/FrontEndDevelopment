@@ -6,7 +6,7 @@
     </el-header>
     <router-view>
     </router-view>
-    <el-footer>Footer</el-footer>
+    <el-footer><the-footer></the-footer></el-footer>
   </el-container>
 
   <!-- Footer -->
@@ -15,9 +15,11 @@
 <script>
 // import HelloWorld from './components/HelloWorld.vue'
 // import ElAvatar from 'element-plus';
+import TheFooter from './components/layout/TheFooter.vue';
 export default {
   name: 'App',
   components: {
+    TheFooter,
     // HelloWorld,
 
   },
@@ -38,6 +40,9 @@ body{
   margin:0;
   line-height: 1.4em;
   font-size: 18px;
+  /* background: #ddffbc; */
+  background: #f7f7f7;
+
 }
 /* #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
