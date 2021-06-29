@@ -4,7 +4,6 @@ function onDragStart(event) {
   event
     .dataTransfer
     .setData('text/plain', event.target.id);
-
     dropzones = document.querySelectorAll('.example-origin');
 
     event
@@ -23,9 +22,8 @@ function onDrop(event) {
   const id = event
     .dataTransfer
     .getData('text');
-
-    const draggableElement = document.getElementById(id);
-    const dropzone = event.target;
+    const draggableElement = document.getElementsByClassName(id);
+    const dropzone = event.currentTarget;
 
     dropzones = document.querySelectorAll('.example-origin');
 
@@ -33,6 +31,7 @@ function onDrop(event) {
     // Allow only one child on a box
     if(dropzone.children.length === 0){
       dropzone.appendChild(draggableElement);
+      // dropzone.innerHTML += draggableElement;
     }
     // Allow only one child on a box
     checkWinning();

@@ -46,7 +46,7 @@
   justify-content: center;
   margin: 0.5em 0;
 }
-.el-col{
-  margin: auto;
+.el-card{
+  margin:1em 1em;
 }
 </style>

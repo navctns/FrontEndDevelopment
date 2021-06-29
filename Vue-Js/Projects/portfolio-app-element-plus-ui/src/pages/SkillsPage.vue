@@ -2,60 +2,31 @@
   <el-container>
     <el-main>
       <el-row type="flex">
-        <!-- <el-col :xs="24" :sm="24" :md="12" :lg="12">
-          <div class="content">
-            <p>Projects are done on HTML, CSS, Javascript, and Vue js</p>
-          </div>
-        </el-col> -->
+        <!--SKILLS-->
         <el-col :xs="24" :sm="24" :md="12" :lg="6">
-          <el-card>
-            <div class="two-item-container">
-              <div class="img-sm-container">
-                <h2>HTML</h2>
-                <img src="../assets/img/icons8-html-5-100.png" alt="">
-              </div>
-              <div class="img-sm-container">
-                <h2>CSS</h2>
-                <img src="../assets/img/icons8-css3-100.png" alt="">
-              </div>
-            </div>
-            <div class="btn-container">
-              <el-button>View Projects</el-button>
-            </div>
-          </el-card>
+          <app-skill-card
+            :skill-one="skills.html"
+            :skill-two="skills.css"
+            @set-skill="switchProjectType"
+          ></app-skill-card>
         </el-col>
         <el-col :xs="24" :sm="24" :md="12" :lg="6">
-          <el-card>
-            <div class="img-container">
-              <h2>Javascript</h2>
-              <img src="../assets/img/icons8-javascript-logo1-100.png" alt="">
-            </div>
-            <div class="btn-container">
-              <el-button>View Projects</el-button>
-            </div>
-          </el-card>
+          <app-skill-card
+            :skill-one="skills.js"
+            @set-skill="switchProjectType"
+          ></app-skill-card>
         </el-col>
         <el-col :xs="24" :sm="24" :md="12" :lg="6">
-          <el-card>
-            <div class="img-container">
-              <h2>Vue Js</h2>
-              <img src="../assets/img/icons8-vue-js-100.png" alt="">
-            </div>
-            <div class="btn-container">
-              <el-button>View Projects</el-button>
-            </div>
-          </el-card>
+          <app-skill-card
+            :skill-one="skills.vue"
+            @set-skill="switchProjectType"
+          ></app-skill-card>
         </el-col>
         <el-col :xs="24" :sm="24" :md="12" :lg="6">
-          <el-card>
-            <div class="img-container">
-              <h2>Python</h2>
-              <img src="../assets/img/python-128px.png" alt="" style="width:100px; height:100px;">
-            </div>
-            <div class="btn-container">
-              <el-button>View Projects</el-button>
-            </div>
-          </el-card>
+          <app-skill-card
+            :skill-one="skills.python"
+            @set-skill="switchProjectType"
+          ></app-skill-card>
         </el-col>
       </el-row>
       <!--PROJECTS-->
@@ -69,6 +40,7 @@
               :description="project.description"
             ></app-project-card>
           </el-row>
+          {{projects}}
         </el-card>
 
       </el-row>
@@ -76,17 +48,22 @@
   </el-container>
 </template>
 <script>
-  import { ref, watch } from 'vue';
+  import { ref, watch, computed } from 'vue';
   import { useStore } from 'vuex';
+  import AppSkillCard from '../components/UI/AppSkillCard.vue';
   export default{
+    components:{
+      AppSkillCard,
+    },
     setup(){
       //Initialize store
       const store = useStore();
       //Get Projects Data contents
       const projectsData = store.getters.contentsData('projects');
       //Type of project
-      const projectType = ref('htmlCss');
+      const projectType = ref('html');
       function switchProjectType(type){
+        console.log('project',type);
         //Switch Projects based on type(html,js, python..)
         projectType.value = type;
       }
@@ -96,11 +73,19 @@
       const watchProjectType = watch(projectType,()=>{
         //Change project data content when change projectType
         currentProjects.value = projectsData[projectType];
+        console.log('projects-current',projectsData.html,projectsData[projectType]);
       });
+      //compute current projects
+      const selectedProjects = computed(()=>{
+        return projectsData[projectType.value];
+      });
+      //get skills
+      const skills = store.getters.contentsData('skills');
       return {
-        projects:currentProjects,
+        projects:selectedProjects,
         switchProjectType,
         watchProjectType,
+        skills,
       }
     }
   }
