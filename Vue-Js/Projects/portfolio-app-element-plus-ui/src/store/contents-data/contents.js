@@ -18,6 +18,11 @@ export default{
       name:'Movies App',
       description:'Movie search App Using Vue Js, Vuex, Vue Router, and TMDB API',
       imgUrl:'https://raw.githubusercontent.com/navctns/FrontEndDevelopment/50Days50Projects/Vue-Js/Projects/portfolio-app-element-plus-ui/src/assets/img/projects/movies-app-home.png'
+      },
+      {
+        name:'Cricket Game',
+        description:'Simple cricket game using Vue Js',
+        imgUrl:'https://raw.githubusercontent.com/navctns/FrontEndDevelopment/50Days50Projects/Vue-Js/Projects/portfolio-app-element-plus-ui/src/assets/img/projects/cricket-app-img.png',
       }
     ]
   },
@@ -25,22 +30,28 @@ export default{
   skills:{
       html:{
         name:'HTML',
-        imgUrl:'https://raw.githubusercontent.com/navctns/FrontEndDevelopment/50Days50Projects/Vue-Js/Projects/portfolio-app-element-plus-ui/src/assets/img/icons8-html-5-100.png'
+        label:'HTML & CSS',
+        imgUrl:'https://raw.githubusercontent.com/navctns/FrontEndDevelopment/50Days50Projects/Vue-Js/Projects/portfolio-app-element-plus-ui/src/assets/img/icons8-html-5-100.png',
+
       },
       css:{
         name:'CSS',
+        label:'CSS',
         imgUrl:'https://raw.githubusercontent.com/navctns/FrontEndDevelopment/50Days50Projects/Vue-Js/Projects/portfolio-app-element-plus-ui/src/assets/img/icons8-css3-100.png'
       },
-      js:{
+      javascript:{
         name:'Javascript',
+        label:"Javascript",
         imgUrl:'https://raw.githubusercontent.com/navctns/FrontEndDevelopment/50Days50Projects/Vue-Js/Projects/portfolio-app-element-plus-ui/src/assets/img/icons8-javascript-logo1-100.png'
       },
-      vue:{
+      vuejs:{
         name:'Vue Js',
+        label:"Vue Js",
         imgUrl:'https://raw.githubusercontent.com/navctns/FrontEndDevelopment/50Days50Projects/Vue-Js/Projects/portfolio-app-element-plus-ui/src/assets/img/icons8-vue-js-100.png'
       },
       python:{
         name:'Python',
+        label:'Python',
         imgUrl:'https://raw.githubusercontent.com/navctns/FrontEndDevelopment/50Days50Projects/Vue-Js/Projects/portfolio-app-element-plus-ui/src/assets/img/python-128px.png',
       }
     }

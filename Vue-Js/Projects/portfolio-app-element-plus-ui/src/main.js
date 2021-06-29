@@ -12,11 +12,21 @@ import 'element-plus/lib/theme-chalk/index.css';
 import TheNavbar from './components/layout/TheNavbar.vue';
 //Import Global components
 import AppProjectCard from './components/UI/AppProjectCard.vue';
+//Font awesome fb
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faUserSecret, fas } from '@fortawesome/free-solid-svg-icons'
+import { fab } from '@fortawesome/free-brands-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
+//Add to font awesome library
+library.add(faUserSecret,fas,fab);
+// library.add(fab);
 
 const app = createApp(App);
 app.component('the-navbar', TheNavbar);
 app.component('app-project-card', AppProjectCard);
+//font awesome component
+app.component('font-awesome-icon', FontAwesomeIcon);
 app.use(ElementPlus);
 app.use(router);
 app.use(store);

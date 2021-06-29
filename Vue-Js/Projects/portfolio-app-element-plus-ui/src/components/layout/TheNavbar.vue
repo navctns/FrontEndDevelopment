@@ -4,10 +4,12 @@
         <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect" :router="true">
           <el-menu-item index="/">Home</el-menu-item>
           <el-menu-item index="/skills">Skills & Projects</el-menu-item>
-          <el-menu-item index="5">Projects</el-menu-item>
           <el-menu-item index="/exp_academics">Experience & Academics</el-menu-item>
-          <el-menu-item index="3" disabled>Info</el-menu-item>
-          <el-menu-item index="4"><a href="https://www.ele.me" target="_blank">Orders</a></el-menu-item>
+          <!-- <el-menu-item index="3" disabled>Info</el-menu-item> -->
+          <el-menu-item index="www.facebook.com"><font-awesome-icon icon="user-secret" /></el-menu-item>
+          <el-menu-item index="www.facebook.com"><font-awesome-icon :icon="['fab','facebook']" /></el-menu-item>
+          <el-menu-item index="www.facebook.com"><font-awesome-icon :icon="['fab','linkedin']" /></el-menu-item>
+          <el-menu-item index="www.facebook.com"><font-awesome-icon :icon="['fab','github']" /></el-menu-item>
         </el-menu>
         <div class="line"></div>
       </el-row>

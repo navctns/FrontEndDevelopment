@@ -12,13 +12,13 @@
         </el-col>
         <el-col :xs="24" :sm="24" :md="12" :lg="6">
           <app-skill-card
-            :skill-one="skills.js"
+            :skill-one="skills.javascript"
             @set-skill="switchProjectType"
           ></app-skill-card>
         </el-col>
         <el-col :xs="24" :sm="24" :md="12" :lg="6">
           <app-skill-card
-            :skill-one="skills.vue"
+            :skill-one="skills.vuejs"
             @set-skill="switchProjectType"
           ></app-skill-card>
         </el-col>
@@ -32,7 +32,7 @@
       <!--PROJECTS-->
       <el-row type="flex">
         <el-card class="projects-container">
-          <h2>HTML & CSS Projects</h2>
+          <h3>{{projectsHeading}} Projects</h3>
           <el-row>
             <app-project-card v-for="project in projects"
               :key="project.name"
@@ -82,11 +82,16 @@
       });
       //get skills
       const skills = store.getters.contentsData('skills');
+      // Set Projects Heading(eg:Javascript Projects)
+      const projectsHeading = computed(()=>{
+        return skills[projectType.value].label;
+      });
       return {
         projects:selectedProjects,
         switchProjectType,
         watchProjectType,
         skills,
+        projectsHeading
       }
     }
   }
@@ -131,7 +136,7 @@
   gap:1em;
 }
 .el-card{
-  min-height: 16em;
+  min-height: 10em;
 }
 .btn-container{
   display: flex;
@@ -146,8 +151,10 @@ ul{
   flex-direction: column;
   align-items: center; */
 }
-.projects-container h2{
+.projects-container h3{
   text-align: center;
 }
-
+/* .el-col{
+  height: auto;
+} */
 </style>
