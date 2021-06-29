@@ -3,11 +3,11 @@
     <el-card :body-style="{ padding: '0px' }">
       <img :src="imgUrl" class="image">
       <div style="padding: 14px;">
-        <h4>{{description}}</h4>
+        <h4>{{projectName}}</h4>
         <div class="bottom">
           <el-row>
             <el-col :xs="24" :sm="24" :md="12" :lg="12">
-              <span>Using HTML,CSS,JS and Bootstrap</span>
+              <span>{{description}}</span>
             </el-col>
             <el-col :xs="24" :sm="24" :md="12" :lg="12">
               <div class="btn-container">

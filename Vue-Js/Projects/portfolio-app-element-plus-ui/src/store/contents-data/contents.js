@@ -2,7 +2,7 @@ export default{
   projects:{
     html:[{
       name:'Playback Singer Portfolio Website',
-      description:'Portfolio website for playback singer Vimal P K',
+      description:'Using HTML,CSS and Bootstrap',
       imgUrl:'https://raw.githubusercontent.com/navctns/FrontEndDevelopment/50Days50Projects/Projects/Static-Website-Projects/Vimalettan-Bootstrap-Project/img/showcase-1.jpg',
     },
   ],
@@ -10,7 +10,7 @@ export default{
     {
       name:'Polling App',
       description:'Simple polling app using html,css, and Vanilla Js,',
-      imgUrl:'https://drive.google.com/file/d/1k-yBZBQbM2d92iR1flEqmW-gs0i90826/view?usp=sharing',
+      imgUrl:'https://raw.githubusercontent.com/navctns/FrontEndDevelopment/50Days50Projects/Vue-Js/Projects/portfolio-app-element-plus-ui/src/assets/img/projects/polling-app.png',
     }
   ],
   },

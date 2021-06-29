@@ -36,6 +36,7 @@
           <el-row>
             <app-project-card v-for="project in projects"
               :key="project.name"
+              :project-name="project.name"
               :img-url="project.imgUrl"
               :description="project.description"
             ></app-project-card>
