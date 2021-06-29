@@ -13,6 +13,13 @@ export default{
       imgUrl:'https://raw.githubusercontent.com/navctns/FrontEndDevelopment/50Days50Projects/Vue-Js/Projects/portfolio-app-element-plus-ui/src/assets/img/projects/polling-app.png',
     }
   ],
+  vuejs:[
+      {
+      name:'Movies App',
+      description:'Movie search App Using Vue Js, Vuex, Vue Router, and TMDB API',
+      imgUrl:'https://raw.githubusercontent.com/navctns/FrontEndDevelopment/50Days50Projects/Vue-Js/Projects/portfolio-app-element-plus-ui/src/assets/img/projects/movies-app-home.png'
+      }
+    ]
   },
   //SKILLS
   skills:{

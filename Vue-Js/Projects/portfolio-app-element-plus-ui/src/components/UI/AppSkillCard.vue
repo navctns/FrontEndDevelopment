@@ -29,7 +29,7 @@
       }
     },
     setup(props, context){
-      function viewProjectsForSkill( _ ,skillTerm = (props.skillOne.name).toLowerCase()){
+      function viewProjectsForSkill( _ ,skillTerm = (props.skillOne.name).toLowerCase().split(" ").join("")){
         //Switch skill for showing project based on that skill
         console.log('skill term',skillTerm);
         context.emit('set-skill',skillTerm);
