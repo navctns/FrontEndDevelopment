@@ -41,7 +41,6 @@
               :description="project.description"
             ></app-project-card>
           </el-row>
-          {{projects}}
         </el-card>
 
       </el-row>
@@ -147,12 +146,15 @@ ul{
 }
 .projects-container{
   width:100%;
+  margin:0;
+  min-height: 60vh;
   /* display: flex;
   flex-direction: column;
   align-items: center; */
 }
 .projects-container h3{
   text-align: center;
+  margin:0.5em 0;
 }
 /* .el-col{
   height: auto;
