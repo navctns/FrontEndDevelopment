@@ -31,6 +31,11 @@ export default{
         description:'Modules created and customized on Odoo ERP(Community)',
         // imgUrl:'https://odoocdn.com/openerp_website/static/src/img/assets/png/odoo_logo.png',
         imgUrl:'https://mms.businesswire.com/media/20191217005513/en/763363/22/Odoo_LP-logo.jpg'
+      },
+      {
+        name:'Django Projects',
+        description:'Simple web apps developed using Django Framework',
+        imgUrl:'https://raw.githubusercontent.com/navctns/FrontEndDevelopment/50Days50Projects/Vue-Js/Projects/portfolio-app-element-plus-ui/src/assets/img/projects/icons8-django-480.png',
       }
     ]
   },
