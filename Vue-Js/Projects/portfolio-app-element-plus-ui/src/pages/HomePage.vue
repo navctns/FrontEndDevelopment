@@ -49,7 +49,8 @@
       return {
         // circleUrl: "https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png",
         // circleUrl:"../assets/5301-A.jpg",
-        circleUrl:"https://www.cybsafe.com/wp-content/uploads/2020/11/play-icon-03-1.png",
+        // circleUrl:"https://www.cybsafe.com/wp-content/uploads/2020/11/play-icon-03-1.png",
+        circleUrl:'https://raw.githubusercontent.com/navctns/FrontEndDevelopment/50Days50Projects/Vue-Js/Projects/portfolio-app-element-plus-ui/src/assets/img/5301-A.jpg',
         squareUrl: "https://cube.elemecdn.com/9/c2/f0ee8a3c7c9638a54940382568c9dpng.png",
         sizeList: ["large", "medium", "small"]
       }

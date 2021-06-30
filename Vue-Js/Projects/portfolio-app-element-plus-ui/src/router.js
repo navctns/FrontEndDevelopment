@@ -2,7 +2,8 @@ import {createRouter, createWebHistory} from 'vue-router';
 // const TheHome = () => import('./pages/sample/TheHome.vue');
 const TheAbout = () => import('./pages/sample/TheAbout.vue');
 const HomePage = () => import('./pages/HomePage.vue');
-const SkillsPage = () => import('./pages/SkillsPage.vue');
+// const SkillsPage = () => import('./pages/SkillsPage.vue');
+const SkillsPageSidebar = () => import('./pages/SkillsPageSidebar.vue');
 const ExperienceAndAcademics = () => import('./pages/ExperienceAndAcademics.vue');
 
 const router = createRouter({
@@ -17,7 +18,8 @@ const router = createRouter({
     },
     {
       path:'/skills',
-      component:SkillsPage,
+      // component:SkillsPage,
+      component:SkillsPageSidebar,
     },
     {
       path:'/exp_academics',
