@@ -37,7 +37,8 @@
 } */
 .el-card img{
   width:100%;
-  height: auto;
+  height:auto;
+  /* max-height: 12em; */
   padding:0;
   margin:0;
 }

@@ -35,7 +35,7 @@ export default{
       {
         name:'Django Projects',
         description:'Simple web apps developed using Django Framework',
-        imgUrl:'https://raw.githubusercontent.com/navctns/FrontEndDevelopment/ccc67ed3642d4a20dd912cef4ae7113bd68a14ab/Vue-Js/Projects/portfolio-app-element-plus-ui/src/assets/img/projects/icons8-django.svg',
+        imgUrl:'https://raw.githubusercontent.com/navctns/FrontEndDevelopment/d4e340b86a96d1f943487d56f6e0851cbd3ae199/Vue-Js/Projects/portfolio-app-element-plus-ui/src/assets/img/projects/icons8-django-48.svg',
       }
     ]
   },
