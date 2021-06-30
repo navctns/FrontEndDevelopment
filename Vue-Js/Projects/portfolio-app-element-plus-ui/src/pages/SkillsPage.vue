@@ -39,6 +39,7 @@
               :project-name="project.name"
               :img-url="project.imgUrl"
               :description="project.description"
+              :github="project.github"
             ></app-project-card>
           </el-row>
         </el-card>

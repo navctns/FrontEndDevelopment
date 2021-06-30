@@ -6,7 +6,6 @@
           <el-menu-item index="/skills">Skills & Projects</el-menu-item>
           <el-menu-item index="/exp_academics">Experience & Academics</el-menu-item>
           <!-- <el-menu-item index="3" disabled>Info</el-menu-item> -->
-          <el-menu-item index="www.facebook.com"><font-awesome-icon icon="user-secret" /></el-menu-item>
           <el-menu-item index="www.facebook.com"><font-awesome-icon :icon="['fab','facebook']" /></el-menu-item>
           <el-menu-item index="www.facebook.com"><font-awesome-icon :icon="['fab','linkedin']" /></el-menu-item>
           <el-menu-item index="www.facebook.com"><font-awesome-icon :icon="['fab','github']" /></el-menu-item>

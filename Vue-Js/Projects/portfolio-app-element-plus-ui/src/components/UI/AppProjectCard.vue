@@ -10,6 +10,7 @@
               <span>{{description}}</span>
               <div class="btn-container">
                 <el-button>View also</el-button>
+                <a :href="github" target="_blank"><font-awesome-icon :icon="['fab','github']" /></a>
               </div>
             </el-col>
             <!-- <el-col :xs="24" :sm="24" :md="12" :lg="12">
@@ -27,7 +28,7 @@
 </template>
 <script>
   export default{
-    props:['imgUrl','projectName','description'],
+    props:['imgUrl','projectName','description','github'],
   }
 </script>
 <style scoped>
@@ -38,7 +39,7 @@
 .el-card img{
   width:100%;
   height:auto;
-  /* max-height: 12em; */
+  min-height:8em;
   padding:0;
   margin:0;
 }
@@ -50,6 +51,7 @@
 }
 .btn-container{
   display: flex;
+  gap:1em;
   justify-content: center;
   align-items: center;
   margin: 0.2em 0;
@@ -71,5 +73,12 @@ h4{
 }
 span{
   min-height: 3em;
+}
+a{
+  color:#323232;
+}
+a:focus,
+a:hover{
+  opacity:0.7;
 }
 </style>
