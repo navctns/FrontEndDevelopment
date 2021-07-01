@@ -10,7 +10,8 @@
         <img :src="skillTwo.imgUrl" alt="">
       </div>
     </div>
-    <div class="btn-container" v-if="size==='lg'">
+    <!-- <div class="btn-container" v-if="size==='lg'"> -->
+    <div class="btn-container">
       <el-button @click="viewProjects">View Projects</el-button>
     </div>
   </el-card>
@@ -89,6 +90,7 @@ img{
   align-items: center;
   justify-content: center;
   gap:0;
+  margin-bottom: 0.5em;
 }
 .twoItemContainer{
   display: flex;
@@ -98,10 +100,13 @@ img{
 .btn-container{
   display: flex;
   justify-content: center;
+  margin: 0.5em;
 }
 .smSizeContainer{
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   gap:0.5em;
 }
 /* .resizeIcon{

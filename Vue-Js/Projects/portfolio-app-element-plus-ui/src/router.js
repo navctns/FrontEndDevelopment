@@ -3,7 +3,9 @@ import {createRouter, createWebHistory} from 'vue-router';
 const TheAbout = () => import('./pages/sample/TheAbout.vue');
 const HomePage = () => import('./pages/HomePage.vue');
 // const SkillsPage = () => import('./pages/SkillsPage.vue');
-const SkillsPageSidebar = () => import('./pages/SkillsPageSidebar.vue');
+// const SkillsPageSidebar = () => import('./pages/SkillsPageSidebar.vue');
+const SkillsPageScroller = () => import('./pages/SkillsPageScroller.vue');
+
 const ExperienceAndAcademics = () => import('./pages/ExperienceAndAcademics.vue');
 
 const router = createRouter({
@@ -19,7 +21,8 @@ const router = createRouter({
     {
       path:'/skills',
       // component:SkillsPage,
-      component:SkillsPageSidebar,
+      // component:SkillsPageSidebar,
+      component:SkillsPageScroller,
     },
     {
       path:'/exp_academics',
