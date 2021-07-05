@@ -1,5 +1,5 @@
 <template>
-  <el-tag :class="{largeTag:width==='lg'}"
+  <el-tag :class="{largeTag:width==='lg',textBlack:type==='warning'}"
     :type="type"
     :effect="effect"
     :size="size"
@@ -30,5 +30,8 @@
     width:90%;
     display: flex;
     justify-content: center;
+  }
+  .textBlack{
+    color:#323232;
   }
 </style>

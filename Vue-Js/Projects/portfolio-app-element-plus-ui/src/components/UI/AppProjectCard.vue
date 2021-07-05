@@ -10,7 +10,7 @@
               <span>{{description}}</span>
               <div class="btn-container">
                 <a target="_blank" :href="projectUrl"><el-button>View also</el-button></a>
-                <a :href="github" target="_blank"><font-awesome-icon :icon="['fab','github']" /></a>
+                <a :href="github" target="_blank" v-if="githubLink"><font-awesome-icon :icon="['fab','github']" /></a>
               </div>
             </el-col>
             <!-- <el-col :xs="24" :sm="24" :md="12" :lg="12">
@@ -27,8 +27,45 @@
   </el-col>
 </template>
 <script>
+  import { computed } from 'vue';
   export default{
-    props:['imgUrl','projectName','description','github','projectUrl'],
+    // props:['imgUrl','projectName','description','github','projectUrl','showGit'],
+    props:{
+      imgUrl:{
+        type:String,
+      },
+      projectName:{
+        type:String,
+      },
+      description:{
+        type:String,
+      },
+      github:{
+        type:String,
+      },
+      projectUrl:{
+        type:String,
+      },
+      showGit:{
+        type:Boolean,
+      },
+    },
+    setup(props){
+      const githubVisibility = computed(()=>{
+        return props.showGit;
+      });
+      const githubLink= computed(()=>{
+        if(props.github === 'private'){
+          return false;
+        }else{
+          return true;
+        }
+      });
+      return{
+        githubVisibility,
+        githubLink,
+      }
+    }
   }
 </script>
 <style scoped>

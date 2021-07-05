@@ -6,7 +6,7 @@ export default{
       imgUrl:'https://raw.githubusercontent.com/navctns/FrontEndDevelopment/50Days50Projects/Projects/Static-Website-Projects/Vimalettan-Bootstrap-Project/img/showcase-1.jpg',
       github:'#',
       domain:'https://navctns.github.io/static-websites/',
-
+      showGit:true,
     },
   ],
   javascript:[
@@ -16,16 +16,17 @@ export default{
       imgUrl:'https://raw.githubusercontent.com/navctns/FrontEndDevelopment/50Days50Projects/Vue-Js/Projects/portfolio-app-element-plus-ui/src/assets/img/projects/polling-app.png',
       github:'https://github.com/navctns/FrontEndDevelopment/tree/50Days50Projects/Basic/Modern%20Js%20From%20the%20Beginning/practice/polling-app',
       domain:'https://navctns.github.io/Javascript-Projects/',
+      showGit:true,
     }
   ],
   vuejs:[
       {
-      name:'Movies App',
-      description:'Movie search App Using Vue Js, Vuex, Vue Router, and TMDB API',
-      imgUrl:'https://raw.githubusercontent.com/navctns/FrontEndDevelopment/50Days50Projects/Vue-Js/Projects/portfolio-app-element-plus-ui/src/assets/img/projects/movies-app-home.png',
-      github:'#',
-      domain:'https://vue-http-connect-14047.web.app/',
-
+        name:'Movies App',
+        description:'Movie search App Using Vue Js, Vuex, Vue Router, and TMDB API',
+        imgUrl:'https://raw.githubusercontent.com/navctns/FrontEndDevelopment/50Days50Projects/Vue-Js/Projects/portfolio-app-element-plus-ui/src/assets/img/projects/movies-app-home.png',
+        github:'private',
+        domain:'https://vue-http-connect-14047.web.app/',
+        showGit:false,
       },
       {
         name:'Cricket Game',
@@ -33,6 +34,7 @@ export default{
         imgUrl:'https://raw.githubusercontent.com/navctns/FrontEndDevelopment/50Days50Projects/Vue-Js/Projects/portfolio-app-element-plus-ui/src/assets/img/projects/cricket-app-img.png',
         github:'https://github.com/navctns/FrontEndDevelopment/tree/50Days50Projects/Vue-Js/basics/Course-Projects/cricket-game-vue',
         domain:'https://navctns.github.io/vue-cricket-game/',
+        showGit:true,
       }
     ],
     python:[
@@ -43,6 +45,7 @@ export default{
         imgUrl:'https://mms.businesswire.com/media/20191217005513/en/763363/22/Odoo_LP-logo.jpg',
         github:'https://github.com/navctns/Odoo13',
         domain:'#',
+        showGit:true,
       },
       {
         name:'Django Projects',
@@ -50,6 +53,7 @@ export default{
         imgUrl:'https://raw.githubusercontent.com/navctns/FrontEndDevelopment/50Days50Projects/Vue-Js/Projects/portfolio-app-element-plus-ui/src/assets/img/projects/django-crop-512px.png',
         github:'https://github.com/navctns/Django-Udemy',
         domain:'#',
+        showGit:true,
       }
     ]
   },

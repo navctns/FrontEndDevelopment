@@ -12,7 +12,7 @@
           <el-menu-item index="/exp_academics" @click="hideNavbar">Experience & Academics</el-menu-item>
           <!-- <el-menu-item index="3" disabled>Info</el-menu-item> -->
           <el-menu-item ><a target="_blank" href="https://www.facebook.com/naveenvijay.v" @click="hideNavbar"><font-awesome-icon :icon="['fab','facebook']" /></a></el-menu-item>
-          <el-menu-item ><a target="_blank" href="https://www.linkedin.com/in/naveen-v-20b962126" @click="hideNavbar"><font-awesome-icon :icon="['fab','linkedin']" /></a></el-menu-item>
+          <el-menu-item ><a target="_blank" href="https://www.linkedin.com/in/naveen-vijayan-frontend" @click="hideNavbar"><font-awesome-icon :icon="['fab','linkedin']" /></a></el-menu-item>
           <el-menu-item ><a target="_blank" href="https://github.com/navctns" @click="hideNavbar"><font-awesome-icon :icon="['fab','github']" /></a></el-menu-item>
         </el-menu>
         <div class="line"></div>

@@ -22,9 +22,9 @@
                   </div>
                   <div class="tags-container">
                     <div class="tag-group">
-                      <app-tag type="success" effect="dark" label="html/css" size="medium"></app-tag>
+                      <app-tag type="danger" effect="dark" label="html/css" size="medium"></app-tag>
                       <app-tag type="" effect="dark" label="Bootstrap" size="medium"></app-tag>
-                      <app-tag type="" effect="dark" label="Javascript" size="medium"></app-tag>
+                      <app-tag type="warning" effect="dark" label="Javascript" size="medium"></app-tag>
                       <app-tag type="success" effect="dark" label="Vue Js" size="medium"></app-tag>
                       <app-tag type="warning" effect="dark" label="Python/Django" size="medium"></app-tag>
                     </div>
@@ -51,7 +51,7 @@
               <div class="showcase-text">
                 <span>
                   <!-- I am Naveen, I am a Front end developer, I create maintainable web applications and static websites -->
-                  <h1>As a Web Developer</h1>
+                  <h1>As a Frontend Developer</h1>
                   <p>
                     i work with technologies HTML5,CSS3,Javascirpt,Vue Js, Firebase and Python.
                     My philosophy about software development is that simple and maintainable development is to be prefered over complex UIs and unwanted features.
@@ -194,5 +194,8 @@
   .el-card.inner-card{
     background: #F9F9F9;
   }
-
+  .el-avatar{
+    display: flex;
+    justify-content: center;
+  }
 </style>
