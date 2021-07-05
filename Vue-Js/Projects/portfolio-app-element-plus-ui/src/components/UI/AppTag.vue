@@ -20,7 +20,7 @@
 </script>
 <style scoped>
   span{
-    font-size: 1em;
+    font-size: 0.9em;
     font-weight:600;
   }
   .el-tag{

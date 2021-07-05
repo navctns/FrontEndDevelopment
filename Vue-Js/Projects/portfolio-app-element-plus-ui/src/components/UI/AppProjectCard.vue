@@ -9,7 +9,7 @@
             <el-col :xs="24" :sm="24" :md="24" :lg="24">
               <span>{{description}}</span>
               <div class="btn-container">
-                <a target="_blank" :href="projectUrl"><el-button>View also</el-button></a>
+                <a target="_blank" :href="projectUrl" v-if="showDeployed"><el-button>View also</el-button></a>
                 <a :href="github" target="_blank" v-if="githubLink"><font-awesome-icon :icon="['fab','github']" /></a>
               </div>
             </el-col>
@@ -55,7 +55,16 @@
         return props.showGit;
       });
       const githubLink= computed(()=>{
+        //to deside whether repo is to be shown or not
         if(props.github === 'private'){
+          return false;
+        }else{
+          return true;
+        }
+      });
+      const showDeployed = computed(()=>{
+        //show deployed site or not
+        if(props.projectUrl === 'none'){
           return false;
         }else{
           return true;
@@ -64,6 +73,7 @@
       return{
         githubVisibility,
         githubLink,
+        showDeployed,
       }
     }
   }

@@ -3,8 +3,9 @@
     <el-main>
       <el-row>
         <el-card>
-          <h2>Academic Info</h2>
+          <h3>Academic Info</h3>
           <ul v-if="isMobileView">
+          <!-- <ul> -->
             <li v-for="academic in tableData"
               :key="academic.course"
             >Course :<span class="academic-info"><h4>{{academic.course}}</h4></span><span>Institute :<h4>{{academic.institute}}</h4></span></li>
@@ -34,7 +35,7 @@
             </el-table>
         </el-card>
         <el-card>
-          <h2>Experiences</h2>
+          <h3>Experiences</h3>
           <!-- <h4>Python/Odoo Developer(1yr), Cybrosys Technologies</h4> -->
           <ul v-if="isMobileView">
             <li v-for="exp in experienceData"
@@ -119,18 +120,46 @@
   width:100%;
   display: flex;
   justify-content: center;
+  background: #F9F9F9;
+
 }
 .el-table{
-  width:100%;
-  font-size:1em;
+  width:90%;
+  font-size:0.9em;
+  background: #F6F5F5;
 }
 h4{
   margin:0;
   font-size: 0.9em;
 }
+ul{
+  width:100%;
+}
+ul li{
+  /* margin:1em; */
+  /* margin: auto; */
+  /* display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start; */
+  margin:0 15em;
+  width:90%;
+}
+h3{
+  text-align: left;
+  margin:0 15em;
+
+}
 @media (max-width:768px) {
   h2{
     font-size: 1.2em;
+  }
+  ul li{
+    margin:0;
+  }
+  h3{
+    margin:0;
+    text-align:center;
   }
 }
 /* ul{

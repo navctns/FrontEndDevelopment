@@ -35,6 +35,14 @@ export default{
         github:'https://github.com/navctns/FrontEndDevelopment/tree/50Days50Projects/Vue-Js/basics/Course-Projects/cricket-game-vue',
         domain:'https://navctns.github.io/vue-cricket-game/',
         showGit:true,
+      },
+      {
+        name:'Portfolio(This Website)',
+        description:'Portfolio website',
+        imgUrl:'https://raw.githubusercontent.com/navctns/FrontEndDevelopment/50Days50Projects/Vue-Js/Projects/portfolio-app-element-plus-ui/src/assets/img/projects/portfolio-website-cropped.png',
+        github:'private',
+        domain:'/',
+        showGit:true,
       }
     ],
     python:[
@@ -44,7 +52,7 @@ export default{
         // imgUrl:'https://odoocdn.com/openerp_website/static/src/img/assets/png/odoo_logo.png',
         imgUrl:'https://mms.businesswire.com/media/20191217005513/en/763363/22/Odoo_LP-logo.jpg',
         github:'https://github.com/navctns/Odoo13',
-        domain:'#',
+        domain:'none',
         showGit:true,
       },
       {
@@ -52,7 +60,7 @@ export default{
         description:'Simple web apps developed using Django Framework',
         imgUrl:'https://raw.githubusercontent.com/navctns/FrontEndDevelopment/50Days50Projects/Vue-Js/Projects/portfolio-app-element-plus-ui/src/assets/img/projects/django-crop-512px.png',
         github:'https://github.com/navctns/Django-Udemy',
-        domain:'#',
+        domain:'none',
         showGit:true,
       }
     ]
