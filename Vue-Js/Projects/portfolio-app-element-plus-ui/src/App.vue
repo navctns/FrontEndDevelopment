@@ -40,6 +40,7 @@ body{
   margin:0;
   line-height: 1.4em;
   font-size: 18px;
+  letter-spacing: 1px; 
   /* background: #ddffbc; */
   background: #f7f7f7;
 

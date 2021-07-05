@@ -117,6 +117,7 @@ img{
   width:100%;
   height: auto;
   padding:0;
+  background: #F9F9F9;
 }
 h3{
   margin:0;

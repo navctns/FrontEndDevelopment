@@ -1,8 +1,16 @@
-
 <template>
 <el-container style="height: 500px; border: 1px solid #eee">
+
   <el-button v-if="isMobileView" @click="toggleSkillsBar"><font-awesome-icon :icon="['fas','cog']" /> Skills</el-button>
   <el-aside style="background-color: rgb(238, 241, 246)" v-if="showSideNav">
+    <!-- <h3>Skills</h3> -->
+    <!-- <div class="skills-header" v-if="!isMobileView">
+      <app-tag type="success" label="Skills" effect="dark" size="medium" width="lg"></app-tag>
+    </div> -->
+    <!--SKILLS Header -->
+    <el-header style="text-align: center; font-size: 18px">
+      <span><h3>Skills</h3></span>
+    </el-header>
     <el-menu :default-openeds="['1', '3']">
       <el-menu-item index="2">
           <!-- <i class="el-icon-setting"></i> -->
@@ -37,69 +45,11 @@
           ></app-skill-card>
           <!-- <template #title>Navigator Four</template> -->
         </el-menu-item>
-      <!-- <el-submenu index="1">
-        <template #title><i class="el-icon-message"></i>Navigator One</template>
-        <el-menu-item-group>
-          <template #title>Group 1</template>
-          <el-menu-item index="1-1">Option 1</el-menu-item>
-          <el-menu-item index="1-2">Option 2</el-menu-item>
-        </el-menu-item-group>
-        <el-menu-item-group title="Group 2">
-          <el-menu-item index="1-3">Option 3</el-menu-item>
-        </el-menu-item-group>
-        <el-submenu index="1-4">
-          <template #title>Option4</template>
-          <el-menu-item index="1-4-1">Option 4-1</el-menu-item>
-        </el-submenu>
-      </el-submenu> -->
-      <!-- <el-submenu index="2">
-        <template #title><i class="el-icon-menu"></i>Navigator Two</template>
-        <el-menu-item-group>
-          <template #title>Group 1</template>
-          <el-menu-item index="2-1">Option 1</el-menu-item>
-          <el-menu-item index="2-2">Option 2</el-menu-item>
-        </el-menu-item-group>
-        <el-menu-item-group title="Group 2">
-          <el-menu-item index="2-3">Option 3</el-menu-item>
-        </el-menu-item-group>
-        <el-submenu index="2-4">
-          <template #title>Option 4</template>
-          <el-menu-item index="2-4-1">Option 4-1</el-menu-item>
-        </el-submenu>
-      </el-submenu>
-      <el-submenu index="3">
-        <template #title><i class="el-icon-setting"></i>Navigator Three</template>
-        <el-menu-item-group>
-          <template #title>Group 1</template>
-          <el-menu-item index="3-1">Option 1</el-menu-item>
-          <el-menu-item index="3-2">Option 2</el-menu-item>
-        </el-menu-item-group>
-        <el-menu-item-group title="Group 2">
-          <el-menu-item index="3-3">Option 3</el-menu-item>
-        </el-menu-item-group>
-        <el-submenu index="3-4">
-          <template #title>Option 4</template>
-          <el-menu-item index="3-4-1">Option 4-1</el-menu-item>
-        </el-submenu>
-      </el-submenu> -->
+
     </el-menu>
   </el-aside>
-
+  <!-- PROJECTS -->
   <el-container>
-    <!-- <el-header style="text-align: right; font-size: 12px">
-      <el-dropdown>
-        <i class="el-icon-setting" style="margin-right: 15px"></i>
-        <template #dropdown>
-          <el-dropdown-menu>
-              <el-dropdown-item>View</el-dropdown-item>
-              <el-dropdown-item>Add</el-dropdown-item>
-              <el-dropdown-item>Delete</el-dropdown-item>
-          </el-dropdown-menu>
-        </template>
-      </el-dropdown>
-      <span>Tom</span>
-    </el-header> -->
-
     <el-main v-if="projectsVisibility">
       <el-card class="projects-container">
         <h2>{{projectsHeading}} Projects</h2>
@@ -110,6 +60,8 @@
             :img-url="project.imgUrl"
             :description="project.description"
             :github="project.github"
+            :project-url="project.domain"
+
           ></app-project-card>
         </el-row>
       </el-card>
@@ -137,20 +89,12 @@
         skillCardSize:'sm',
         isMobileView:window.innerWidth<768,
         isCollapse:false,
-        projectType:'html',
+        projectType:'vuejs',
         showSideNav:window.innerWidth<768?false:true,
         projectsVisibility:true,
       }
     },
     computed:{
-    //   skillCardSize(){
-    //     //resize skill card on collapse and expand
-    //     if(window.innerWidth<768){
-    //       return 'sm';
-    //     }else{
-    //       return 'lg';
-    //     }
-    //   }
         projectsData(){
           return this.$store.getters.contentsData('projects')[this.projectType];
         },
@@ -196,11 +140,15 @@
     min-height: 14em;
     margin:0.8em 0;
     min-width: 90%;
+    background: #F9F9F9;
+
   }
   .projects-container{
     width:100%;
     margin:0;
     min-height: 85vh;
+    background: #F9F9F9;
+
     /* display: flex;
     flex-direction: column;
     align-items: center; */
@@ -220,10 +168,29 @@
     z-index: 9;
     margin-bottom: 0.5em;
   }
+  h3{
+    margin:0;
+    text-align: center;
+    font-size: 18px;
+  }
+  .skills-header{
+    display: flex;
+    justify-content: center;
+  }
+  .el-header{
+    margin: 0 1em;
+    /* position: fixed;
+    width:100%; */
+    display: flex;
+    justify-content: center;
+  }
   @media (max-width:768) {
     .el-aside{
       width:100%;
       position: absolute;
+    }
+    .el-container{
+      margin:0;
     }
   }
 </style>
