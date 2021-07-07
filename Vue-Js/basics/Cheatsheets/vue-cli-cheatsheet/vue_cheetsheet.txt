@@ -1,0 +1,7 @@
+Lazy Loading 
+
+const Foo = () => import('./Foo.vue')
+
+const router = new VueRouter({
+  routes: [{ path: '/foo', component: Foo }]
+})

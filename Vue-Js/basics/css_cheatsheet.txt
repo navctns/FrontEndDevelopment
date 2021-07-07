@@ -1,4 +1,0 @@
-get Last child
-.similar-movies li:last-child{
-  display: none;
-}

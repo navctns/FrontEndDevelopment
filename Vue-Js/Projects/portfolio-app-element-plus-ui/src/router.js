@@ -7,9 +7,10 @@ const HomePage = () => import('./pages/HomePage.vue');
 const SkillsPageScroller = () => import('./pages/SkillsPageScroller.vue');
 
 const ExperienceAndAcademics = () => import('./pages/ExperienceAndAcademics.vue');
-
+import publicPath from '../vue.config.js';
 const router = createRouter({
   history:createWebHistory(),
+  base:publicPath,
   routes:[
     { path:'/',
       component:HomePage,

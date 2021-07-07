@@ -119,13 +119,13 @@
 .el-card{
   width:100%;
   display: flex;
-  justify-content: center;
+  /* justify-content: center; */
   background: #F9F9F9;
-
+  margin:0;
 }
 .el-table{
-  width:90%;
-  font-size:0.9em;
+  width:98%;
+  font-size:0.8em;
   background: #F6F5F5;
 }
 h4{
@@ -150,6 +150,11 @@ h3{
   margin:0 15em;
 
 }
+.el-table-column{
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
 @media (max-width:768px) {
   h2{
     font-size: 1.2em;
@@ -165,4 +170,5 @@ h3{
 /* ul{
   list-style: none;
 } */
+
 </style>

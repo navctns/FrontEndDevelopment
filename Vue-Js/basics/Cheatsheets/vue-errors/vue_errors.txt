@@ -1,0 +1,1 @@
+Failed to resolve component: movie-card : Might be because the component is not imported, and its not a global component

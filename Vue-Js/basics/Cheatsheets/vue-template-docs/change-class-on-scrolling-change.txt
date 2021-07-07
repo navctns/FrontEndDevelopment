@@ -1,0 +1,19 @@
+const app = new Vue({
+  
+  el: '#app',
+  
+  data: {
+    scrollPosition: null
+  },
+  
+  methods: {
+    updateScroll() {
+      this.scrollPosition = window.scrollY
+    }
+  },
+  
+  mounted() {
+    window.addEventListener('scroll', this.updateScroll);
+  }
+  
+})
