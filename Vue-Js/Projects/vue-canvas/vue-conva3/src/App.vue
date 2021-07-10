@@ -1,45 +1,58 @@
 <template>
   <v-stage :config="configKonva">
    <v-layer>
-     <v-circle :config="coloredCircle1"
+     <app-circle :config="coloredCircleGreen"
+        v-if="!greenMatched"
+       @drag-start="circleDragStart"
+       @drag-end="circleDragEnd"
+     ></app-circle>
+     <app-circle :config="coloredCircleRed"
+        v-if="!redMatched"
+       @drag-start="circleDragStart"
+       @drag-end="circleDragEnd"
+     ></app-circle>
+     <app-circle :config="coloredCircleBlue"
+       v-if="!blueMatched"
+       @drag-start="circleDragStart"
+       @drag-end="circleDragEnd"
+     ></app-circle>
+     <app-circle :config="coloredCircleYellow"
+       v-if="!yellowMatched"
+       @drag-start="circleDragStart"
+       @drag-end="circleDragEnd"
+     ></app-circle>
+     <!-- <v-circle :config="coloredCircleRed"
        @dragstart="circleDragStart"
        @dragend="circleDragEnd"
      ></v-circle>
-     <v-circle :config="coloredCircle2"
+     <v-circle :config="coloredCircleBlue"
        @dragstart="circleDragStart"
        @dragend="circleDragEnd"
      ></v-circle>
-     <v-circle :config="coloredCircle3"
+     <v-circle :config="coloredCircleYellow"
        @dragstart="circleDragStart"
        @dragend="circleDragEnd"
-     ></v-circle>
-     <v-circle :config="coloredCircle4"
-       @dragstart="circleDragStart"
-       @dragend="circleDragEnd"
-     ></v-circle>
-     <v-circle :config="configCircle1"
-       @dragstart="circleDragStart"
-       @dragend="circleDragEnd"
+     ></v-circle> -->
+     <!-- Non-Colored circles -->
+     <v-circle :config="plainCircleRed"
+
      >
    </v-circle>
 
-     <v-circle :config="configCircle2"
-       @dragstart="circleDragStart"
-       @dragend="circleDragEnd"
+     <v-circle :config="plainCircleGreen"
+
      ></v-circle>
-     <v-circle :config="configCircle3"
-       @dragstart="circleDragStart"
-       @dragend="circleDragEnd"
+     <v-circle :config="plainCircleBlue"
+
      ></v-circle>
-     <v-circle :config="configCircle4"
-       @dragstart="circleDragStart"
-       @dragend="circleDragEnd"
+     <v-circle :config="plainCircleYellow"
+
      ></v-circle>
      <v-text :config="redText"/>
      <v-text :config="greenText"/>
      <v-text :config="blueText"/>
      <v-text :config="yellowText"/>
-
+     <v-text v-if="taskSucceded" :config="successText"/>
      <!-- <v-rect :config="configRect"></v-rect> -->
      <!-- <v-rect :config="circleContainerBox"></v-rect> -->
      <!-- <v-rect :config="rectContainerBox"></v-rect> -->
@@ -59,7 +72,7 @@ export default {
        width: 1500,
        height: 800
      },
-     coloredCircle1:{
+     coloredCircleGreen:{
        x: 200,
        y: 100,
        radius: 50,
@@ -68,7 +81,7 @@ export default {
        strokeWidth: 4,
        draggable: true
      },
-     coloredCircle2:{
+     coloredCircleRed:{
        x: 200,
        y: 210,
        radius: 50,
@@ -77,7 +90,7 @@ export default {
        strokeWidth: 4,
        draggable: true
      },
-     coloredCircle3:{
+     coloredCircleBlue:{
        x: 200,
        y: 320,
        radius: 50,
@@ -86,7 +99,7 @@ export default {
        strokeWidth: 4,
        draggable: true
      },
-     coloredCircle4:{
+     coloredCircleYellow:{
        x: 200,
        y: 430,
        radius: 50,
@@ -119,41 +132,48 @@ export default {
        text: 'yellow',
        fontSize: 20
      },
-     configCircle1: {
+     successText:{
+       x:500,
+       y:500,
+       text: 'Success, Your task is completed',
+       fill:"green",
+       fontSize: 40
+     },
+     plainCircleRed: {
        x: 810,
        y: 100,
        radius: 50,
        fill: "#fff",
        stroke: "black",
        strokeWidth: 4,
-       draggable: true
+       draggable: false
      },
-     configCircle2: {
+     plainCircleGreen: {
        x: 700,
        y: 210,
        radius: 50,
        fill: "#fff",
        stroke: "black",
        strokeWidth: 4,
-       draggable: true
+       draggable: false
      },
-     configCircle3: {
+     plainCircleBlue: {
        x: 810,
        y: 210,
        radius: 50,
        fill: "#fff",
        stroke: "black",
        strokeWidth: 4,
-       draggable: true
+       draggable: false
      },
-     configCircle4: {
+     plainCircleYellow: {
        x: 920,
        y: 210,
        radius: 50,
        fill: "#fff",
        stroke: "black",
        strokeWidth: 4,
-       draggable: true
+       draggable:false
      },
      configRect:{
        x:200,
@@ -183,16 +203,50 @@ export default {
        strokeWidth:2
      },
      circleIsDragging:false,
+     currentCircleColor:null,
+     greenMatched:false,
+     redMatched:false,
+     blueMatched:false,
+     yellowMatched:false,
    };
  },
  methods:{
-   circleDragStart(){
+   circleDragStart(color){
+     // console.log('fill-color',color);
+     //Set currently dragging circle(by its color)
+     this.currentCircleColor = color;
      this.circleIsDragging = true;
      console.log('circle dragging:',this.circleIsDragging);
    },
-   circleDragEnd(){
+   circleDragEnd(ptrX,ptrY){
      this.circleIsDragging = false;
      console.log('circle dragging:',this.circleIsDragging);
+     console.log(ptrX,ptrY);
+     if(this.currentCircleColor === '#66DE93' && ptrX >=669 && ptrX<720 && ptrY>180 && ptrY<243){
+       //Color Matched
+       console.log('Green Matched');
+       this.plainCircleGreen.fill = this.currentCircleColor;
+       this.greenMatched = true;
+     }else if(this.currentCircleColor === "#FF616D" && ptrX >= this.redText.x-30 && ptrX <= this.redText.x+30 && ptrY >= this.redText.y -30 && ptrY <= this.redText.y +30){
+       console.log('red matched');
+       this.plainCircleRed.fill = this.currentCircleColor;
+       this.redMatched = true;
+     }else if(this.currentCircleColor === "#3C8DAD" && ptrX >= this.blueText.x-30 && ptrX<= this.blueText.x+30 && ptrY >= this.blueText.y -30 && ptrY <= this.blueText.y +30){
+       console.log('Blue matched');
+       this.plainCircleBlue.fill = this.currentCircleColor;
+       this.blueMatched = true;
+     }else if(this.currentCircleColor === "#E8E46E" && ptrX >= this.yellowText.x-30 && ptrX<= this.yellowText.x+30 && ptrY >= this.yellowText.y -30 && ptrY <= this.yellowText.y +30){
+       console.log('Yellow matched');
+       this.plainCircleYellow.fill = this.currentCircleColor;
+       this.yellowMatched = true;
+     }
+
+   }
+ },
+ computed:{
+   taskSucceded(){
+     //Task success check
+     return this.greenMatched && this.redMatched && this.blueMatched && this.yellowMatched;
    }
  }
 }

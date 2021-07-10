@@ -1,0 +1,9 @@
+
+INITIALIZING STRIPE
+
+I was having this problem in a Vue app not using Laravel.
+
+But to fix it i put the script <script src="https://js.stripe.com/v3/"></script> in my index.html
+
+Then when referencing Stripe in a component i used window.Stripe That pointed to the script and fixed the ReferenceError: Stripe is not defined error.
+

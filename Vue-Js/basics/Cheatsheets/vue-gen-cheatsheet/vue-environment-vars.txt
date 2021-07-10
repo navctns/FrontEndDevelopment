@@ -1,0 +1,15 @@
+Environment Variables
+
+You can specify env variables by placing the following files in your project root:
+
+.env                # loaded in all cases
+.env.local          # loaded in all cases, ignored by git
+.env.[mode]         # only loaded in specified mode
+.env.[mode].local   # only loaded in specified mode, ignored by git
+
+ACCESSING
+
+console.log(process.env.VUE_APP_NOT_SECRET_CODE)
+
+
+You may test your Stripe.js integration over HTTP. However, live Stripe.js integrations must use HTTPS.
