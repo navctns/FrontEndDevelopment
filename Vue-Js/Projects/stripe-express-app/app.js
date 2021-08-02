@@ -5,7 +5,10 @@ import Stripe from "stripe"
 
 const app = express();
 app.use(cors());
+app.use(express.json());
 dotenv.config();
+
+const stripe = new Stripe(process.env.SECRET_KEY);
 
 const port = 3001;
 
@@ -40,6 +43,25 @@ app.post("/stripe/webhook",
       console.log(`unhandled event type ${event.type}`);
   }
   response.json({recieved:true});
+})
+
+//Another end point
+app.post("/stripe", async(request,response)=>{
+  const {amount} = request.body;
+  //shoud never trust the client side amount
+
+  try{
+    const paymentIntent = await stripe.paymentIntents.create({
+      amount,
+      currency:"usd"
+    })
+    response.status(200).send({
+      secret:paymentIntent.client_secret
+    })
+  }catch(error){
+    console.log("Error",error);
+    response.status(500).send("error"+ error);
+  }
 })
 
 app.get("/", (req,res)=>{

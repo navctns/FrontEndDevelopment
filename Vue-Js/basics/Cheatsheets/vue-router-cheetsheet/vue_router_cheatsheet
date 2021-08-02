@@ -1,4 +1,4 @@
 
-For dynamic routing, solves loading problems while routing
+For dynamic routing, solves loading problems while routing due to similarities in route names
 
 <router-view :key="$route.fullPath"></router-view>

@@ -1,6 +1,6 @@
 <template>
   <colors-task v-if="taskIndex === 1" @task-success="showResults"></colors-task>
-  <shapes-task v-if="taskIndex === 2"></shapes-task>
+  <shapes-task v-if="taskIndex === 2" @task-success="showResults"></shapes-task>
   <task-switcher @next-task="hideResults" v-if="showResultsBox"></task-switcher>
 </template>
 

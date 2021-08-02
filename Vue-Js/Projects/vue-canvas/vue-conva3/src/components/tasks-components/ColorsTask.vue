@@ -1,26 +1,26 @@
 <template>
   <v-stage :config="configKonva">
    <v-layer>
-     <app-circle :config="coloredCircleGreen"
+     <app-shape shape="circle" :config="coloredCircleGreen"
         v-if="!greenMatched"
        @drag-start="circleDragStart"
        @drag-end="circleDragEnd"
-     ></app-circle>
-     <app-circle :config="coloredCircleRed"
+     ></app-shape>
+     <app-shape shape="circle" :config="coloredCircleRed"
         v-if="!redMatched"
        @drag-start="circleDragStart"
        @drag-end="circleDragEnd"
-     ></app-circle>
-     <app-circle :config="coloredCircleBlue"
+     ></app-shape>
+     <app-shape shape="circle" :config="coloredCircleBlue"
        v-if="!blueMatched"
        @drag-start="circleDragStart"
        @drag-end="circleDragEnd"
-     ></app-circle>
-     <app-circle :config="coloredCircleYellow"
+     ></app-shape>
+     <app-shape shape="circle" :config="coloredCircleYellow"
        v-if="!yellowMatched"
        @drag-start="circleDragStart"
        @drag-end="circleDragEnd"
-     ></app-circle>
+     ></app-shape>
 
      <v-circle :config="plainCircleRed"
 
@@ -237,10 +237,10 @@ export default {
 
      //METHODS
 
-     function circleDragStart(color){
+     function circleDragStart(el){
        // console.log('fill-color',color);
        //Set currently dragging circle(by its color)
-       currentCircleColor.value = color;
+       currentCircleColor.value = el.color;
        circleIsDragging.value = true;
        console.log('circle dragging:',circleIsDragging.value);
      }
