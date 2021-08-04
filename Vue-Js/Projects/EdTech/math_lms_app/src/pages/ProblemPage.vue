@@ -168,11 +168,14 @@ export default {
             // const operandObj = problemObj.value.lhs
             //CHANGING THE SIDE VALUE
             problemObj.value.transferOperand('lhs','rhs', currentOperandId.value, {x:xVal,y:yVal})
+                .then(problemObj.value.evaluateSide('rhs'));
                 // .then(operandIndex =>{
                 // //   problemObj.value.lhs.splice(operandIndex,1); 
                 //     console.log('operand index promise',operandIndex); 
                 // });
             console.log('change sides');
+            //Evaluate expression in RHS
+            
         }
         //move the current operand text also 
         //filter the current operand object 
