@@ -5,6 +5,7 @@ export default{
         step:'',
         side:'',
         type:'oper',
+        paraNo:0,
         configShape:{
             x: 600,
             y: 250,
@@ -33,6 +34,10 @@ export default{
         side:'lhs',
         step:1,
         val:'7',
+        coeff:null,
+        paraNo:0,
+        sign:'+',
+        coeffId:null,
         configShape:{
             x:700,
             y:220,//equalToX y-10

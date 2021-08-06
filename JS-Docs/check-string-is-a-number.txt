@@ -1,0 +1,117 @@
+    Use the isNaN() Function to Check Whether a Given String Is a Number or Not in JavaScript
+    Use the + Operator to Check Whether a Given String Is a Number or Not in JavaScript
+    Use the parseInt() Function to Check Whether a Given String Is a Number or Not in JavaScript
+    Use the Number() Function to Check Whether a Given String Is a Number or Not in JavaScript
+    Use the Regular Expressions to Check Whether a Given String Is a Number or Not in JavaScript
+
+Number in the programming language is the data type that denotes integers, floats, etc. Strings represent all characters rather than just numeric values. Strings can contain numerical values.
+
+We will check whether a given string is a number or not in this article.
+Use the isNaN() Function to Check Whether a Given String Is a Number or Not in JavaScript
+
+The isNaN() function determines whether the given value is a number or an illegal number (Not-a-Number). The function outputs as True for a NaN value and returns False for a valid numeric value.
+
+Example:
+
+console.log(isNaN('195'))
+console.log(isNaN('boo'))
+console.log(isNaN('100px'))
+
+Output:
+
+false 
+true
+true
+
+If we want to create a function that returns true for a valid value, we can always do that by creating a function that negates the output of the isNaN() function.
+
+function isNum(val){
+  return !isNaN(val)
+}
+console.log(isNum('aaa'));          
+console.log(isNum('13579'));        
+console.log(isNum('-13'));
+
+Output:
+
+false
+true
+true
+
+Now this function named isNum() will return true for a valid numeric value.
+Use the + Operator to Check Whether a Given String Is a Number or Not in JavaScript
+
+The + operator returns the numeric value of the string, or NaN, if the string isn’t purely numeric characters.
+
+For example,
+
+console.log(+'195')
+console.log(+'boo')
+
+Output:
+
+195
+NaN
+
+Use the parseInt() Function to Check Whether a Given String Is a Number or Not in JavaScript
+
+The parseInt() function parses a string and then returns an integer. It returns NaN when it is unable to extract numbers from the string.
+
+For example,
+
+console.log(parseInt('195'))
+console.log(parseInt('boo'))
+
+Output:
+
+195
+NaN
+
+Use the Number() Function to Check Whether a Given String Is a Number or Not in JavaScript
+
+The Number() function converts the argument to a number representing the object’s value. If it fails to convert the value to a number, it returns NaN.
+
+We can use it with strings also to check whether a given string is a number or not.
+
+For example,
+
+console.log(Number('195'))
+console.log(Number('boo'))
+
+Output:
+
+195
+NaN
+
+Use the Regular Expressions to Check Whether a Given String Is a Number or Not in JavaScript
+
+Regular expressions are an object that describes a pattern of characters. These can be used to search the pattern, make changes to them, add, delete, etc.
+
+We can use such patterns to check whether a string contains a number or not.
+
+For example,
+
+function isNumeric(val) {
+    return /^-?\d+$/.test(val);
+}
+
+console.log(isNumeric('aaa'));          
+console.log(isNumeric('13579'));        
+console.log(isNumeric('-13'));         
+
+Output:
+
+false
+true
+true
+
+Contribute
+DelftStack is a collective effort contributed by software geeks like you. If you like the article and would like to contribute to DelftStack by writing paid articles, you can check the write for us page.
+Related Article - JavaScript String
+Add Character to String in JavaScript
+JavaScript Insert Variable Into String
+
+    Change Text Colour Using JavaScript
+    Check if a Value Is Object in JavaScript
+
+Ezoicreport this ad

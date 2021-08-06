@@ -24,9 +24,14 @@ const store = createStore({
             currPrbNo:0,//stores current problem no,
             currPrbStr:'',//current problem string,
             currProbObj:'',//Current problem object generated from currPrbStr
+            openPara:false,//a paranthesis is open(used when consturcting problem Object)
+            paraNo:0,//Paranthesis Number,
+            curSide:'lhs',//store side which now processing(used when consturcting problem Object)
+
             //Operator and operand object models(for reusing)
             operModel:problemElmModels.oper,
             opdModel:problemElmModels.opd,
+
         }
     },
     getters:getters,
