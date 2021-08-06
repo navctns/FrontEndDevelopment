@@ -22,23 +22,29 @@
                 :config-obj="elem"
                 :type="elem.type"
             ></problem-element>
-            <!--equan operator - container circle and text -->
-            <v-circle :config="equalSign"></v-circle>
-            <v-text :config="equalText"></v-text>
+            <!--EQUAL OPERATORS - container circle and text(For various steps) -->
+            <problem-operator
+                v-for="elem in equalOpers"
+                :key="elem.id"
+                :config-obj="elem"
+                :type="elem.type"
+            ></problem-operator>
+            <!-- <v-circle :config="equalSign"></v-circle>
+            <v-text :config="equalText"></v-text> -->
         </v-layer>
     </v-stage>
 </template>
 <script>
 import { ref, onMounted, computed } from 'vue';
 // import ProblemOperand from '../components/problem-elements/ProblemOperand.vue';
-// import ProblemOperator from '../components/problem-elements/ProblemOperator.vue';
+import ProblemOperator from '../components/problem-elements/ProblemOperator.vue';
 import ProblemElement from '../components/problem-elements/ProblemElement.vue';
 import ProblemObject from './ProblemObject.js';
 export default {
   components:{
     ProblemElement,
     // ProblemOperand,
-    // ProblemOperator,
+    ProblemOperator,
   },
   setup() {
     
@@ -168,7 +174,8 @@ export default {
             // const operandObj = problemObj.value.lhs
             //CHANGING THE SIDE VALUE
             problemObj.value.transferOperand('lhs','rhs', currentOperandId.value, {x:xVal,y:yVal})
-                .then(problemObj.value.evaluateSide('rhs'));
+                .then(problemObj.value.evaluateSide('rhs'))
+                .then(problemObj.value.evaluateSide('lhs'));
                 // .then(operandIndex =>{
                 // //   problemObj.value.lhs.splice(operandIndex,1); 
                 //     console.log('operand index promise',operandIndex); 
@@ -227,6 +234,7 @@ export default {
         operators,
         lhs:problemObj.value.lhs,
         rhs:problemObj.value.rhs,
+        equalOpers: problemObj.value.equalOpers,
         operandCmpDragEnd,
         operandCmpDragStart,
         paragraphDrag,

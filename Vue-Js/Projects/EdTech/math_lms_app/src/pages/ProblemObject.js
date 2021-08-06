@@ -1,3 +1,53 @@
+const operSampleObj ={
+    id:1,
+    val:'',
+    configShape:{
+        x: 600,
+        y: 250,
+        radius: 30,
+        // fill: "#50CB93",
+        // stroke: "#50CB93",
+        fill:"#FDE49C",
+        stroke:"#FFB740",
+        strokeWidth: 4
+    },
+
+    //equal operator text(=)
+    configValue:{
+        x:587,//shapeX-13
+        y:235,//shapeY-15
+        text: '=',
+        fontSize: 40
+    }
+}
+
+//OPERAND SAMPLE 
+const operandSampleObj = {
+    //sample object for using in various places
+    seq:'',//sequence/index in equation(to know the initial place)
+    id:'operand-3',
+    type:'opd',//for operand,
+    valType:'const',
+    side:'lhs',
+    step:1,
+    val:'7',
+    configShape:{
+        x:700,
+        y:220,//equalToX y-10
+        width:70,
+        height:70,
+        fill:"#FDE49C",
+        stroke:"#FFB740",
+        // draggable:true,
+    },
+    configValue:{
+    x:715,//rectX+15
+    y:230,//recty:+10
+    text: '7',
+    fontSize: 40
+    }
+}
+
 const problemObj = {
     //Operators and operands at the left hand side
     lhs:[
@@ -7,7 +57,7 @@ const problemObj = {
                 id:'operand-1',
                 type:'opd',
                 valType:'var',
-                val:'un',
+                val:'X',
                 side:'lhs',
                 configShape:{
                     x:100,
@@ -22,7 +72,7 @@ const problemObj = {
                     x:115,//rectX+15
                     y:230,//recty:+10
                     text: 'X',
-                    fontSize: 60
+                    fontSize: 40
                 } 
             },
             {
@@ -30,20 +80,20 @@ const problemObj = {
                 id:'oper-1',
                 step:1,
                 type:'oper',//operator,
-                operType:'-',
+                val:'-',
                 configShape:{
                     x: 233,
                     y: 258,
                     radius: 30,
                     fill: "#64C9CF",
-                    stroke: "black",
-                    strokeWidth:4
+                    stroke: "#2541B2",
+                    strokeWidth:1
                 },
                 configValue:{
-                    x:223,//circleX-10
-                    y:228,//circley-30
+                    x:220,//circleX-10
+                    y:243,//circley-30
                     text: '-',
-                    fontSize: 60
+                    fontSize: 40
                 },
                 changeCoordinates(xVal,yVal){
                     this.configShape.x = xVal;
@@ -74,7 +124,7 @@ const problemObj = {
                 x:315,//rectX+15
                 y:230,//recty:+10
                 text: '5',
-                fontSize: 60
+                fontSize: 40
                 }
             },
 
@@ -101,17 +151,42 @@ const problemObj = {
             x:715,//rectX+15
             y:230,//recty:+10
             text: '7',
-            fontSize: 60
+            fontSize: 40
             }
         },
     ],
+    //EQUAL OPERATORS in various steps
+    equalOpers:[
+        {
+            id:1,
+            configShape:{
+                x: 600,
+                y: 250,
+                radius: 30,
+                // fill: "#50CB93",
+                // stroke: "#50CB93",
+                fill:"#FDE49C",
+                stroke:"#FFB740",
+                strokeWidth: 4
+            },
+        
+            //equal operator text(=)
+            configValue:{
+                x:587,//shapeX-13
+                y:235,//shapeY-15
+                text: '=',
+                fontSize: 40
+            }
+        }
+
+    ],
     pushOperator: function(oper, side){
         //when pushing operator to other side (on effect of dragging)
-        if(oper.operType === '+'){
-            oper.operType = '-'
+        if(oper.val === '+'){
+            oper.val = '-'
             oper.configValue.text = '-'
-        }else if(oper.operType === '-'){
-            oper.operType = '+'
+        }else if(oper.val === '-'){
+            oper.val = '+'
             oper.configValue.text = '+'
         }
 
@@ -160,10 +235,10 @@ const problemObj = {
                             //Make copy of operator to modify 
                             // let operatorObj = Object.assign({}, this.lhs[operandIndex]);
                             //Change operator on side change 
-                            // if(operatorObj.operType === '+'){
-                            //     operatorObj.operType = '-';
-                            // }else if(operatorObj.operType === '-'){
-                            //     operatorObj.operType = '+';
+                            // if(operatorObj.val === '+'){
+                            //     operatorObj.val = '-';
+                            // }else if(operatorObj.val === '-'){
+                            //     operatorObj.val = '+';
                             // }
                             this.pushOperator(this.lhs[operatorIndex], 'rhs');
                             this.rhs.push(this.lhs[operandIndex]);
@@ -198,72 +273,120 @@ const problemObj = {
     },
     //EVALUATE (Compute calculations)
     evaluateSide(side){
+            //Trial 
+            //Next step Values
+            const stepNo = this[side][this[side].length - 1].step + 1;
+            //Add an element as next step item 
             //evaluate the expression on a side 
-            if(side === 'lhs'){
-                //evaluating LHS 
-                console.log('evaluate LHS');
-            }else{
-                //Evaluate RHS 
-                for(let i=1;i<this.rhs.length; i+=2){
+                let xVal;
+                //Set initial X-vals according to side
+                if(side === 'lhs'){
+                    xVal = 100;
+                }else{
+                    xVal = 700;
+                }
+                console.log('next step X-val', xVal);
+                //Evaluate RHS/LHS 
+                for(let i=1,j=0;i<this[side].length, j<this[side].length; i+=2,j+=2){
                     //look all intermediate index for operators
-                    if(this.rhs[i].type === 'oper'){
-                        //If it is an operator, make calculations
-                        //construct evalualtion string 
-                        console.log('rhs-now', this.rhs,i);
-                        const evalStr = this.rhs[i-1].val + this.rhs[i].operType + this.rhs[i+1].val;
-                        console.log('evalStr',evalStr);
-                        console.log('evaluate-result', eval(evalStr));
-                        //Result of evaluation
-                        const resultOperand = eval(evalStr);
-                        //Trial 
-                        //Next step Values
-                        const stepNo = this.rhs[i].step + 1;
-                        //Add an element as next step item 
-                        if(i==1){
-                            //No need to add operator,add an operand with evaluated result 
-                            console.log('add-next-step-items')
-                            this.addNextStepElm('rhs', stepNo, 'opd', resultOperand)
-                        }else{
-                            //Add operator and connecting operand 
-                            console.log('operator and operand');
+                    if(this[side][i]){
+                        if(this[side][i].type === 'oper'){
+                            //If it is an operator, make calculations
+                            if(this[side].length >2){
+                                //if there is an expression there(items>2..eg:x+2)
+                                //construct evalualtion string 
+                                console.log('rhs-now', this[side],i);
+                                const evalStr = this[side][i-1].val + this[side][i].val + this[side][i+1].val;
+                                console.log('evalStr',evalStr);
+                                console.log('evaluate-result', eval(evalStr));
+                                //Result of evaluation
+                                const resultOperand = eval(evalStr);
+                                //Result of evaluation
+                                this.addNextStepElm(side, stepNo, 'opd', resultOperand, xVal)
+                                console.log('added-new-step-elem-after-eval',this[side])
+                                xVal +=150;
+                            }
+    
+
+                            //GENERATE NEW ELEMENTS
+                            else{
+                                //Only one or two elements
+                                if(i==1){
+                                    //No need to add operator,add an operand with evaluated result 
+                                    console.log('add-next-step-items')
+        
+                                    if(!this[side][2]){
+                                        //Only one element on lhs(expressiont be like 5+ or x+)
+                                        if(this[side][0].valType === 'const'){
+                                            //if val inside is a constant
+                                            //convert the val type to int
+                                            this.addNextStepElm(side, stepNo, 'opd', parseInt(this[side][0].val), xVal)
+                                            xVal +=150;
+    
+                                        }else if(this[side][0].valType === 'var'){
+                                            
+                                            this.addNextStepElm(side, stepNo, 'opd', this[side][0].val, xVal)
+                                            xVal +=150;
+    
+                                        }
+                                    }
+                                }else{
+                                    //Add operator and connecting operand 
+                                    console.log('operator and operand');
+                                }
+                            }
+
+                            this.addNextEqualOper(stepNo);
+
                         }
                     }
+
+                    //FOR ADDING OPERANDS IN NEXT STEP 
+                    // if(this.rhs[j].type === 'opd'){
+
+                    // }
                 }
-            }
+            
 
     },
     //GENERATE NEXT STEP ELEMENTS 
-    addNextStepElm(side, step, elmType, val){
+    addNextStepElm(side, step, elmType, val, xVal){
         //Generate next step elem by evaluating results and rendering new elems 
         console.log('gen-next-step');
         //Step Y Coordinates
         const stepY = step * 220;
         if(elmType === 'opd'){
-            this[side].push({
-                seq:'',//sequence/index in equation(to know the initial place)
-                id:'operand-4',
-                type:'opd',//for operand,
-                valType:'const',
-                side:side,
-                step:step,
-                val:String(val),
-                configShape:{
-                    x:700,
-                    y:stepY,//equalToX y-10
-                    width:70,
-                    height:70,
-                    fill:"#FDE49C",
-                    stroke:"#FFB740",
-                    // draggable:true,
-                },
-                configValue:{
-                x:715,//rectX+15
-                y:stepY+10,//recty:+10
-                text: String(val),
-                fontSize: 60
-                }
-            });
+            //Make a copy of operand object
+            const newOpd = Object.assign({}, operandSampleObj);
+            //change x-vals
+            newOpd.configShape.x = xVal;
+            newOpd.configValue.x = xVal + 15;
+            // change Y - values
+            newOpd.configShape.y = stepY;
+            newOpd.configValue.y = stepY+10;
+            //Set side
+            newOpd.side = side;
+            //set Val
+            newOpd.val = String(val);
+            newOpd.configValue.text = String(val);
+            //Generate and set new id (incrementing 1 to last element id)
+            newOpd.id = this[side][this[side].length - 1].id + 1;
+            this[side].push(newOpd);
         }
+    },
+    addNextEqualOper(step){
+        //Add new '=' operator on new step
+        //Calculate Y-val of equal operator using step
+        const stepY = step * 250;
+        //Make a copy of operator object
+        const newOper = Object.assign({}, operSampleObj);
+        //change Y vals
+        newOper.configShape.y = stepY;
+        newOper.configValue.y = stepY - 15;
+        //set New id ( by incrementing the last id)
+        newOper.id = this.equalOpers[this.equalOpers.length - 1].id + 1;
+        this.equalOpers.push(newOper);
+        console.log('opers-array',this.equalOpers);
     }
 }
 

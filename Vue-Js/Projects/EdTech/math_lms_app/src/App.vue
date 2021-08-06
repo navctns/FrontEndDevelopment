@@ -1,13 +1,15 @@
 <template>
-  <problem-page></problem-page>
+  <problem-page-vuex></problem-page-vuex>
 </template>
 
 <script>
 // import HelloWorld from './components/HelloWorld.vue'
-import ProblemPage from './pages/ProblemPage.vue';
+// import ProblemPage from './pages/ProblemPage.vue';
+import ProblemPageVuex from './pages/ProblemPageVuex.vue'
 export default {
   components: {
-    ProblemPage
+    ProblemPageVuex
+    // ProblemPage
   }
 }
 </script>

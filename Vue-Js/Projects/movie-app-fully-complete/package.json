@@ -1,5 +1,5 @@
 {
-  "name": "math_lms_app",
+  "name": "movie-rating-form",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,10 +9,9 @@
   },
   "dependencies": {
     "core-js": "^3.6.5",
-    "konva": "^8.1.1",
     "vue": "^3.0.0",
-    "vue3-konva": "^2.1.7",
-    "vuex": "^4.0.2"
+    "vue-router": "^4.0.6",
+    "vuex": "^4.0.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",

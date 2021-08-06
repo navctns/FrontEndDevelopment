@@ -1,0 +1,10 @@
+
+160
+
+I don't believe there is a built-in function for that. But it's easy enough to write with a regex
+
+function isLetter(str) {
+  return str.length === 1 && str.match(/[a-z]/i);
+}
+
+

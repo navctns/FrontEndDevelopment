@@ -1,0 +1,2 @@
+npm install --save vuex (for vue 2)
+npm install vuex@next --save (for vue 3)
