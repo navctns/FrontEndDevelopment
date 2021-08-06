@@ -36,7 +36,7 @@ export default{
         val:'7',
         coeff:null,
         paraNo:0,
-        sign:'+',
+        sign:'',
         coeffId:null,
         configShape:{
             x:700,
