@@ -1,3 +1,4 @@
+
 export default{
     setProblemStatus(state){
         console.log('setProblemStatus');
@@ -6,7 +7,36 @@ export default{
         state.currPrbStr = state.problems[state.currPrbNo].str;
         console.log('setProblemStatus - currPrbStr', state.currPrbStr);
     },
+
     createProblemObject(state){
+        function setCoordinates(elType, elObj){
+            //UPDATING Coordinates of Konva elements in Oper/Opd objects
+            //Sample function inside a function
+            let xVal = null;
+            if(state.currX === 100){
+                //initial condition
+                xVal = state.currX;
+            }else{
+                //other conditions
+                state.currX += 133;
+                xVal = state.currX;
+            }
+            //Set Y Val
+            const yVal = elType === 'opd' ? state.currOpdY : state.currOperY;
+            //set Object values
+            elObj.configShape.x = xVal;
+            elObj.configShape.y = yVal;
+            //Set Text coord vals
+            if(elType === 'oper'){
+                elObj.configValue.x = xVal -13;
+                elObj.configValue.y = yVal - 15;
+            }else{
+                //Operand Text coord vals
+                elObj.configValue.x = xVal + 15;
+                elObj.configValue.y = yVal + 10;
+            }
+            return elObj;//Object
+        }
         //store the current problem string
         const problem = state.currPrbStr;
         console.log('createProblemObject - curr-prb',problem,problem.length);
@@ -44,6 +74,9 @@ export default{
                 newOpd.type ='opd';
                 //change val type
                 newOpd.valType = 'var';
+                //Update coordinates
+                newOpd = setCoordinates('opd', newOpd); 
+
                 if(i>0){
                     //an element is present before alphabet
                     const prevEl = problem[i-1]//the element before tha alphabet
@@ -95,6 +128,8 @@ export default{
             }else if(!isNaN(problem[i])){
                 //The element val is a Number
                 console.log(`constant found on ${i}`)
+                //Update Coordinates
+                newOpd = setCoordinates('opd', newOpd); 
                 let j = i;
                 let numStr = '';
                 while(j < problem.length){
@@ -138,6 +173,8 @@ export default{
             }else if(operators.includes(problem[i])){
                 //Check for Operators
                 console.log('oper found', problem[i]);
+                //Update Coordinates
+                newOper = setCoordinates('oper', newOper); 
                 //SET ATTRIBUTES 
                 newOper.val = problem[i]
                 //check for '='

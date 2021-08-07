@@ -30,7 +30,9 @@ const store = createStore({
             openPara:false,//a paranthesis is open(used when consturcting problem Object)
             paraNo:0,//Paranthesis Number,
             currSide:'lhs',//store side which now processing(used when consturcting problem Object)
-
+            currX:100,//x value same for opd & oper
+            currOpdY:220,// y value for opernad
+            currOperY:258,// y value for operator
             //Operator and operand object models(for reusing)
             operModel:problemElmModels.oper,
             opdModel:problemElmModels.opd,
