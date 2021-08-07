@@ -1,11 +1,11 @@
 export default{
     oper:{
         id:'',
-        val:'',
-        step:'',
-        side:'',
+        val:'',//+-*
+        step:0,//1234
+        side:'',//lhs/rhs
         type:'oper',
-        paraNo:0,
+        paraNo:0,//presently open paranthesis(if any)
         configShape:{
             x: 600,
             y: 250,
@@ -30,11 +30,11 @@ export default{
         seq:'',//sequence/index in equation(to know the initial place)
         id:'operand-3',
         type:'opd',//for operand,
-        valType:'const',
+        valType:'const',//var/const
         side:'lhs',
-        step:1,
-        val:'7',
-        coeff:null,
+        step:0,
+        val:'',
+        coeff:null,//coeff val
         paraNo:0,
         sign:'',
         coeffId:null,

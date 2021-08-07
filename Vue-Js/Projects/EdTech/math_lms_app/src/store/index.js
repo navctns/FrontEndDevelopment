@@ -10,7 +10,7 @@ const store = createStore({
             problems:[
                 {
                     id:'101',
-                    str:'-10+2x+5=25',
+                    str:'(-10-32x)+5=25',
                     status:'not-complete',
                     result:false,//true if result is correct
                 },
