@@ -1,0 +1,5 @@
+
+mysql 
+
+user: wp-user
+pass: $123#45

@@ -1,0 +1,226 @@
+
+Prereq: Install LAMP Stack
+
+Configure MySQL
+
+sudo mysql -u root OR sudo mysql -u root -p   (And Provide the user password(of ubuntu))
+
+//SETUP Database
+
+mysql> CREATE DATABASE wordpressdb;
+NOTE: Always remember to terminate MySQL statements with a semi-colon “;”
+
+//SET ADMIN USER FOR DATABASE
+
+With the database in place, you need to create a new MySQL user account that will have exclusive access to the database.
+
+Let's also grant the user full access to the database and set a strong password. For this guide, we will create a user
+called admin-user
+
+mysql> GRANT ALL ON wordpress.* TO 'admin-suser'@'localhost' IDENTIFIED BY 'PASSWORD';
+
+NOTE: Remember to replace the PASSWORD string with a strong password.
+
+At this point, we’ve created a database and a user account specifically for WordPress.
+
+To apply the changes in MySQL instance, we need to run the command below 
+
+mysql> FLUSH PRIVILEGES;
+
+//EXIT MySQL
+
+mysql>   EXIT;
+
+////// Install additional PHP extensions ////////////
+
+LAMP stack requires only a minimal set of extensions for PHP to communicate with MySQL database server. However, WordPress and many of its plugins require additional extensions to function without complications.
+
+With that in mind, we're now going to install additional PHP extensions for WordPress.
+
+First, update the system: 
+
+sudo apt update
+
+Next, install the additional PHP extensions: 
+
+sudo apt install php-curl php-gd php-mbstring php-xml php-xmlrpc php-  soap php-intl php-zip
+NOTE: if not working install one by one instead (eg sudo apt install php-curl)
+
+To load these extensions, restart Apache web server by running the following command:
+
+# sudo systemctl restart apache2
+
+
+//// Download WordPress 
+
+With all the prerequisites in place, let’s go ahead and download WordPress.
+
+For security reasons, I recommend always downloading WordPress from its official repository:
+
+First Navigate to /var/www/ directory 
+
+cd  /var/www/``` or cd /var/www/ only
+
+Then download the zipped folder using the command 
+
+# curl -O https://wordpress.org/latest.tar.gz
+
+Extract the tarball file
+
+# tar -xvf latest.tar.gz
+
+//DELETE  tarball file 
+
+This is the folder that contains all the WordPress configuration files. At this point, it’s safe to delete the tarball file you just downloaded from the WordPress repository. 
+
+# rm latest.tar.gz
+
+//////Configure the WordPress directory///////
+
+Before we proceed to the next step, we need to adjust ownership and file permissions of the WordPress directory.
+
+Let’s assign file ownership to all the files in the WordPress directory using the
+
+# sudo chown -R www-data:www-data /var/www/wordpress
+
+Next, we’ll set the correct permissions as shown: 
+
+# sudo find /var/www/wordpress/ -type d -exec chmod 750 {} \;
+# sudo find /var/www/wordpress/ -type f -exec chmod 640 {} \;
+
+If above commands dont perform what you nedd
+//Make the current user own everything inside the folder (and the folder itself):
+
+sudo chown -R $USER ~/.blabla or sudo chown -R $USER var/www/wordpress
+
+
+Rename config file
+
+We also need to rename the sample configuration file in the WordPress directory to a filename it can read from: 
+
+# cd /var/www/wordpress
+# mv wp-config-sample.php wp-config.php
+
+Next, we will open the wp-config.php file using the default text editor Vim
+
+# vim  wp-config.php OR nano wp-config.php
+
+Now scroll down and locate the database settings as shown below. Be sure to fill in the WordPress database name, database user, database password and hostname
+
+// ** MySQL settings - You can get this info from your web host ** //
+/** The name of the database for WordPress */
+define('DB_NAME', 'wordpressdb');
+
+/** MySQL database username */
+define('DB_USER', 'admin-user');
+
+/** MySQL database password */
+define('DB_PASSWORD', 'StrongPassword');
+
+/** MySQL hostname */
+define('DB_HOST', 'localhost');
+
+/** Database Charset to use in creating database tables. */
+define('DB_CHARSET', 'utf8');
+
+/** The Database Collate type. Don't change this if in doubt. */
+define('DB_COLLATE', '');
+
+
+You also need to generate security keys to provide additional security to your WordPress installation. WordPress provides an automatic generator for these keys to eliminate the need for generating them ourselves.
+
+To generate these values from WordPress secret generator, simply run the command: 
+
+# curl -s https://api.wordpress.org/secret-key/1.1/salt/
+
+
+Note: The command gave us the output below. DO NOT USE THESE VALUES, you need to copy the unique values that you generated.
+
+define('AUTH_KEY',      'UV>...SAMPLE ONLY...COPY YOUR OWN VALUES...mL)');
+define('SECURE_AUTH_KEY',  'bn(UV>...SAMPLE ONLY...COPY YOUR OWN VALUES...emL)zx');
+define('LOGGED_IN_KEY',    '-naUV>...SAMPLE ONLY...COPY YOUR OWN VALUES...emL{fY');
+define('NONCE_KEY',     '{xNwUV>...SAMPLE ONLY...COPY YOUR OWN VALUES...emL8Fq');
+define('AUTH_SALT',        'j+;UV>...SAMPLE ONLY...COPY YOUR OWN VALUES...emLZpu');
+define('SECURE_AUTH_SALT', '0M=UV>...SAMPLE ONLY...COPY YOUR OWN VALUES...emL*xC');
+define('LOGGED_IN_SALT',   'G&2UV>...SAMPLE ONLY...COPY YOUR OWN VALUES...emLps+');
+define('NONCE_SALT',    '2gZUV>...SAMPLE ONLY...COPY YOUR OWN VALUES...emLh/L');
+
+//SET Configuration with these keys
+
+Copy the unique output that you’ve generated.
+
+Once again, open the WordPress configuration file wp-config.php 
+
+# vim  wp-config.php
+
+Scroll and locate the section that contains the dummy values, which looks like this: 
+
+define('AUTH_KEY',         'put your unique phrase here');
+define('SECURE_AUTH_KEY',  'put your unique phrase here');
+define('LOGGED_IN_KEY',    'put your unique phrase here');
+define('NONCE_KEY',        'put your unique phrase here');
+define('AUTH_SALT',        'put your unique phrase here');
+define('SECURE_AUTH_SALT', 'put your unique phrase here');
+define('LOGGED_IN_SALT',   'put your unique phrase here');
+define('NONCE_SALT',       'put your unique phrase here');
+
+
+Step 5: Modify Apache configuration
+
+In this step, we need to make a few adjustments to the default configuration file 000-default.conf in the path /etc/apache2/sites-available.
+
+Start by opening the default configuration file 
+
+# vim  /etc/apache2/sites-available/000-default.conf
+
+Next, locate the DocumentRoot attribute and change it from /var/www/html to /var/www/wordpress.
+
+In the same file, copy and paste the following lines inside the Virtual Host block
+
+<Directory /var/www/wordpress/>
+AllowOverride All
+</Directory>
+
+
+Save and exit the configuration file.
+
+Next, you need to enable the mod_rewrite so that you can use WordPress Permalink feature
+
+# sudo a2enmod rewrite
+
+To verify that all went well, execute the command. 
+
+# sudo apache2ctl configtest
+
+To implement the changes, restart Apache web server. 
+
+# sudo systemctl restart apache2
+
+Step 6: Run WordPress installation using the web browser
+
+At this point, you’ve finished all the server configurations for your WordPress installation.
+
+The final step is to complete the installation via a web browser.
+
+To do this, launch your web browser and browser your server’s IP address or domain name
+http://server_IP_address or http://YOUR-DOMAIN
+
+The first page will prompt you to select the language. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

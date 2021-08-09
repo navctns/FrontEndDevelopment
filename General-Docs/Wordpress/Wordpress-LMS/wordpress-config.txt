@@ -1,0 +1,37 @@
+Configurations
+
+database:wordpressdb
+db-user : wp-user
+pass: $123#45
+
+AUTH KEYS
+
+define('AUTH_KEY',         '],-$i0lT[rN3)654xZ~JPpU[)5F_(dL3iGiJrcL|DrtAcwWMQ-!v0>N_LqExC5nO');
+define('SECURE_AUTH_KEY',  'yVO8^I:aR1@EX;}zAp(Nu+UmxNp(ft_BAOb?k8@|||nxK0]5*)MZU-nm#haqc+iY');
+define('LOGGED_IN_KEY',    'P8Oxq6zmz6~Y>=3k?[j5.MN6`R-Yo|E2>>cm5<DY*g3rD{iz]p0b!VSAwd._lQ8Z');
+define('NONCE_KEY',        'dwQX^RUkUkj5|o?e(!lnUlY(%mx?Wp$|8Z%rliU|wQV}i2]_Kae.SWZP[sfn{-xA');
+define('AUTH_SALT',        '@xVCZuIW0<T%O$Gc+g7|<n+_1n4b|W2^,7JQ}WT%EkP05tEMkZb6>N(]FF|N1Oa2');
+define('SECURE_AUTH_SALT', '=BNlS=<>ZIkGG/n)4Ap#E;G:B(+Tn6z3=9Si2O#bcQ$Z4@yI V=+*+@e})P&N=8E');
+define('LOGGED_IN_SALT',   '3R>ER`Q`ATc$su&Tj{, _yJLm4Ql+G|A.2Y`WO3~cpfiRc7|F_/WL-=LC0-c^GmV');
+define('NONCE_SALT',       ':HZy2:m&N|~z&J|JXrJ38kaLVq:$B^7A/TV;G(&LlzC+>o@,Ec#Cz[4bPKp?UsD.');
+
+
+LOCAl LOGIN 
+
+login page: http://localhost/wp-login.php
+
+username:navwplms
+pass:lms@wp#Tryout
+mail:navsoft18@gmail.com
+
+
+When installing wordpress on system directory var/www
+
+wordpress ask for ftp connection uera and pass , it is because the access right
+
+it can be fixed by giving access right to wordpress by running command
+
+sudo chown -R www-data wordpress 
+Note: here wordpress is the directory name where wordpress is stored
+
+

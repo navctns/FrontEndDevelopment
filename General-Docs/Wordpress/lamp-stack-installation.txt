@@ -1,0 +1,20 @@
+sudo apt-get install tasksel
+
+sudo tasksel
+
+Now tick LAMP Server and press the Tab key once, followed by the Enter key. You will be prompted to provide a root password for MySQL, and once you’ve done that, the installation will be complete within a few minutes.
+
+Find the versions of Apache, MySQL, and PHP by issuing the following three commands from the terminal. 
+
+$ apache2 -v
+Server version: Apache/2.4.18 (Ubuntu)
+Server built:   2018-04-18T14:53:04
+
+$ mysql -V
+mysql  Ver 14.14 Distrib 5.7.22, for Linux (x86_64) using  EditLine wrapper
+
+$ php -v
+PHP 7.0.30-0ubuntu0.16.04.1 (cli) ( NTS )
+Copyright (c) 1997-2017 The PHP Group
+Zend Engine v3.0.0, Copyright (c) 1998-2017 Zend Technologies
+    with Zend OPcache v7.0.30-0ubuntu0.16.04.1, Copyright (c) 1999-2017, by Zend Technologies

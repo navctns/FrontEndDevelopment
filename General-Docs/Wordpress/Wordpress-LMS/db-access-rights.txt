@@ -1,0 +1,18 @@
+Login as root user
+
+ sudo mysql -u root -p
+type password://probably ubuntu-user password
+
+LOGIN AS other user(eg:wp-user)
+
+sudo mysql -u wp-user -p
+
+type password
+
+GRANTING ACCESS TO DATABASES 
+
+Login as root user/or user having that database
+
+mysql> CREATE DATABASE wordpressdb;
+
+mysql> GRANT ALL ON wordpressdb.* TO 'wp-user'@'localhost' IDENTIFIED BY 'PASSWORD of wp-user';

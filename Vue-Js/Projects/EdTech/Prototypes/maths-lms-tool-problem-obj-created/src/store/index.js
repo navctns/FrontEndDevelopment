@@ -28,7 +28,6 @@ const store = createStore({
                 rhs:[],
                 equalOpers:[],//Only for storing equal operators in various steps
                 sideBorder:null,//Border coordinate b/w lhs and rhs
-                coeffs:[],//store coefficient ids(eg: 2 in 2x)
             },//Current problem object generated from currPrbStr
             openPara:false,//a paranthesis is open(used when consturcting problem Object)
             paraNo:0,//Paranthesis Number,
