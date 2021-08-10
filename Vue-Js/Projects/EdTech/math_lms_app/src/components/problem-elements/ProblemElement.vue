@@ -12,7 +12,7 @@
     </v-group>
     <!--FOR OPERANDS -->
     <v-group :config="{ draggable: true}" v-else 
-        @dragstart="$emit('drag-start',configObj.id,configObj.side)"
+        @dragstart="$emit('drag-start',configObj.id,configObj.side, configObj.valType)"
         @dragend="$emit('drag-end',$event)"
     >    
         <!--Render variable/constant as rectangle-->
