@@ -82,13 +82,32 @@ export default{
             console.log('operandCmpDragEnd')
             //Set Pointer Values from event
             const xVal = event.evt.layerX;
+            console.log('coffs',problemObj.value.coeffs);
+            console.log('OPERAND valType',currentOperandType.value);
+            console.log('OPERAND ID',currentOperandId.value);
             // const yVal = event.evt.layerY;
             if(currentOperandSide.value === 'lhs' && xVal > currentSideBorder.x){
                 //OPERAND TRANSFERING From LHS to RHS
                 if(currentOperandType.value === 'const'){
-                    //Operand is a constant
-                    transferConstant('lhs','rhs', currentOperandId.value);
+                    console.log('transfer simple Const - non coeff')
+                    if(problemObj.value.coeffs.includes(currentOperandId.value)){
+                        //operand is a constant and coefficient
+                        console.log('transferCofficient IF BLOCK')
+                        transferCoefficient('lhs','rhs', currentOperandId.value); 
+                    }else{
+                        //Operand is a constant but not a coefficient
+                        transferConstant('lhs','rhs', currentOperandId.value);
+                    }
+
+                }else if(currentOperandType.value === 'var'){
+                    transferVairable('lhs', 'rhs', currentOperandId.value, 'num', true);
+
                 }
+                // if(currentOperandType.value === 'const' && problemObj.value.coeffs.includes(currentOperandId.value)){
+                //     //operand is a coefficient
+                //     console.log('transfer coeff - BLOCK');
+                //     transferCoefficient('lhs','rhs', currentOperandId.value);                 
+                // }
             }
 
         }
@@ -96,6 +115,7 @@ export default{
             //Transfer constant from one side(prev) to another(next)
             //opdId is the id of the dragging operand
             const opdIndex = problemObj.value[prev].findIndex(opd => opd.id === opdId) ;//problemObj.value.rhs/lhs
+            console.log('transferConst index', opdIndex)
             let sign = '';
             //Get sign of operand
             if(problemObj.value[prev][opdIndex].sign === '-'){
@@ -145,7 +165,7 @@ export default{
             problemObj.value[prev][opdIndex].configShape.x = opdCoord.xVal;
             problemObj.value[prev][opdIndex].configValue.x = opdCoord.xVal + 15
             console.log('yval', yVal);
-            //push to next
+            //push to operand next
             problemObj.value[next].push(problemObj.value[prev][opdIndex]);
             console.log('Coord for adding Oper',xVal,yVal);
             // console.log('current operand index ',opdIndex);
@@ -159,6 +179,59 @@ export default{
             console.log('PROB-OBJ - AFTER ADDING Const', problemObj.value);
             //Rearrange problem elements
             rearrangeCoordinates();
+        }
+        function transferVairable(prev, next, opdId, nextFractorPos='num', addCoeff=true){
+            console.log('transferVairable()');
+            //Transfer Variable
+            //nextFactorPos can be (num/denom) num -is set when more than 2 elements on
+            // prev side, transferring to num of next 
+            //addCoeff - true means transfer coeff along with variable(when elements on side > 2)
+            //get  operand object
+            //Get operand index
+            const opdIndex = problemObj.value[prev].findIndex(opd => opd.id === opdId) ;//problemObj.value.rhs/lhs
+            if(problemObj.value[prev].length > 2){
+                //add var along with coeff
+                //Get Coefficient
+                const coeffId = problemObj.value[prev][opdIndex].coeffId;   
+                //Transfer the coeffecient object to other side
+                if(addCoeff){
+                    //when addCoeff is true, it is to reuse this function when transferring coeffecient
+                    transferConstant(prev, next, coeffId);
+                }
+                //transfer variable to other side
+                const varObj = problemObj.value[prev][opdIndex];
+                console.log('TRANSFERRING VAR OBJ', varObj);
+                problemObj.value[next].push(varObj);
+                console.log('PROB OBJ AFTER PUSHING VAR', problemObj.value);
+                rearrangeCoordinates();
+            }
+            if(nextFractorPos === 'den'){
+                console.log('transfer to denomenator of other side');
+            }
+        }
+        function transferCoefficient(prev, next, opdId){
+            console.log('transferCoefficient');
+            //transfer coeffecient 
+            if(problemObj.value[prev].length > 2){
+                console.log('No of Elements on side > 2 (Coeff TRANSFER)')
+                //element in prev side > 2
+                //transfer coeff along with variable
+                //transfer coefficient
+                const coeffIndex = problemObj.value[prev].findIndex(opd => opd.id === opdId) ;//problemObj.value.rhs/lhs
+
+                transferConstant(prev, next, opdId);
+                console.log('after TRANSFERRING CONST',problemObj.value[prev]);
+                //transfer variable
+                //Get Variable Object
+                console.log('coeffIndex',coeffIndex);
+                const varIndex = coeffIndex - 1;
+                console.log('varIndex',varIndex);
+                console.log(' CONST + VAR AFTER TRANSFER PROB OBJ', problemObj.value);
+                //variable object id
+                const varId = problemObj.value[prev][varIndex].id;
+                console.log('(CONST + VAR - TRANSFERRING) varId', varId);
+                transferVairable(prev, next, varId,'num', false);
+            }
         }
         function getNextCoordinate(side){
             //Return Next coordinate for adding item
