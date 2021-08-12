@@ -10,7 +10,7 @@ const store = createStore({
             problems:[
                 {
                     id:'101',
-                    str:'(-10-32x)+5=25',
+                    str:'(-10-32x)+5+x=25',
                     status:'not-complete',
                     result:false,//true if result is correct
                 },
@@ -32,6 +32,7 @@ const store = createStore({
                     y:0
                 },//Border coordinate b/w lhs and rhs
                 coeffs:[],//store coefficient ids(eg: 2 in 2x)
+                vars:[],//store the variable string and id obj
             },//Current problem object generated from currPrbStr
             currOpdCount:0,//Operands count in current problem
             currOperCount:0,//Operator count in current problem

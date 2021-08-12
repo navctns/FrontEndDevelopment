@@ -127,6 +127,16 @@ export default{
                 opdModel.type ='opd';
                 //change val type
                 opdModel.valType = 'var';
+                //Push variable info to Current Problem Variables
+                // state.currProbObj.vars.push({
+                //     str:problem[i],
+                //     id:`opd-${state.currOpdCount}`
+                // });
+                if(!state.currProbObj.vars.includes(problem[i])){
+                    //check for duplcate entry
+                    state.currProbObj.vars.push(problem[i])
+                }
+
                 if(i>0){
                     //an element is present before alphabet
                     const prevEl = problem[i-1]//the element before tha alphabet
@@ -158,6 +168,8 @@ export default{
                         }
                         //Push operand to problem object
                         state.currProbObj[state.currSide].push(opdModel);
+                        //update currX value
+                        state.currX += 133;
                         i++;//increment
                     }
                 }else{
@@ -213,7 +225,7 @@ export default{
                 }
             }else if(operators.includes(problem[i])){
                 //Set Newly generated operand id
-                opdModel.id = `oper-${state.currOperCount}`;
+                operModel.id = `oper-${state.currOperCount}`;
                 state.currOperCount += 1;
                 //Check for Operators
                 //SET ATTRIBUTES 
@@ -237,10 +249,12 @@ export default{
                     //Update Curr X value
                     state.currX += 60;
                 }else{
-                    //Push Object if elem is not 
+                    //Push Object if elem is not  =
                     state.currProbObj[state.currSide].push(operModel);
                     //Update currX value
                     state.currX += 60;
+                    //increment operCount
+                    // state.currOperCount += 1;
                 }
                 i++;
             }else if(parenthesis.includes(problem[i])){
