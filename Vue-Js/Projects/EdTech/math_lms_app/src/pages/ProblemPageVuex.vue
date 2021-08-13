@@ -105,17 +105,17 @@ export default{
             console.log('operandCmpDragEnd')
             //Set Pointer Values from event
             const xVal = event.evt.layerX;
-            console.log('coffs',problemObj.value.coeffs);
-            console.log('OPERAND valType',currentOperandType.value);
-            console.log('OPERAND ID',currentOperandId.value);
+            // console.log('coffs',problemObj.value.coeffs);
+            // console.log('OPERAND valType',currentOperandType.value);
+            // console.log('OPERAND ID',currentOperandId.value);
             // const yVal = event.evt.layerY;
             if(currentOperandSide.value === 'lhs' && xVal > currentSideBorder.x){
                 //OPERAND TRANSFERING From LHS to RHS
                 if(currentOperandType.value === 'const'){
-                    console.log('transfer simple Const - non coeff')
+                    // console.log('transfer simple Const - non coeff')
                     if(problemObj.value.coeffs.includes(currentOperandId.value)){
                         //operand is a constant and coefficient
-                        console.log('transferCofficient IF BLOCK')
+                        // console.log('transferCofficient IF BLOCK')
                         transferCoefficient('lhs','rhs', currentOperandId.value); 
                     }else{
                         //Operand is a constant but not a coefficient
@@ -124,13 +124,13 @@ export default{
 
                 }else if(currentOperandType.value === 'var'){
                     //get Variable Object
-                    const varObj = problemObj.value.lhs.find(opd => opd.id === currentOperandId.value);
-                    console.log('varOjb',varObj, varObj.coeff);
+                    // const varObj = problemObj.value.lhs.find(opd => opd.id === currentOperandId.value);
+                    // console.log('varOjb',varObj, varObj.coeff);
                     // transferVairable('lhs', 'rhs', currentOperandId.value, 'num', varObj.coeff>1 || varObj.coeff < 0);
                     // console.log('Operand Id when TRANSFERRING Variable', currentOperandId.value);
                     transferVairable('lhs', 'rhs', currentOperandId.value, 'num', true);
                     
-                    console.log('PROB-OBJ(after VAR+CONTST TRANS', problemObj.value );
+                    // console.log('PROB-OBJ(after VAR+CONTST TRANS', problemObj.value );
                 }
                 // if(currentOperandType.value === 'const' && problemObj.value.coeffs.includes(currentOperandId.value)){
                 //     //operand is a coefficient
@@ -140,7 +140,7 @@ export default{
             }else if(currentOperandSide.value === 'rhs' && xVal < currentSideBorder.x){
                 //OPERAND TRANSFERRING FROM RHS to LHS
                 if(currentOperandType.value === 'const'){
-                    console.log('transfer simple Const - non coeff')
+                    // console.log('transfer simple Const - non coeff')
                     if(problemObj.value.coeffs.includes(currentOperandId.value)){
                         //operand is a constant and coefficient
                         console.log('transferCofficient IF BLOCK')
@@ -152,7 +152,7 @@ export default{
 
                 }else if(currentOperandType.value === 'var'){
                     transferVairable('rhs', 'lhs', currentOperandId.value, 'num', true);
-                    console.log('PROB-OBJ(after VAR+CONTST TRANS', problemObj.value );
+                    // console.log('PROB-OBJ(after VAR+CONTST TRANS', problemObj.value );
                 }
 
             }
@@ -163,7 +163,7 @@ export default{
             //Transfer constant from one side(prev) to another(next)
             //opdId is the id of the dragging operand
             const opdIndex = problemObj.value[prev].findIndex(opd => opd.id === opdId) ;//problemObj.value.rhs/lhs
-            console.log('transferConst index', opdIndex)
+            // console.log('transferConst index', opdIndex)
             let sign = '';
             //Get sign of operand
             if(problemObj.value[prev][opdIndex].sign === '-'){
@@ -173,15 +173,16 @@ export default{
                 sign = '-';
             }
             
-            console.log('sign',sign);
+            // console.log('sign',sign);
 
             //create an operator with sign
             //set x,y values
             //Get New coordinate for adding operator from ,last coordinate on next side
-            let {xVal, yVal} = getNextCoordinate(next);
+            // let {xVal, yVal} = getNextCoordinate(next);
+            let {xVal} = getNextCoordinate(next);
             // const opdObj = problemObj.value[prev][opdIndex];
             //create oper object
-            console.log('OPER count', operCount.value);
+            // console.log('OPER count', operCount.value);
             operCount.value += 1; 
             const operModel = {
                 id:`oper${operCount.value}`,
@@ -213,32 +214,32 @@ export default{
             let opdCoord = getNextCoordinate(next);
             problemObj.value[prev][opdIndex].configShape.x = opdCoord.xVal;
             problemObj.value[prev][opdIndex].configValue.x = opdCoord.xVal + 15
-            console.log('yval', yVal);
+            // console.log('yval', yVal);
             //push to operand next
             problemObj.value[next].push(problemObj.value[prev][opdIndex]);
-            console.log('Coord for adding Oper',xVal,yVal);
+            // console.log('Coord for adding Oper',xVal,yVal);
             // console.log('current operand index ',opdIndex);
             //Remove the operator before the operand from prev
             if(opdIndex > 0){
                 //if there exist an element(possible operator) before operand
                 if(problemObj.value[prev][opdIndex - 1].type === 'oper'){
                     //Remove Operator
-                    console.log('Removing Operator before Const',problemObj.value[prev][opdIndex -1]);
+                    // console.log('Removing Operator before Const',problemObj.value[prev][opdIndex -1]);
                     problemObj.value[prev].splice(opdIndex - 1, 1);
-                    console.log('Removing Oper before CONST', problemObj.value);
+                    // console.log('Removing Oper before CONST', problemObj.value);
                 }
             }
 
             //Remove operand from prev side
-            console.log('OPD Now',problemObj.value[prev][opdIndex -1]);
+            // console.log('OPD Now',problemObj.value[prev][opdIndex -1]);
             problemObj.value[prev].splice(opdIndex - 1, 1);//since prev elem is spliced before index reduced to len-1
-            console.log('PROB-OBJ - AFTER ADDING Const', problemObj.value);
+            // console.log('PROB-OBJ - AFTER ADDING Const', problemObj.value);
             //Rearrange problem elements
-            rearrangeCoordinates();
+            rearrangeCoordinates(currStep.value);
         }
         function transferVairable(prev, next, opdId, nextFractorPos='num', addCoeff=true){
             console.log('transferVairable()', opdId);
-            console.log('TRANSFER VAR PROB OBJ BEFORE ADDING', problemObj.value);
+            // console.log('TRANSFER VAR PROB OBJ BEFORE ADDING', problemObj.value);
             //Transfer Variable
             //nextFactorPos can be (num/denom) num -is set when more than 2 elements on
             // prev side, transferring to num of next 
@@ -246,19 +247,19 @@ export default{
             //get  operand object
             //Get operand index
             const opdIndex = problemObj.value[prev].findIndex(opd => opd.id === opdId) ;//problemObj.value.rhs/lhs
-            console.log('problem Obj ON TRANSFER VAR ', problemObj.value);
+            // console.log('problem Obj ON TRANSFER VAR ', problemObj.value);
             //store/track index of variable
             // let varNewIndex = null;
             if(problemObj.value[prev].length > 2){
                 //add var along with coeff
                 //Get Coefficient
                 const coeffId = problemObj.value[prev][opdIndex].coeffId;  
-                console.log('coeffID', coeffId); 
+                // console.log('coeffID', coeffId); 
                 //Transfer the coeffecient object to other side
                 if(addCoeff){
                     //TRANSFER COEFFICIENT AND VARIABLE
                     //when addCoeff is true, it is to reuse this function when transferring coeffecient
-                    console.log('TRANSFERRING Coeff when trnasfering VAR')
+                    // console.log('TRANSFERRING Coeff when trnasfering VAR')
                     if(coeffId){
                         //IF a coefficient exits transfer coefficient before transferring var
                         transferConstant(prev, next, coeffId);
@@ -281,7 +282,7 @@ export default{
                                 prevElem.val = '+';
                                 prevElem.configValue.text = '+';
                             }
-                            console.log('prev oper', prevElem);
+                            // console.log('prev oper', prevElem);
                             problemObj.value[next].push(prevElem);
                             //Remove operator from prev side
                             problemObj.value[prev].splice(opdIndex - 1,1);
@@ -293,13 +294,13 @@ export default{
                     //PUSHING VARIABLE
                     //Get New Index of var
                     const opdNewIndex = problemObj.value[prev].findIndex(opd => opd.id === opdId) ;//problemObj.value.rhs/lhs
-                    console.log('var NEW Index',opdNewIndex, problemObj.value[prev]);
+                    // console.log('var NEW Index',opdNewIndex, problemObj.value[prev]);
                     if(coeffId){
                         //If an actual coefficient element is there (index -> index -2)
                         // transfer variable to other side
                         // const varObj = problemObj.value[prev][opdIndex -2];
                         const varObj = problemObj.value[prev][opdNewIndex];
-                        console.log('TRANSFERRING VAR OBJ', varObj);
+                        // console.log('TRANSFERRING VAR OBJ', varObj);
                         //change side 
                         varObj.side = next;
                         problemObj.value[next].push(varObj);
@@ -310,13 +311,14 @@ export default{
                         //Coeff = 1 , No actual coefficient element (index -> index -1)
                         //Get Variable Object
                         // const varObj = problemObj.value[prev][opdNewIndex];
-                        console.log('PROB OBJ - PUSHING SINGLE VAR', problemObj.value);
+                        // console.log('PROB OBJ - PUSHING SINGLE VAR', problemObj.value);
                         const varObj = problemObj.value[prev][opdNewIndex];
                         //Push Object
                         //change side value
                         varObj.side = next;
                         problemObj.value[next].push(varObj);
                         //Remove Variable from prev side
+                        problemObj.value[prev].splice(opdNewIndex,1)
                         // problemObj.value[prev].splice(opdIndex -1,1)
                         // problemObj.value[prev].splice(opdIndex -1,1)
                     }
@@ -324,14 +326,14 @@ export default{
                 }else{
                     //TRANFER ONLY VARIABLE( Mainly used when transferring Coefficient)
                     const varObj = problemObj.value[prev][opdIndex];
-                    console.log('TRANSFERRING VAR OBJ', varObj);
+                    // console.log('TRANSFERRING VAR OBJ', varObj);
                     problemObj.value[next].push(varObj);
                     //Remove Variable from prev side
                     problemObj.value[prev].splice(opdIndex,1);
                 }
 
-                console.log('PROB OBJ AFTER PUSHING VAR', problemObj.value);
-                rearrangeCoordinates();
+                // console.log('PROB OBJ AFTER PUSHING VAR', problemObj.value);
+                rearrangeCoordinates(currStep.value);
             }
             if(nextFractorPos === 'den'){
                 console.log('transfer to denomenator of other side');
@@ -341,24 +343,24 @@ export default{
             console.log('transferCoefficient');
             //transfer coeffecient 
             if(problemObj.value[prev].length > 2){
-                console.log('No of Elements on side > 2 (Coeff TRANSFER)')
+                // console.log('No of Elements on side > 2 (Coeff TRANSFER)')
                 //element in prev side > 2
                 //transfer coeff along with variable
                 //transfer coefficient
                 const coeffIndex = problemObj.value[prev].findIndex(opd => opd.id === opdId) ;//problemObj.value.rhs/lhs
                 //transfer constant
                 transferConstant(prev, next, opdId);
-                console.log('after TRANSFERRING CONST',problemObj.value[prev]);
+                // console.log('after TRANSFERRING CONST',problemObj.value[prev]);
                 //transfer variable
                 //Get Variable Object
-                console.log('coeffIndex',coeffIndex);
+                // console.log('coeffIndex',coeffIndex);
                 const varIndex = coeffIndex - 1;
-                console.log('varIndex',varIndex);
-                console.log(' CONST + VAR AFTER TRANSFER PROB OBJ', problemObj.value);
+                // console.log('varIndex',varIndex);
+                // console.log(' CONST + VAR AFTER TRANSFER PROB OBJ', problemObj.value);
                 //variable object id
                 const varId = problemObj.value[prev][varIndex].id;
-                console.log('(CONST + VAR - TRANSFERRING) varId', varId);
-                console.log('AFTER adding COEFF Const', problemObj.value);
+                // console.log('(CONST + VAR - TRANSFERRING) varId', varId);
+                // console.log('AFTER adding COEFF Const', problemObj.value);
                 transferVairable(prev, next, varId,'num', false);
 
             }
@@ -373,19 +375,40 @@ export default{
                 yVal:y
             }
         }
-        function rearrangeCoordinates(){
+        function rearrangeCoordinates(step){
             //REARRANGE ALL COORDINATES ON ALL STEPS
             //set starting x val
             let xValElem = 100;
             //activate when changing step (mainly for setting new = operator)
             // let stepChange = false;
             //set y val offset(changes on every step)
-            // let yValOffset = 0;//0 for first step, then increment by 100
-            // let step = 0;
-            for(let i=0;i< problemObj.value.lhs.length;i++){
-                //Change coordinates in lhs
+            let yValOffset = 0;//0 for first step, then increment by 100
+            let yVal = (step + 1) *220;//since step starts from 0
+            //Step
+            // let step=0;
+            //Filter LHS according to step
+            // const currentStepLhs = problemObj.value.lhs.filter(elem => elem.step === step);
+            //Render LHS
+            // for(let i=0;i< problemObj.value.lhs.length;i++){
+            // function getAllIndexes(arr, val) {
+            // Get LHS indexes of items in the current step
+            const lhsIndexes = [];
+            const rhsIndexes = [];//stores RHS items indexes in the current step
+            for(let i = 0; i < problemObj.value.lhs.length; i++){
+                    if (problemObj.value.lhs[i].step === step)
+                        lhsIndexes.push(i);
+                // return indexes;
+            }
+            // Get LHS indexes of items in the current step
+            for(let i = 0; i < problemObj.value.rhs.length; i++){
+                    if (problemObj.value.rhs[i].step === step)
+                        rhsIndexes.push(i);
+                // return indexes;
+            }
+            for(let i=0;i< lhsIndexes.length;i++){
                 // if(i>0){
-                //     if(problemObj.value.lhs[i-1].step !== problemObj.value.lhs[i]){
+                //     if(problemObj.value.lhs[i-1].step !== problemObj.value.lhs[i].step){
+                //         //ON STEP CHANGED
                 //         console.log('CHANGE STEP Coordinates');
                 //         //change in step detected
                 //         xValElem = 100;
@@ -397,23 +420,30 @@ export default{
                 //         yValOffset += 100;
                 //     }
                 // }
-                if(problemObj.value.lhs[i].type === 'oper'){
+                // if(problemObj.value.lhs[i].type === 'oper'){
+                if(problemObj.value.lhs[lhsIndexes[i]].type === 'oper'){
                     //since operElem needed a different span
                     xValElem += 30;
                 }
-                problemObj.value.lhs[i].configShape.x = xValElem;
+                problemObj.value.lhs[lhsIndexes[i]].configShape.x = xValElem;
                 //set y val according to current offset
-                // problemObj.value.lhs[i].configShape.y += yValOffset;
-                if(problemObj.value.lhs[i].type === 'opd'){
-                    problemObj.value.lhs[i].configValue.x = xValElem + 15;
+                if(problemObj.value.lhs[lhsIndexes[i]].type === 'oper'){
+                    //y value is greater for operators
+                    problemObj.value.lhs[lhsIndexes[i]].configShape.y = yVal + 23;
+                }else{
+                    //Y val for operands
+                    problemObj.value.lhs[lhsIndexes[i]].configShape.y = yVal;
+                }
+                if(problemObj.value.lhs[lhsIndexes[i]].type === 'opd'){
+                    problemObj.value.lhs[lhsIndexes[i]].configValue.x = xValElem + 15;
                     //set y val according to current offset
-                    // problemObj.value.lhs[i].configValue.y += yValOffset;
+                    problemObj.value.lhs[lhsIndexes[i]].configValue.y = yVal + 10;
                     //set yVal later
                 }else{
                     //operator config text
-                    problemObj.value.lhs[i].configValue.x = xValElem - 13;
+                    problemObj.value.lhs[lhsIndexes[i]].configValue.x = xValElem - 13;
                     //set y val according to current offset
-                    // problemObj.value.lhs[i].configValue.y += yValOffset;
+                    problemObj.value.lhs[lhsIndexes[i]].configValue.y = yVal + 10;// yval + 23 -7
                 }
                 //Increment xValElem
                 xValElem += 80;
@@ -433,53 +463,67 @@ export default{
             //SET equal Operators 
             problemObj.value.equalOpers[problemObj.value.equalOpers.length - 1].configShape.x = xValElem;
             problemObj.value.equalOpers[problemObj.value.equalOpers.length - 1].configValue.x = xValElem - 13;
+            //set Y vals
+            problemObj.value.equalOpers[problemObj.value.equalOpers.length - 1].configShape.y = yVal + 20;
+            problemObj.value.equalOpers[problemObj.value.equalOpers.length - 1].configValue.y = yVal + 5;//shapeX + 20 - 15
             console.log('REARRANGED', problemObj.value);
             //Increment xValElm for RHS
             xValElem += 60;
-            for(let i=0;i< problemObj.value.rhs.length;i++){
+            for(let i=0;i< rhsIndexes.length;i++){
                 //Change coordinates in RHS
-                if(problemObj.value.rhs[i].type === 'oper'){
+                if(problemObj.value.rhs[rhsIndexes[i]].type === 'oper'){
                     //since operElem needed a different span
                     xValElem += 30;
                 }
-                problemObj.value.rhs[i].configShape.x = xValElem;
+                problemObj.value.rhs[rhsIndexes[i]].configShape.x = xValElem;
                 //set yVal according to current offset
                 // problemObj.value.rhs[i].configShape.y += yValOffset;
-                if(problemObj.value.rhs[i].type === 'opd'){
-                    problemObj.value.rhs[i].configValue.x = xValElem + 15;
+                if(problemObj.value.rhs[rhsIndexes[i]].type === 'opd'){
+                    problemObj.value.rhs[rhsIndexes[i]].configValue.x = xValElem + 15;
                     //set yVal according to current offset
-                    // problemObj.value.rhs[i].configValue.y += yValOffset;
+                    problemObj.value.rhs[rhsIndexes[i]].configValue.y += yValOffset;
 
                 }else{
                     //operator config text
-                    problemObj.value.rhs[i].configValue.x = xValElem - 13;
+                    problemObj.value.rhs[rhsIndexes[i]].configValue.x = xValElem - 13;
                     //set yVal according to current offset
-                    // problemObj.value.rhs[i].configValue.y += yValOffset;
+                    problemObj.value.rhs[rhsIndexes[i]].configValue.y += yValOffset;
                 }
                 //Increment xValElem
                 xValElem += 100;
             }
         }
         function evaluateCurrentStep(){
+            console.log('evaluateCurrentStep()');
             currStep.value += 1;
+            //create new equal oper
+            createEqualOperator(currStep.value);
+            //Evaluate LHS and create new step elements
             evaluate('lhs');
+            //Evaluate RHS and create new step elements
+            evaluate('rhs');
+            console.log('PROB OBJ AFTER EVAL', problemObj.value)
             //REARRANGE Coordinates after evaluation
-            rearrangeCoordinates();
+            for(let step = 0;step <= currStep.value; step++){
+                rearrangeCoordinates(step);
+            }
         }
         //EVALUATE SIDES AND CONSTRUCT NEXT STEP
         function evaluate(side){
             //evaluate side
             //on the present step
-            let sideProblemStr = '';//the string to be evaluated at last
+            // let sideProblemStr = '';//the string to be evaluated at last
 
-            for(let i=0; i<problemObj.value[side].length; i++){
-                //iterate through elements on a side
-                sideProblemStr =  sideProblemStr + problemObj.value[side][i].val;
-                //Add Variables by adding its coefficients
-            }
-            console.log(`problem String on ${side}`, sideProblemStr);
+            // for(let i=0; i<problemObj.value[side].length; i++){
+            //     //iterate through elements on a side
+            //     sideProblemStr =  sideProblemStr + problemObj.value[side][i].val;
+            //     //Add Variables by adding its coefficients
+            // }
+            // console.log(`problem String on ${side}`, sideProblemStr);
             //Sum variables in a side
-            sumVariables(side)
+            sumVariables(side);
+            //Sum constants
+            sumConstants(side);
         }
         function sumVariables(side){
             //filter variables
@@ -498,12 +542,33 @@ export default{
                 const coeffSumSign = Math.sign(coeffSum) === -1 ? '-':'+';
                 const coeffId = createOperand(side,'const',coeffSum,coeffSumSign,null,null,0);//set paraNo dynamically
                 createOperand(side,'var',varStr,'',coeffSum, coeffId, 0);
+                console.log('coeff sum',coeffSum);
 
             });
             //Sum up variables by adding its coefficients
             // for(let i=0; i<variables.length; i++){
 
             // }
+        }
+        function sumConstants(side){
+            //SUM constants on a side
+            //Filter Constants
+            const constElems = problemObj.value[side].filter(elem =>{
+                //Since step is incremented already
+                return elem.valType === 'const' && elem.step === currStep.value - 1 && !problemObj.value.coeffs.includes(elem.id);
+            });
+            let constSum = 0;
+            //Sum all constants
+            let numStr = '';
+            for(let i=0;i<constElems.length; i++){
+                console.log('const Val', constElems[i].val)
+                //add sign to const(concatenate sign to number)
+                numStr = '';
+                numStr += constElems[i].sign + String(constElems[i].val);
+                constSum += Number(numStr);
+            }
+            //Create new const element
+            createOperand(side,'const', constSum, null, null, 0);
         }
         function createOperand(side,valType,val,sign, coeff=null,coeffId=null,paraNo=0){
             //increment operand count
@@ -528,8 +593,8 @@ export default{
                 configShape:{
                     x:700,
                     y:220,//equalToX y-10
-                    width:70,
-                    height:70,
+                    width:60,
+                    height:60,
                     fill:"#FDE49C",
                     stroke:"#FFB740",
                     // draggable:true,
@@ -537,8 +602,8 @@ export default{
                 configValue:{
                 x:715,//rectX+15
                 y:230,//recty:+10
-                text: '7',
-                fontSize: 40
+                text: val,
+                fontSize: 25
                 }
             }
             //push to side
@@ -558,7 +623,7 @@ export default{
                 configShape:{
                     x: 600,
                     y: 250,
-                    radius: 30,
+                    radius: 20,
                     fill:"#FDE49C",
                     stroke:"#FFB740",
                     strokeWidth: 4,
@@ -575,37 +640,37 @@ export default{
             problemObj.value[side].push(operModel);
             return operModel.id;
         }
-        // function createEqualOperator(step){
-        //     //CREATE EQUAL OPERATOR ON STEP CHANGE
-        //     //prev equal operator for getting coordinates and id
-        //     const prevOper = problemObj.value.equalOpers[problemObj.value.equalOpers.length - 1]
-        //     const yVal = prevOper.configShape.y;
-        //     const yValText = prevOper.configValue.y;
-        //     const equalOperModel = {
-        //         id:'equalOper',//set id if wanted (else access the last item for dragging)
-        //         val:'=',//+-*
-        //         step:step,//1234
-        //         side:'',//lhs/rhs
-        //         type:'oper',
-        //         paraNo:0,//presently open paranthesis(if any)
-        //         configShape:{
-        //             x: 600,//this will be overwritted
-        //             y: yVal + 100,
-        //             radius: 30,
-        //             fill:"#FDE49C",
-        //             stroke:"#FFB740",
-        //             strokeWidth: 4,
-        //             // draggable:true,
-        //         },                
-        //         configValue:{
-        //             x:220,//circleX-10
-        //             y:yValText + 100,//circley-30
-        //             text: '-',
-        //             fontSize: 40
-        //         },
-        //     }
-        //     problemObj.value.equalOpers.push(equalOperModel);
-        // }
+        function createEqualOperator(step){
+            //CREATE EQUAL OPERATOR ON STEP CHANGE
+            //prev equal operator for getting coordinates and id
+            const prevOper = problemObj.value.equalOpers[problemObj.value.equalOpers.length - 1]
+            const yVal = prevOper.configShape.y;
+            const yValText = prevOper.configValue.y;
+            const equalOperModel = {
+                id:'equalOper',//set id if wanted (else access the last item for dragging)
+                val:'=',//+-*
+                step:step,//1234
+                side:'',//lhs/rhs
+                type:'oper',
+                paraNo:0,//presently open paranthesis(if any)
+                configShape:{
+                    x: 600,//this will be overwritted
+                    y: yVal + 100,
+                    radius: 20,
+                    fill:"#FDE49C",
+                    stroke:"#FFB740",
+                    strokeWidth: 4,
+                    // draggable:true,
+                },                
+                configValue:{
+                    x:220,//circleX-10
+                    y:yValText + 100,//circley-30
+                    text: '=',
+                    fontSize: 40
+                },
+            }
+            problemObj.value.equalOpers.push(equalOperModel);
+        }
         return{
             configKonva,
             problem:problemObj,

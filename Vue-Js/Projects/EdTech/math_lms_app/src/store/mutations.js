@@ -55,7 +55,7 @@ export default{
                 configShape:{
                     x: 600,
                     y: 250,
-                    radius: 30,
+                    radius: 20,
                     fill:"#FDE49C",
                     stroke:"#FFB740",
                     strokeWidth: 4,
@@ -85,8 +85,8 @@ export default{
                 configShape:{
                     x:700,
                     y:220,//equalToX y-10
-                    width:70,
-                    height:70,
+                    width:60,
+                    height:60,
                     fill:"#FDE49C",
                     stroke:"#FFB740",
                     // draggable:true,
@@ -95,7 +95,7 @@ export default{
                 x:715,//rectX+15
                 y:230,//recty:+10
                 text: '7',
-                fontSize: 40
+                fontSize: 25
                 }
             }
             
