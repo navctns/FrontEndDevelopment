@@ -1,0 +1,3 @@
+        cd nuxt-project
+        npm run build
+        npm run start

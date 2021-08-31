@@ -53,6 +53,8 @@ export default function useRearrangeCoordinates(problemObj, step){
     problemObj.equalOpers[problemObj.equalOpers.length - 1].configShape.y = yVal + 20;
     problemObj.equalOpers[problemObj.equalOpers.length - 1].configValue.y = yVal + 5;//shapeX + 20 - 15
     console.log('REARRANGED', problemObj);
+    //Set side border as equal operator position
+    problemObj.sideBorder.x = xValElem + 10;
     //Increment xValElm for RHS
     xValElem += 60;
     for(let i=0;i< rhsIndexes.length;i++){

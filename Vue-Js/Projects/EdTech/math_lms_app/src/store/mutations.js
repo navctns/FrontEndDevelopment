@@ -82,6 +82,7 @@ export default{
                 paraNo:0,
                 sign:'',
                 coeffId:null,
+                fracPos:'num',//fractional position
                 configShape:{
                     x:700,
                     y:220,//equalToX y-10

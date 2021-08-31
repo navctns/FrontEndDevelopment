@@ -1,0 +1,6 @@
+  - Enter directory cd gridsome-blog
+  - Run gridsome develop to start local development
+  - Run gridsome build to build for production
+
+
+npm install @gridsome/source-filesystem

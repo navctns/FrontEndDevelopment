@@ -1,0 +1,10 @@
+FTP Access rights on Wordpress Network installation with multiple websites
+
+on wp-config.php
+
+define('FS_METHOD', 'direct');
+
+And run following command on terminal:
+
+sudo chown -R www-data:www-data PATH_TO_YOUR_WORDPRESS_FOLDER
+

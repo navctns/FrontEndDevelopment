@@ -97,7 +97,7 @@ export default{
         const currentOperandSide = ref('');
         const currentOperandType = ref('');
         // const currentStep = 0;
-        const currentSideBorder = problemObj.value.sideBorder;
+        const currentSideBorder = ref(problemObj.value.sideBorder);
 
         function operandCmpDragStart(operandId,side,valType){
             console.log('operandCmpDragStart')
@@ -105,18 +105,18 @@ export default{
             currentOperandId.value = operandId;
             currentOperandSide.value = side;
             currentOperandType.value = valType;
+            currentSideBorder.value = problemObj.value.sideBorder;
         }
         function operandCmpDragEnd(event){
             
             //WHEN DROPPING AN ELEMENT
-            console.log('operandCmpDragEnd')
+            console.log('operandCmpDragEnd', currentOperandSide.value, problemObj.value.sideBorder)
             //Set Pointer Values from event
             const xVal = event.evt.layerX;
-            // console.log('coffs',problemObj.value.coeffs);
-            // console.log('OPERAND valType',currentOperandType.value);
-            // console.log('OPERAND ID',currentOperandId.value);
-            // const yVal = event.evt.layerY;
-            if(currentOperandSide.value === 'lhs' && xVal > currentSideBorder.x){
+            console.log('drag-end stepval', currStep.value, xVal,problemObj.value.sideBorder.x);
+
+            if(currentOperandSide.value === 'lhs' && xVal > problemObj.value.sideBorder.x){   
+                console.log('LHS-RHS-TRANSFER');
                 //OPERAND TRANSFERING From LHS to RHS
                 //Initial transfer methods hook/composable(contains all transfer methods)
                 const { transferCoefficient, transferConstant, transferVairable} = useTransfer(problemObj.value, 
@@ -125,7 +125,7 @@ export default{
                     // console.log('transfer simple Const - non coeff')
                     if(problemObj.value.coeffs.includes(currentOperandId.value)){
                         //operand is a constant and coefficient
-                        // console.log('transferCofficient IF BLOCK')
+                        console.log('transferCoeff');
                         problemObj.value = transferCoefficient(); 
                     }else{
                         //Operand is a constant but not a coefficient
@@ -138,42 +138,34 @@ export default{
 
                 }else if(currentOperandType.value === 'var'){
                     //get Variable Object
-                    // const varObj = problemObj.value.lhs.find(opd => opd.id === currentOperandId.value);
-                    // console.log('varOjb',varObj, varObj.coeff);
-                    // transferVairable('lhs', 'rhs', currentOperandId.value, 'num', varObj.coeff>1 || varObj.coeff < 0);
-                    // console.log('Operand Id when TRANSFERRING Variable', currentOperandId.value);
                     problemObj.value = transferVairable('num', true);
                     
                     // console.log('PROB-OBJ(after VAR+CONTST TRANS', problemObj.value );
                 }
-                // if(currentOperandType.value === 'const' && problemObj.value.coeffs.includes(currentOperandId.value)){
-                //     //operand is a coefficient
-                //     console.log('transfer coeff - BLOCK');
-                //     transferCoefficient('lhs','rhs', currentOperandId.value);                 
-                // }
-            }else if(currentOperandSide.value === 'rhs' && xVal < currentSideBorder.x){
+
+            }else if(currentOperandSide.value === 'rhs' && xVal < problemObj.value.sideBorder.x){
                 //OPERAND TRANSFERRING FROM RHS to LHS
                  //Initial transfer methods hook/composable(contains all transfer methods)
                 const { transferCoefficient, transferConstant, transferVairable} = useTransfer(problemObj.value, 
-                                'lhs', 'rhs', currentOperandId.value, operCount.value, currStep.value);
+                                'rhs', 'lhs', currentOperandId.value, operCount.value, currStep.value);
                 if(currentOperandType.value === 'const'){
                     // console.log('transfer simple Const - non coeff')
                     if(problemObj.value.coeffs.includes(currentOperandId.value)){
                         //operand is a constant and coefficient
                         console.log('transferCofficient IF BLOCK')
                         // transferCoefficient('rhs','lhs', currentOperandId.value); 
-                        transferCoefficient(); 
+                        problemObj.value = transferCoefficient(); 
 
                     }else{
                         //Operand is a constant but not a coefficient
                         // transferConstant('rhs','lhs', currentOperandId.value);
-                        transferConstant();
+                        problemObj.value = transferConstant();
 
                     }
 
                 }else if(currentOperandType.value === 'var'){
                     // transferVairable('rhs', 'lhs', currentOperandId.value, 'num', true);
-                    transferVairable('num', true);
+                    problemObj.value = transferVairable('num', true);
 
                     // console.log('PROB-OBJ(after VAR+CONTST TRANS', problemObj.value );
                 }
@@ -182,29 +174,11 @@ export default{
 
 
         }
-        //METHODS DETAILS
-        // function transferConstant(prev, next, opdId){
-        
-        // function transferVairable(prev, next, opdId, nextFractorPos='num', addCoeff=true){
-        
-        // function transferCoefficient(prev, next, opdId){
-       
-        // }
-        // function getNextCoordinate(side){
-        //     //Return Next coordinate for adding item
-        //     const {x,y} = problemObj.value[side][problemObj.value[side].length - 1].configShape;
-        //     // console.log('last coord',x,y);
-        //     //Generate new coordinate
-        //     return{
-        //         xVal:x+120,
-        //         yVal:y
-        //     }
-        // }
-        // function rearrangeCoordinates(step){
  
         function evaluateCurrentStep(){
             console.log('evaluateCurrentStep()');
             currStep.value += 1;
+            console.log('currStep', currStep.value);
             //create new equal oper
             createEqualOperator(currStep.value);
             //Evaluate LHS and create new step elements
@@ -216,19 +190,11 @@ export default{
             for(let step = 0;step <= currStep.value; step++){
                 problemObj.value = useRearrangeCoordinates(problemObj.value, step);
             }
+            console.log('problem obj after eval', problemObj.value);
         }
         //EVALUATE SIDES AND CONSTRUCT NEXT STEP
         function evaluate(side){
             //evaluate side
-            //on the present step
-            // let sideProblemStr = '';//the string to be evaluated at last
-
-            // for(let i=0; i<problemObj.value[side].length; i++){
-            //     //iterate through elements on a side
-            //     sideProblemStr =  sideProblemStr + problemObj.value[side][i].val;
-            //     //Add Variables by adding its coefficients
-            // }
-            // console.log(`problem String on ${side}`, sideProblemStr);
             //Sum variables in a side
             sumVariables(side);
             //Sum constants
@@ -236,7 +202,9 @@ export default{
         }
         function sumVariables(side){
             //filter variables
-            const variables = problemObj.value[side].filter(elem => elem.valType === 'var');
+            const variables = problemObj.value[side].filter(elem => {
+                return elem.valType === 'var' && elem.step === currStep.value-1;
+            });
             //iterate by variable
             problemObj.value.vars.forEach(varStr => {
                 const singleVarArr = variables.filter(varObj => varObj.val === varStr);
@@ -245,19 +213,20 @@ export default{
                     //sum coefficients
                     coeffSum += singleVarArr[i].coeff;
                 }
+                console.log('coeff sum', coeffSum);
                 //create a new var obj (with sum of coeffs as coeff)
                 //create coeff elem first
                 //set coeff sign
-                const coeffSumSign = Math.sign(coeffSum) === -1 ? '-':'+';
-                const coeffId = createOperand(side,'const',coeffSum,coeffSumSign,null,null,0);//set paraNo dynamically
-                createOperand(side,'var',varStr,'',coeffSum, coeffId, 0);
-                console.log('coeff sum',coeffSum);
+                if(coeffSum !== 0){
+                    const coeffSumSign = Math.sign(coeffSum) === -1 ? '-':'+';
+                    const coeffId = createOperand(side,'const', Math.abs(coeffSum),coeffSumSign,null,null,true, 0);//set paraNo dynamically
+                    createOperand(side,'var',varStr, '',coeffSum, coeffId, 0);
+                    console.log('coeff sum',coeffSum);
+                }
+
 
             });
-            //Sum up variables by adding its coefficients
-            // for(let i=0; i<variables.length; i++){
 
-            // }
         }
         function sumConstants(side){
             //SUM constants on a side
@@ -276,10 +245,21 @@ export default{
                 numStr += constElems[i].sign + String(constElems[i].val);
                 constSum += Number(numStr);
             }
-            //Create new const element
-            createOperand(side,'const', constSum, null, null, 0);
+            if(constSum !== 0){
+                //Create operand only if val is non-zero
+                //get sign of constSum 
+                let constSign = '';
+                if(Math.sign(constSum) === -1){
+                    constSign = '-';
+                }else{
+                    constSign = '+';
+                }
+                //Create new const element
+                createOperand(side,'const', Math.abs(constSum), constSign, null, null, false, 0);
+            }
+
         }
-        function createOperand(side,valType,val,sign, coeff=null,coeffId=null,paraNo=0){
+        function createOperand(side,valType,val,sign, coeff=null,coeffId=null, isCoeff, paraNo=0){
             //increment operand count
             opdCount.value += 1;
             if(valType === 'const'){
@@ -299,6 +279,7 @@ export default{
                 paraNo:paraNo,
                 sign:'',
                 coeffId:coeffId,
+                fracPos:'num',
                 configShape:{
                     x:700,
                     y:220,//equalToX y-10
@@ -314,6 +295,11 @@ export default{
                 text: val,
                 fontSize: 25
                 }
+            }
+            //Add to coeffs 
+            if(isCoeff){
+                console.log('isCoeff push to');
+                problemObj.value.coeffs.push(opdModel.id);
             }
             //push to side
             problemObj.value[side].push(opdModel);
@@ -341,7 +327,7 @@ export default{
                 configValue:{
                     x:220,//circleX-10
                     y:243,//circley-30
-                    text: '-',
+                    text: val,
                     fontSize: 40
                 },
             }
