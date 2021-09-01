@@ -15,10 +15,11 @@
   <!-- Magnific Popup core CSS file -->
 <link rel="stylesheet" href="css/magnific-popup.css">
 
-  <title>Glozzom Theme</title>
+  <title>E-Village</title>
 </head>
 <body>
-  <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+  <!-- <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top"> -->
+  <nav class="navbar navbar-expand-sm navbar-light fixed-top">
     <div class="container">
       <a href="index.html" class="navbar-brand">E-Village</a>
       <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
@@ -41,79 +42,38 @@
           <li class="nav-item">
             <a href="share-header-section" class="nav-link">Contact</a>
           </li>
+          <li class="nav-item">
+            <a href="https://wa.me/917034763747" class="phone-link"><i class="fab fa-whatsapp-square fa-2x"></i><h5>7034763747</h5></a>
+          </li>
         </ul>
       </div>
     </div>
   </nav>
-  <!-- SHOWCASE SLIDER -->
-  <!-- <section id="showcase">
-    <div id="myCarousel" class="carousel slide" data-ride="carousel">
-      <ol class="carousel-indicators">
-        <li class="active" data-target="#myCarousel" data-slide-to="0"></li>
-        <li data-target="#myCarousel" data-slide-to="1"></li>
-        <li data-target="#myCarousel" data-slide-to="2"></li>
 
-      </ol>
-
-    <div class="carousel-inner">
-      <div class="carousel-item carousel-image-1 active">
-        <div class="container">
-          <div class="carousel-caption d-none d-sm-block  mb-5">
-            <h1 class="display-3">Heading One</h1>
-            <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae, corporis!</p>
-            <a href="" class="btn btn-danger btn-lg">Sign Up Now</a>
-          </div>
-        </div>
-      </div>
-      <div class="carousel-item carousel-image-2">
-        <div class="container">
-          <div class="carousel-caption d-none d-sm-block text-right mb-5">
-            <h1 class="display-3">Heading Two</h1>
-            <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae, corporis!</p>
-            <a href="" class="btn btn-danger btn-primary btn-lg">Sign Up Now</a>
-          </div>
-        </div>
-      </div>
-      <div class="carousel-item carousel-image-3">
-        <div class="container">
-          <div class="carousel-caption d-none d-sm-block text-right mb-5">
-            <h1 class="display-3">Heading One</h1>
-            <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae, corporis!</p>
-            <a href="" class="btn btn-danger btn-lg">Sign Up Now</a>
-          </div>
-        </div>
-      </div>
-    </div>
-    <a href="#myCarousel" data-slide="prev" class="carousel-control-prev">
-      <span class="carousel-control-prev-icon"></span>
-    </a>
-    <a href="#myCarousel" data-slide="next" class="carousel-control-next">
-      <span class="carousel-control-next-icon"></span>
-    </a>
-  </div>
-  </section> -->
     <!-- ABOUT AND NEWS -->
-    <section id="home-icons" class="py-5">
+    <!-- <section id="home-icons" class="py-5"> -->
+    <section id="home-icons" class="service-showcase">
       <div class="container">
         <!-- <h2>Our Services</h2> -->
-        <div class="row">
+        <div class="row services-display">
           <div class="col-md-4 mb-4 text-center">
             <!-- <i class="fas fa-cog fa-3x mb-2"></i> -->
             <!-- <h3>About Us</h3>
             <p>All Government applications, ration card services, income certificate</p> -->
-            <div class="card">
+            <div class="card" onmouseenter="showServicesOnMouseEnter(event)" onmouseleave="hideServicesOnMouseLeave(event)">
               <img src="img/vasily-koloda-8CqDvPuo_kI-unsplash.jpg" class="card-img-top" alt="...">
               <div class="card-body">
                 <h4>Education Services</h4>
-                <i class="fas fa-chevron-down" onclick="showServices(event)"></i>
+                <!-- <button type="button" class="btn btn-light" onclick="showServices(event, 'btn')"><i class="fas fa-chevron-down" onclick="showServices(event,'icon')"></i></button> -->
+                <i class="fas fa-chevron-down"></i>
                 <ul class="list-group">
                   <li class="list-group-item">Employment Registration</li>
-                  <li class="list-group-item">Income certificate</li>
+                  <li class="list-group-item"><a href="income-certificate-info.html">Income certificate</a></li>
                   <li class="list-group-item">Ration Card Services</li>
                   <li class="list-group-item">Ticket Booking</li>
                   <li class="list-group-item">Vestibulum at eros</li>
                 </ul>
-                <i class="fas fa-chevron-up" onclick="hideServices(event)"></i>
+                <button type="button" class="btn btn-light" onclick="hideServices(event)"><i class="fas fa-chevron-up"></i></button>
               </div>
             </div>
 
@@ -122,7 +82,7 @@
             <!-- <i class="fas fa-cloud fa-3x mb-2"></i> -->
             <!-- <h3>Sending Data</h3>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum, velit!</p> -->
-            <div class="card">
+            <div class="card" onmouseenter="showServicesOnMouseEnter(event)" onmouseleave="hideServicesOnMouseLeave(event)">
               <img src="img/brett-jordan-ZoZJLgAIvGc-unsplash.jpg" class="card-img-top" alt="...">
               <div class="card-body">
                 <h4>Government Services</h4>
@@ -142,13 +102,13 @@
             <!-- <i class="fas fa-cloud fa-3x mb-2"></i> -->
             <!-- <h3>Sending Data</h3>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum, velit!</p> -->
-            <div class="card">
+            <div class="card" onmouseenter="showServicesOnMouseEnter(event)" onmouseleave="hideServicesOnMouseLeave(event)">
               <img src="img/keila-hotzel-lFmuWU0tv4M-unsplash.jpg" class="card-img-top" alt="...">
-              <div class="card-body">
+              <div class="card-body showcase-card">
                 <h4>Other Services</h4>
                 <i class="fas fa-chevron-down" onclick="showServices(event)"></i>
                 <ul class="list-group">
-                  <li class="list-group-item">Employment Registration</li>
+                  <li class="list-group-item"><a href="design-portfolio.html">Graphic Designing</a></li>
                   <li class="list-group-item">Income certificate</li>
                   <li class="list-group-item">Ration Card Services</li>
                   <li class="list-group-item">Ticket Booking</li>
@@ -162,6 +122,63 @@
       </div>
     </section>
   <!-- HOME ICON -->
+    <!-- SHOWCASE UPDATES SLIDER -->
+  <section id="showcase">
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+      <ol class="carousel-indicators">
+        <li class="active" data-target="#myCarousel" data-slide-to="0"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+
+      </ol>
+
+    <div class="carousel-inner">
+      <update-carousel v-for="update in updates"
+        :key="update.id"
+        :heading="update.content"
+      ></update-carousel>
+      <div class="carousel-item carousel-image-1 active">
+        <div class="container">
+          <!-- <div class="carousel-caption d-none d-sm-block  mb-5"> -->
+          <div class="carousel-caption">
+            <!-- <h1 class="display-3">Heading One</h1> -->
+            <h4>Plus One അഡ്മിഷൻ രെജിസ്ട്രേഷൻ</h4>
+            <!-- <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae, corporis!</p> -->
+            <!-- <a href="" class="btn btn-danger btn-lg">Show Details</a> -->
+            <a href="" class="btn btn-outline-primary">Show Detais</a>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item carousel-image-2">
+        <div class="container">
+          <!-- <div class="carousel-caption d-none d-sm-block text-right mb-5"> -->
+          <div class="carousel-caption">
+            <h4>Heading Two</h1>
+            <!-- <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae, corporis!</p> -->
+            <a href="" class="btn btn-danger btn-primary btn-lg">Sign Up Now</a>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item carousel-image-3">
+        <div class="container">
+          <!-- <div class="carousel-caption d-none d-sm-block text-right mb-5"> -->
+          <div class="carousel-caption">
+            <h4>Heading One</h1>
+            <!-- <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae, corporis!</p> -->
+            <a href="" class="btn btn-danger btn-lg">Sign Up Now</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <a href="#myCarousel" data-slide="prev" class="carousel-control-prev">
+      <span class="carousel-control-prev-icon"></span>
+    </a>
+    <a href="#myCarousel" data-slide="next" class="carousel-control-next">
+      <span class="carousel-control-next-icon"></span>
+    </a>
+  </div>
+  </section>
+
   <section id="home-icons" class="py-5">
     <div class="container">
       <div class="row">
@@ -360,6 +377,8 @@
 
   <!-- JavaScript Bundle with Popper -->
   <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script> -->
+  <script src="https://unpkg.com/vue@next"></script>
+  <script src="app.js"></script>
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
@@ -383,7 +402,7 @@
       interval:6000,
       pause:'hover',
     });
-    function showServices(event){
+    function showServices(event, fromEl){
       //Hide other list groups
       const allLists = document.getElementsByClassName('list-group');
       for(let i=0;i<allLists.length;i++){
@@ -398,7 +417,13 @@
       console.log('all-lists', allLists);
       console.log('showServices',event);
       console.log(event.originalTarget.nextElementSibling)
-      const nextSibling = event.originalTarget.nextElementSibling;
+      let nextSibling = null;
+      if(fromEl === 'btn'){
+        nextSibling = event.originalTarget.nextElementSibling;
+      }else if(fromEl === 'icon'){
+        nextSibling = event.originalTarget.parentElement.nextElementSibling;
+        console.log('nextSibling', nextSibling);
+      }
       nextSibling.style.display = 'block';
       //hide the bottom arrow button
       event.originalTarget.style.display = 'none';
@@ -419,6 +444,49 @@
       //show top image 
       event.originalTarget.parentElement.previousElementSibling.style.display = 'block';
 
+    }
+
+    function showServicesOnMouseEnter(event){
+      //show services when mouse enter on card
+      //Hide other list groups
+      const allLists = document.getElementsByClassName('list-group');
+      for(let i=0;i<allLists.length;i++){
+        allLists[i].style.display = 'none';
+        //show top image
+        allLists[i].parentElement.previousElementSibling.style.display = 'block';
+        //hide and show arrow buttons
+        allLists[i].previousElementSibling.style.display = 'block';
+        //hide arrow-top button
+        allLists[i].nextElementSibling.style.display = 'none';
+      }
+      console.log('on Mouseenter',event.originalTarget);
+      //get list group
+      const listGroup = event.originalTarget.getElementsByClassName('list-group');
+      console.log(listGroup, listGroup[0]);
+      listGroup[0].style.display = 'block';
+      //get card top image
+      const topImageEl = event.originalTarget.getElementsByClassName('card-img-top');
+      //hide card top image
+      topImageEl[0].style.display = 'none';
+      //get arrow button element
+      const arrowBtnEl = event.originalTarget.getElementsByClassName('fas');
+      //hide arrow button element
+      arrowBtnEl[0].style.display = 'none';
+    }
+    function hideServicesOnMouseLeave(event){
+      //Hide services when mouse leave card
+      //Get list-group element
+      const listGroup = event.originalTarget.getElementsByClassName('list-group');
+      //hide list group
+      listGroup[0].style.display = 'none';
+      //get card top image element
+      const topImageEl = event.originalTarget.getElementsByClassName('card-img-top');
+      //show cart top image
+      topImageEl[0].style.display = 'block';
+      //get arrow button element
+      const arrowBtnEl = event.originalTarget.getElementsByClassName('fas');
+      //hide arrow button element
+      arrowBtnEl[0].style.display = 'block';
     }
     // document.body.addEventListener('click',function(){
     //   //Hide other list groups

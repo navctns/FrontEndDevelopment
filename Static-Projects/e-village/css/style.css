@@ -8,24 +8,40 @@
 .navbar .nav-item.active {
   border-left:#444 3px solid;
 }
-
+.navbar{
+  /* background-color: #548CA8; */
+  background-color: #F3F1F5;
+}
 .carousel-item {
-  height:400px;
+  height:100px;
+  /* height: 450px; */
+  /* background-color: black; */
+  background-color: #548CA8;
+}
+.btn-outline-primary{
+  color:#fafafa;
+  border-color: #fafafa;
+}
+.btn-outline-primary:focus,
+.btn-outline-primary:hover{
+  color:#323232;
+  border-color: #323232;
+  background-color: #fafafa;
 }
 
 .carousel-image-1 {
   /* background: url('../img/image1.jpg'); */
-  background: url('../img/daniel-funes-fuentes-TyLw3IQALMs-unsplash.jpg');
+  /* background: url('../img/daniel-funes-fuentes-TyLw3IQALMs-unsplash.jpg'); */
   background-size:cover;
 }
 
 .carousel-image-2 {
-  background: url('../img/my-life-through-a-lens-bq31L0jQAjU-unsplash.jpg');
+  /* background: url('../img/my-life-through-a-lens-bq31L0jQAjU-unsplash.jpg'); */
   background-size:cover;
 }
 
 .carousel-image-3 {
-  background: url('../img/natalie-pedigo-wJK9eTiEZHY-unsplash.jpg');
+  /* background: url('../img/natalie-pedigo-wJK9eTiEZHY-unsplash.jpg'); */
   background-size:cover;
 }
 
@@ -106,6 +122,13 @@ body {
   background-color: #548CA8;
   color:#fafafa;
 }
+.list-group-item a{
+  text-decoration: none;
+  color:#fafafa;
+  width: 100%;
+  height: 100%;
+  padding:1em;
+}
 
 .card{
   box-shadow: 0 2px 8px rgba(0,0,0,0.26);
@@ -113,9 +136,14 @@ body {
   /* -webkit-transition: 2s;
   transition: 2s; */
   min-height: 50vh;
+  /* max-height: 50vh; */
 
 }
-.card-body{
+.card:focus,
+.card:hover{
+  cursor: pointer;
+}
+.card-body.showcase-card{
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -124,6 +152,12 @@ body {
 
 .card-img-top{
   height: 280px;
+  transition: transform .5s ease;
+  transform:scale(0.95);
+}
+.card-img-top:focus,
+.card-img-top:hover{
+  transform:scale(1);
 }
 
 .fas{
@@ -143,4 +177,49 @@ body {
 }
 .fa-chevron-up{
   display:none;
+}
+.btn{
+  width:15em;
+}
+
+.services-display {
+  display: flex;
+  align-items: center;
+  /* height: 100vh; */
+}
+
+/* #showcase{
+  height: 2vh;
+  margin:0;
+} */
+
+.service-showcase{
+  margin:3em 0 0 0;
+  min-height: 75vh;
+}
+
+.carousel-caption{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.fa-whatsapp-square{
+  color:#25D366;
+}
+.fa-whatsapp-square:hover,
+.fa-whatsapp-square:focus{
+  cursor: pointer;
+}
+.phone-link{
+  display: flex;
+  gap:0.5em;
+  align-items: center;
+  text-decoration: none;
+  color:#fafafa;
+}
+.phone-link:hover,
+.phone-link:focus{
+  text-decoration: none;
+  color:#fafafa;
+  opacity: 0.8;
 }
