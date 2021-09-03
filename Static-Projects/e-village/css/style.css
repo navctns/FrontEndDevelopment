@@ -1,3 +1,6 @@
+html{
+  scroll-behavior: smooth;
+}
 .navbar .nav-link {
   font-size:14px;
   text-transform:uppercase;
@@ -18,15 +21,25 @@
   /* background-color: black; */
   background-color: #548CA8;
 }
-.btn-outline-primary{
+.btn-outline-primary.flat{
   color:#fafafa;
   border-color: #fafafa;
 }
-.btn-outline-primary:focus,
-.btn-outline-primary:hover{
+.btn-outline-primary.flat:focus,
+.btn-outline-primary.flat:hover{
   color:#323232;
   border-color: #323232;
   background-color: #fafafa;
+}
+
+.btn-outline-primary.btn-colored{
+  border-color: #548CA8;
+  color:#548CA8;
+}
+.btn-outline-primary.btn-colored:focus,
+.btn-outline-primary.btn-colored:hover{
+  background-color: #548CA8;
+  color:#fafafa;
 }
 
 .carousel-image-1 {
@@ -45,9 +58,9 @@
   background-size:cover;
 }
 
-#home-heading {
+#home-heading,#design-heading {
   position:relative;
-  min-height:200px;
+  min-height:150px;
   background:url('../img/lights.jpg');
   background-attachment:fixed;
   background-repeat:no-repeat;
@@ -155,11 +168,30 @@ body {
   transition: transform .5s ease;
   transform:scale(0.95);
 }
-.card-img-top:focus,
-.card-img-top:hover{
+.card-img-top.portfolio-img:focus,
+.card-img-top.portfolio-img:hover{
   transform:scale(1);
 }
-
+.portfolio-categ-card{
+  background-image: url("img/charles-deluvio-LPTVnfARdfs-unsplash.jpg");
+  /* width:480px;
+  height: auto; */
+}
+.portfolio-categ-card a{
+  /* height: 200px;; */
+  text-decoration: none;
+  color:#323232;
+}
+/* .card-img-overlay{
+  display: flex;
+  justify-content:center;
+  align-items:flex-start;
+  color:#39A2DB;
+} */
+/* .portfolio-categ-card img{
+  height: 100%;
+  opacity: 0.4;
+} */
 .fas{
   cursor:pointer;
   margin:0.5em 0;
@@ -222,4 +254,36 @@ body {
   text-decoration: none;
   color:#fafafa;
   opacity: 0.8;
+}
+
+section {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+/* ACCORDION TABS */
+.accordion{
+  display: flex;
+  justify-content: center;
+}
+
+.gallery-btn{
+  width:15em;
+  border-color: #548CA8;
+}
+.nav-link.gallery-btn.active{
+  background: #548CA8;
+  color: #fafafa;
+  border-color: #548CA8;
+}
+.gallery-nav{
+  display: flex;
+  justify-content:center;
+  gap:1em;
+  margin:1em 0;
+}
+.parallax-header{
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
