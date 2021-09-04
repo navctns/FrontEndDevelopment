@@ -65,11 +65,12 @@
             <p>All Government applications, ration card services, income certificate</p> -->
             <!-- <div class="card showcase-card" onmouseenter="showServicesOnMouseEnter(event)" onmouseleave="hideServicesOnMouseLeave(event)"> -->
             <div class="card showcase-card" onmouseenter="showServicesOnMouseEnter(event)" onmouseleave="hideServicesOnMouseLeave(event)">
+            <!-- <div class="card showcase-card" onmouseleave="hideServicesOnMouseLeave(event)"> -->
               <img src="img/vasily-koloda-8CqDvPuo_kI-unsplash.jpg" class="card-img-top" alt="...">
               <div class="card-body">
                 <h4>Education Services</h4>
                 <!-- <button type="button" class="btn btn-light" onclick="showServices(event, 'btn')"><i class="fas fa-chevron-down" onclick="showServices(event,'icon')"></i></button> -->
-                <i class="fas fa-chevron-down"></i>
+                <i class="fas fa-chevron-down" onclick="showServices(event)"></i>
                 <ul class="list-group">
                   <li class="list-group-item">Employment Registration</li>
                   <li class="list-group-item"><a href="income-certificate-info.html">Income certificate</a></li>
@@ -77,7 +78,7 @@
                   <li class="list-group-item">Ticket Booking</li>
                   <li class="list-group-item">Vestibulum at eros</li>
                 </ul>
-                <button type="button" class="btn btn-light" onclick="hideServices(event)"><i class="fas fa-chevron-up"></i></button>
+                <i class="fas fa-chevron-up" onclick="hideServices(event)"></i>
               </div>
             </div>
 
@@ -108,7 +109,7 @@
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum, velit!</p> -->
             <div class="card showcase-card" onmouseenter="showServicesOnMouseEnter(event)" onmouseleave="hideServicesOnMouseLeave(event)">
               <img src="img/keila-hotzel-lFmuWU0tv4M-unsplash.jpg" class="card-img-top" alt="...">
-              <div class="card-body showcase-card">
+              <div class="card-body">
                 <h4>Other Services</h4>
                 <i class="fas fa-chevron-down" onclick="showServices(event)"></i>
                 <ul class="list-group">
@@ -218,7 +219,7 @@
       <!-- <h3>Design Portfolio</h3> -->
       <ul class="nav nav-pills mb-3 gallery-nav py-3" id="pills-tab" role="tablist">
         <li class="nav-item" role="presentation">
-          <button class="nav-link gallery-btn active" id="pills-home-tab" data-toggle="pill" data-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Poster Designs</button>
+          <button class="btn btn-outline-primary btn-colored  active" id="pills-home-tab" data-toggle="pill" data-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Poster Designs</button>
         </li>
         <li class="nav-item" role="presentation">
           <button class="nav-link gallery-btn" id="pills-profile-tab" data-toggle="pill" data-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Wedding Cards</button>

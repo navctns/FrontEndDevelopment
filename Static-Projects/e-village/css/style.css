@@ -37,10 +37,12 @@ html{
   color:#548CA8;
 }
 .btn-outline-primary.btn-colored:focus,
-.btn-outline-primary.btn-colored:hover{
+.btn-outline-primary.btn-colored:hover,
+.btn-colored.active{
   background-color: #548CA8;
   color:#fafafa;
 }
+
 
 .carousel-image-1 {
   /* background: url('../img/image1.jpg'); */
@@ -195,10 +197,12 @@ body {
 .fas{
   cursor:pointer;
   margin:0.5em 0;
+  padding:1em;
 }
 .fas:hover,
 .fas:focus{
   transform: scale(1.1);
+  background-color: antiquewhite;
 }
 .list-group{
   display: none;
@@ -218,6 +222,7 @@ body {
   display: flex;
   align-items: center;
   /* height: 100vh; */
+  /* min-height: 90vh; */
 }
 
 /* #showcase{

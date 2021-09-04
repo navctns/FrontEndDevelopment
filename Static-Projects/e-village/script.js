@@ -12,33 +12,54 @@ function showServices(event, fromEl){
     }
     console.log('all-lists', allLists);
     console.log('showServices',event);
-    console.log(event.originalTarget.nextElementSibling)
+    // console.log(event.originalTarget.nextElementSibling)
     let nextSibling = null;
-    if(fromEl === 'btn'){
+    // if(fromEl === 'btn'){
+    //   nextSibling = event.originalTarget.nextElementSibling;
+    // }else if(fromEl === 'icon'){
+    //   nextSibling = event.originalTarget.parentElement.nextElementSibling;
+    //   console.log('nextSibling', nextSibling);
+    // }
+    if(event.originalTarget){
       nextSibling = event.originalTarget.nextElementSibling;
-    }else if(fromEl === 'icon'){
-      nextSibling = event.originalTarget.parentElement.nextElementSibling;
-      console.log('nextSibling', nextSibling);
+      //hide the bottom arrow button
+      event.originalTarget.style.display = 'none';
+      //hide top image 
+      event.originalTarget.parentElement.previousElementSibling.style.display = 'none';
+    }else if(event.target){
+      console.log('event-chrome',event);
+      nextSibling = event.target.nextElementSibling;
+      //hide the bottom arrow button
+      event.target.style.display = 'none';
+      //hide top image 
+      event.target.parentElement.previousElementSibling.style.display = 'none';
     }
+    //show list-gruop
     nextSibling.style.display = 'block';
-    //hide the bottom arrow button
-    event.originalTarget.style.display = 'none';
     //show top arrow button
     nextSibling.nextElementSibling.style.display = 'block';
-    //hide top image 
-    event.originalTarget.parentElement.previousElementSibling.style.display = 'none';
+
   }
   function hideServices(event){
-    const prevSibling = event.originalTarget.previousElementSibling;
+    let prevSibling = null;
+    if(event.originalTarget){
+      prevSibling = event.originalTarget.previousElementSibling;
+      //show top image 
+      event.originalTarget.parentElement.previousElementSibling.style.display = 'block';
+      //hide the top arrow button itself
+      event.originalTarget.style.display = 'none';
+    }else if(event.target){
+      prevSibling = event.target.previousElementSibling;
+      //show top image 
+      event.target.parentElement.previousElementSibling.style.display = 'block';
+      //hide the top arrow button itself
+      event.target.style.display = 'none';
+    }
     console.log('prev sibling', prevSibling)
     //hide services list
     prevSibling.style.display = 'none';
-    //hide the top arrow button itself
-    event.originalTarget.style.display = 'none';
     //show bottom arrow button
     prevSibling.previousElementSibling.style.display = 'block';
-    //show top image 
-    event.originalTarget.parentElement.previousElementSibling.style.display = 'block';
 
   }
 
